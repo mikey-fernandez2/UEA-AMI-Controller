@@ -1,0 +1,10 @@
+prefix=/usr/local
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include
+
+Name: Handsim
+Description: Gazebo simulation environment for the HAPTIX project.
+Version: 1.0.0
+Requires:
+Libs: -L${libdir} -lhandsim
+CFlags: -I${includedir}

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/handsim/polhemus_driver.h
+
+/home/haptix-e15-463/haptix/haptix_controller/handsim/src/polhemus_driver.c
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+stdlib.h
+-
+pthread.h
+-
+libusb-1.0/libusb.h
+-
+handsim/polhemus_driver.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/polhemus_driver.h
+

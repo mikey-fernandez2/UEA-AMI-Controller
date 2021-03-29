@@ -1,0 +1,12 @@
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixControlPlugin.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixTracking.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixWorldPlugin.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/integration/CMakeFiles/INTEGRATION_physics.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/integration/CMakeFiles/INTEGRATION_sim_api.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/regression/CMakeFiles/REGRESSION_86_motor_values.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/CMakeFiles/gtest.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/CMakeFiles/gtest_main.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/uninstall.dir
