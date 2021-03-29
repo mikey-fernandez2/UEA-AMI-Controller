@@ -423,7 +423,7 @@ int main(int argc, char **argv)
         // We could set a desired controller position gain
         // cmd.gain_pos[i] = 1.0;
         // We could set a desired controller velocity gain
-        cmd.gain_vel[i] = 100.0;
+        cmd.gain_vel[i] = 1000.0;
       }
       // Indicate that the positions we set should be used.
       cmd.ref_pos_enabled = 0;
