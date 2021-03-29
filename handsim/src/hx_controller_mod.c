@@ -150,8 +150,8 @@ void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
     printf("\t\t\tref_pos: %f rads\n", _cmd->ref_pos[i]);
     printf("\t\t\tref_vel: %f rads/sec\n", _cmd->ref_vel[i]);
     printf("\t\t\tref_vel_max: %f rads/sec\n", _cmd->ref_vel_max[i]);
-    printf("\t\t\tgain_pos: %f rads/sec\n", _cmd->gain_pos[i]);
-    printf("\t\t\tgain_vel: %f rads/sec\n", _cmd->gain_vel[i]);
+    printf("\t\t\tgain_pos: %f Nm/rad\n", _cmd->gain_pos[i]);
+    printf("\t\t\tgain_vel: %f Nm*sec/rad\n", _cmd->gain_vel[i]);
   }
 
   printf("\n");
@@ -364,7 +364,7 @@ int main(int argc, char **argv)
     // else
     // {
     //   printf("Can't find server at given address\n");
-    //   return -1;
+    //   return -1; Debug output: 
     // }
 
     mkfifo(myfifo, 0666); 
@@ -372,9 +372,8 @@ int main(int argc, char **argv)
     printf("Successfully connected to EMG board.\n\n");
   }
 
-  float wrist_flex, wrist_extend, wrist_net, thumb_flex;
+  float wrist_flex, wrist_extend, wrist_net;
   float wrist_vel = 0;
-  thumb_flex = 0;
 
   ///////////////////////////////
   start = clock(); end = clock(); // TODO: Figure out some timing stuff
@@ -394,12 +393,9 @@ int main(int argc, char **argv)
       {
         // Set the desired velocity of this motor
         if (i == 2)
-          cmd.ref_vel[i] = -wrist_vel;
-        //else if (i == 3)
-        // cmd.ref_vel[i] = thumb_flex;
+          cmd.ref_pos[i] = -wrist_vel;
         else
-          // cmd.ref_vel[i] = 0.0;
-          cmd.ref_vel[i] = 0.0;
+          cmd.ref_pos[i] = 0.0;
         // cmd.ref_pos[i] = 0.0;
         // cmd.ref_vel_max[i] = 5.0;
         // We could set a desired controller position gain
@@ -407,8 +403,8 @@ int main(int argc, char **argv)
         // We could set a desired controller velocity gain
         // cmd.gain_vel[i] = 1.0;
       }
-      cmd.ref_pos_enabled = 0;
-      cmd.ref_vel_enabled = 1;
+      cmd.ref_pos_enabled = 1;
+      cmd.ref_vel_enabled = 0;
       cmd.ref_vel_max_enabled = 0;
       cmd.gain_pos_enabled = 0;
       cmd.gain_vel_enabled = 0;
@@ -419,15 +415,15 @@ int main(int argc, char **argv)
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
-        cmd.ref_vel[i] = (float)(350 * 0.5 *
+        cmd.ref_vel[i] = (float)(20 * 0.5 *
           sin(0.05 * 2.0 * M_PI * counter * 0.01));
         // We could set a desired maximum velocity
-        // cmd.ref_vel[i] = 1.0;
+        // cmd.ref_vel[i] = 10.0;
         cmd.ref_vel_max[i] = 200.0;
         // We could set a desired controller position gain
         // cmd.gain_pos[i] = 1.0;
         // We could set a desired controller velocity gain
-        // cmd.gain_vel[i] = 1.0;
+        cmd.gain_vel[i] = 100.0;
       }
       // Indicate that the positions we set should be used.
       cmd.ref_pos_enabled = 0;
@@ -438,9 +434,8 @@ int main(int argc, char **argv)
       // We're not setting it, so indicate that gain_pos should be ignored.
       cmd.gain_pos_enabled = 0;
       // We're not setting it, so indicate that gain_vel should be ignored.
-      cmd.gain_vel_enabled = 0;
+      cmd.gain_vel_enabled = 1;
     }
-    printCommand(&robotInfo, &cmd);
 
     // sendCommand(counter, &robotInfo, &cmd);
 
@@ -453,7 +448,9 @@ int main(int argc, char **argv)
     // printf("Command %d sent\n", steps);
 
     // Debug output: Print the state.
+    // printState() cannot be commented out or the limb won't move
     if (!(counter % 100))
+      printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor);
     if (++counter == 10000)
       counter = 0;
@@ -504,7 +501,6 @@ int main(int argc, char **argv)
       if (n >= 0) 
       {
         memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-        // printf(Electrode 0: %f\n", emg->rawEMG[0]); // to verfiy incoming data is correct
         // printEMGData(emg);
       }
       else
@@ -514,12 +510,11 @@ int main(int argc, char **argv)
       }
 
       // printf("Calculating new wrist command\n");
-      thumb_flex = emg->rawEMG[5];
       wrist_flex = emg->rawEMG[7];
       wrist_extend = emg->rawEMG[6];
-      wrist_net = wrist_flex - wrist_extend;
-      wrist_vel = 1.0*wrist_net;
-      printf("New wrist command: %f\t\tNew thumb command: %f\n", wrist_vel, thumb_flex);
+      wrist_net = wrist_extend - wrist_flex;
+      wrist_vel = 2.0*wrist_net;
+      printf("New wrist command: %f\n", wrist_vel);
     }
 
     if(running == 0)
@@ -558,7 +553,7 @@ int main(int argc, char **argv)
     // close(EMGSock);
   }
 
-  free(emg);
+  free(emg); // free the memory allocated for this struct
 
   return 0;
 }
