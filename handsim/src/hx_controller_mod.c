@@ -14,10 +14,6 @@
  *
 */
 
-#ifdef _WIN32
-#include <windows.h>
-#define _USE_MATH_DEFINES
-#endif
 #include <math.h>
 #include <signal.h>
 #include <stdio.h>
@@ -25,18 +21,10 @@
 #include <string.h>
 #include <time.h>
 #include <haptix/comm/haptix.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
 // #include "EMGStruct.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h"
 // #include "sendCommands.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/sendCommands.h"
-// #include <sys/socket.h>
-// #include <sys/types.h>
-// #include <netdb.h>
-// #include <arpa/inet.h>
-// #include <netinet/in.h>
 // #include "handsim/include/handsim/polhemus_driver.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h"
 #include <fcntl.h> 
@@ -44,12 +32,7 @@
 #include <sys/types.h> 
 #include <unistd.h>
 
-// #define gIP "192.168.50.192"
-// #define gPORT 8899
-
 int running = 1;
-int usingEMG;
-int usingPolhemus;
 
 //////////////////////////////////////////////////
 void sigHandler(int signo)
@@ -133,8 +116,6 @@ void printRobotInfo(const hxRobotInfo *_robotInfo)
 //////////////////////////////////////////////////
 void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
 {
-  int i;
-
   printf("Command received:\n");
 
   printf("\tref_pos_enabled: %d\n", _cmd->ref_pos_enabled);
@@ -143,6 +124,7 @@ void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
   printf("\tgain_pos_enabled: %d\n", _cmd->gain_pos_enabled);
   printf("\tgain_vel_enabled: %d\n", _cmd->gain_vel_enabled);
 
+  int i;
   printf("\n\tMotors:\n");
   for (i = 0; i < _robotInfo->motor_count; ++i)
   {
@@ -196,21 +178,22 @@ void printPolhemus(polhemus_pose_t *poses, int num_poses)
 
   printf("\n");
 
-  /* NOTE POLHEMUS TRACKERS
-  finger 1: seems to be nothing
-  finger 2: seems to be nothing
-  arm: arm
-  head 2: head, but side to side/tilting are switched
-  */
+  // NOTE ON POLHEMUS TRACKERS
+    // finger 1: seems to be nothing
+    // finger 2: seems to be nothing
+    // arm: arm
+    // head 2: head, but side to side/tilting are switched
 }
 
 //////////////////////////////////////////////////
 // This main function requires two arguments
 //    usingEMG is a boolean integer - 0 if not, 1 if using, EMG board
 //    usingPolhemus is a boolean integer - 0 if not, 1 if using, Polhemus trackers
-
 int main(int argc, char **argv)
 {
+  int usingEMG;
+  int usingPolhemus;
+
   if (argc != 3)
   {
     fprintf(stderr, "Wrong number of arguments. Did you set usingEMG and usingPolhemus?\n");
@@ -222,17 +205,14 @@ int main(int argc, char **argv)
     usingPolhemus = strcmp("0", argv[2]) == 0 ? 0 : 1;
   }
 
-
   int i;
   int counter = 0;
   hxRobotInfo robotInfo;
   hxCommand cmd = {0};
   hxSensor sensor = {0};
   clock_t start, end, loopStart, loopEnd;
-  char *myfifo = "/tmp/emg";
-  int fd1;
 
-  // reading from Polhemus
+  // Polhemus settings
   polhemus_conn_t* conn;
   double x, y, z, roll, pitch, yaw; // these hold the pose from the sensors
   int num_poses = 4;                // have 4 sensors
@@ -256,9 +236,9 @@ int main(int argc, char **argv)
       return -1;
     }
   }
-  ///////////////////////////////
 
-  printf("\n\nInitializing...\n");
+  ///////////////////////////////
+  printf("\nInitializing...\n");
 
   // Capture SIGINT signal.
   if (signal(SIGINT, sigHandler) == SIG_ERR)
@@ -282,7 +262,7 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  printf("Robot connection checks passed.\n\n");
+  printf("Robot checks passed.\n");
 
   // Print the robot information.
   printRobotInfo(&robotInfo);
@@ -292,98 +272,34 @@ int main(int argc, char **argv)
   //   printf("hxs_start_logging(): error.\n");
 
   ///////////////////////////////
-  // Set up sockets for receiving EMG data
-  int msgLen = 76;
+  // Set up for receiving EMG data
+  int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
   ssize_t n;
-  // int EMGSock;
 
+  char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
+  int fd1;                    // Pipe file descriptor
   if (usingEMG)
   {
     printf("\nTrying to connect to EMG board...\n");
 
-    // struct addrinfo hints = {0};
-    // struct addrinfo *servInfoList;
-    // struct addrinfo *selfInfoList;
-    // hints.ai_family = AF_INET;
-    // hints.ai_socktype = SOCK_DGRAM;
-    // hints.ai_protocol = 0;
-    // hints.ai_flags = AI_PASSIVE;
-    // hints.ai_canonname = NULL;
-    // hints.ai_addr = NULL;
-    // hints.ai_next = NULL;
-
-    // EMGSock = socket(AF_INET, SOCK_DGRAM, 0);
-    // // printf("Socket fileID: %d\n", EMGSock);
-    // if (EMGSock < 0)
-    // {
-    //   printf("socket(): Socket creation error\n");
-    //   return -1;
-    // }
-
-    // int serverInfo = getaddrinfo(gIP, "8899", &hints, &servInfoList);
-    // int selfInfo = getaddrinfo(NULL, "50000", &hints, &selfInfoList);
-    // if (serverInfo < 0 || selfInfo < 0)
-    // {
-    //   printf("getaddrinfo(): Error");
-    //   return -1;
-    // }
-    // if (serverInfo == 0)
-    // {
-    //   struct addrinfo *rp;
-    //   for (rp = selfInfoList; rp != NULL; rp = rp->ai_next)
-    //   {
-
-    //     EMGSock = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
-    //     if (EMGSock < 0)
-    //       continue;
-
-    //     if (bind(EMGSock, rp->ai_addr, rp->ai_addrlen) != -1)
-    //     {
-    //       // struct sockaddr_in *addr_in = (struct sockaddr_in *)rp;
-    //       // printf("Found my address: %s\n", inet_ntoa(addr_in->sin_addr));
-    //       // printf("Found my port: %d\n", addr_in->sin_port);
-    //       // char s[INET6_ADDRSTRLEN];
-    //       // printf("Address: %s\n",inet_ntop(rp->ai_family, &(((struct sockaddr_in*)(struct sockaddr *)rp->ai_addr)->sin_addr), s, sizeof(s)));
-    //       struct sockaddr_in addr;
-    //       socklen_t len;
-    //       len = sizeof(addr);
-    //       getpeername(EMGSock, (struct sockaddr *)&addr, &len);
-    //       printf("Found server address: (%s:%d)\n", inet_ntoa(addr.sin_addr), ntohs(addr.sin_port));
-    //       break;
-    //     }
-    //     close(EMGSock);
-    //   }
-    //   if (rp == NULL)
-    //   {
-    //     printf("None of the addresses can be connected to\n");
-    //     return -1;
-    //   }
-    // }
-    // else
-    // {
-    //   printf("Can't find server at given address\n");
-    //   return -1; Debug output: 
-    // }
-
-    mkfifo(myfifo, 0666); 
+    mkfifo(EMGPipe, 0666); 
 
     printf("Successfully connected to EMG board.\n\n");
   }
 
-  float wrist_flex, wrist_extend, wrist_net;
-  float wrist_vel = 0;
-
   ///////////////////////////////
-  start = clock(); end = clock(); // TODO: Figure out some timing stuff
+  start = clock(); end = clock();
 
   int steps = 0;
 
-  // Send commands at ~100Hz.
+  float wrist_flex, wrist_extend, wrist_net;
+  float wrist_vel = 0;
+
+  // Send commands
   while (running)
   {
-
     loopStart = clock(); // for adjusting wait time
     // printf("Time running: %f sec\n", 1000*(double)(end - start)/CLOCKS_PER_SEC);
 
@@ -415,7 +331,7 @@ int main(int argc, char **argv)
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
-        cmd.ref_vel[i] = (float)(20 * 0.5 *
+        cmd.ref_pos[i] = (float)(20 * 0.5 *
           sin(0.05 * 2.0 * M_PI * counter * 0.01));
         // We could set a desired maximum velocity
         // cmd.ref_vel[i] = 10.0;
@@ -426,15 +342,15 @@ int main(int argc, char **argv)
         cmd.gain_vel[i] = 1000.0;
       }
       // Indicate that the positions we set should be used.
-      cmd.ref_pos_enabled = 0;
+      cmd.ref_pos_enabled = 1;
       // We're not setting it, so indicate that ref_vel should be ignored.
-      cmd.ref_vel_enabled = 1;
+      cmd.ref_vel_enabled = 0;
       // We're not setting it, so indicate that ref_vel_max should be ignored.
-      cmd.ref_vel_max_enabled = 1;
+      cmd.ref_vel_max_enabled = 0;
       // We're not setting it, so indicate that gain_pos should be ignored.
       cmd.gain_pos_enabled = 0;
       // We're not setting it, so indicate that gain_vel should be ignored.
-      cmd.gain_vel_enabled = 1;
+      cmd.gain_vel_enabled = 0;
     }
 
     // sendCommand(counter, &robotInfo, &cmd);
@@ -450,9 +366,11 @@ int main(int argc, char **argv)
     // Debug output: Print the state.
     // printState() cannot be commented out or the limb won't move
     if (!(counter % 100))
-      printCommand(&robotInfo, &cmd);
+    {
+      // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor);
-    if (++counter == 10000)
+    }
+    if (++counter == 2000) // originally 10000
       counter = 0;
 
     ++steps;
@@ -471,31 +389,15 @@ int main(int argc, char **argv)
 
     if (usingPolhemus)
     {
-      // print out Polhemus state update
       polhemus_get_poses(conn, poses, &num_poses, 10);
+      // print out Polhemus state update
       //printf("Received %d poses\n", num_poses);
       printPolhemus(poses, num_poses);
     }
 
     if (usingEMG)
     {
-      // Receive new EMG data
-      // printf("Receiving new data...\n");
-      // n = recv(EMGSock, (char *)buffer, msgLen, 0);
-      // printf("Bytes received: %d\n", (int)n);
-      // if (n >= 0) 
-      // {
-      //   memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-      //   // printf(Electrode 0: %f\n", emg->rawEMG[0]); // to verfiy incoming data is correct
-      //   printEMGData(emg);
-      // }
-      // else
-      // {
-      //   printf("recv(): Receiving error.\n");
-      //   return -1;
-      // }
-
-      fd1 = open(myfifo, O_RDONLY); 
+      fd1 = open(EMGPipe, O_RDONLY); 
       n = read(fd1, buffer, msgLen);
       close(fd1);
       if (n >= 0) 
@@ -509,6 +411,7 @@ int main(int argc, char **argv)
         return -1;
       }
 
+      // Calculate next control commands
       // printf("Calculating new wrist command\n");
       wrist_flex = emg->rawEMG[7];
       wrist_extend = emg->rawEMG[6];
@@ -517,6 +420,7 @@ int main(int argc, char **argv)
       printf("New wrist command: %f\n", wrist_vel);
     }
 
+    // This is the 'end' point
     if(running == 0)
     {
       printf("Stopping movement\n");
@@ -526,12 +430,8 @@ int main(int argc, char **argv)
     loopEnd = clock();
     unsigned int sleeptime_us = 10000 - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
 
-#ifdef _WIN32
-    Sleep((DWORD)(sleeptime_us / 1e3));
-#else
     usleep(sleeptime_us);
     end = clock();
-#endif
   }
 
   ///////////////////////////////

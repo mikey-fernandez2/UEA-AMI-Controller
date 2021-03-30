@@ -29,8 +29,6 @@ windows.h
 -
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c
-windows.h
--
 math.h
 -
 signal.h
@@ -44,8 +42,6 @@ string.h
 time.h
 -
 haptix/comm/haptix.h
--
-windows.h
 -
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
 -
