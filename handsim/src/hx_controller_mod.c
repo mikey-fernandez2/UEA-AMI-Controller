@@ -48,41 +48,41 @@ void printState(const hxRobotInfo *_robotInfo, const hxSensor *_sensor)
 
   // int i;
 
-  // printf("\tTime: %d.%09d\n",
+  // printf("Time: %d.%09d\n",
   //   _sensor->time_stamp.sec, _sensor->time_stamp.nsec);
 
-  // printf("\tMotors:\n");
+  // printf("Motors:\n");
   // for (i = 0; i < _robotInfo->motor_count; ++i)
   // {
-  //   printf("\t\tMotor %d\n", i);
-  //   printf("\t\t\tPosition: %f rads\n", _sensor->motor_pos[i]);
-  //   printf("\t\t\tVelocity: %f rads/sec\n", _sensor->motor_vel[i]);
-  //   printf("\t\t\tTorque: %f N*m\n" , _sensor->motor_torque[i]);
+  //   printf("\tMotor %d\n", i);
+  //   printf("\t\tPosition: %f rads\n", _sensor->motor_pos[i]);
+  //   printf("\t\tVelocity: %f rads/sec\n", _sensor->motor_vel[i]);
+  //   printf("\t\tTorque: %f N*m\n" , _sensor->motor_torque[i]);
   // }
 
-  // printf("\tJoints:\n");
+  // printf("Joints:\n");
   // for (i = 0; i < _robotInfo->joint_count; ++i)
   // {
-  //   printf("\t\tJoint %d\n", i);
-  //   printf("\t\t\tPosition: %f rads\n", _sensor->joint_pos[i]);
-  //   printf("\t\t\tVelocity: %f rads/sec\n", _sensor->joint_vel[i]);
+  //   printf("\tJoint %d\n", i);
+  //   printf("\t\tPosition: %f rads\n", _sensor->joint_pos[i]);
+  //   printf("\t\tVelocity: %f rads/sec\n", _sensor->joint_vel[i]);
   // }
 
-  // printf("\tContact sensors:\n");
+  // printf("Contact sensors:\n");
   // for (i = 0; i < _robotInfo->contact_sensor_count; ++i)
   // {
-  //   printf("\t\t# %d\n", i);
-  //   printf("\t\t\tvalue: %f N.\n", _sensor->contact[i]);
+  //   printf("\t# %d\n", i);
+  //   printf("\t\tvalue: %f N.\n", _sensor->contact[i]);
   // }
 
-  // printf("\tIMUs:\n");
+  // printf("IMUs:\n");
   // for (i = 0; i < _robotInfo->imu_count; ++i)
   // {
-  //   printf("\t\t# %d\n", i);
-  //   printf("\t\t\tLinear acceleration: (%f, %f, %f) m/sec2\n",
+  //   printf("\t# %d\n", i);
+  //   printf("\t\tLinear acceleration: (%f, %f, %f) m/sec2\n",
   //     _sensor->imu_linear_acc[i][0], _sensor->imu_linear_acc[i][1],
   //     _sensor->imu_linear_acc[i][2]);
-  //   printf("\t\t\tAngular velocity: (%f, %f, %f) rads/sec\n",
+  //   printf("\t\tAngular velocity: (%f, %f, %f) rads/sec\n",
   //     _sensor->imu_angular_vel[i][0], _sensor->imu_angular_vel[i][1],
   //     _sensor->imu_angular_vel[i][2]);
   // }
@@ -204,7 +204,7 @@ int main(int argc, char **argv)
     usingEMG = strcmp("0", argv[1]) == 0 ? 0 : 1;
     usingPolhemus = strcmp("0", argv[2]) == 0 ? 0 : 1;
   }
-
+   
   int i;
   int counter = 0;
   hxRobotInfo robotInfo;
@@ -307,7 +307,7 @@ int main(int argc, char **argv)
     {
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
-        // Set the desired velocity of this motor
+        // Set the desired position of this motor
         if (i == 2)
           cmd.ref_pos[i] = -wrist_vel;
         else
@@ -331,7 +331,7 @@ int main(int argc, char **argv)
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
-        cmd.ref_pos[i] = (float)(20 * 0.5 *
+        cmd.ref_pos[i] = (float)(350 * 0.5 *
           sin(0.05 * 2.0 * M_PI * counter * 0.01));
         // We could set a desired maximum velocity
         // cmd.ref_vel[i] = 10.0;
@@ -428,7 +428,7 @@ int main(int argc, char **argv)
     }
 
     loopEnd = clock();
-    unsigned int sleeptime_us = 10000 - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    unsigned int sleeptime_us = 1000 - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
 
     usleep(sleeptime_us);
     end = clock();
