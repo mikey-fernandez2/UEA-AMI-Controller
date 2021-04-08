@@ -157,8 +157,8 @@ void printEMGData(const struct EMGData *emg)
   printf("\tRunning time: %d ms\n", emg->OS_tick);
   printf("\tEMG:\n");
   printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    emg->rawEMG[0], emg->rawEMG[4], emg->rawEMG[8], emg->rawEMG[12],
-    emg->rawEMG[1], emg->rawEMG[5], emg->rawEMG[9], emg->rawEMG[13],
+    emg->rawEMG[0], emg->rawEMG[4], emg->rawEMG[8],  emg->rawEMG[12],
+    emg->rawEMG[1], emg->rawEMG[5], emg->rawEMG[9],  emg->rawEMG[13],
     emg->rawEMG[2], emg->rawEMG[6], emg->rawEMG[10], emg->rawEMG[14],
     emg->rawEMG[3], emg->rawEMG[7], emg->rawEMG[11], emg->rawEMG[15]);
   printf("\tTrigger: %d\n", emg->trigger);
@@ -168,6 +168,20 @@ void printEMGData(const struct EMGData *emg)
   printf("\n");
 }
 
+void printEMGNorms(const struct EMGNorms *norms)
+{
+  printf("EMG normalization factors:\n");
+
+  printf("\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+    norms->MVC[0], norms->MVC[4], norms->MVC[8],  norms->MVC[12],
+    norms->MVC[1], norms->MVC[5], norms->MVC[9],  norms->MVC[13],
+    norms->MVC[2], norms->MVC[6], norms->MVC[10], norms->MVC[14],
+    norms->MVC[3], norms->MVC[7], norms->MVC[11], norms->MVC[15]);
+
+  printf("\n");
+}
+
+//////////////////////////////////////////////////
 void printPolhemus(polhemus_pose_t *poses, int num_poses)
 {
   int i;
@@ -273,20 +287,45 @@ int main(int argc, char **argv)
 
   ///////////////////////////////
   // Set up for receiving EMG data
+  ssize_t n;
+
   int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
-  ssize_t n;
-
   char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
   int fd1;                    // Pipe file descriptor
+
+  int scaleFactorsLen = 64; // 64 bytes - ffffffffffffffff struct formatting
+  char buffer2[scaleFactorsLen];
+  struct EMGNorms *norms = malloc(sizeof(struct EMGNorms));
+  char *scaleFactors = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt";
+  int fd2;
+
   if (usingEMG)
   {
     printf("\nTrying to connect to EMG board...\n");
 
     mkfifo(EMGPipe, 0666); 
 
-    printf("Successfully connected to EMG board.\n\n");
+    printf("Successfully connected to EMG board.\n");
+
+    printf("\nTrying to read EMG normalization factors...\n");
+
+    fd2 = open(scaleFactors, O_RDONLY); 
+    n = read(fd2, buffer2, scaleFactorsLen);
+    close(fd2);
+    if (n >= 0) 
+    {
+      memcpy(norms, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate struct
+      printEMGNorms(norms);
+    }
+    else
+    {
+      printf("read(): Receiving error.\n");
+      return -1;
+    }
+
+    printf("Successfully read in norming factors.\n");
   }
 
   ///////////////////////////////
@@ -305,6 +344,18 @@ int main(int argc, char **argv)
 
     if (usingEMG)
     {
+      // ref_pos[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) + th[i]
+      //     Starting point:
+      //         a0 = 0
+      //         a1 = full flex angle      (robotInfo.joint_limit[i][0])
+      //         a2 = full extension angle (robotInfo.joint_limit[i][1])
+      //
+      //     0 <= al_ag, al_an <= 1 (normalized EMG)
+      //
+      //     th = sensor->joint_pos[i]
+      //
+      //     TODO: figure out how to calculate K[i]
+
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
@@ -365,7 +416,19 @@ int main(int argc, char **argv)
 
     // Debug output: Print the state.
     // printState() cannot be commented out or the limb won't move
-    if (!(counter % 100))
+    if (!(counter % 100))fd1 = open(EMGPipe, O_RDONLY); 
+      n = read(fd1, buffer, msgLen);
+      close(fd1);
+      if (n >= 0) 
+      {
+        memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
+        // printEMGData(emg);
+      }
+      else
+      {
+        printf("read(): Receiving error.\n");
+        return -1;
+      }
     {
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor);

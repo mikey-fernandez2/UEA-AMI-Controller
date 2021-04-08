@@ -134,14 +134,6 @@ gazebo/gui/KeyEventHandler.hh
 handsim/HaptixControlPlugin.hh
 /home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/HaptixControlPlugin.hh
 
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/JointHelper.cc
-handsim/JointHelper.hh
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/JointHelper.hh
-
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/WrenchHelper.cc
-handsim/WrenchHelper.hh
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/WrenchHelper.hh
-
 /usr/include/gazebo-7/gazebo/common/Animation.hh
 string
 -

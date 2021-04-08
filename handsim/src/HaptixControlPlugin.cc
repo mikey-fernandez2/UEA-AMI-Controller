@@ -648,7 +648,7 @@ void HaptixControlPlugin::LoadHandControl()
   // Get pid gains and insert into pid
   this->pids.resize(this->simJoints.size());
   sdf::ElementPtr pid = this->sdf->GetElement("pid");
-  // gzdbg << "getting pid\n";
+  // gzdbg << "getting pid\n";velocity
   while (pid)
   {
     pid->GetAttribute("id")->Get(id);
