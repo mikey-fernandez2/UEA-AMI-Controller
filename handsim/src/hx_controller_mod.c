@@ -31,6 +31,7 @@
 #include <sys/stat.h> 
 #include <sys/types.h> 
 #include <unistd.h>
+#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h"
 
 int running = 1;
 
@@ -41,154 +42,7 @@ void sigHandler(int signo)
   running = 0;
 }
 
-//////////////////////////////////////////////////
-void printState(const hxRobotInfo *_robotInfo, const hxSensor *_sensor)
-{
-  return;
-
-  // int i;
-
-  // printf("Time: %d.%09d\n",
-  //   _sensor->time_stamp.sec, _sensor->time_stamp.nsec);
-
-  // printf("Motors:\n");
-  // for (i = 0; i < _robotInfo->motor_count; ++i)
-  // {
-  //   printf("\tMotor %d\n", i);
-  //   printf("\t\tPosition: %f rads\n", _sensor->motor_pos[i]);
-  //   printf("\t\tVelocity: %f rads/sec\n", _sensor->motor_vel[i]);
-  //   printf("\t\tTorque: %f N*m\n" , _sensor->motor_torque[i]);
-  // }
-
-  // printf("Joints:\n");
-  // for (i = 0; i < _robotInfo->joint_count; ++i)
-  // {
-  //   printf("\tJoint %d\n", i);
-  //   printf("\t\tPosition: %f rads\n", _sensor->joint_pos[i]);
-  //   printf("\t\tVelocity: %f rads/sec\n", _sensor->joint_vel[i]);
-  // }
-
-  // printf("Contact sensors:\n");
-  // for (i = 0; i < _robotInfo->contact_sensor_count; ++i)
-  // {
-  //   printf("\t# %d\n", i);
-  //   printf("\t\tvalue: %f N.\n", _sensor->contact[i]);
-  // }
-
-  // printf("IMUs:\n");
-  // for (i = 0; i < _robotInfo->imu_count; ++i)
-  // {
-  //   printf("\t# %d\n", i);
-  //   printf("\t\tLinear acceleration: (%f, %f, %f) m/sec2\n",
-  //     _sensor->imu_linear_acc[i][0], _sensor->imu_linear_acc[i][1],
-  //     _sensor->imu_linear_acc[i][2]);
-  //   printf("\t\tAngular velocity: (%f, %f, %f) rads/sec\n",
-  //     _sensor->imu_angular_vel[i][0], _sensor->imu_angular_vel[i][1],
-  //     _sensor->imu_angular_vel[i][2]);
-  // }
-
-  // printf("\n");
-}
-
-//////////////////////////////////////////////////
-void printRobotInfo(const hxRobotInfo *_robotInfo)
-{
-  printf("Robot information received:\n");
-  printf("Num motors: %d\n", _robotInfo->motor_count);
-  printf("Num joints: %d\n", _robotInfo->joint_count);
-  printf("Num contact sensors: %d\n", _robotInfo->contact_sensor_count);
-  printf("Num IMUs: %d\n", _robotInfo->imu_count);
-  printf("Update rate: %f\n", _robotInfo->update_rate);
-  printf("Actuated joint limits: \n");
-
-  // Print joint limits.
-  int i;
-  for (i = 0; i < _robotInfo->motor_count; ++i)
-  {
-    printf("\tJoint associated to motor %d:\n", i);
-    printf("\t\t Min: %f rads.\n", _robotInfo->joint_limit[i][0]);
-    printf("\t\t Max: %f rads.\n", _robotInfo->joint_limit[i][1]);
-  }
-
-  printf("\n");
-}
-
-//////////////////////////////////////////////////
-// Print next command to be sent
-void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
-{
-  printf("Command received:\n");
-
-  // Print command settings.
-  printf("\tref_pos_enabled: %d\n",     _cmd->ref_pos_enabled);
-  printf("\tref_vel_enabled: %d\n",     _cmd->ref_vel_enabled);
-  printf("\tref_vel_max_enabled: %d\n", _cmd->ref_vel_max_enabled);
-  printf("\tgain_pos_enabled: %d\n",    _cmd->gain_pos_enabled);
-  printf("\tgain_vel_enabled: %d\n",    _cmd->gain_vel_enabled);
-
-  // Print individual motor commands.
-  int i;
-  printf("\n\tMotors:\n");
-  for (i = 0; i < _robotInfo->motor_count; ++i)
-  {
-    printf("\t\tMotor %d\n", i);
-    printf("\t\t\tref_pos: %f rads\n", _cmd->ref_pos[i]);
-    printf("\t\t\tref_vel: %f rads/sec\n", _cmd->ref_vel[i]);
-    printf("\t\t\tref_vel_max: %f rads/sec\n", _cmd->ref_vel_max[i]);
-    printf("\t\t\tgain_pos: %f Nm/rad\n", _cmd->gain_pos[i]);
-    printf("\t\t\tgain_vel: %f Nm*sec/rad\n", _cmd->gain_vel[i]);
-  }
-
-  printf("\n");
-}
-
-//////////////////////////////////////////////////
-// Print EMG struct
-void printEMGData(const struct EMGData *emg)
-{
-  printf("EMG data received:\n");
-
-  printf("\tRunning time: %d ms\n", emg->OS_tick);
-  printf("\tTrigger: %d\n", emg->trigger);
-  printf("\tSwitch1: %d\n", emg->switch1);
-  printf("\tSwitch2: %d\n", emg->switch2);
-
-  printf("\tEMG Norms:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    emg->MVC[0], emg->MVC[4], emg->MVC[8],  emg->MVC[12],
-    emg->MVC[1], emg->MVC[5], emg->MVC[9],  emg->MVC[13],
-    emg->MVC[2], emg->MVC[6], emg->MVC[10], emg->MVC[14],
-    emg->MVC[3], emg->MVC[7], emg->MVC[11], emg->MVC[15]);
-
-  printf("\tRaw EMG:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    emg->rawEMG[0], emg->rawEMG[4], emg->rawEMG[8],  emg->rawEMG[12],
-    emg->rawEMG[1], emg->rawEMG[5], emg->rawEMG[9],  emg->rawEMG[13],
-    emg->rawEMG[2], emg->rawEMG[6], emg->rawEMG[10], emg->rawEMG[14],
-    emg->rawEMG[3], emg->rawEMG[7], emg->rawEMG[11], emg->rawEMG[15]);
-
-  printf("\tNormed EMG:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    emg->normedEMG[0], emg->normedEMG[4], emg->normedEMG[8],  emg->normedEMG[12],
-    emg->normedEMG[1], emg->normedEMG[5], emg->normedEMG[9],  emg->normedEMG[13],
-    emg->normedEMG[2], emg->normedEMG[6], emg->normedEMG[10], emg->normedEMG[14],
-    emg->normedEMG[3], emg->normedEMG[7], emg->normedEMG[11], emg->normedEMG[15]);
-
-  printf("\n");
-}
-
-// Print EMG normalization factors
-void printEMGNorms(float *norms)
-{
-  printf("EMG normalization factors:\n");
-  printf("\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    norms[0], norms[4], norms[8],  norms[12],
-    norms[1], norms[5], norms[9],  norms[13],
-    norms[2], norms[6], norms[10], norms[14],
-    norms[3], norms[7], norms[11], norms[15]);
-
-  printf("\n");
-}
+// All printing functions relegated to "printFunctions.c"
 
 // Divide each raw EMG value by the normalization factor and save in struct
 void normEMG(struct EMGData *emg)
@@ -200,25 +54,6 @@ void normEMG(struct EMGData *emg)
   {
     emg->normedEMG[i] = emg->rawEMG[i]/emg->MVC[i];
   }
-}
-
-//////////////////////////////////////////////////
-// Print tracking data from Polhemus system
-void printPolhemus(polhemus_pose_t *poses, int num_poses)
-{
-  int i;
-  for(i = 0; i < num_poses; i++)
-    printf("%d: %lf %lf %lf %lf %lf %lf\n", poses[i].station_id,
-          poses[i].x, poses[i].y, poses[i].z,
-          poses[i].roll, poses[i].pitch, poses[i].yaw);
-
-  printf("\n");
-
-  // NOTE ON POLHEMUS TRACKERS
-    // finger 1: seems to be nothing
-    // finger 2: seems to be nothing
-    // arm: arm
-    // head 2: head, but side to side/tilting are switched
 }
 
 //////////////////////////////////////////////////
@@ -240,6 +75,25 @@ int main(int argc, char **argv)
     usingEMG = strcmp("0", argv[1]) == 0 ? 0 : 1;
     usingPolhemus = strcmp("0", argv[2]) == 0 ? 0 : 1;
   }
+
+  char *str;
+  if (usingEMG && usingPolhemus)
+  {
+    str = "with EMG and Polhemus";
+  }
+  else if (usingEMG)
+  {
+    str = "with EMG";
+  }
+  else if (usingPolhemus)
+  {
+    str = "with Polhemus";
+  }
+  else
+  {
+    str = "without EMG or Polhemus";
+  }
+  printf("Starting arm controller %s\n", str);
    
   int i;
   int counter = 0;
@@ -274,8 +128,6 @@ int main(int argc, char **argv)
   }
 
   ///////////////////////////////
-  printf("Initializing...\n");
-
   // Capture SIGINT signal.
   if (signal(SIGINT, sigHandler) == SIG_ERR)
     printf("Error catching SIGINT\n");
@@ -338,7 +190,7 @@ int main(int argc, char **argv)
     if (n >= 0) 
     {
       memcpy(emg->MVC, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate struct
-      // printEMGNorms(emg->MVC);
+      printEMGNorms(emg->MVC);
     }
     else
     {
@@ -353,7 +205,6 @@ int main(int argc, char **argv)
   start = clock(); end = clock();
 
   int steps = 0;
-  float normedEMG[16] = {0.0};
 
   // Send commands
   while (running)
@@ -486,7 +337,7 @@ int main(int argc, char **argv)
     // This is the 'end' point
     if(running == 0)
     {
-      printf("Stopping movement\n");
+      printf("\nStopping movement\n");
       break;
     }
 
@@ -495,6 +346,8 @@ int main(int argc, char **argv)
 
     usleep(sleeptime_us);
     end = clock();
+
+    // printf("Control loop ran %i times.\n", steps);
   }
 
   ///////////////////////////////
@@ -511,7 +364,7 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  // free the memory use
+  // free the memory used
   free(emg);
 
   return 0;

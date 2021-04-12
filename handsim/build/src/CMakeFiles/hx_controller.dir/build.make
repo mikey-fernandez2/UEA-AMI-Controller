@@ -72,9 +72,32 @@ src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o.provides: src/CMakeFiles/
 
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o.provides.build: src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o
 
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: src/CMakeFiles/hx_controller.dir/flags.make
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: ../src/printFunctions.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/hx_controller.dir/printFunctions.c.o"
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build/src && /usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/hx_controller.dir/printFunctions.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/hx_controller.dir/printFunctions.c.i"
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build/src && /usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c > CMakeFiles/hx_controller.dir/printFunctions.c.i
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/hx_controller.dir/printFunctions.c.s"
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build/src && /usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c -o CMakeFiles/hx_controller.dir/printFunctions.c.s
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o.requires:
+.PHONY : src/CMakeFiles/hx_controller.dir/printFunctions.c.o.requires
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o.provides: src/CMakeFiles/hx_controller.dir/printFunctions.c.o.requires
+	$(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/printFunctions.c.o.provides.build
+.PHONY : src/CMakeFiles/hx_controller.dir/printFunctions.c.o.provides
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o.provides.build: src/CMakeFiles/hx_controller.dir/printFunctions.c.o
+
 src/CMakeFiles/hx_controller.dir/calculateCommands.c.o: src/CMakeFiles/hx_controller.dir/flags.make
 src/CMakeFiles/hx_controller.dir/calculateCommands.c.o: ../src/calculateCommands.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/hx_controller.dir/calculateCommands.c.o"
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build/src && /usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/hx_controller.dir/calculateCommands.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/src/calculateCommands.c
 
@@ -98,12 +121,14 @@ src/CMakeFiles/hx_controller.dir/calculateCommands.c.o.provides.build: src/CMake
 # Object files for target hx_controller
 hx_controller_OBJECTS = \
 "CMakeFiles/hx_controller.dir/hx_controller_mod.c.o" \
+"CMakeFiles/hx_controller.dir/printFunctions.c.o" \
 "CMakeFiles/hx_controller.dir/calculateCommands.c.o"
 
 # External object files for target hx_controller
 hx_controller_EXTERNAL_OBJECTS =
 
 src/hx_controller: src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o
+src/hx_controller: src/CMakeFiles/hx_controller.dir/printFunctions.c.o
 src/hx_controller: src/CMakeFiles/hx_controller.dir/calculateCommands.c.o
 src/hx_controller: src/CMakeFiles/hx_controller.dir/build.make
 src/hx_controller: /usr/lib/x86_64-linux-gnu/libhaptix-comm.so
@@ -166,6 +191,7 @@ src/CMakeFiles/hx_controller.dir/build: src/hx_controller
 .PHONY : src/CMakeFiles/hx_controller.dir/build
 
 src/CMakeFiles/hx_controller.dir/requires: src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o.requires
+src/CMakeFiles/hx_controller.dir/requires: src/CMakeFiles/hx_controller.dir/printFunctions.c.o.requires
 src/CMakeFiles/hx_controller.dir/requires: src/CMakeFiles/hx_controller.dir/calculateCommands.c.o.requires
 .PHONY : src/CMakeFiles/hx_controller.dir/requires
 

@@ -9,19 +9,16 @@ def printNorms(norms):
     print("Scaling factors:")
     
     for elec in range(len(norms)//4):
-        print("\t", norms[elec], norms[elec + 1], norms[elec + 2], norms[elec + 3])
+        print("\t%06.2f %06.2f %06.2f %06.2f" % (norms[elec], norms[elec + 1], norms[elec + 2], norms[elec + 3]))
 
     return
 
-def main(path, numElectrodes):    
+def main(path):    
     try:
         print("Accessing EMG normalization factors...\n")
-
-        msgLen = 4*numElectrodes
-
-        fifo = os.open(path, os.O_RDONLY)
-        normsPack = os.read(fifo, msgLen)
-        os.close(fifo)
+        fifo = open(path, 'rb')
+        normsPack = fifo.read()
+        fifo.close()
 
         norms = struct.unpack("ffffffffffffffff", normsPack)
         printNorms(norms)
@@ -33,6 +30,5 @@ def main(path, numElectrodes):
 
 if __name__ == "__main__":
     path = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
-    numElectrodes = 16
 
-    main(path, numElectrodes)
+    main(path)

@@ -28,6 +28,8 @@ windows.h
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
+
 /home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c
 math.h
 -
@@ -56,5 +58,7 @@ sys/stat.h
 sys/types.h
 -
 unistd.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
 -
 

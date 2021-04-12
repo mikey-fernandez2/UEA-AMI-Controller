@@ -554,6 +554,30 @@ polhemus_driver.c.s:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/HaptixTracking.dir/build.make src/CMakeFiles/HaptixTracking.dir/polhemus_driver.c.s
 .PHONY : polhemus_driver.c.s
 
+printFunctions.o: printFunctions.c.o
+.PHONY : printFunctions.o
+
+# target to build an object file
+printFunctions.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/printFunctions.c.o
+.PHONY : printFunctions.c.o
+
+printFunctions.i: printFunctions.c.i
+.PHONY : printFunctions.i
+
+# target to preprocess a source file
+printFunctions.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/printFunctions.c.i
+.PHONY : printFunctions.c.i
+
+printFunctions.s: printFunctions.c.s
+.PHONY : printFunctions.s
+
+# target to generate assembly for a file
+printFunctions.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/printFunctions.c.s
+.PHONY : printFunctions.c.s
+
 usr/include/haptix/comm/msg/hxCommand.pb.o: usr/include/haptix/comm/msg/hxCommand.pb.cc.o
 .PHONY : usr/include/haptix/comm/msg/hxCommand.pb.o
 
@@ -712,6 +736,9 @@ help:
 	@echo "... polhemus_driver.o"
 	@echo "... polhemus_driver.i"
 	@echo "... polhemus_driver.s"
+	@echo "... printFunctions.o"
+	@echo "... printFunctions.i"
+	@echo "... printFunctions.s"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.o"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.i"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.s"

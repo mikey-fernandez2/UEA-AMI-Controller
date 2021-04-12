@@ -34,8 +34,6 @@ def main(path, numElectrodes, scaleFactorsPath):
         print("\nReceiving complete.\nWriting normalization factors to %s\n" % scaleFactorsPath)
         os.remove(path)
 
-        # print(maxes)
-
         maxesbytes = struct.pack("ffffffffffffffff", maxes[0], maxes[1], maxes[2], maxes[3], maxes[4], maxes[5], maxes[6], maxes[7],
                                                      maxes[8], maxes[9], maxes[10], maxes[11], maxes[12], maxes[13], maxes[14], maxes[15])
 

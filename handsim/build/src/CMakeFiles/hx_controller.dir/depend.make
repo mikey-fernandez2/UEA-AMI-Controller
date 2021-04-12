@@ -7,5 +7,11 @@ src/CMakeFiles/hx_controller.dir/calculateCommands.c.o: ../src/calculateCommands
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../include/handsim/EMGStruct.h
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../include/handsim/calculateCommands.h
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../include/handsim/polhemus_driver.h
+src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../include/handsim/printFunctions.h
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../src/hx_controller_mod.c
+
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: ../include/handsim/EMGStruct.h
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: ../include/handsim/polhemus_driver.h
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: ../include/handsim/printFunctions.h
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o: ../src/printFunctions.c
 

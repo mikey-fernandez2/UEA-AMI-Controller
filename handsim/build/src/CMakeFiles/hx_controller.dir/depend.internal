@@ -8,4 +8,10 @@ src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o
  /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
  /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h
  /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
+ /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
  /home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c
+src/CMakeFiles/hx_controller.dir/printFunctions.c.o
+ /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
+ /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
+ /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
+ /home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c
