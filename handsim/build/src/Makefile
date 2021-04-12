@@ -482,6 +482,30 @@ __/include/handsim/moc_TaskButton.cxx.s:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/HaptixGUIPlugin.dir/build.make src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_TaskButton.cxx.s
 .PHONY : __/include/handsim/moc_TaskButton.cxx.s
 
+calculateCommands.o: calculateCommands.c.o
+.PHONY : calculateCommands.o
+
+# target to build an object file
+calculateCommands.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/calculateCommands.c.o
+.PHONY : calculateCommands.c.o
+
+calculateCommands.i: calculateCommands.c.i
+.PHONY : calculateCommands.i
+
+# target to preprocess a source file
+calculateCommands.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/calculateCommands.c.i
+.PHONY : calculateCommands.c.i
+
+calculateCommands.s: calculateCommands.c.s
+.PHONY : calculateCommands.s
+
+# target to generate assembly for a file
+calculateCommands.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/calculateCommands.c.s
+.PHONY : calculateCommands.c.s
+
 hx_controller_mod.o: hx_controller_mod.c.o
 .PHONY : hx_controller_mod.o
 
@@ -529,30 +553,6 @@ polhemus_driver.s: polhemus_driver.c.s
 polhemus_driver.c.s:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/HaptixTracking.dir/build.make src/CMakeFiles/HaptixTracking.dir/polhemus_driver.c.s
 .PHONY : polhemus_driver.c.s
-
-sendCommands.o: sendCommands.c.o
-.PHONY : sendCommands.o
-
-# target to build an object file
-sendCommands.c.o:
-	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/sendCommands.c.o
-.PHONY : sendCommands.c.o
-
-sendCommands.i: sendCommands.c.i
-.PHONY : sendCommands.i
-
-# target to preprocess a source file
-sendCommands.c.i:
-	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/sendCommands.c.i
-.PHONY : sendCommands.c.i
-
-sendCommands.s: sendCommands.c.s
-.PHONY : sendCommands.s
-
-# target to generate assembly for a file
-sendCommands.c.s:
-	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/sendCommands.c.s
-.PHONY : sendCommands.c.s
 
 usr/include/haptix/comm/msg/hxCommand.pb.o: usr/include/haptix/comm/msg/hxCommand.pb.cc.o
 .PHONY : usr/include/haptix/comm/msg/hxCommand.pb.o
@@ -703,15 +703,15 @@ help:
 	@echo "... __/include/handsim/moc_TaskButton.o"
 	@echo "... __/include/handsim/moc_TaskButton.i"
 	@echo "... __/include/handsim/moc_TaskButton.s"
+	@echo "... calculateCommands.o"
+	@echo "... calculateCommands.i"
+	@echo "... calculateCommands.s"
 	@echo "... hx_controller_mod.o"
 	@echo "... hx_controller_mod.i"
 	@echo "... hx_controller_mod.s"
 	@echo "... polhemus_driver.o"
 	@echo "... polhemus_driver.i"
 	@echo "... polhemus_driver.s"
-	@echo "... sendCommands.o"
-	@echo "... sendCommands.i"
-	@echo "... sendCommands.s"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.o"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.i"
 	@echo "... usr/include/haptix/comm/msg/hxCommand.pb.s"

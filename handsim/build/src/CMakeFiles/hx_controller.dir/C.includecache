@@ -10,9 +10,7 @@
 stdint.h
 -
 
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
-
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/sendCommands.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h
 windows.h
 -
 math.h
@@ -27,6 +25,8 @@ haptix/comm/haptix.h
 -
 windows.h
 -
+
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c
 math.h
@@ -45,7 +45,7 @@ haptix/comm/haptix.h
 -
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
 -
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/sendCommands.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h
 -
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 -

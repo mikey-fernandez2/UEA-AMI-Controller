@@ -4,8 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/calculateCommands.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/calculateCommands.c.o"
   "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o"
-  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/sendCommands.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/sendCommands.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

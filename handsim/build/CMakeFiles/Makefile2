@@ -251,9 +251,9 @@ clean: src/CMakeFiles/HaptixWorldPlugin.dir/clean
 
 # All Build rule for target.
 src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixControlPlugin.dir/all
-src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 	$(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/depend
 	$(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  26 27
@@ -433,9 +433,9 @@ test/integration/preinstall:
 
 # All Build rule for target.
 test/integration/CMakeFiles/INTEGRATION_physics.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+test/integration/CMakeFiles/INTEGRATION_physics.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_physics.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_physics.dir/all: src/CMakeFiles/HaptixControlPlugin.dir/all
-test/integration/CMakeFiles/INTEGRATION_physics.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_physics.dir/build.make test/integration/CMakeFiles/INTEGRATION_physics.dir/depend
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_physics.dir/build.make test/integration/CMakeFiles/INTEGRATION_physics.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  20
@@ -471,9 +471,9 @@ clean: test/integration/CMakeFiles/INTEGRATION_physics.dir/clean
 
 # All Build rule for target.
 test/integration/CMakeFiles/INTEGRATION_sim_api.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+test/integration/CMakeFiles/INTEGRATION_sim_api.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_sim_api.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_sim_api.dir/all: src/CMakeFiles/HaptixControlPlugin.dir/all
-test/integration/CMakeFiles/INTEGRATION_sim_api.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_sim_api.dir/build.make test/integration/CMakeFiles/INTEGRATION_sim_api.dir/depend
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_sim_api.dir/build.make test/integration/CMakeFiles/INTEGRATION_sim_api.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  21
@@ -509,9 +509,9 @@ clean: test/integration/CMakeFiles/INTEGRATION_sim_api.dir/clean
 
 # All Build rule for target.
 test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/all: src/CMakeFiles/HaptixControlPlugin.dir/all
-test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/build.make test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/depend
 	$(MAKE) -f test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/build.make test/integration/CMakeFiles/INTEGRATION_sim_api_client.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  22
@@ -577,9 +577,9 @@ test/regression/preinstall:
 
 # All Build rule for target.
 test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/all: src/CMakeFiles/HaptixControlPlugin.dir/all
-test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 	$(MAKE) -f test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/build.make test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/depend
 	$(MAKE) -f test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/build.make test/regression/CMakeFiles/REGRESSION_86_motor_values.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  23

@@ -9,8 +9,6 @@ struct EMGData {
     unsigned int switch1 : 1;
     unsigned int switch2 : 1;
     unsigned int end;
-};
-
-struct EMGNorms {
     float MVC[16];
+    float normedEMG[16];
 };

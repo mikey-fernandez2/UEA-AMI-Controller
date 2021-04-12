@@ -23,8 +23,8 @@
 #include <haptix/comm/haptix.h>
 // #include "EMGStruct.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h"
-// #include "sendCommands.h"
-#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/sendCommands.h"
+// #include "calculateCommands.h"
+#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h"
 // #include "handsim/include/handsim/polhemus_driver.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h"
 #include <fcntl.h> 
@@ -114,16 +114,19 @@ void printRobotInfo(const hxRobotInfo *_robotInfo)
 }
 
 //////////////////////////////////////////////////
+// Print next command to be sent
 void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
 {
   printf("Command received:\n");
 
-  printf("\tref_pos_enabled: %d\n", _cmd->ref_pos_enabled);
-  printf("\tref_vel_enabled: %d\n", _cmd->ref_vel_enabled);
+  // Print command settings.
+  printf("\tref_pos_enabled: %d\n",     _cmd->ref_pos_enabled);
+  printf("\tref_vel_enabled: %d\n",     _cmd->ref_vel_enabled);
   printf("\tref_vel_max_enabled: %d\n", _cmd->ref_vel_max_enabled);
-  printf("\tgain_pos_enabled: %d\n", _cmd->gain_pos_enabled);
-  printf("\tgain_vel_enabled: %d\n", _cmd->gain_vel_enabled);
+  printf("\tgain_pos_enabled: %d\n",    _cmd->gain_pos_enabled);
+  printf("\tgain_vel_enabled: %d\n",    _cmd->gain_vel_enabled);
 
+  // Print individual motor commands.
   int i;
   printf("\n\tMotors:\n");
   for (i = 0; i < _robotInfo->motor_count; ++i)
@@ -140,48 +143,67 @@ void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
 }
 
 //////////////////////////////////////////////////
+// Print EMG struct
 void printEMGData(const struct EMGData *emg)
 {
-  time_t raw_time = (time_t)emg->OS_time;
-  struct tm *timeinfo = localtime(&raw_time);
-  
-  struct tm ts;
-  ts = *localtime(&raw_time);
-  char timebuf[80];
-  strftime(timebuf, sizeof(timebuf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
-
   printf("EMG data received:\n");
-  // printf("\tLocal time: %s", asctime(timeinfo));
-  // printf("\tLocal time: %s\n", timebuf);
-  // printf("\tRaw time: %d\n", emg->OS_time);
+
   printf("\tRunning time: %d ms\n", emg->OS_tick);
-  printf("\tEMG:\n");
+  printf("\tTrigger: %d\n", emg->trigger);
+  printf("\tSwitch1: %d\n", emg->switch1);
+  printf("\tSwitch2: %d\n", emg->switch2);
+
+  printf("\tEMG Norms:\n");
+  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+    emg->MVC[0], emg->MVC[4], emg->MVC[8],  emg->MVC[12],
+    emg->MVC[1], emg->MVC[5], emg->MVC[9],  emg->MVC[13],
+    emg->MVC[2], emg->MVC[6], emg->MVC[10], emg->MVC[14],
+    emg->MVC[3], emg->MVC[7], emg->MVC[11], emg->MVC[15]);
+
+  printf("\tRaw EMG:\n");
   printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
     emg->rawEMG[0], emg->rawEMG[4], emg->rawEMG[8],  emg->rawEMG[12],
     emg->rawEMG[1], emg->rawEMG[5], emg->rawEMG[9],  emg->rawEMG[13],
     emg->rawEMG[2], emg->rawEMG[6], emg->rawEMG[10], emg->rawEMG[14],
     emg->rawEMG[3], emg->rawEMG[7], emg->rawEMG[11], emg->rawEMG[15]);
-  printf("\tTrigger: %d\n", emg->trigger);
-  printf("\tSwitch1: %d\n", emg->switch1);
-  printf("\tSwitch2: %d\n", emg->switch2);
+
+  printf("\tNormed EMG:\n");
+  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+    emg->normedEMG[0], emg->normedEMG[4], emg->normedEMG[8],  emg->normedEMG[12],
+    emg->normedEMG[1], emg->normedEMG[5], emg->normedEMG[9],  emg->normedEMG[13],
+    emg->normedEMG[2], emg->normedEMG[6], emg->normedEMG[10], emg->normedEMG[14],
+    emg->normedEMG[3], emg->normedEMG[7], emg->normedEMG[11], emg->normedEMG[15]);
 
   printf("\n");
 }
 
-void printEMGNorms(const struct EMGNorms *norms)
+// Print EMG normalization factors
+void printEMGNorms(float *norms)
 {
   printf("EMG normalization factors:\n");
-
   printf("\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
-    norms->MVC[0], norms->MVC[4], norms->MVC[8],  norms->MVC[12],
-    norms->MVC[1], norms->MVC[5], norms->MVC[9],  norms->MVC[13],
-    norms->MVC[2], norms->MVC[6], norms->MVC[10], norms->MVC[14],
-    norms->MVC[3], norms->MVC[7], norms->MVC[11], norms->MVC[15]);
+    norms[0], norms[4], norms[8],  norms[12],
+    norms[1], norms[5], norms[9],  norms[13],
+    norms[2], norms[6], norms[10], norms[14],
+    norms[3], norms[7], norms[11], norms[15]);
 
   printf("\n");
+}
+
+// Divide each raw EMG value by the normalization factor and save in struct
+void normEMG(struct EMGData *emg)
+{
+  int numElectrodes = 16;
+  int i = 0;
+
+  for(i = 0; i < numElectrodes; i++)
+  {
+    emg->normedEMG[i] = emg->rawEMG[i]/emg->MVC[i];
+  }
 }
 
 //////////////////////////////////////////////////
+// Print tracking data from Polhemus system
 void printPolhemus(polhemus_pose_t *poses, int num_poses)
 {
   int i;
@@ -252,7 +274,7 @@ int main(int argc, char **argv)
   }
 
   ///////////////////////////////
-  printf("\nInitializing...\n");
+  printf("Initializing...\n");
 
   // Capture SIGINT signal.
   if (signal(SIGINT, sigHandler) == SIG_ERR)
@@ -276,7 +298,7 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  printf("Robot checks passed.\n");
+  printf("Robot checks passed.\n\n");
 
   // Print the robot information.
   printRobotInfo(&robotInfo);
@@ -297,27 +319,26 @@ int main(int argc, char **argv)
 
   int scaleFactorsLen = 64; // 64 bytes - ffffffffffffffff struct formatting
   char buffer2[scaleFactorsLen];
-  struct EMGNorms *norms = malloc(sizeof(struct EMGNorms));
   char *scaleFactors = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt";
   int fd2;
 
   if (usingEMG)
   {
-    printf("\nTrying to connect to EMG board...\n");
+    printf("Trying to connect to EMG board...\n");
 
     mkfifo(EMGPipe, 0666); 
 
-    printf("Successfully connected to EMG board.\n");
+    printf("Successfully connected to EMG board.\n\n");
 
-    printf("\nTrying to read EMG normalization factors...\n");
+    printf("Trying to read EMG normalization factors...\n");
 
     fd2 = open(scaleFactors, O_RDONLY); 
     n = read(fd2, buffer2, scaleFactorsLen);
     close(fd2);
     if (n >= 0) 
     {
-      memcpy(norms, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate struct
-      printEMGNorms(norms);
+      memcpy(emg->MVC, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate struct
+      // printEMGNorms(emg->MVC);
     }
     else
     {
@@ -325,22 +346,28 @@ int main(int argc, char **argv)
       return -1;
     }
 
-    printf("Successfully read in norming factors.\n");
+    printf("Successfully read in norming factors.\n\n");
   }
 
   ///////////////////////////////
   start = clock(); end = clock();
 
   int steps = 0;
-
-  float wrist_flex, wrist_extend, wrist_net;
-  float wrist_vel = 0;
+  float normedEMG[16] = {0.0};
 
   // Send commands
   while (running)
   {
     loopStart = clock(); // for adjusting wait time
     // printf("Time running: %f sec\n", 1000*(double)(end - start)/CLOCKS_PER_SEC);
+
+    // Send the new joint command and receive the state update.
+    if (hx_update(&cmd, &sensor) != hxOK)
+    {
+      printf("hx_update(): Request error.\n");
+      continue;
+    }
+    // printf("Command %d sent\n", steps);
 
     if (usingEMG)
     {
@@ -356,11 +383,13 @@ int main(int argc, char **argv)
       //
       //     TODO: figure out how to calculate K[i]
 
+      // calculateCommands(&robotInfo, &cmd, &sensor);
+
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
         if (i == 2)
-          cmd.ref_pos[i] = -wrist_vel;
+          cmd.ref_pos[i] = 0;
         else
           cmd.ref_pos[i] = 0.0;
         // cmd.ref_pos[i] = 0.0;
@@ -378,7 +407,7 @@ int main(int argc, char **argv)
     }
     else
     {
-      // Create a new command based on a sinusoidal wave.
+      // Create a new command based on a sinusoidal wave (hardcoded)
       for (i = 0; i < robotInfo.motor_count; ++i)
       {
         // Set the desired position of this motor
@@ -404,31 +433,9 @@ int main(int argc, char **argv)
       cmd.gain_vel_enabled = 0;
     }
 
-    // sendCommand(counter, &robotInfo, &cmd);
-
-    // Send the new joint command and receive the state update.
-    if (hx_update(&cmd, &sensor) != hxOK)
-    {
-      printf("hx_update(): Request error.\n");
-      continue;
-    }
-    // printf("Command %d sent\n", steps);
-
     // Debug output: Print the state.
     // printState() cannot be commented out or the limb won't move
-    if (!(counter % 100))fd1 = open(EMGPipe, O_RDONLY); 
-      n = read(fd1, buffer, msgLen);
-      close(fd1);
-      if (n >= 0) 
-      {
-        memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-        // printEMGData(emg);
-      }
-      else
-      {
-        printf("read(): Receiving error.\n");
-        return -1;
-      }
+    if (!(counter % 100))
     {
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor);
@@ -466,21 +473,14 @@ int main(int argc, char **argv)
       if (n >= 0) 
       {
         memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-        // printEMGData(emg);
+        normEMG(emg); // calculate and store normed EMG values
+        printEMGData(emg);
       }
       else
       {
         printf("read(): Receiving error.\n");
         return -1;
       }
-
-      // Calculate next control commands
-      // printf("Calculating new wrist command\n");
-      wrist_flex = emg->rawEMG[7];
-      wrist_extend = emg->rawEMG[6];
-      wrist_net = wrist_extend - wrist_flex;
-      wrist_vel = 2.0*wrist_net;
-      printf("New wrist command: %f\n", wrist_vel);
     }
 
     // This is the 'end' point
@@ -511,12 +511,8 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  if (usingEMG)
-  {
-    // close(EMGSock);
-  }
-
-  free(emg); // free the memory allocated for this struct
+  // free the memory use
+  free(emg);
 
   return 0;
 }

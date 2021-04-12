@@ -13,5 +13,5 @@
 #include <windows.h>
 #endif
 
-// sendCommands.h
-void sendCommand(int counter, hxRobotInfo *robotInfo, hxCommand *cmd);
+// calculateCommands.h
+void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor);
