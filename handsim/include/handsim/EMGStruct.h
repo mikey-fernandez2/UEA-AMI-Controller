@@ -12,3 +12,5 @@ struct EMGData {
     float MVC[16];
     float normedEMG[16];
 };
+
+typedef struct EMGData EMGData;

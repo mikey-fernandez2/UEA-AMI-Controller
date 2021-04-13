@@ -15,6 +15,7 @@
 */
 
 #include <math.h>
+#include <stdbool.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,12 +46,11 @@ void sigHandler(int signo)
 // All printing functions relegated to "printFunctions.c"
 
 // Divide each raw EMG value by the normalization factor and save in struct
-void normEMG(struct EMGData *emg)
+void normEMG(EMGData *emg, int numElec)
 {
-  int numElectrodes = 16;
   int i = 0;
 
-  for(i = 0; i < numElectrodes; i++)
+  for(i = 0; i < numElec; i++)
   {
     emg->normedEMG[i] = emg->rawEMG[i]/emg->MVC[i];
   }
@@ -62,8 +62,8 @@ void normEMG(struct EMGData *emg)
 //    usingPolhemus is a boolean integer - 0 if not, 1 if using, Polhemus trackers
 int main(int argc, char **argv)
 {
-  int usingEMG;
-  int usingPolhemus;
+  bool usingEMG;
+  bool usingPolhemus;
 
   if (argc != 3)
   {
@@ -72,8 +72,8 @@ int main(int argc, char **argv)
   }
   else
   {
-    usingEMG = strcmp("0", argv[1]) == 0 ? 0 : 1;
-    usingPolhemus = strcmp("0", argv[2]) == 0 ? 0 : 1;
+    usingEMG = strcmp("0", argv[1]) == 0 ? false : true;
+    usingPolhemus = strcmp("0", argv[2]) == 0 ? false : true;
   }
 
   char *str;
@@ -165,11 +165,12 @@ int main(int argc, char **argv)
 
   int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
   char buffer[msgLen];
-  struct EMGData *emg = malloc(sizeof(struct EMGData));
+  EMGData *emg = malloc(sizeof(EMGData));
   char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
   int fd1;                    // Pipe file descriptor
 
-  int scaleFactorsLen = 64; // 64 bytes - ffffffffffffffff struct formatting
+  int numElec = 16;
+  int scaleFactorsLen = 4*numElec; // 64 bytes - ffffffffffffffff struct formatting
   char buffer2[scaleFactorsLen];
   char *scaleFactors = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt";
   int fd2;
@@ -189,7 +190,7 @@ int main(int argc, char **argv)
     close(fd2);
     if (n >= 0) 
     {
-      memcpy(emg->MVC, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate struct
+      memcpy(emg->MVC, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate field of struct
       printEMGNorms(emg->MVC);
     }
     else
@@ -198,7 +199,7 @@ int main(int argc, char **argv)
       return -1;
     }
 
-    printf("Successfully read in norming factors.\n\n");
+    printf("Successfully read EMG norming factors.\n\n");
   }
 
   ///////////////////////////////
@@ -206,11 +207,14 @@ int main(int argc, char **argv)
 
   int steps = 0;
 
-  // Send commands
+  // Send commands, read from sensors
   while (running)
   {
     loopStart = clock(); // for adjusting wait time
     // printf("Time running: %f sec\n", 1000*(double)(end - start)/CLOCKS_PER_SEC);
+
+    // calculate next control command
+    calculateCommands(&robotInfo, &cmd, &sensor, emg, usingEMG, counter);
 
     // Send the new joint command and receive the state update.
     if (hx_update(&cmd, &sensor) != hxOK)
@@ -220,100 +224,23 @@ int main(int argc, char **argv)
     }
     // printf("Command %d sent\n", steps);
 
-    if (usingEMG)
-    {
-      // ref_pos[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) + th[i]
-      //     Starting point:
-      //         a0 = 0
-      //         a1 = full flex angle      (robotInfo.joint_limit[i][0])
-      //         a2 = full extension angle (robotInfo.joint_limit[i][1])
-      //
-      //     0 <= al_ag, al_an <= 1 (normalized EMG)
-      //
-      //     th = sensor->joint_pos[i]
-      //
-      //     TODO: figure out how to calculate K[i]
-
-      // calculateCommands(&robotInfo, &cmd, &sensor);
-
-      for (i = 0; i < robotInfo.motor_count; ++i)
-      {
-        // Set the desired position of this motor
-        if (i == 2)
-          cmd.ref_pos[i] = 0;
-        else
-          cmd.ref_pos[i] = 0.0;
-        // cmd.ref_pos[i] = 0.0;
-        // cmd.ref_vel_max[i] = 5.0;
-        // We could set a desired controller position gain
-        // cmd.gain_pos[i] = 1.0;
-        // We could set a desired controller velocity gain
-        // cmd.gain_vel[i] = 1.0;
-      }
-      cmd.ref_pos_enabled = 1;
-      cmd.ref_vel_enabled = 0;
-      cmd.ref_vel_max_enabled = 0;
-      cmd.gain_pos_enabled = 0;
-      cmd.gain_vel_enabled = 0;
-    }
-    else
-    {
-      // Create a new command based on a sinusoidal wave (hardcoded)
-      for (i = 0; i < robotInfo.motor_count; ++i)
-      {
-        // Set the desired position of this motor
-        cmd.ref_pos[i] = (float)(350 * 0.5 *
-          sin(0.05 * 2.0 * M_PI * counter * 0.01));
-        // We could set a desired maximum velocity
-        // cmd.ref_vel[i] = 10.0;
-        cmd.ref_vel_max[i] = 200.0;
-        // We could set a desired controller position gain
-        // cmd.gain_pos[i] = 1.0;
-        // We could set a desired controller velocity gain
-        cmd.gain_vel[i] = 1000.0;
-      }
-      // Indicate that the positions we set should be used.
-      cmd.ref_pos_enabled = 1;
-      // We're not setting it, so indicate that ref_vel should be ignored.
-      cmd.ref_vel_enabled = 0;
-      // We're not setting it, so indicate that ref_vel_max should be ignored.
-      cmd.ref_vel_max_enabled = 0;
-      // We're not setting it, so indicate that gain_pos should be ignored.
-      cmd.gain_pos_enabled = 0;
-      // We're not setting it, so indicate that gain_vel should be ignored.
-      cmd.gain_vel_enabled = 0;
-    }
-
     // Debug output: Print the state.
-    // printState() cannot be commented out or the limb won't move
     if (!(counter % 100))
     {
       // printCommand(&robotInfo, &cmd);
-      printState(&robotInfo, &sensor);
+      printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move
     }
     if (++counter == 2000) // originally 10000
       counter = 0;
 
     ++steps;
 
-    // Here is where you would do your other work, such as reading from EMG
-    // sensors, decoding that data, computing your next control command,
-    // etc.  In this example, we're just sleeping for 10ms.
-    //
-    // You might also want to sleep in your code, because there's a maximum
-    // rate at which the limb can process new commands and produce new
-    // sensor readings.  Depending on how long your computation takes, you
-    // might want to wait here until it's time to send a new command.  Or
-    // you might want to run as fast as possible, computing and sending new
-    // commands constantly (but knowing that not all of them will be
-    // executed by the limb).
+    ////// Perform sensor reading below
 
     if (usingPolhemus)
     {
       polhemus_get_poses(conn, poses, &num_poses, 10);
-      // print out Polhemus state update
-      //printf("Received %d poses\n", num_poses);
-      printPolhemus(poses, num_poses);
+      // printPolhemus(poses, num_poses); // print received Polhemus poses
     }
 
     if (usingEMG)
@@ -324,8 +251,8 @@ int main(int argc, char **argv)
       if (n >= 0) 
       {
         memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-        normEMG(emg); // calculate and store normed EMG values
-        printEMGData(emg);
+        normEMG(emg, numElec);       // calculate and store normed EMG values
+        printEMGData(emg);           // print EMG struct
       }
       else
       {
@@ -334,10 +261,10 @@ int main(int argc, char **argv)
       }
     }
 
-    // This is the 'end' point
+    // This is the 'end' point - stop running the control loop
     if(running == 0)
     {
-      printf("\nStopping movement\n");
+      printf("\nEnding movement\n");
       break;
     }
 
@@ -351,8 +278,6 @@ int main(int argc, char **argv)
   }
 
   ///////////////////////////////
-  printf("Movement completed.\n");
-
   // Uncomment this block to stop logging.
   // if (hxs_stop_logging() != hxOK)
   //   printf("hxs_stop_logging(): error.\n");
@@ -366,6 +291,8 @@ int main(int argc, char **argv)
 
   // free the memory used
   free(emg);
+
+  printf("Exited successfully.\n");
 
   return 0;
 }

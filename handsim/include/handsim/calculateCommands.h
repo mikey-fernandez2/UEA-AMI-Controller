@@ -12,6 +12,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include <stdbool.h>
 
 // calculateCommands.h
-void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor);
+struct EMGData;
+void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, struct EMGData *emg, bool usingEMG, int counter);
