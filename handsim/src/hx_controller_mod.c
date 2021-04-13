@@ -46,7 +46,7 @@ void sigHandler(int signo)
 // All printing functions relegated to "printFunctions.c"
 
 // Divide each raw EMG value by the normalization factor and save in struct
-void normEMG(EMGData *emg, int numElec)
+void normEMG(struct EMGData *emg, int numElec)
 {
   int i = 0;
 
@@ -165,7 +165,8 @@ int main(int argc, char **argv)
 
   int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
   char buffer[msgLen];
-  EMGData *emg = malloc(sizeof(EMGData));
+  struct EMGData *emg = malloc(sizeof(struct EMGData));
+  // struct EMGData *emg;
   char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
   int fd1;                    // Pipe file descriptor
 

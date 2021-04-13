@@ -14,12 +14,12 @@
  *
 */
 
-#include <math.h>
+// #include <math.h>
 // #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+// #include <time.h>
 #include <haptix/comm/haptix.h>
 // #include "EMGStruct.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h"

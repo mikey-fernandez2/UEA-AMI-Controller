@@ -11,22 +11,14 @@ stdint.h
 -
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h
-windows.h
--
-math.h
--
-signal.h
--
-stdio.h
--
-time.h
--
 haptix/comm/haptix.h
--
-windows.h
 -
 stdbool.h
 -
+math.h
+-
+EMGStruct.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 
@@ -66,6 +58,22 @@ sys/stat.h
 sys/types.h
 -
 unistd.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
+-
+
+/home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+haptix/comm/haptix.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 -
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
 -
