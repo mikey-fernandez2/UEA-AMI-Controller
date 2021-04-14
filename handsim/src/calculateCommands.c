@@ -1,11 +1,8 @@
-// C file to read in commands
+// Calculate next controller command based on incoming EMG and current limb position
+//
+// Mikey Fernandez 04/11/2021
 
 #include "../include/handsim/calculateCommands.h"
-
-float getNormedEMG(struct EMGData *emg, int i)
-{
-  return emg->normedEMG[i];
-}
 
 void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, struct EMGData *emg, bool usingEMG, int counter)
 {

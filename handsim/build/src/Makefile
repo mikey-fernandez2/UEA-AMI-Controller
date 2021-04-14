@@ -239,6 +239,30 @@ hx_controller/fast:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/build
 .PHONY : hx_controller/fast
 
+EMGStruct.o: EMGStruct.c.o
+.PHONY : EMGStruct.o
+
+# target to build an object file
+EMGStruct.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/EMGStruct.c.o
+.PHONY : EMGStruct.c.o
+
+EMGStruct.i: EMGStruct.c.i
+.PHONY : EMGStruct.i
+
+# target to preprocess a source file
+EMGStruct.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/EMGStruct.c.i
+.PHONY : EMGStruct.c.i
+
+EMGStruct.s: EMGStruct.c.s
+.PHONY : EMGStruct.s
+
+# target to generate assembly for a file
+EMGStruct.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/EMGStruct.c.s
+.PHONY : EMGStruct.c.s
+
 HaptixControlPlugin.o: HaptixControlPlugin.cc.o
 .PHONY : HaptixControlPlugin.o
 
@@ -697,6 +721,9 @@ help:
 	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... EMGStruct.o"
+	@echo "... EMGStruct.i"
+	@echo "... EMGStruct.s"
 	@echo "... HaptixControlPlugin.o"
 	@echo "... HaptixControlPlugin.i"
 	@echo "... HaptixControlPlugin.s"

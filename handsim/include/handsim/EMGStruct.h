@@ -1,4 +1,7 @@
 // Header file containing the structs related to collecting EMG data from the WiFi board
+//
+// Mikey Fernandez 02/2021
+
 #include <stdint.h>
 
 #ifndef EMG_STRUCT_H
@@ -19,6 +22,8 @@ struct EMGData {
 };
 
 // typedef struct EMGData EMGData;
+
+void normEMG(struct EMGData *emg, int numElec);
 
 float getNormedEMG(struct EMGData *emg, int i);
 

@@ -14,25 +14,7 @@
  *
 */
 
-#include <math.h>
-#include <stdbool.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <haptix/comm/haptix.h>
-// #include "EMGStruct.h"
-#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h"
-// #include "calculateCommands.h"
-#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h"
-// #include "handsim/include/handsim/polhemus_driver.h"
-#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h"
-#include <fcntl.h> 
-#include <sys/stat.h> 
-#include <sys/types.h> 
-#include <unistd.h>
-#include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h"
+#include "../include/handsim/hx_controller.h"
 
 int running = 1;
 
@@ -44,17 +26,6 @@ void sigHandler(int signo)
 }
 
 // All printing functions relegated to "printFunctions.c"
-
-// Divide each raw EMG value by the normalization factor and save in struct
-void normEMG(struct EMGData *emg, int numElec)
-{
-  int i = 0;
-
-  for(i = 0; i < numElec; i++)
-  {
-    emg->normedEMG[i] = emg->rawEMG[i]/emg->MVC[i];
-  }
-}
 
 //////////////////////////////////////////////////
 // This main function requires two arguments

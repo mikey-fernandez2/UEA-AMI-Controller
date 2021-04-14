@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/EMGStruct.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/EMGStruct.c.o"
   "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/calculateCommands.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/calculateCommands.c.o"
   "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o"
   "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/printFunctions.c" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir/printFunctions.c.o"
