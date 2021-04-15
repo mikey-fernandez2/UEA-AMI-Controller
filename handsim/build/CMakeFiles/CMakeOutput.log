@@ -28,30 +28,30 @@ The CXX compiler identification is GNU, found in "/home/haptix-e15-463/haptix/ha
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec4255436150/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec4255436150.dir/build.make CMakeFiles/cmTryCompileExec4255436150.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1148697622/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1148697622.dir/build.make CMakeFiles/cmTryCompileExec1148697622.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec4255436150.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec4255436150.dir/testCCompiler.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTryCompileExec4255436150
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4255436150.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec4255436150.dir/testCCompiler.c.o  -o cmTryCompileExec4255436150 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec1148697622.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1148697622.dir/testCCompiler.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec1148697622
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1148697622.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec1148697622.dir/testCCompiler.c.o  -o cmTryCompileExec1148697622 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3391898580/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3391898580.dir/build.make CMakeFiles/cmTryCompileExec3391898580.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1885526861/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1885526861.dir/build.make CMakeFiles/cmTryCompileExec1885526861.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
-Linking C executable cmTryCompileExec3391898580
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3391898580.dir/link.txt --verbose=1
-/usr/bin/cc     -v CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3391898580 -rdynamic  
+Building C object CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec1885526861
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1885526861.dir/link.txt --verbose=1
+/usr/bin/cc     -v CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1885526861 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper
@@ -61,8 +61,8 @@ Thread model: posix
 gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3391898580' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec3391898580 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1885526861' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1885526861 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
@@ -70,15 +70,15 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3391898580/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3391898580.dir/build.make CMakeFiles/cmTryCompileExec3391898580.dir/build]
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec1885526861/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec1885526861.dir/build.make CMakeFiles/cmTryCompileExec1885526861.dir/build]
   ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
   ignore line: [/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building C object CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTryCompileExec3391898580]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3391898580.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3391898580 -rdynamic  ]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec1885526861]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1885526861.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1885526861 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper]
@@ -88,8 +88,8 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3391898580' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec3391898580 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1885526861' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1885526861 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/collect2] ==> ignore
     arg [--sysroot=/] ==> ignore
     arg [--build-id] ==> ignore
@@ -103,7 +103,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec3391898580] ==> ignore
+    arg [cmTryCompileExec1885526861] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o] ==> ignore
@@ -115,7 +115,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..]
-    arg [CMakeFiles/cmTryCompileExec3391898580.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec1885526861.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -147,30 +147,30 @@ Parsed C implicit link information from above output:
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec435266250/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec435266250.dir/build.make CMakeFiles/cmTryCompileExec435266250.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec3908915850/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3908915850.dir/build.make CMakeFiles/cmTryCompileExec3908915850.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec435266250.dir/testCXXCompiler.cxx.o
-/usr/bin/c++     -o CMakeFiles/cmTryCompileExec435266250.dir/testCXXCompiler.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTryCompileExec435266250
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec435266250.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTryCompileExec435266250.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec435266250 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec3908915850.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3908915850.dir/testCXXCompiler.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec3908915850
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3908915850.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTryCompileExec3908915850.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec3908915850 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec4264421380/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec4264421380.dir/build.make CMakeFiles/cmTryCompileExec4264421380.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec4211507192/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4211507192.dir/build.make CMakeFiles/cmTryCompileExec4211507192.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++     -o CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTryCompileExec4264421380
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4264421380.dir/link.txt --verbose=1
-/usr/bin/c++      -v CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4264421380 -rdynamic  
+Building CXX object CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec4211507192
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4211507192.dir/link.txt --verbose=1
+/usr/bin/c++      -v CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4211507192 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper
@@ -180,8 +180,8 @@ Thread model: posix
 gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4264421380' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4264421380 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4211507192' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4211507192 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
@@ -189,15 +189,15 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec4264421380/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec4264421380.dir/build.make CMakeFiles/cmTryCompileExec4264421380.dir/build]
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec4211507192/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec4211507192.dir/build.make CMakeFiles/cmTryCompileExec4211507192.dir/build]
   ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
   ignore line: [/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTryCompileExec4264421380]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4264421380.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4264421380 -rdynamic  ]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec4211507192]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4211507192.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4211507192 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper]
@@ -207,8 +207,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4264421380' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4264421380 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4211507192' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4211507192 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/collect2] ==> ignore
     arg [--sysroot=/] ==> ignore
     arg [--build-id] ==> ignore
@@ -222,7 +222,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec4264421380] ==> ignore
+    arg [cmTryCompileExec4211507192] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o] ==> ignore
@@ -234,7 +234,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..]
-    arg [CMakeFiles/cmTryCompileExec4264421380.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec4211507192.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -264,45 +264,45 @@ Parsed CXX implicit link information from above output:
 Determining if files pthread.h exist passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3914106784/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3914106784.dir/build.make CMakeFiles/cmTryCompileExec3914106784.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1522395943/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1522395943.dir/build.make CMakeFiles/cmTryCompileExec1522395943.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3914106784.dir/CheckIncludeFiles.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3914106784.dir/CheckIncludeFiles.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
-Linking C executable cmTryCompileExec3914106784
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3914106784.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec3914106784.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec3914106784 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec1522395943.dir/CheckIncludeFiles.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1522395943.dir/CheckIncludeFiles.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec1522395943
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1522395943.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec1522395943.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec1522395943 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3483412758/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3483412758.dir/build.make CMakeFiles/cmTryCompileExec3483412758.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec713458959/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec713458959.dir/build.make CMakeFiles/cmTryCompileExec713458959.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3483412758.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3483412758.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
-Linking C executable cmTryCompileExec3483412758
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3483412758.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3483412758.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3483412758 -rdynamic -lpthread 
+Building C object CMakeFiles/cmTryCompileExec713458959.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec713458959.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec713458959
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec713458959.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec713458959.dir/CheckFunctionExists.c.o  -o cmTryCompileExec713458959 -rdynamic -lpthread 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the Q_WS_X11 exist passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec933540902/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec933540902.dir/build.make CMakeFiles/cmTryCompileExec933540902.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec2975546156/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2975546156.dir/build.make CMakeFiles/cmTryCompileExec2975546156.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec933540902.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec933540902.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-Linking CXX executable cmTryCompileExec933540902
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec933540902.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTryCompileExec933540902.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec933540902 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec2975546156.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec2975546156.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec2975546156
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2975546156.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTryCompileExec2975546156.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec2975546156 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
@@ -323,16 +323,16 @@ int main(int argc, char** argv)
 Performing C++ SOURCE FILE Test R-Wall succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec1633550316/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1633550316.dir/build.make CMakeFiles/cmTryCompileExec1633550316.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1819603627/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1819603627.dir/build.make CMakeFiles/cmTryCompileExec1819603627.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1633550316.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall   -Wall -o CMakeFiles/cmTryCompileExec1633550316.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec1819603627.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall   -Wall -o CMakeFiles/cmTryCompileExec1819603627.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1633550316
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1633550316.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall    CMakeFiles/cmTryCompileExec1633550316.dir/src.cxx.o  -o cmTryCompileExec1633550316 -rdynamic 
+Linking CXX executable cmTryCompileExec1819603627
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1819603627.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall    CMakeFiles/cmTryCompileExec1819603627.dir/src.cxx.o  -o cmTryCompileExec1819603627 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -340,16 +340,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wextra succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3547629118/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3547629118.dir/build.make CMakeFiles/cmTryCompileExec3547629118.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec3513778235/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3513778235.dir/build.make CMakeFiles/cmTryCompileExec3513778235.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3547629118.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra   -Wextra -o CMakeFiles/cmTryCompileExec3547629118.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec3513778235.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra   -Wextra -o CMakeFiles/cmTryCompileExec3513778235.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec3547629118
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3547629118.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra    CMakeFiles/cmTryCompileExec3547629118.dir/src.cxx.o  -o cmTryCompileExec3547629118 -rdynamic 
+Linking CXX executable cmTryCompileExec3513778235
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3513778235.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra    CMakeFiles/cmTryCompileExec3513778235.dir/src.cxx.o  -o cmTryCompileExec3513778235 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -357,16 +357,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wno-long-long succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3893116689/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3893116689.dir/build.make CMakeFiles/cmTryCompileExec3893116689.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1627750403/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1627750403.dir/build.make CMakeFiles/cmTryCompileExec1627750403.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3893116689.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long   -Wno-long-long -o CMakeFiles/cmTryCompileExec3893116689.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec1627750403.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long   -Wno-long-long -o CMakeFiles/cmTryCompileExec1627750403.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec3893116689
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3893116689.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long    CMakeFiles/cmTryCompileExec3893116689.dir/src.cxx.o  -o cmTryCompileExec3893116689 -rdynamic 
+Linking CXX executable cmTryCompileExec1627750403
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1627750403.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long    CMakeFiles/cmTryCompileExec1627750403.dir/src.cxx.o  -o cmTryCompileExec1627750403 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -374,16 +374,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wno-unused-value succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec1561076983/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1561076983.dir/build.make CMakeFiles/cmTryCompileExec1561076983.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec3407121934/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3407121934.dir/build.make CMakeFiles/cmTryCompileExec3407121934.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1561076983.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value   -Wno-unused-value -o CMakeFiles/cmTryCompileExec1561076983.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec3407121934.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value   -Wno-unused-value -o CMakeFiles/cmTryCompileExec3407121934.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1561076983
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1561076983.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value    CMakeFiles/cmTryCompileExec1561076983.dir/src.cxx.o  -o cmTryCompileExec1561076983 -rdynamic 
+Linking CXX executable cmTryCompileExec3407121934
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3407121934.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value    CMakeFiles/cmTryCompileExec3407121934.dir/src.cxx.o  -o cmTryCompileExec3407121934 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -391,16 +391,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wfloat-equal succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec1398090167/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1398090167.dir/build.make CMakeFiles/cmTryCompileExec1398090167.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec4264080073/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4264080073.dir/build.make CMakeFiles/cmTryCompileExec4264080073.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1398090167.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal   -Wfloat-equal -o CMakeFiles/cmTryCompileExec1398090167.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec4264080073.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal   -Wfloat-equal -o CMakeFiles/cmTryCompileExec4264080073.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1398090167
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1398090167.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal    CMakeFiles/cmTryCompileExec1398090167.dir/src.cxx.o  -o cmTryCompileExec1398090167 -rdynamic 
+Linking CXX executable cmTryCompileExec4264080073
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4264080073.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal    CMakeFiles/cmTryCompileExec4264080073.dir/src.cxx.o  -o cmTryCompileExec4264080073 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -408,16 +408,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wshadow succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec1751598663/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1751598663.dir/build.make CMakeFiles/cmTryCompileExec1751598663.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec978268656/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec978268656.dir/build.make CMakeFiles/cmTryCompileExec978268656.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1751598663.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow   -Wshadow -o CMakeFiles/cmTryCompileExec1751598663.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec978268656.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow   -Wshadow -o CMakeFiles/cmTryCompileExec978268656.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1751598663
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1751598663.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow    CMakeFiles/cmTryCompileExec1751598663.dir/src.cxx.o  -o cmTryCompileExec1751598663 -rdynamic 
+Linking CXX executable cmTryCompileExec978268656
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec978268656.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow    CMakeFiles/cmTryCompileExec978268656.dir/src.cxx.o  -o cmTryCompileExec978268656 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -425,16 +425,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Winit-self succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec2299970361/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2299970361.dir/build.make CMakeFiles/cmTryCompileExec2299970361.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec3863889827/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3863889827.dir/build.make CMakeFiles/cmTryCompileExec3863889827.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2299970361.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self   -Winit-self -o CMakeFiles/cmTryCompileExec2299970361.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec3863889827.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self   -Winit-self -o CMakeFiles/cmTryCompileExec3863889827.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec2299970361
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2299970361.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self    CMakeFiles/cmTryCompileExec2299970361.dir/src.cxx.o  -o cmTryCompileExec2299970361 -rdynamic 
+Linking CXX executable cmTryCompileExec3863889827
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3863889827.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self    CMakeFiles/cmTryCompileExec3863889827.dir/src.cxx.o  -o cmTryCompileExec3863889827 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -442,16 +442,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wswitch-default succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec2153839042/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2153839042.dir/build.make CMakeFiles/cmTryCompileExec2153839042.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec2362182551/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2362182551.dir/build.make CMakeFiles/cmTryCompileExec2362182551.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2153839042.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default   -Wswitch-default -o CMakeFiles/cmTryCompileExec2153839042.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec2362182551.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default   -Wswitch-default -o CMakeFiles/cmTryCompileExec2362182551.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec2153839042
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2153839042.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default    CMakeFiles/cmTryCompileExec2153839042.dir/src.cxx.o  -o cmTryCompileExec2153839042 -rdynamic 
+Linking CXX executable cmTryCompileExec2362182551
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2362182551.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default    CMakeFiles/cmTryCompileExec2362182551.dir/src.cxx.o  -o cmTryCompileExec2362182551 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -459,16 +459,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-Wmissing-include-dirs succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec2163611519/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2163611519.dir/build.make CMakeFiles/cmTryCompileExec2163611519.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec2733881621/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2733881621.dir/build.make CMakeFiles/cmTryCompileExec2733881621.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2163611519.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs   -Wmissing-include-dirs -o CMakeFiles/cmTryCompileExec2163611519.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec2733881621.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs   -Wmissing-include-dirs -o CMakeFiles/cmTryCompileExec2733881621.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec2163611519
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2163611519.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs    CMakeFiles/cmTryCompileExec2163611519.dir/src.cxx.o  -o cmTryCompileExec2163611519 -rdynamic 
+Linking CXX executable cmTryCompileExec2733881621
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2733881621.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs    CMakeFiles/cmTryCompileExec2733881621.dir/src.cxx.o  -o cmTryCompileExec2733881621 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -476,16 +476,16 @@ int main() { return 0;}
 Performing C++ SOURCE FILE Test R-pedantic succeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec4080827764/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec4080827764.dir/build.make CMakeFiles/cmTryCompileExec4080827764.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec999438615/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec999438615.dir/build.make CMakeFiles/cmTryCompileExec999438615.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec4080827764.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic   -pedantic -o CMakeFiles/cmTryCompileExec4080827764.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTryCompileExec999438615.dir/src.cxx.o
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic   -pedantic -o CMakeFiles/cmTryCompileExec999438615.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec4080827764
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4080827764.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic    CMakeFiles/cmTryCompileExec4080827764.dir/src.cxx.o  -o cmTryCompileExec4080827764 -rdynamic 
+Linking CXX executable cmTryCompileExec999438615
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec999438615.dir/link.txt --verbose=1
+/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic    CMakeFiles/cmTryCompileExec999438615.dir/src.cxx.o  -o cmTryCompileExec999438615 -rdynamic 
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 Source file was:

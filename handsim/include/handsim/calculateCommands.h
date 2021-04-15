@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include "EMGStruct.h"
+#include <stdio.h>
 
 #ifndef CALCULATE_COMMANDS_H
 #define CALCULATE_COMMANDS_H

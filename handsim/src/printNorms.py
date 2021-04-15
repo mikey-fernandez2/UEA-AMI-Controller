@@ -8,8 +8,9 @@ import os, sys, struct
 def printNorms(norms):
     print("Scaling factors:")
     
-    for elec in range(len(norms)//4):
-        print("\t%06.2f %06.2f %06.2f %06.2f" % (norms[elec], norms[elec + 1], norms[elec + 2], norms[elec + 3]))
+    print("\t%06.2f %06.2f %06.2f %06.2f\n\t%06.2f %06.2f %06.2f %06.2f\n\t%06.2f %06.2f %06.2f %06.2f\n\t%06.2f %06.2f %06.2f %06.2f" % 
+         (norms[0], norms[1], norms[2], norms[3], norms[4], norms[5], norms[6], norms[7],
+          norms[8], norms[9], norms[10], norms[11], norms[12], norms[13], norms[14], norms[15]))
 
     return
 

@@ -7,7 +7,7 @@
 #ifndef EMG_STRUCT_H
 #define EMG_STRUCT_H
 
-struct EMGData;
+// struct EMGData;
 
 struct EMGData {
     uint32_t OS_time;
@@ -20,8 +20,6 @@ struct EMGData {
     float MVC[16];
     float normedEMG[16];
 };
-
-// typedef struct EMGData EMGData;
 
 void normEMG(struct EMGData *emg, int numElec);
 

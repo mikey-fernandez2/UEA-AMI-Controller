@@ -18,8 +18,19 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
   // arat - these are the default P gains for these joints
   float K0_arr[22] = {100, 100, 100, 30, 20, 8, 2, 20, 10, 5, 1, 10, 5, 1, 20, 10, 5, 1, 15, 10, 5, 1};
+  // float K0_arr[22] = {0}; K0_arr[2] = 100;
   float K1_arr[22] = {0};
   float K2_arr[22] = {0};
+
+  float motorPos, motorRef;
+
+  // motorMap[0][i] is the electrode corresponding to the agonist muscle for motor i
+  // motorMap[1][i] is the electrode corresponding to the antagonist muscle for motor i
+  // int motorMap[2][22] = {{4, 2, 0, 6, 6, 6, 6, 8, 8, 8, 8, 10, 10, 10, 12, 12, 12, 12, 14, 14, 14, 14},
+  //                        {5, 3, 1, 7, 7, 7, 7, 9, 9, 9, 9, 11, 11, 11, 13, 13, 13, 13, 15, 15, 15, 15}};
+  int motorMap[22][2] = {{4, 5}, {2, 3}, {0, 1}, {6, 7}, {6, 7}, {6, 7}, {8, 9}, {8, 9}, {8, 9}, {8, 9},
+                         {10, 11}, {10, 11}, {10, 11}, {12, 13}, {12, 13}, {12, 13}, {12, 13}, {14, 15},
+                         {14, 15}, {14, 15}, {14, 15}};
 
   if (usingEMG)
   {
@@ -40,58 +51,98 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
     for (i = 0; i < robotInfo->motor_count; i++)
     {
-      // find current joint position
-      jointPos = sensor->motor_pos[i];
+      if (i == 2)
+      {
+        // find current joint position
+        // jointPos = sensor->joint_pos[i];
 
-      // find a0, a1, a2
-      a0 = 0;
-      a1 = robotInfo->joint_limit[i][0];
-      a2 = robotInfo->joint_limit[i][1];
+        // find current motor position
+        motorPos = sensor->motor_pos[i];
 
-      // find al_ag, al_an - TODO: make map between EMG sensors and their corresponding motors
-      agonist = 0; antagonist = 0;
-      al_ag = getNormedEMG(emg, agonist); //->normedEMG[agonist];
-      al_an = getNormedEMG(emg, antagonist); //emg->normedEMG[antagonist];
+        /* FOR SOME REASON, NEGATIVE POSITION FOR JOINT 2 SEEMS TO BE EXTENSION */
+        /* COMMANDS ARE GIVEN FOR DESIRED MOTOR POSITION - MAGNITUDES WILL BE FAR LARGER THAN EXPECTED */
 
-      // find K0, K1, and K2
-      K0 = K0_arr[i];
-      K1 = K1_arr[i];
-      K2 = K2_arr[i];
+        // find al_ag, al_an - TODO: make map between EMG sensors and their corresponding motors
+        agonist = motorMap[i][0];    al_ag = getNormedEMG(emg, agonist); // flexion
+        antagonist = motorMap[i][1]; al_an = getNormedEMG(emg, antagonist); // extension
+        
+        // find a0, a1, a2
+        a0 = 0;
+        // a1 = robotInfo->joint_limit[i][0]; // this corresponds to the agonist muscle
+        // a2 = robotInfo->joint_limit[i][1]; // this corresponds to the antagonist muscle
+        a1 = robotInfo->motor_limit[i][1]; // this corresponds to the agonist muscle
+        a2 = robotInfo->motor_limit[i][0]; // this corresponds to the antagonist muscle
 
-      // calculate net stiffness
-      K_net = K0 + K1*al_ag + K2*al_an;
+        // find K0, K1, and K2
+        K0 = K0_arr[i];
+        K1 = K1_arr[i];
+        K2 = K2_arr[i];
 
-      // calculate reference position of joint
-      jointRefPos = a0 + (a1*al_ag - a2*al_an);
+        // calculate net stiffness
+        K_net = K0 + K1*al_ag + K2*al_an;
 
-      // calculate reference position of joint[i]
-      pos = K_net*(jointRefPos - jointPos) + jointPos;
+        // calculate reference position of joint
+        // jointRefPos = a0 + (a1*al_ag + a2*al_an); // replaced subtraction in parenthesis with addition - a2 is negative
+        motorRef = a0 + (a1*al_ag + a2*al_an); // replaced subtraction in parenthesis with addition - a2 is negative
 
-      // set in command struct
-      cmd->ref_pos[i] = pos;
-      cmd->gain_pos[i] = K_net;
+        // calculate reference position of joint[i]
+        // pos = K_net*(jointRefPos - jointPos) + jointPos;
+        pos = 2*(motorRef - motorPos) + motorPos;
+        // pos = 1*(jointRefPos - jointPos) + jointPos;
+
+        // set in command struct
+        cmd->ref_pos[i] = pos;
+        cmd->gain_pos[i] = K_net;
+
+        // printf("\t      a1: %06.2f\t\t   a2: %06.2f\n\t   al_ag: %06.2f\t\tal_an: %06.2f\n\tjointPos: %06.2f\t  jointRefPos: %06.2f\n\t  desPos: %06.2f\t\tK_net: %06.2f\n\n", a1, a2, al_ag, al_an, jointPos, jointRefPos, pos, K_net);
+        printf("\t      a1: %06.2f\t      a2: %06.2f\n\t   al_ag: %06.4f\t   al_an: %06.4f\n\tmotorPos: %06.2f\tmotorRef: %06.2f\n\t  desPos: %06.2f\t   K_net: %06.2f\n\n", a1, a2, al_ag, al_an, motorPos, motorRef, pos, K_net);
+      }
+      else
+      {
+        cmd->ref_pos[i] = 0;
+        cmd->gain_pos[i] = K0_arr[i];
+      }
     }
 
     // Set what these commands are - we use a reference position and a position gain
     cmd->ref_pos_enabled = 1;
     cmd->gain_pos_enabled = 1;
-
+    
   }
   else
   {
+    float pos;
     // Create a new command based on a sinusoidal wave (hardcoded)
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
-      // Set the desired position of this motor
-      cmd->ref_pos[i] = (float)(350 * 0.5 *
-        sin(0.05 * 2.0 * M_PI * counter * 0.01));
-      // We could set a desired maximum velocity
-      // cmd->ref_vel[i] = 10.0;
-      cmd->ref_vel_max[i] = 200.0;
-      // We could set a desired controller position gain
-      // cmd->gain_pos[i] = 1.0;
-      // We could set a desired controller velocity gain
-      cmd->gain_vel[i] = 1000.0;
+      if (i == 2)
+      {
+        // Set the desired position of this motor
+        pos = (float)(350 * 0.5 * sin(0.05 * 2.0 * M_PI * counter * 0.01));
+        cmd->ref_pos[i] = pos;
+
+        printf("Position: %f\n", pos);
+
+        if (pos < 0)
+        {
+          printf("\tNegative\n");
+        }
+        else
+        {
+          printf("\tPositive\n");
+        }
+        // We could set a desired maximum velocity
+        // cmd->ref_vel[i] = 10.0;
+        // cmd->ref_vel_max[i] = 200.0;
+        // We could set a desired controller position gain
+        // cmd->gain_pos[i] = 1.0;
+        // We could set a desired controller velocity gain
+        // cmd->gain_vel[i] = 1000.0;
+      }
+      else
+      {
+        cmd->ref_pos[i] = 0;
+      }
     }
     // Indicate that the positions we set should be used.
     cmd->ref_pos_enabled = 1;

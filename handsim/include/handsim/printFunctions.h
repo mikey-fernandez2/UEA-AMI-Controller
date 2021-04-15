@@ -19,11 +19,17 @@ void printRobotInfo(const hxRobotInfo *_robotInfo);
 // Print next command to be sent
 void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd);
 
+// Print the command to be sent to motor i
+void printCommandMotor(const hxRobotInfo *_robotInfo, const hxCommand *_cmd, int i);
+
 // Print EMG struct
 void printEMGData(const struct EMGData *emg);
 
 // Print EMG normalization factors
 void printEMGNorms(float *norms);
+
+// Print normalized EMG
+void printNormedEMG(float *norms);
 
 // Print tracking data from Polhemus system
 void printPolhemus(polhemus_pose_t *poses, int num_poses);

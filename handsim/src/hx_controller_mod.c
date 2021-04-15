@@ -29,7 +29,7 @@ void sigHandler(int signo)
 
 //////////////////////////////////////////////////
 // This main function requires two arguments
-//    usingEMG is a boolean integer - 0 if not, 1 if using, EMG board
+//    usingEMG is a boolean integer      - 0 if not, 1 if using, EMG board
 //    usingPolhemus is a boolean integer - 0 if not, 1 if using, Polhemus trackers
 int main(int argc, char **argv)
 {
@@ -137,7 +137,6 @@ int main(int argc, char **argv)
   int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
-  // struct EMGData *emg;
   char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
   int fd1;                    // Pipe file descriptor
 
@@ -188,13 +187,14 @@ int main(int argc, char **argv)
     // calculate next control command
     calculateCommands(&robotInfo, &cmd, &sensor, emg, usingEMG, counter);
 
+    // printCommandMotor(&robotInfo, &cmd, 2);
+
     // Send the new joint command and receive the state update.
     if (hx_update(&cmd, &sensor) != hxOK)
     {
       printf("hx_update(): Request error.\n");
       continue;
     }
-    // printf("Command %d sent\n", steps);
 
     // Debug output: Print the state.
     if (!(counter % 100))
@@ -202,10 +202,9 @@ int main(int argc, char **argv)
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move
     }
+
     if (++counter == 2000) // originally 10000
       counter = 0;
-
-    ++steps;
 
     ////// Perform sensor reading below
 
@@ -224,29 +223,35 @@ int main(int argc, char **argv)
       {
         memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
         normEMG(emg, numElec);       // calculate and store normed EMG values
-        printEMGData(emg);           // print EMG struct
+        // printEMGData(emg);           // print EMG struct
+        // printNormedEMG(emg->normedEMG);
       }
       else
       {
         printf("read(): Receiving error.\n");
         return -1;
       }
+
+      ++steps;
     }
 
     // This is the 'end' point - stop running the control loop
-    if(running == 0)
+    if (running == 0)
     {
       printf("\nEnding movement\n");
       break;
     }
 
     loopEnd = clock();
-    unsigned int sleeptime_us = 1000 - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    int defaultSleep = 100000;
+    unsigned int sleeptime_us = defaultSleep - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    if (sleeptime_us < 0)
+    {
+      sleeptime_us = defaultSleep;
+    }
 
     usleep(sleeptime_us);
     end = clock();
-
-    // printf("Control loop ran %i times.\n", steps);
   }
 
   ///////////////////////////////

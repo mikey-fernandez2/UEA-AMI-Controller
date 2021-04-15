@@ -106,12 +106,27 @@ void printCommand(const hxRobotInfo *_robotInfo, const hxCommand *_cmd)
   for (i = 0; i < _robotInfo->motor_count; ++i)
   {
     printf("\t\tMotor %d\n", i);
-    printf("\t\t\tref_pos: %f rads\n", _cmd->ref_pos[i]);
-    printf("\t\t\tref_vel: %f rads/sec\n", _cmd->ref_vel[i]);
+    printf("\t\t\tref_pos: %f rads\n",         _cmd->ref_pos[i]);
+    printf("\t\t\tref_vel: %f rads/sec\n",     _cmd->ref_vel[i]);
     printf("\t\t\tref_vel_max: %f rads/sec\n", _cmd->ref_vel_max[i]);
-    printf("\t\t\tgain_pos: %f Nm/rad\n", _cmd->gain_pos[i]);
-    printf("\t\t\tgain_vel: %f Nm*sec/rad\n", _cmd->gain_vel[i]);
+    printf("\t\t\tgain_pos: %f Nm/rad\n",      _cmd->gain_pos[i]);
+    printf("\t\t\tgain_vel: %f Nm*sec/rad\n",  _cmd->gain_vel[i]);
   }
+
+  printf("\n");
+}
+
+// Print next command to be sent
+void printCommandMotor(const hxRobotInfo *_robotInfo, const hxCommand *_cmd, int i)
+{
+  printf("Command for motor %d:\n", i);
+
+  printf("\tMotor %d\n", i);
+  printf("\t\tref_pos: %f rads\n",         _cmd->ref_pos[i]);
+  printf("\t\tref_vel: %f rads/sec\n",     _cmd->ref_vel[i]);
+  printf("\t\tref_vel_max: %f rads/sec\n", _cmd->ref_vel_max[i]);
+  printf("\t\tgain_pos: %f Nm/rad\n",      _cmd->gain_pos[i]);
+  printf("\t\tgain_vel: %f Nm*sec/rad\n",  _cmd->gain_vel[i]);
 
   printf("\n");
 }
@@ -128,21 +143,21 @@ void printEMGData(const struct EMGData *emg)
   printf("\tSwitch2: %d\n", emg->switch2);
 
   printf("\tEMG Norms:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+  printf("\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n",
     emg->MVC[0], emg->MVC[4], emg->MVC[8],  emg->MVC[12],
     emg->MVC[1], emg->MVC[5], emg->MVC[9],  emg->MVC[13],
     emg->MVC[2], emg->MVC[6], emg->MVC[10], emg->MVC[14],
     emg->MVC[3], emg->MVC[7], emg->MVC[11], emg->MVC[15]);
 
   printf("\tRaw EMG:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+  printf("\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n",
     emg->rawEMG[0], emg->rawEMG[4], emg->rawEMG[8],  emg->rawEMG[12],
     emg->rawEMG[1], emg->rawEMG[5], emg->rawEMG[9],  emg->rawEMG[13],
     emg->rawEMG[2], emg->rawEMG[6], emg->rawEMG[10], emg->rawEMG[14],
     emg->rawEMG[3], emg->rawEMG[7], emg->rawEMG[11], emg->rawEMG[15]);
 
   printf("\tNormed EMG:\n");
-  printf("\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+  printf("\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n",
     emg->normedEMG[0], emg->normedEMG[4], emg->normedEMG[8],  emg->normedEMG[12],
     emg->normedEMG[1], emg->normedEMG[5], emg->normedEMG[9],  emg->normedEMG[13],
     emg->normedEMG[2], emg->normedEMG[6], emg->normedEMG[10], emg->normedEMG[14],
@@ -155,11 +170,24 @@ void printEMGData(const struct EMGData *emg)
 void printEMGNorms(float *norms)
 {
   printf("EMG normalization factors:\n");
-  printf("\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n\t%10.2f\t%10.2f\t%10.2f\t%10.2f\n",
+  printf("\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n",
     norms[0], norms[4], norms[8],  norms[12],
     norms[1], norms[5], norms[9],  norms[13],
     norms[2], norms[6], norms[10], norms[14],
     norms[3], norms[7], norms[11], norms[15]);
+
+  printf("\n");
+}
+
+// print normed EMG
+void printNormedEMG(float *emg)
+{
+  printf("Normalized EMG:\n");
+  printf("\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n\t%8.2f\t%8.2f\t%8.2f\t%8.2f\n",
+    emg[0], emg[4], emg[8],  emg[12],
+    emg[1], emg[5], emg[9],  emg[13],
+    emg[2], emg[6], emg[10], emg[14],
+    emg[3], emg[7], emg[11], emg[15]);
 
   printf("\n");
 }
