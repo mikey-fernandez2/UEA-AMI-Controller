@@ -5,14 +5,39 @@
     <spacenav_control_point_offset>0 -0.4 0 0 0 3.1416</spacenav_control_point_offset>
     <hydra_control_point_offset>0 -0.3 0 0 3.1416 -1.5707</hydra_control_point_offset>
     <optitrack_head_to_marker_offset>0 0 0 0 1.5707 0</optitrack_head_to_marker_offset>
-    <base_joint>elbow</base_joint>
-    <base_link>forearm</base_link>
+    <!-- <base_joint>elbow</base_joint>
+    <base_link>forearm</base_link> -->
+    <base_joint>elbow_dummy</base_joint>
+    <base_link>forearm_dummy</base_link>
     <base_link_sensor_offset>0 0 0.07 3.14159 -1.570796 0</base_link_sensor_offset>
     <world_screen_location>0 -0.65 1.5 0 0 0</world_screen_location>
     <base_pid_pos cmd_max="10000.0" cmd_min="-10000.0" d="10.0" i="0" p="700.0"/>
     <base_pid_rot cmd_max="10000.0" cmd_min="-10000.0" d="10.0" i="0" p="800.0"/>
     <!-- order must match hxAPLJoints enumeration -->
-    <joint id="0">wristy</joint>
+    <joint id="0">elbow</joint>
+    <joint id="1">wristy</joint>
+    <joint id="2">wristx</joint>
+    <joint id="3">wristz</joint>
+    <joint id="4">thumb0</joint>
+    <joint id="5">thumb1</joint>
+    <joint id="6">thumb2</joint>
+    <joint id="7">thumb3</joint>
+    <joint id="8">index0</joint>
+    <joint id="9">index1</joint>
+    <joint id="10">index2</joint>
+    <joint id="11">index3</joint>
+    <joint id="12">middle1</joint>
+    <joint id="13">middle2</joint>
+    <joint id="14">middle3</joint>
+    <joint id="15">ring0</joint>
+    <joint id="16">ring1</joint>
+    <joint id="17">ring2</joint>
+    <joint id="18">ring3</joint>
+    <joint id="19">pinky0</joint>
+    <joint id="20">pinky1</joint>
+    <joint id="21">pinky2</joint>
+    <joint id="22">pinky3</joint>
+    <!-- <joint id="0">wristy</joint>
     <joint id="1">wristx</joint>
     <joint id="2">wristz</joint>
     <joint id="3">thumb0</joint>
@@ -33,7 +58,7 @@
     <joint id="18">pinky0</joint>
     <joint id="19">pinky1</joint>
     <joint id="20">pinky2</joint>
-    <joint id="21">pinky3</joint>
+    <joint id="21">pinky3</joint> -->
 
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 1.0"/>
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 1.0"/>
@@ -57,6 +82,30 @@
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="19" p="1.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="1.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="22" p="1.0"/>
+    
+    <!-- <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 1.0"/>
+    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 1.0"/>
+    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="2" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="3" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="4" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="5" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="6" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="7" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="8" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="9" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="10" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="11" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="12" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="13" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="14" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="15" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="16" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="17" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="18" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="19" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="1.0"/> -->
 
       <!-- Original PID gains
       <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 100.0"/>
@@ -83,7 +132,15 @@
       <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="  1.0"/>
       -->
 
-    <motor id="0" name="motor_wristy">
+    <motor id="0" name="motor_elbow">
+      <powered_motor_joint>elbow</powered_motor_joint>
+      <!-- gear_ratio = motor angle / joint angle -->
+      <!-- wrist motor torque unknown, guessing for now -->
+      <motor_torque>0.1</motor_torque>
+      <gear_ratio>180.0</gear_ratio>
+      <encoder_offset>0.0</encoder_offset>
+    </motor>
+    <motor id="1" name="motor_wristy">
       <powered_motor_joint>wristy</powered_motor_joint>
       <!-- gear_ratio = motor angle / joint angle -->
       <!-- wrist motor torque unknown, guessing for now -->
@@ -91,27 +148,27 @@
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="1" name="motor_wristx">
+    <motor id="2" name="motor_wristx">
       <powered_motor_joint>wristx</powered_motor_joint>
       <!-- wrist motor torque unknown, guessing for now -->
       <motor_torque>0.003</motor_torque>
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="2" name="motor_wristz">
+    <motor id="3" name="motor_wristz">
       <powered_motor_joint>wristz</powered_motor_joint>
       <!-- wrist motor torque unknown, guessing for now -->
       <motor_torque>0.0191</motor_torque>
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="3" name="motor_thumb0">
+    <motor id="4" name="motor_thumb0">
       <powered_motor_joint>thumb0</powered_motor_joint>
       <motor_torque>3.82e-3</motor_torque>
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="4" name="motor_thumb1">
+    <motor id="5" name="motor_thumb1">
       <powered_motor_joint>thumb1</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -120,7 +177,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="5" name="motor_thumb2">
+    <motor id="6" name="motor_thumb2">
       <powered_motor_joint>thumb2</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -129,7 +186,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="6" name="motor_thumb3">
+    <motor id="7" name="motor_thumb3">
       <powered_motor_joint>thumb3</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -138,7 +195,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="7" name="motor_index0">
+    <motor id="8" name="motor_index0">
       <powered_motor_joint>index0</powered_motor_joint>
       <!--
         1MF gear ratio: 352, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
@@ -151,7 +208,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0</encoder_offset>
     </motor>
-    <motor id="8" name="motor_index1">
+    <motor id="9" name="motor_index1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -188,7 +245,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="9" name="motor_middle1">
+    <motor id="10" name="motor_middle1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -225,7 +282,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="10" name="motor_ring1">
+    <motor id="11" name="motor_ring1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -262,7 +319,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="11" name="motor_pinky0">
+    <motor id="12" name="motor_pinky0">
       <powered_motor_joint>ring0</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -278,7 +335,7 @@
         <multiplier2>1.0</multiplier2>
       </gearbox>
     </motor>
-    <motor id="12" name="motor_pinky1">
+    <motor id="13" name="motor_pinky1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -388,14 +445,64 @@
   </plugin>
 
   <!-- Model SDF copied from gazebo_models -->
-  <joint name='elbow' type='revolute'>
-    <child>forearm</child>
+  <!-- EDITED 04/16/2021 - New dummy base joint, base link so that elbow joint can be controlled as all others -->
+<joint name='elbow_dummy' type='revolute'>
+    <child>forearm_dummy</child>
     <parent>world</parent>
     <axis>
       <xyz>0 0 1.0</xyz>
       <limit>
         <lower>0</lower>
         <upper>0</upper>
+        <effort>10000</effort>
+        <velocity>-1</velocity>
+      </limit>
+      <dynamics>
+        <damping>2</damping>
+        <friction>0</friction>
+        <spring_reference>0</spring_reference>
+        <spring_stiffness>0</spring_stiffness>
+      </dynamics>
+      <use_parent_model_frame>1</use_parent_model_frame>
+    </axis>
+    <physics>
+      <provide_feedback>1</provide_feedback>
+      <ode>
+        <provide_feedback>1</provide_feedback>
+        <implicit_spring_damper>1</implicit_spring_damper>
+        <cfm_damping>1</cfm_damping>
+        <limit>
+          <cfm>0.01</cfm>
+          <erp>0</erp>
+        </limit>
+      </ode>
+    </physics>
+  </joint>
+  <link name='forearm_dummy'>
+    <gravity>0</gravity>
+    <pose>0.00660504 -0.294573 0.119123 -1.21334e-13 2.77556e-17 -0.0115373</pose>
+    <inertial>
+      <pose>-0.000589428 -0.0733139 0.0215526 0 0 0</pose>
+      <mass>0.0997005</mass>
+      <inertia>
+        <ixx>0.0004998</ixx>
+        <ixy>-5.83136e-06</ixy>
+        <ixz>3.56083e-07</ixz>
+        <iyy>0.00010215</iyy>
+        <iyz>3.76069e-05</iyz>
+        <izz>0.000498862</izz>
+      </inertia>
+    </inertial>  
+  </link>
+
+  <joint name='elbow' type='revolute'>
+    <child>forearm</child>
+    <parent>forearm_dummy</parent>
+    <axis>
+      <xyz>0 0 1.0</xyz>    <!-- x is up-down, y is rotate about long axis, z is move in the horizontal plane-->
+      <limit>
+        <lower>0</lower> <!-- TODO: edit me --> 
+        <upper>1.57</upper>  <!-- TODO: edit me --> 
         <effort>10000</effort>
         <velocity>-1</velocity>
       </limit>

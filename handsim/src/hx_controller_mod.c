@@ -134,17 +134,24 @@ int main(int argc, char **argv)
   // Set up for receiving EMG data
   ssize_t n;
 
-  int msgLen = 76; // 76 bytes - IHffffffffffffffffBBBB struct formatting
+  int msgLen = 92; // 92 bytes - ffffffffffffffffffIIIIf struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
+  // printf("Struct Size: %d\n", (int)sizeof(struct EMGData));
+  // printf("EMG packet size: %d\n", (int)sizeof(emg->OS_time) + (int)sizeof(emg->OS_tick) +(int)sizeof(emg->rawEMG) + (int)sizeof(emg->trigger) +(int)sizeof(emg->switch1) +(int)sizeof(emg->switch2) +(int)sizeof(emg->end) +(int)sizeof(emg->samplingFreq));
+  memset(emg, 0, sizeof(struct EMGData)); // zero out 'prevAct' field
   char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
   int fd1;                    // Pipe file descriptor
 
   int numElec = 16;
-  int scaleFactorsLen = 4*numElec; // 64 bytes - ffffffffffffffff struct formatting
+  emg->numElec = numElec;
+  int scaleFactorsLen = 8*numElec; // 128 bytes - ffffffffffffffffffffffffffffffff struct formatting
   char buffer2[scaleFactorsLen];
   char *scaleFactors = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt";
   int fd2;
+
+  float tauA = 0.05; // 50 ms activation time constant
+  float tauD = 0.10; // 100 ms deactivation time constant
 
   if (usingEMG)
   {
@@ -161,12 +168,12 @@ int main(int argc, char **argv)
     close(fd2);
     if (n >= 0) 
     {
-      memcpy(emg->MVC, buffer2, scaleFactorsLen); // copy EMG MVC norming factors into appropriate field of struct
-      printEMGNorms(emg->MVC);
+      memcpy(emg->bounds, buffer2, scaleFactorsLen); // copy EMG bounds into appropriate field of struct
+      printEMGNorms(emg->bounds);
     }
     else
     {
-      printf("read(): Receiving error.\n");
+      printf("read(): Error reading EMG norms.\n");
       return -1;
     }
 
@@ -177,6 +184,7 @@ int main(int argc, char **argv)
   start = clock(); end = clock();
 
   int steps = 0;
+  int pauseTime;
 
   // Send commands, read from sensors
   while (running)
@@ -186,7 +194,6 @@ int main(int argc, char **argv)
 
     // calculate next control command
     calculateCommands(&robotInfo, &cmd, &sensor, emg, usingEMG, counter);
-
     // printCommandMotor(&robotInfo, &cmd, 2);
 
     // Send the new joint command and receive the state update.
@@ -207,7 +214,6 @@ int main(int argc, char **argv)
       counter = 0;
 
     ////// Perform sensor reading below
-
     if (usingPolhemus)
     {
       polhemus_get_poses(conn, poses, &num_poses, 10);
@@ -221,9 +227,11 @@ int main(int argc, char **argv)
       close(fd1);
       if (n >= 0) 
       {
-        memcpy(emg, buffer, msgLen); // copy incoming data into the EMG data struct
-        normEMG(emg, numElec);       // calculate and store normed EMG values
-        // printEMGData(emg);           // print EMG struct
+        memcpy(emg, buffer, msgLen);
+        normEMG(emg);                     // calculate and store normed EMG values, updating 'prevEMG' field
+        muscleDynamics(emg, tauA, tauD);  // use low pass muscle activation dynamics with tauA and tauD
+        // printEMGData(emg);                // print EMG struct
+        // printMuscleActivation(emg->muscleAct);
         // printNormedEMG(emg->normedEMG);
       }
       else
@@ -243,11 +251,18 @@ int main(int argc, char **argv)
     }
 
     loopEnd = clock();
-    int defaultSleep = 100000;
-    unsigned int sleeptime_us = defaultSleep - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    if (usingEMG)
+    {
+      pauseTime = 200000; // go slower when using EMG
+    }
+    else
+    {
+      pauseTime = 1000;
+    }
+    unsigned int sleeptime_us = pauseTime - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
     if (sleeptime_us < 0)
     {
-      sleeptime_us = defaultSleep;
+      sleeptime_us = pauseTime;
     }
 
     usleep(sleeptime_us);

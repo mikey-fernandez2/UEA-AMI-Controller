@@ -103,6 +103,10 @@ namespace gazebo
     /// \param[in] _index joint index to set position
     public: void SetPosition(double _position);
 
+    /// \brief Set joint velocity
+    /// \param[in] _index joint index to set velocity
+    public: void SetVelocity(double _velocity);
+
     /// \brief Set joint effort limit
     /// \param[in] _effort Effort limit for the axis.
     /// \param[in] _index Index of the axis to set.

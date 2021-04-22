@@ -2,6 +2,9 @@
 //
 // Mikey Fernandez 04/14/2021
 
+#ifndef HX_CONTROLLER_H
+#define HX_CONTRLLER_H
+
 #include <math.h>
 #include <stdbool.h>
 #include <signal.h>
@@ -21,4 +24,4 @@
 
 void sigHandler(int signo);
 
-
+#endif

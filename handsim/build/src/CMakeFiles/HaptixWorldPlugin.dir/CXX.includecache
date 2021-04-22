@@ -126,10 +126,6 @@ gazebo/plugins/TimerGUIPlugin.hh
 handsim/HaptixWorldPlugin.hh
 /home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/HaptixWorldPlugin.hh
 
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/WrenchHelper.cc
-handsim/WrenchHelper.hh
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/handsim/WrenchHelper.hh
-
 /usr/include/gazebo-7/gazebo/common/Assert.hh
 boost/assert.hpp
 -

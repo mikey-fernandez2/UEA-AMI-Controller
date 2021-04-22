@@ -15,6 +15,9 @@
  *
 */
 
+// RELEVANT FUNCTIONS:
+  // line 1470
+
 #include <gazebo/util/Diagnostics.hh>
 #include <gazebo/common/Assert.hh>
 #include <gazebo/gui/KeyEventHandler.hh>
@@ -94,7 +97,7 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
 
   // start a transport node for polhemus head pose view point control
   this->gazeboNode = gazebo::transport::NodePtr(new gazebo::transport::Node());
-  fprintf(stderr, "world name: [%s]\n", this->world->GetName().c_str());
+  fprintf(stderr, "ARE YOU REGISTERING MY CHANGES world name: [%s]\n", this->world->GetName().c_str());
   this->gazeboNode->Init(this->world->GetName());
   this->viewpointJoyPub =
     this->gazeboNode->Advertise<gazebo::msgs::Pose>("~/user_camera/joy_pose");
@@ -895,7 +898,7 @@ void HaptixControlPlugin::LoadHandControl()
 
     // default position and velocity gains
     this->robotCommand.add_gain_pos(1.0);
-    this->robotCommand.add_gain_vel(0.0);
+    this->robotCommand.add_gain_vel(1.0);
   }
   // initialize to control mode, not gain mode
   this->robotCommand.set_ref_pos_enabled(true);
@@ -1606,20 +1609,21 @@ void HaptixControlPlugin::UpdateHandControl(double _dt)
         bool handPushedClose = (pos > this->simJointCommands[m].ref_pos + tol);
         if (handPushedClose)
         {
+          gzdbg << "Hand Pushed Close\n";
           if (this->clutchEngaged[m] != 1)
           {
-            gzdbg << "engage hi ["
-                  << this->simJoints[m]->GetRealJoint()->GetName()
-                  << "] m: " << m
-                  << " pos: " << pos
-                  << " ref_pos: " << this->simJointCommands[m].ref_pos
-                  << " cmd: " << cmd
-                  << " pe: " << pe
-                  << " ie: " << ie
-                  << " de: " << de
-                  << " lo: " << this->simJointLowerLimits[m]
-                  << " hi: " << this->simJointUpperLimits[m]
-                  << "\n";
+            // gzdbg << "engage hi ["
+            //       << this->simJoints[m]->GetRealJoint()->GetName()
+            //       << "] m: " << m
+            //       << " pos: " << pos
+            //       << " ref_pos: " << this->simJointCommands[m].ref_pos
+            //       << " cmd: " << cmd
+            //       << " pe: " << pe
+            //       << " ie: " << ie
+            //       << " de: " << de
+            //       << " lo: " << this->simJointLowerLimits[m]
+            //       << " hi: " << this->simJointUpperLimits[m]
+            //       << "\n";
             double posClamp = math::clamp(pos,
                   this->simJointLowerLimits[m], this->simJointUpperLimits[m]);
             // hi clutch engaged
@@ -1634,18 +1638,18 @@ void HaptixControlPlugin::UpdateHandControl(double _dt)
         // check if we should disengage hi
         if (this->clutchEngaged[m] == 1 && !handPushedClose)
         {
-            gzdbg << "disengage hi ["
-                  << this->simJoints[m]->GetRealJoint()->GetName()
-                  << "] m: " << m
-                  << " pos: " << pos
-                  << " ref_pos: " << this->simJointCommands[m].ref_pos
-                  << " cmd: " << cmd
-                  << " pe: " << pe
-                  << " ie: " << ie
-                  << " de: " << de
-                  << " lo: " << this->simJointLowerLimits[m]
-                  << " hi: " << this->simJointUpperLimits[m]
-                  << "\n";
+            // gzdbg << "disengage hi ["
+            //       << this->simJoints[m]->GetRealJoint()->GetName()
+            //       << "] m: " << m
+            //       << " pos: " << pos
+            //       << " ref_pos: " << this->simJointCommands[m].ref_pos
+            //       << " cmd: " << cmd
+            //       << " pe: " << pe
+            //       << " ie: " << ie
+            //       << " de: " << de
+            //       << " lo: " << this->simJointLowerLimits[m]
+            //       << " hi: " << this->simJointUpperLimits[m]
+            //       << "\n";
           // hi clutch disabled
           this->simJoints[m]->GetRealJoint()->SetHighStop(0,
             this->simJointUpperLimits[m]);

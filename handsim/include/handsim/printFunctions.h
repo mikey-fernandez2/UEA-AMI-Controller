@@ -2,13 +2,13 @@
 //
 // Mikey Fernandez 04/11/2021
 
+#ifndef PRINT_FUNCTIONS_H
+#define PRINT_FUNCTIONS_H
+
 #include <stdio.h>
 #include <haptix/comm/haptix.h>
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h"
 #include "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h"
-
-#ifndef PRINT_FUNCTIONS_H
-#define PRINT_FUNCTIONS_H
 
 // Print robot state - current joint positions, velocities, sensor readings
 void printState(const hxRobotInfo *_robotInfo, const hxSensor *_sensor);
@@ -30,6 +30,9 @@ void printEMGNorms(float *norms);
 
 // Print normalized EMG
 void printNormedEMG(float *norms);
+
+// Print muscle activation
+void printMuscleActivation(float *act);
 
 // Print tracking data from Polhemus system
 void printPolhemus(polhemus_pose_t *poses, int num_poses);

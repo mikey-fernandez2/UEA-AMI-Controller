@@ -74,7 +74,7 @@ set_target_properties(HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin PROP
 install (TARGETS HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin DESTINATION
   ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
-handsim_build_tests(${gtest_sources})
+# handsim_build_tests(${gtest_sources})
 
 ########################################
 #add_executable(hx_controller hx_controller.c)
@@ -83,13 +83,4 @@ handsim_build_tests(${gtest_sources})
 # Modified Version
 add_executable(hx_controller hx_controller_mod.c printFunctions.c EMGStruct.c calculateCommands.c)
 #target_link_libraries(hx_controller ${HAPTIX-COMM_LIBRARIES} HaptixTracking m)
-target_link_libraries(hx_controller ${HAPTIX-COMM_LIBRARIES} HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin m)
-
-#if (EXISTS "${CMAKE_SOURCE_DIR}/subscriber_generic.cc")
-#  add_executable(subscriber_generic subscriber_generic.cc)
-#  target_link_libraries(subscriber_generic
-#    ignition-transport${IGN_TRANSPORT_VER}::core)
-#endif()
-
-#add_executable(subscriber_generic subscriber_generic.cc)
-#target_link_libraries(subscriber_generic ignition-transport${IGN_TRANSPORT_VER}::core)
+target_link_libraries(hx_controller ${GAZEBO_LIBRARIES} ${HAPTIX-COMM_LIBRARIES} HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin m)

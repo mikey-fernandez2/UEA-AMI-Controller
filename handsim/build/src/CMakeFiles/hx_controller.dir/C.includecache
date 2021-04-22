@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
+string.h
+-
 stdint.h
 -
 

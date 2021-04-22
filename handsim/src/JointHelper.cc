@@ -131,6 +131,12 @@ void JointHelper::SetPosition(double _position)
 }
 
 /////////////////////////////////////////////////
+void JointHelper::SetVelocity(double _velocity)
+{
+  this->fakeVelocity = _velocity;
+}
+
+/////////////////////////////////////////////////
 const std::string JointHelper::GetName() const
 {
   if (this->hasJoint)

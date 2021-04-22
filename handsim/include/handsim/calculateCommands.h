@@ -12,7 +12,6 @@
 #define CALCULATE_COMMANDS_H
 
 // Calculate next command to send based on EMG and current limb position
-struct EMGData;
 void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, struct EMGData *emg, bool usingEMG, int counter);
 
 #endif

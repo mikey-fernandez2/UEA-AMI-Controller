@@ -6,42 +6,56 @@
 
 import os, sys, time, struct
 
-def compareMax(maxes, EMGData, numElectrodes):
-    raw_data = struct.unpack("IHffffffffffffffffBBBB", EMGData)
-    sensors = raw_data[2:2 + numElectrodes] # extract the EMG data
-
-    for electrode in range(numElectrodes):
-        if sensors[electrode] > maxes[electrode]:
-            maxes[electrode] = sensors[electrode]
+def compareMax(maxes, raw_emg):
+    for electrode in range(len(raw_emg)):
+        if raw_emg[electrode] > maxes[electrode]:
+            maxes[electrode] = raw_emg[electrode]
 
     return maxes
 
-def main(path, numElectrodes, scaleFactorsPath):    
+def compareMin(mins, raw_emg):
+    for electrode in range(len(raw_emg)):
+        if raw_emg[electrode] < mins[electrode]:
+            mins[electrode] = raw_emg[electrode]
+
+    return mins
+
+def main(path, numElectrodes, scaleFactorsPath, sendingFreq):    
     try:
         print("Receiving...")
         maxes = [0]*numElectrodes
-        msgLen = 76
+        mins = [sys.maxsize]*numElectrodes
+        msgLen = struct.calcsize("ffffffffffffffffffIIIIf")
+        print(msgLen)
+        recLen = 0
         while(1):
-            fifo = os.open(path, os.O_RDONLY)
-            EMGData = os.read(fifo, msgLen)
-            os.close(fifo)
+            while recLen == 0:
+                with open(path, 'rb') as fifo:
+                    EMGData = fifo.read()
+                recLen = len(EMGData)
 
-            maxes = compareMax(maxes, EMGData, numElectrodes)
+            raw_data = struct.unpack("ffffffffffffffffffIIIIf", EMGData)
+            raw_emg = raw_data[2:2 + numElectrodes] # extract the EMG data
 
-            time.sleep(1)
+            maxes = compareMax(maxes, raw_emg)
+            mins = compareMin(mins, raw_emg)
+
+            recLen = 0
+            time.sleep(1/sendingFreq)
 
     except KeyboardInterrupt:
         print("\nReceiving complete.\nWriting normalization factors to %s\n" % scaleFactorsPath)
-        os.remove(path)
 
         # print(maxes)
+        # print(mins)
+        
+        normsBytes = struct.pack("ffffffffffffffffffffffffffffffff", maxes[0], maxes[1], maxes[2], maxes[3], maxes[4], maxes[5], maxes[6], maxes[7],
+                                                                     maxes[8], maxes[9], maxes[10], maxes[11], maxes[12], maxes[13], maxes[14], maxes[15],
+                                                                     mins[0], mins[1], mins[2], mins[3], mins[4], mins[5], mins[6], mins[7],
+                                                                     mins[8], mins[9], mins[10], mins[11], mins[12], mins[13], mins[14], mins[15])
 
-        maxesbytes = struct.pack("ffffffffffffffff", maxes[0], maxes[1], maxes[2], maxes[3], maxes[4], maxes[5], maxes[6], maxes[7],
-                                                     maxes[8], maxes[9], maxes[10], maxes[11], maxes[12], maxes[13], maxes[14], maxes[15])
-
-        output = os.open(scaleFactorsPath, os.O_WRONLY)
-        os.write(output, maxesbytes)
-        os.close(output)
+        with open(scaleFactorsPath, 'wb') as output:
+            output.write(normsBytes)
 
     return
 
@@ -50,5 +64,6 @@ if __name__ == "__main__":
     path = "/tmp/emg"
     scaleFactorsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
     numElectrodes = 16
+    sendingFreq = 20
 
-    main(path, numElectrodes, scaleFactorsPath)
+    main(path, numElectrodes, scaleFactorsPath, sendingFreq)
