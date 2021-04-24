@@ -37,28 +37,6 @@
     <joint id="20">pinky1</joint>
     <joint id="21">pinky2</joint>
     <joint id="22">pinky3</joint>
-    <!-- <joint id="0">wristy</joint>
-    <joint id="1">wristx</joint>
-    <joint id="2">wristz</joint>
-    <joint id="3">thumb0</joint>
-    <joint id="4">thumb1</joint>
-    <joint id="5">thumb2</joint>
-    <joint id="6">thumb3</joint>
-    <joint id="7">index0</joint>
-    <joint id="8">index1</joint>
-    <joint id="9">index2</joint>
-    <joint id="10">index3</joint>
-    <joint id="11">middle1</joint>
-    <joint id="12">middle2</joint>
-    <joint id="13">middle3</joint>
-    <joint id="14">ring0</joint>
-    <joint id="15">ring1</joint>
-    <joint id="16">ring2</joint>
-    <joint id="17">ring3</joint>
-    <joint id="18">pinky0</joint>
-    <joint id="19">pinky1</joint>
-    <joint id="20">pinky2</joint>
-    <joint id="21">pinky3</joint> -->
 
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 1.0"/>
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 1.0"/>
@@ -83,29 +61,6 @@
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="1.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="1.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="22" p="1.0"/>
-    
-    <!-- <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 1.0"/>
-    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 1.0"/>
-    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="2" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="3" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="4" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="5" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="6" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="7" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="8" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="9" p=" 1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="10" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="11" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="12" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="13" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="14" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="15" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="16" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="17" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="18" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="19" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="1.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="1.0"/> -->
 
       <!-- Original PID gains
       <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 100.0"/>
@@ -135,7 +90,7 @@
     <motor id="0" name="motor_elbow">
       <powered_motor_joint>elbow</powered_motor_joint>
       <!-- gear_ratio = motor angle / joint angle -->
-      <!-- wrist motor torque unknown, guessing for now -->
+      <!-- elbow motor torque unknown, guessing for now -->
       <motor_torque>0.1</motor_torque>
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>

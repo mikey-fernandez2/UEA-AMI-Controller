@@ -256,7 +256,7 @@ src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 src/CMakeFiles/hx_controller.dir/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 	$(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/depend
 	$(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  26 27 28 29
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  26 27 28 29 30
 	@echo "Built target hx_controller"
 .PHONY : src/CMakeFiles/hx_controller.dir/all
 
@@ -266,7 +266,7 @@ all: src/CMakeFiles/hx_controller.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/hx_controller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 23
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 24
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/hx_controller.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/hx_controller.dir/rule

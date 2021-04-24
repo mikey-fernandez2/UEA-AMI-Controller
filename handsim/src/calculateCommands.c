@@ -8,28 +8,28 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 {
   int i;
   float a0, a1, a2;         // gains for EMG
-  float al_ag, al_an;       // normalized EMG for a given joint
-  float K0, K1, K2;         // stiffness gaings
+  float al_ag, al_an;       // muscle activation (agonist, antagonist)
+  float K0, K1, K2;         // stiffness gains
   float K_net;              // net stiffness
-  float pos;                // reference joint position
   int agonist, antagonist;  // indices for the two electrodes corresponding to a given joint
-  float motorPos, motorRef; // current actual motor position, desired motor position based on muscle command **COMMANDS GIVE IN MOTOR SPACE
-  float motorRange;
-  float motorVel;
+  float pos;                // reference motor position
+  float motorPos, motorRef; // current actual motor position, virtual trajectory motor position **COMMANDS GIVE IN MOTOR SPACE
+  float motorRange;         // full range of motion of motor
+  float motorVel;           // current actual motor angular velocity
+  float K = 10;             // 
+  float setpoint;           // neutral setpoint for joint to return to
 
   int numMotors = robotInfo->motor_count;
 
-  // arat - these are the default P gains for these joints
+  // arat.world - these are the default P gains for these joints
   // NOTE: With addition of controllable elbow joint, assumed default P gain of 100
-  float K0_arr[23] = {100, 100, 100, 100, 30, 20, 8, 2, 20, 10, 5, 1, 10, 5, 1, 20, 10, 5, 1, 15, 10, 5, 1};
-  // float K0_arr[numMotors] = {0}; K0_arr[2] = 100;
-  float K1_arr[23] = {0};
-  float K2_arr[23] = {0};
+  //    float jointPgains[23] = {100, 100, 100, 100, 30, 20, 8, 2, 20, 10, 5, 1, 10, 5, 1, 20, 10, 5, 1, 15, 10, 5, 1};
+  float K0_arr[14] = {0}; /* TUNE ME */
+  float K1_arr[14] = {0}; /* TUNE ME */
+  float K2_arr[14] = {0}; /* TUNE ME */
+  float D_arr[14] = {0};  /* TUNE ME */
 
-  float K = 10;
-  float setpoint;
-
-  float D_arr[23] = {10, 10, 10, 10, 10, 20, 8, 2, 20, 10, 5, 1, 10, 5, 1, 20, 10, 5, 1, 15, 10, 5, 10};
+  float inc;
 
   if (usingEMG)
   {
@@ -48,51 +48,132 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
     //         K1[i] must be tuned
     //         K2[i] must be tuned
 
+    // for (i = 0; i < numMotors; i++)
+    // {
+    //   // find current motor position and velocity
+    //   motorPos = sensor->motor_pos[i];
+    //   motorVel = sensor->motor_vel[i];
+
+    //   // find al_ag, al_an - map between EMG electrodes and their corresponding motors in 'EMGStruct.c'
+    //   getElectrodes(i, &agonist, &antagonist);
+    //   al_ag = getFilteredEMG(emg, agonist);    // flexion
+    //   al_an = getFilteredEMG(emg, antagonist); // extension
+      
+    //   // find a0, a1, a2
+    //   // a0 = 0;
+    //   // a1 = robotInfo->motor_limit[i][1]; // this corresponds to the agonist muscle
+    //   // a2 = robotInfo->motor_limit[i][0]; // this corresponds to the antagonist muscle
+    //   motorRange = robotInfo->motor_limit[i][1] - robotInfo->motor_limit[i][0];
+    //   setpoint = motorRange/2 + robotInfo->motor_limit[i][0]; // halfway through full RoM
+    //   a0 = motorRange/2; /* TUNE ME */
+    //   a1 = motorRange;   /* TUNE ME */
+    //   a2 = motorRange/2; /* TUNE ME */
+
+    //   // find K0, K1, and K2
+    //   K0 = K0_arr[i];
+    //   K1 = K1_arr[i];
+    //   K2 = K2_arr[i];
+
+    //   // calculate net stiffness
+    //   K_net = K0 + K1*al_ag + K2*al_an;
+
+    //   // calculate reference position of motor
+    //   motorRef = a0 + (a1*al_ag - a2*al_an);
+
+    //   // calculate reference position of motor[i]
+    //   // pos = motorPos + K_net*(motorRef - motorPos) - D_arr[i]*motorVel;
+    //   pos = motorPos + K*(motorRef - a0) - D_arr[i]*motorVel;
+
+    //   // set in command struct
+    //   cmd->ref_pos[i] = pos;
+    //   cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
+
+    //   if (i == 0)
+    //   {
+    //     printf("\t      a1: %06.2f\t      a2: %06.2f\n\t   al_ag: %06.4f\t   al_an: %06.4f\n\tmotorPos: %06.2f\tmotorRef: %06.2f\n\t  desPos: %06.2f\t   K_net: %06.2f\n\n",
+    //            a1, a2, al_ag, al_an, motorPos, motorRef, pos, K_net);
+    //   }
+    // }
+
     for (i = 0; i < numMotors; i++)
     {
-      // find current motor position
+      // find current motor position and velocity
       motorPos = sensor->motor_pos[i];
       motorVel = sensor->motor_vel[i];
 
-      // find al_ag, al_an - TODO: make map between EMG sensors and their corresponding motors
+      // find al_ag, al_an - map between EMG electrodes and their corresponding motors in 'EMGStruct.c'
       getElectrodes(i, &agonist, &antagonist);
       al_ag = getFilteredEMG(emg, agonist);    // flexion
       al_an = getFilteredEMG(emg, antagonist); // extension
-      
-      // find a0, a1, a2
-      // a0 = 0;
-      // a1 = robotInfo->motor_limit[i][1]; // this corresponds to the agonist muscle
-      // a2 = robotInfo->motor_limit[i][0]; // this corresponds to the antagonist muscle
-      motorRange = robotInfo->motor_limit[i][1] - robotInfo->motor_limit[i][0];
-      setpoint = motorRange/2 + robotInfo->motor_limit[i][0];
-      a0 = motorRange/2;
-      a1 = motorRange;
-      a2 = motorRange/2;
 
-      // find K0, K1, and K2
-      K0 = K0_arr[i];
-      K1 = K1_arr[i];
-      K2 = K2_arr[i];
+      float delta = al_ag - al_an; // delta activation
 
-      // calculate net stiffness
-      K_net = K0 + K1*al_ag + K2*al_an;
+      float th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
+      float th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
 
-      // calculate reference position of joint (motor)
-      motorRef = a0 + (a1*al_ag - a2*al_an); // replaced subtraction in parenthesis with addition - a2 is negative
+      // int pair = agonist/2; // TODO: make me a nice function instead
+      // float maxD = emg->deltas[pair];
+      // float minD = emg->deltas[8 + pair];
 
-      // calculate reference position of joint[i]
-      // K_net = 2;
-      // pos = motorPos + K_net*(motorRef - motorPos) + D_arr[i]*motorVel;
-      pos = motorPos + K*(motorRef - a0) + D_arr[i]*motorVel;
+      // float K1 = (th_u - th_l)/(maxD - minD);
+      // float K2 = (-minD*th_u + maxD*th_l)/(maxD - minD);
 
-      // set in command struct
-      cmd->ref_pos[i] = pos;
-      // cmd->gain_pos[i] = K_net;
-      cmd->gain_pos[i] = 1; // want the position gain just to be the default position gain of that motor
+      // pos = K1*delta + K2;
+      // if (delta > 0)
+      // {
+      //   pos = motorPos + 100*delta;
+      // }
+      // else if (delta < 0)
+      // {
+      //   pos = motorPos - 100*delta;
+      // }
+      // else
+      // {
+      //   pos = motorPos;
+      // }
 
       if (i == 0)
       {
-        printf("\t      a1: %06.2f\t      a2: %06.2f\n\t   al_ag: %06.4f\t   al_an: %06.4f\n\tmotorPos: %06.2f\tmotorRef: %06.2f\n\t  desPos: %06.2f\t   K_net: %06.2f\n\n", a1, a2, al_ag, al_an, motorPos, motorRef, pos, K_net);
+        if (delta > 0)
+        {
+          inc = 2500;
+        }
+        else
+        {
+          inc = 2000;
+        }
+        // inc = 5000; // elbow
+      }
+      else
+      {
+        inc = 1000; // hand
+      }
+
+      pos = motorPos + inc*delta;
+
+      if (pos < th_l)
+      {
+        pos = th_l;
+      }
+      else if (pos > th_u)
+      {
+        pos = th_u;
+      }
+
+      // if (i == 0)
+      // {
+      //   printf("Position commanded: %f\n", pos);
+      //   // printf("Delta: %f\n", delta);
+      //   printf("\n");
+      // }
+
+      // set in command struct
+      cmd->ref_pos[i] = pos;
+      cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
+
+      if (i == 3) // force wrist z to stay at 0
+      {
+        cmd->ref_pos[i] = 0;
       }
     }
 
@@ -104,6 +185,7 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
   else
   {
     int original = 1; // this is the original, built in example controller - sinusoidal wave
+    float motorRange;
 
     if (original)
     {
@@ -111,8 +193,12 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       for (i = 0; i < numMotors; ++i)
       {
         // Set the desired position of this motor
-        cmd->ref_pos[i] = (float)(350 * 0.5 *
-          sin(0.05 * 2.0 * M_PI * counter * 0.01));
+        float th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
+        float th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
+        motorRange = th_u - th_l;
+
+        cmd->ref_pos[i] = (float)(motorRange/2 * 
+          sin(0.05 * 2.0 * M_PI * counter * 0.01)) + motorRange/2;
         // We could set a desired maximum velocity
         // cmd->ref_vel[i] = 1.0;
         // cmd->ref_vel_max[i] = 1.0;

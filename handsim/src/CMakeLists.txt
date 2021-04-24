@@ -81,6 +81,6 @@ install (TARGETS HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin DESTINATI
 #target_link_libraries(hx_controller ${HAPTIX-COMM_LIBRARIES} m)
 
 # Modified Version
-add_executable(hx_controller hx_controller_mod.c printFunctions.c EMGStruct.c calculateCommands.c)
+add_executable(hx_controller hx_controller_mod.c printFunctions.c EMGStruct.c calculateCommands.c logging.c)
 #target_link_libraries(hx_controller ${HAPTIX-COMM_LIBRARIES} HaptixTracking m)
 target_link_libraries(hx_controller ${GAZEBO_LIBRARIES} ${HAPTIX-COMM_LIBRARIES} HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin m)

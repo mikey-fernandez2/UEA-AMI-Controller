@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <world name="default">
+  <world name="arat.world">
     <plugin name="HaptixWorldPlugin" filename="libHaptixWorldPlugin.so"/>
     <scene>
       <shadows>1</shadows>
@@ -342,11 +342,11 @@
       <uri>model://table</uri>
     </include>
 
-    <include>
+    <!-- <include>
       <uri>model://wooden_case</uri>
       <pose>0 0.037 1.015 0 0 -1.570796</pose>
       <static>true</static>
-    </include>
+    </include> -->
 
     <include>
      <!-- <uri>model://mpl_haptix_right_forearm</uri> -->

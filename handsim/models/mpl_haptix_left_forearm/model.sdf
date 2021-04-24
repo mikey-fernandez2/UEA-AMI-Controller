@@ -4,14 +4,39 @@
     <update_rate>50</update_rate>
     <spacenav_control_point_offset>0 0.4 0 0 0 0</spacenav_control_point_offset>
     <hydra_control_point_offset>0 0.3 0 0 3.1416 1.5707</hydra_control_point_offset>
-    <base_joint>elbow</base_joint>
-    <base_link>forearm</base_link>
+    <!-- <base_joint>elbow</base_joint>
+    <base_link>forearm</base_link> -->
+    <base_joint>elbow_dummy</base_joint>
+    <base_link>forearm_dummy</base_link>
     <base_link_sensor_offset>0 0 0.07 3.14159 -1.570796 0</base_link_sensor_offset>
     <world_screen_location>0 -0.65 1.5 0 0 0</world_screen_location>
     <base_pid_pos cmd_max="10000.0" cmd_min="-10000.0" d="10.0" i="0" p="700.0"/>
     <base_pid_rot cmd_max="10000.0" cmd_min="-10000.0" d="10.0" i="0" p="800.0"/>
     <!-- order must match hxAPLJoints enumeration -->
-    <joint id="0">wristy</joint>
+    <joint id="0">elbow</joint>
+    <joint id="1">wristy</joint>
+    <joint id="2">wristx</joint>
+    <joint id="3">wristz</joint>
+    <joint id="4">thumb0</joint>
+    <joint id="5">thumb1</joint>
+    <joint id="6">thumb2</joint>
+    <joint id="7">thumb3</joint>
+    <joint id="8">index0</joint>
+    <joint id="9">index1</joint>
+    <joint id="10">index2</joint>
+    <joint id="11">index3</joint>
+    <joint id="12">middle1</joint>
+    <joint id="13">middle2</joint>
+    <joint id="14">middle3</joint>
+    <joint id="15">ring0</joint>
+    <joint id="16">ring1</joint>
+    <joint id="17">ring2</joint>
+    <joint id="18">ring3</joint>
+    <joint id="19">pinky0</joint>
+    <joint id="20">pinky1</joint>
+    <joint id="21">pinky2</joint>
+    <joint id="22">pinky3</joint>
+    <!-- <joint id="0">wristy</joint>
     <joint id="1">wristx</joint>
     <joint id="2">wristz</joint>
     <joint id="3">thumb0</joint>
@@ -32,8 +57,31 @@
     <joint id="18">pinky0</joint>
     <joint id="19">pinky1</joint>
     <joint id="20">pinky2</joint>
-    <joint id="21">pinky3</joint>
-    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 100.0"/>
+    <joint id="21">pinky3</joint> -->
+    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 1.0"/>
+    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 1.0"/>
+    <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="2" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="3" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="4" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="5" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="6" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="7" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="8" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="9" p=" 1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="10" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="11" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="12" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="13" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="14" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="15" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="16" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="17" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="18" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="19" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="1.0"/>
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="22" p="1.0"/>
+    <!-- <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="0" p=" 100.0"/>
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="1" p=" 100.0"/>
     <pid cmd_max=" 500.0" cmd_min=" -500.0" d="0" i="0" id="2" p=" 100.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="3" p="  30.0"/>
@@ -54,8 +102,17 @@
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="18" p="  15.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="19" p="  10.0"/>
     <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="20" p="   5.0"/>
-    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="   1.0"/>
-    <motor id="0" name="motor_wristy">
+    <pid cmd_max=" 100.0" cmd_min=" -100.0" d="0" i="0" id="21" p="   1.0"/> -->
+    
+    <motor id="0" name="motor_elbow">
+      <powered_motor_joint>elbow</powered_motor_joint>
+      <!-- gear_ratio = motor angle / joint angle -->
+      <!-- elbow motor torque unknown, guessing for now -->
+      <motor_torque>10000</motor_torque>
+      <gear_ratio>180.0</gear_ratio>
+      <encoder_offset>0.0</encoder_offset>
+    </motor>
+    <motor id="1" name="motor_wristy">
       <powered_motor_joint>wristy</powered_motor_joint>
       <!-- gear_ratio = motor angle / joint angle -->
       <!-- wrist motor torque unknown, guessing for now -->
@@ -63,27 +120,27 @@
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="1" name="motor_wristx">
+    <motor id="2" name="motor_wristx">
       <powered_motor_joint>wristx</powered_motor_joint>
       <!-- wrist motor torque unknown, guessing for now -->
       <motor_torque>0.003</motor_torque>
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="2" name="motor_wristz">
+    <motor id="3" name="motor_wristz">
       <powered_motor_joint>wristz</powered_motor_joint>
       <!-- wrist motor torque unknown, guessing for now -->
       <motor_torque>0.0191</motor_torque>
       <gear_ratio>180.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="3" name="motor_thumb0">
+    <motor id="4" name="motor_thumb0">
       <powered_motor_joint>thumb0</powered_motor_joint>
       <motor_torque>3.82e-3</motor_torque>
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="4" name="motor_thumb1">
+    <motor id="5" name="motor_thumb1">
       <powered_motor_joint>thumb1</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -92,7 +149,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="5" name="motor_thumb2">
+    <motor id="6" name="motor_thumb2">
       <powered_motor_joint>thumb2</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -101,7 +158,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="6" name="motor_thumb3">
+    <motor id="7" name="motor_thumb3">
       <powered_motor_joint>thumb3</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -110,7 +167,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0.0</encoder_offset>
     </motor>
-    <motor id="7" name="motor_index0">
+    <motor id="8" name="motor_index0">
       <powered_motor_joint>index0</powered_motor_joint>
       <!--
         1MF gear ratio: 352, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
@@ -123,7 +180,7 @@
       <gear_ratio>352.0</gear_ratio>
       <encoder_offset>0</encoder_offset>
     </motor>
-    <motor id="8" name="motor_index1">
+    <motor id="9" name="motor_index1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -160,7 +217,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="9" name="motor_middle1">
+    <motor id="10" name="motor_middle1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -197,7 +254,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="10" name="motor_ring1">
+    <motor id="11" name="motor_ring1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -234,7 +291,7 @@
         <multiplier2>0.69791667</multiplier2>
       </gearbox>
     </motor>
-    <motor id="11" name="motor_pinky0">
+    <motor id="12" name="motor_pinky0">
       <powered_motor_joint>ring0</powered_motor_joint>
       <!--
       <motor_torque>3.82e-3</motor_torque>
@@ -250,7 +307,7 @@
         <multiplier2>1.0</multiplier2>
       </gearbox>
     </motor>
-    <motor id="12" name="motor_pinky1">
+    <motor id="13" name="motor_pinky1">
       <!--
         1MF gear ratio: 383, Allied Motion SL0500-S02-Z motor torque: 3.82e-3 Nm
         max differential joint torque = 1.50126 Nm
@@ -268,7 +325,7 @@
         <joint>pinky1</joint>
         <offset>0.174532925199</offset>
         <multiplier1>1.0</multiplier1>
-        <multiplier2>0.833333</multiplier2>
+        <multiplier2>0.833333</multiplier2>motorInfo.gearRati
       </gearbox>
       <gearbox>
         <joint>pinky2</joint>
@@ -360,11 +417,11 @@
   </plugin>
 
   <!-- Model SDF copied from gazebo_models -->
-  <joint name='elbow' type='revolute'>
-    <child>forearm</child>
+  <joint name='elbow_dummy' type='revolute'>
+    <child>forearm_dummy</child>
     <parent>world</parent>
     <axis>
-      <xyz>0 0 -1.0</xyz>
+      <xyz>0 0 1.0</xyz>
       <limit>
         <lower>0</lower>
         <upper>0</upper>
@@ -392,7 +449,57 @@
       </ode>
     </physics>
   </joint>
+  <link name='forearm_dummy'>
+    <gravity>0</gravity>
+    <pose>0.00660504 -0.294573 0.119123 -1.21334e-13 2.77556e-17 -0.0115373</pose>
+    <inertial>
+      <pose>-0.000589428 -0.0733139 0.0215526 0 0 0</pose>
+      <mass>0.0997005</mass>
+      <inertia>
+        <ixx>0.0004998</ixx>
+        <ixy>-5.83136e-06</ixy>
+        <ixz>3.56083e-07</ixz>
+        <iyy>0.00010215</iyy>
+        <iyz>3.76069e-05</iyz>
+        <izz>0.000498862</izz>
+      </inertia>
+    </inertial>  
+  </link>
+
+  <joint name='elbow' type='revolute'>
+    <child>forearm</child>
+    <parent>forearm_dummy</parent>
+    <axis>
+      <xyz>0 0 -1.0</xyz>
+      <limit>
+        <lower>0</lower>
+        <upper>1.57</upper>
+        <effort>-1</effort>
+        <velocity>-1</velocity>
+      </limit>
+      <dynamics>
+        <damping>0.66</damping>
+        <friction>0</friction>
+        <spring_reference>0</spring_reference>
+        <spring_stiffness>0</spring_stiffness>
+      </dynamics>
+      <use_parent_model_frame>1</use_parent_model_frame>
+    </axis>
+    <physics>
+      <provide_feedback>1</provide_feedback>
+      <ode>
+        <provide_feedback>1</provide_feedback>
+        <implicit_spring_damper>1</implicit_spring_damper>
+        <cfm_damping>1</cfm_damping>
+        <limit>
+          <cfm>0.01</cfm>
+          <erp>0</erp>
+        </limit>
+      </ode>
+    </physics>
+  </joint>
   <link name='forearm'>
+<gravity>1</gravity>
     <pose>0.00660504 0.294573 0.119123 1.21334e-13 2.77556e-17 0.0115373</pose>
     <inertial>
       <pose>-0.000589428 0.0733139 0.0215526 0 0 0</pose>
@@ -471,6 +578,7 @@
   </link>
 
   <link name='wristy'>
+    <gravity>0</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
     <pose>0.00449937 0.479995 0.135123 1.2164e-13 1.09079e-14 0.0115373</pose>
     <inertial>
       <pose>-7.08369e-05 0.0217787 -0.000286168 0 0 0</pose>
@@ -555,6 +663,7 @@
   </joint>
 
   <link name='wristx'>
+    <gravity>0</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
     <pose>0.003916 0.527636 0.137161 1.18962e-13 1.21847e-14 0.0115373</pose>
     <inertial>
       <pose>0.00139174 0.00975189 -0.00252668 0 0 0</pose>
@@ -689,6 +798,7 @@
   </joint>
 
   <link name='wristz'>
+    <gravity>0</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
     <pose>0.00375708 0.557636 0.135067 2.87105e-13 1.42109e-14 0.0115373</pose>
     <inertial>
       <pose>0.00368152 0.0358755 0.00265927 0 0 0</pose>
@@ -934,6 +1044,7 @@
   </joint>
 
   <link name='index0'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
     <pose>0.0384854 0.623842 0.136079 1.14726e-13 0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000142572 0.00548494 0.000206145 0 0 0</pose>
@@ -1018,6 +1129,8 @@
   </joint>
 
   <link name='index1'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0383394 0.641841 0.136068 1.1474e-13 0.174533 0.0115373</pose>
     <inertial>
       <pose>0.000406487 0.0213125 0.000655609 0 0 0</pose>
@@ -1108,6 +1221,8 @@
   </joint>
 
   <link name='index2'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0389938 0.685352 0.136372 1.1445e-13 0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000841462 0.012689 0.000572665 0 0 0</pose>
@@ -1223,6 +1338,8 @@
   </joint>
 
   <link name='index3'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <self_collide>true</self_collide>
     <pose>0.0380858 0.709843 0.136482 1.15476e-13 0.174533 0.0115373</pose>
     <inertial>
@@ -1361,6 +1478,8 @@
   </joint>
 
   <link name='middle0'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0156685 0.63568 0.140513 -0.0872665 1.4183e-14 0.0115373</pose>
     <inertial>
       <pose>-0.000142567 0.00548493 0.000206162 0 0 0</pose>
@@ -1445,6 +1564,8 @@
   </joint>
 
   <link name='middle1'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0155242 0.653612 0.138944 -0.0872665 1.43013e-14 0.0115373</pose>
     <inertial>
       <pose>0.000406411 0.0213125 0.00065565 0 0 0</pose>
@@ -1535,6 +1656,8 @@
   </joint>
 
   <link name='middle2'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0161097 0.696999 0.135651 -0.0872665 1.32728e-14 0.0115373</pose>
     <inertial>
       <pose>-0.000841444 0.012689 0.00057266 0 0 0</pose>
@@ -1650,6 +1773,8 @@
   </joint>
 
   <link name='middle3'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <self_collide>true</self_collide>
     <pose>0.0151931 0.721397 0.133515 -0.0872665 1.51577e-14 0.0115373</pose>
     <inertial>
@@ -1788,6 +1913,8 @@
   </joint>
 
   <link name='pinky0'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.0275009 0.61268 0.129428 1.14942e-13 -0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000142559 0.00538484 0.000206147 0 0 0</pose>
@@ -1872,6 +1999,8 @@
   </joint>
 
   <link name='pinky1'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.0276458 0.630579 0.129439 -1.14943e-13 0.174533 0.0115373</pose>
     <inertial>
       <pose>0.000458624 0.0160478 0.000924735 0 0 0</pose>
@@ -1962,6 +2091,8 @@
   </joint>
 
   <link name='pinky2'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.0275441 0.663582 0.130032 1.14415e-13 -0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000270832 0.00914628 0.000738493 0 0 0</pose>
@@ -2052,6 +2183,8 @@
   </joint>
 
   <link name='pinky3'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <self_collide>true</self_collide>
     <pose>-0.0277931 0.681081 0.130023 1.14622e-13 -0.174533 0.0115373</pose>
     <inertial>
@@ -2190,6 +2323,8 @@
   </joint>
 
   <link name='ring0'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.00687963 0.624218 0.136579 1.14553e-13 -0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000142559 0.00548494 0.000206147 0 -0 0</pose>
@@ -2274,6 +2409,8 @@
   </joint>
 
   <link name='ring1'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.00702565 0.642218 0.13659 1.14538e-13 -0.174533 0.0115373</pose>
     <inertial>
       <pose>0.000406447 0.0213125 0.00065563 0 0 0</pose>
@@ -2364,6 +2501,8 @@
   </joint>
 
   <link name='ring2'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>-0.0065449 0.685726 0.137271 1.14828e-13 -0.174533 0.0115373</pose>
     <inertial>
       <pose>-0.000841518 0.012689 0.000572674 0 0 0</pose>
@@ -2478,6 +2617,8 @@
   </joint>
 
   <link name='ring3'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <self_collide>true</self_collide>
     <pose>-0.00745287 0.710217 0.13716 1.14821e-13 -0.174533 0.0115373</pose>
     <inertial>
@@ -2616,6 +2757,8 @@
   </joint>
 
   <link name='thumb0'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0374985 0.578725 0.124974 -0.0873761 -0.0305803 0.276903</pose>
     <inertial>
       <pose>0.00863339 0.000156884 -0.000945846 0 0 0</pose>
@@ -2724,6 +2867,8 @@
   </joint>
 
   <link name='thumb1'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.057306 0.585356 0.126981 -0.0873761 -0.0305803 0.276903</pose>
     <inertial>
       <pose>0.019024 -0.000361131 -0.000186763 0 0 0</pose>
@@ -2865,6 +3010,8 @@
   </joint>
 
   <link name='thumb2'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <pose>0.0895543 0.594453 0.127266 -0.0873761 -0.0305803 0.276903</pose>
     <inertial>
       <pose>0.0188965 -0.000375725 0.00065381 0 0 0</pose>
@@ -2980,6 +3127,8 @@
   </joint>
 
   <link name='thumb3'>
+    <gravity>1</gravity> <!-- REMEMBER TO TURN ME BACK ON -->
+
     <self_collide>true</self_collide>
     <pose>0.121705 0.603689 0.129371 -0.0873761 -0.0305803 0.276903</pose>
     <inertial>

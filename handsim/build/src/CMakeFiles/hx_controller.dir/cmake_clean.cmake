@@ -3,6 +3,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/hx_controller.dir/printFunctions.c.o"
   "CMakeFiles/hx_controller.dir/EMGStruct.c.o"
   "CMakeFiles/hx_controller.dir/calculateCommands.c.o"
+  "CMakeFiles/hx_controller.dir/logging.c.o"
   "hx_controller.pdb"
   "hx_controller"
 )

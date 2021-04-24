@@ -43,8 +43,11 @@ float getFilteredEMG(struct EMGData *emg, int i)
 }
 
 // implement low pass filter corresponding to muscle activation dynamics
-void muscleDynamics(struct EMGData *emg, float tauA, float tauD)
+void muscleDynamics(struct EMGData *emg)
 {
+  float tauA = emg->tauA;
+  float tauD = emg->tauD;
+
   float b = tauA/tauD; // ratio of time constants
   float u;             // normed EMG
   float prevA;         // previous activation
@@ -67,9 +70,13 @@ void getElectrodes(int motor, int *agonist, int *antagonist)
 {
   // motorMap[i][o] is the electrode corresponding to the agonist muscle for motor i
   // motorMap[i][1] is the electrode corresponding to the antagonist muscle for motor i
-  int motorMap[23][2] = {{0, 1}, {2, 3}, {4, 5}, {6, 7}, {6, 7}, {6, 7}, {8, 9}, {8, 9}, {8, 9}, {8, 9},
-                                {10, 11}, {10, 11}, {10, 11}, {12, 13}, {12, 13}, {12, 13}, {12, 13}, {14, 15},
-                                {14, 15}, {14, 15}, {14, 15}};
+  int motorMap[14][2] = {{0, 1},                         // elbow
+                         {8, 8}, {8, 8}, {8, 8},         // wristx, wristy, wristz
+                         {3, 4}, {3, 4}, {3, 4}, {3, 4}, // thumb0, thumb1, thumb2, thumb3
+                         {3, 4}, {3, 4},             // index0, index1
+                         {3, 4},                       // middle1
+                         {3, 4},                       // ring1
+                         {3, 4}, {3, 4}};            // pinky0, pinky1
 
   *agonist = motorMap[motor][0];
   *antagonist = motorMap[motor][1];

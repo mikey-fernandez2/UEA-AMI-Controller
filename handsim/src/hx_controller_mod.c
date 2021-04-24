@@ -28,23 +28,33 @@ void sigHandler(int signo)
 // All printing functions relegated to "printFunctions.c"
 
 //////////////////////////////////////////////////
-// This main function requires two arguments
+// This main function takes two arguments and an optional log file name
 //    usingEMG is a boolean integer      - 0 if not, 1 if using, EMG board
 //    usingPolhemus is a boolean integer - 0 if not, 1 if using, Polhemus trackers
+//    logFile is the name of the log file to save information to (by default in /home/haptix-e15-463/haptix/haptix_controller/logs/)
+
 int main(int argc, char **argv)
 {
   bool usingEMG;
   bool usingPolhemus;
+  bool logging;
+  char *logFile;
 
-  if (argc != 3)
-  {
-    fprintf(stderr, "Wrong number of arguments. Did you set usingEMG and usingPolhemus?\n");
-    return -1;
-  }
-  else
+  if (argc == 3 || argc == 4)
   {
     usingEMG = strcmp("0", argv[1]) == 0 ? false : true;
     usingPolhemus = strcmp("0", argv[2]) == 0 ? false : true;
+    logging = argc == 4 ? true : false;
+    
+    if (argc == 4)
+    {
+      logFile = argv[3];
+    }
+  }
+  else
+  {
+    fprintf(stderr, "Wrong number of arguments.\nDid you set usingEMG and usingPolhemus? Did you name a log file?\n");
+    return -1;
   }
 
   char *str;
@@ -137,10 +147,8 @@ int main(int argc, char **argv)
   int msgLen = 92; // 92 bytes - ffffffffffffffffffIIIIf struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
-  // printf("Struct Size: %d\n", (int)sizeof(struct EMGData));
-  // printf("EMG packet size: %d\n", (int)sizeof(emg->OS_time) + (int)sizeof(emg->OS_tick) +(int)sizeof(emg->rawEMG) + (int)sizeof(emg->trigger) +(int)sizeof(emg->switch1) +(int)sizeof(emg->switch2) +(int)sizeof(emg->end) +(int)sizeof(emg->samplingFreq));
-  memset(emg, 0, sizeof(struct EMGData)); // zero out 'prevAct' field
-  char *EMGPipe = "/tmp/emg"; // Pipe for transmitting EMG data
+  memset(emg, 0, sizeof(struct EMGData)); // zero out EMG struct field
+  char *EMGPipe = "/tmp/emg"; // Pipe for receiving EMG data
   int fd1;                    // Pipe file descriptor
 
   int numElec = 16;
@@ -150,25 +158,34 @@ int main(int argc, char **argv)
   char *scaleFactors = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt";
   int fd2;
 
+  int numPairs = numElec/2;
+  int deltasLen = 8*numPairs; // 64 bytes - ffffffffffffffff struct formatting
+  char buffer3[deltasLen];
+  char *deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt";
+  int fd3;
+
   float tauA = 0.05; // 50 ms activation time constant
   float tauD = 0.10; // 100 ms deactivation time constant
 
   if (usingEMG)
   {
+    emg->tauA = tauA;
+    emg->tauD = tauD;
+
     printf("Trying to connect to EMG board...\n");
 
     mkfifo(EMGPipe, 0666); 
 
     printf("Successfully connected to EMG board.\n\n");
 
-    printf("Trying to read EMG normalization factors...\n");
+    printf("Reading EMG normalization factors...\n");
 
     fd2 = open(scaleFactors, O_RDONLY); 
     n = read(fd2, buffer2, scaleFactorsLen);
     close(fd2);
     if (n >= 0) 
     {
-      memcpy(emg->bounds, buffer2, scaleFactorsLen); // copy EMG bounds into appropriate field of struct
+      memcpy(emg->bounds, buffer2, scaleFactorsLen); // copy EMG normalization bounds into appropriate field of struct
       printEMGNorms(emg->bounds);
     }
     else
@@ -178,19 +195,57 @@ int main(int argc, char **argv)
     }
 
     printf("Successfully read EMG norming factors.\n\n");
+
+    printf("Reading EMG delta bounds...\n");
+
+    fd3 = open(deltasPath, O_RDONLY); 
+    n = read(fd3, buffer3, deltasLen);
+    close(fd3);
+    if (n >= 0) 
+    {
+      memcpy(emg->deltas, buffer3, deltasLen); // copy EMG normalization bounds into appropriate field of struct
+    }
+    else
+    {
+      printf("read(): Error reading EMG delta bounds.\n");
+      return -1;
+    }
+
+    printf("Successfully read EMG delta bounds.\n\n");
+  }
+
+  ////////////////////////////////
+  // start logging
+  char logPath[1000] = "/home/haptix-e15-463/haptix/haptix_controller/logs/";
+  strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
+
+  if (logging)
+  {
+    if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg))
+    {
+      printf("startLogging(): error.\n");
+      return -1;
+    }
+    printf("Logging to %s.\n", logPath);
   }
 
   ///////////////////////////////
-  start = clock(); end = clock();
+  start = clock(); end = clock(); // for timing control loop
 
   int steps = 0;
-  int pauseTime;
+  int waitTime;
 
   // Send commands, read from sensors
   while (running)
   {
+    // This is the 'end' point - stop running the control loop
+    if (running == 0)
+    {
+      printf("\nEnding movement.\n");
+      break;
+    }
+
     loopStart = clock(); // for adjusting wait time
-    // printf("Time running: %f sec\n", 1000*(double)(end - start)/CLOCKS_PER_SEC);
 
     // calculate next control command
     calculateCommands(&robotInfo, &cmd, &sensor, emg, usingEMG, counter);
@@ -202,16 +257,6 @@ int main(int argc, char **argv)
       printf("hx_update(): Request error.\n");
       continue;
     }
-
-    // Debug output: Print the state.
-    if (!(counter % 100))
-    {
-      // printCommand(&robotInfo, &cmd);
-      printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move
-    }
-
-    if (++counter == 2000) // originally 10000
-      counter = 0;
 
     ////// Perform sensor reading below
     if (usingPolhemus)
@@ -227,42 +272,50 @@ int main(int argc, char **argv)
       close(fd1);
       if (n >= 0) 
       {
-        memcpy(emg, buffer, msgLen);
-        normEMG(emg);                     // calculate and store normed EMG values, updating 'prevEMG' field
-        muscleDynamics(emg, tauA, tauD);  // use low pass muscle activation dynamics with tauA and tauD
-        // printEMGData(emg);                // print EMG struct
+        memcpy(emg, buffer, msgLen); // copy incoming EMG data into EMG struct
+        normEMG(emg);                // calculate and store normed EMG values, updating 'prevEMG' field
+        muscleDynamics(emg);         // use low pass muscle activation dynamics with tauA and tauD
+        // printEMGData(emg);           // print EMG struct
         // printMuscleActivation(emg->muscleAct);
         // printNormedEMG(emg->normedEMG);
       }
       else
       {
-        printf("read(): Receiving error.\n");
+        printf("read(): Error reading EMG data.\n");
         return -1;
       }
 
       ++steps;
     }
 
-    // This is the 'end' point - stop running the control loop
-    if (running == 0)
+    // Debug output: Print the state.
+    if (!(counter % 100))
     {
-      printf("\nEnding movement\n");
-      break;
+      // printCommand(&robotInfo, &cmd);
+      printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move
+     
+      if (logging)
+      {
+        if (!addLog(logPath, usingEMG, usingPolhemus, (double)(loopStart)/CLOCKS_PER_SEC, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
+        {
+          printf("addLog(): error.\n");
+          return -1;
+        }
+      }
+    }
+
+    if (++counter == 2000) // originally 10000
+    {
+      counter = 0;
     }
 
     loopEnd = clock();
-    if (usingEMG)
+
+    waitTime = usingEMG ? 10000 : 1000; // wait longer if using EMG
+    unsigned int sleeptime_us = waitTime - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    if (sleeptime_us <= 0)
     {
-      pauseTime = 200000; // go slower when using EMG
-    }
-    else
-    {
-      pauseTime = 1000;
-    }
-    unsigned int sleeptime_us = pauseTime - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
-    if (sleeptime_us < 0)
-    {
-      sleeptime_us = pauseTime;
+      sleeptime_us = waitTime; // if loop took too long to run, just wait the default time
     }
 
     usleep(sleeptime_us);
@@ -279,6 +332,16 @@ int main(int argc, char **argv)
   {
     printf("hx_close(): Request error.\n");
     return -1;
+  }
+
+  // stop the log
+  if (logging)
+  {
+    if (!endLog(logPath))
+    {
+      printf("endLog(): error. \n");
+      return -1;
+    }
   }
 
   // free the memory used

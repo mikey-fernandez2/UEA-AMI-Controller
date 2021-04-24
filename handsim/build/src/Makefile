@@ -554,6 +554,30 @@ hx_controller_mod.c.s:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.s
 .PHONY : hx_controller_mod.c.s
 
+logging.o: logging.c.o
+.PHONY : logging.o
+
+# target to build an object file
+logging.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/logging.c.o
+.PHONY : logging.c.o
+
+logging.i: logging.c.i
+.PHONY : logging.i
+
+# target to preprocess a source file
+logging.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/logging.c.i
+.PHONY : logging.c.i
+
+logging.s: logging.c.s
+.PHONY : logging.s
+
+# target to generate assembly for a file
+logging.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/logging.c.s
+.PHONY : logging.c.s
+
 polhemus_driver.o: polhemus_driver.c.o
 .PHONY : polhemus_driver.o
 
@@ -760,6 +784,9 @@ help:
 	@echo "... hx_controller_mod.o"
 	@echo "... hx_controller_mod.i"
 	@echo "... hx_controller_mod.s"
+	@echo "... logging.o"
+	@echo "... logging.i"
+	@echo "... logging.s"
 	@echo "... polhemus_driver.o"
 	@echo "... polhemus_driver.i"
 	@echo "... polhemus_driver.s"
