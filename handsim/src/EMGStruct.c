@@ -70,16 +70,14 @@ void getElectrodes(int motor, int *agonist, int *antagonist)
 {
   // motorMap[i][o] is the electrode corresponding to the agonist muscle for motor i
   // motorMap[i][1] is the electrode corresponding to the antagonist muscle for motor i
-  int motorMap[14][2] = {{0, 1},                         // elbow
+  int motorMap[14][2] = {{0, 2},                         // elbow
                          {8, 8}, {8, 8}, {8, 8},         // wristx, wristy, wristz
-                         {3, 4}, {3, 4}, {3, 4}, {3, 4}, // thumb0, thumb1, thumb2, thumb3
-                         {3, 4}, {3, 4},             // index0, index1
-                         {3, 4},                       // middle1
-                         {3, 4},                       // ring1
-                         {3, 4}, {3, 4}};            // pinky0, pinky1
+                         {1, 3}, {1, 3}, {1, 3}, {1, 3}, // thumb0, thumb1, thumb2, thumb3
+                         {1, 3}, {1, 3},             // index0, index1
+                         {1, 3},                       // middle1
+                         {1, 3},                       // ring1
+                         {1, 3}, {1, 3}};            // pinky0, pinky1
 
   *agonist = motorMap[motor][0];
   *antagonist = motorMap[motor][1];
-
-  return;  
 }

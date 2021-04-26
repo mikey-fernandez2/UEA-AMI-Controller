@@ -147,7 +147,7 @@ int main(int argc, char **argv)
   int msgLen = 92; // 92 bytes - ffffffffffffffffffIIIIf struct formatting
   char buffer[msgLen];
   struct EMGData *emg = malloc(sizeof(struct EMGData));
-  memset(emg, 0, sizeof(struct EMGData)); // zero out EMG struct field
+  memset(emg, 0, sizeof(struct EMGData)); // zero out EMG struct fields
   char *EMGPipe = "/tmp/emg"; // Pipe for receiving EMG data
   int fd1;                    // Pipe file descriptor
 
@@ -166,6 +166,9 @@ int main(int argc, char **argv)
 
   float tauA = 0.05; // 50 ms activation time constant
   float tauD = 0.10; // 100 ms deactivation time constant
+
+  struct prevCom *prior = malloc(sizeof(struct prevCom));
+  memset(prior, 0, sizeof(struct prevCom)); // zero out struct
 
   if (usingEMG)
   {
@@ -248,7 +251,7 @@ int main(int argc, char **argv)
     loopStart = clock(); // for adjusting wait time
 
     // calculate next control command
-    calculateCommands(&robotInfo, &cmd, &sensor, emg, usingEMG, counter);
+    calculateCommands(&robotInfo, &cmd, &sensor, emg, prior, usingEMG, counter);
     // printCommandMotor(&robotInfo, &cmd, 2);
 
     // Send the new joint command and receive the state update.
@@ -296,7 +299,7 @@ int main(int argc, char **argv)
      
       if (logging)
       {
-        if (!addLog(logPath, usingEMG, usingPolhemus, (double)(loopStart)/CLOCKS_PER_SEC, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
+        if (!addLog(logPath, usingEMG, usingPolhemus, (double)(loopStart - start)/CLOCKS_PER_SEC, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
         {
           printf("addLog(): error.\n");
           return -1;

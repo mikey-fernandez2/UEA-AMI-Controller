@@ -18,14 +18,15 @@ struct __attribute__((__packed__)) EMGData {
     uint32_t end;
     float samplingFreq;
 
-    int numElec; // number of electrodes on SeongHo's EMG board - should be 16
-    float tauA;  // activation time constant
-    float tauD;  // deactivation time constant
+    int numElec;  // number of electrodes on SeongHo's EMG board - should be 16
+    float tauA;   // activation time constant
+    float tauD;   // deactivation time constant
+    float freq_n; // natural frequency for limb movement, Hz
 
-    float bounds[32]; // first 16: maximum values, second 16: minimum values
+    float bounds[32];    // first 16: maximum values, second 16: minimum values
     float normedEMG[16]; // array of normalized EMG values
 
-    float deltas[16]; // first 8: maximum deltas, second 8: minimum deltas
+    float deltas[16];    // first 8: maximum deltas, second 8: minimum deltas
 
     float muscleAct[16]; // array of muscle activation (through low pass muscle activation dynamics)
     float prevAct[16];   // array of previous muscle activation values

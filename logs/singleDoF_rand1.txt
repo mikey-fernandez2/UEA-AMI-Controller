@@ -1,0 +1,3715 @@
+This log file was generated automatically starting at Sat Apr 24 11:29:20 2021
+
+Settings for this run:
+	usingEMG? true
+	usingPolhemus? false
+
+Robot information:
+	Num motors: 14
+	Num joints: 23
+	Num contact sensors: 19
+	Num IMUs: 5
+	Update rate: 050.00 Hz
+	Actuated joint limits: 
+		Joint associated to motor 0:
+			Min: 00.000 rads
+			Max: 02.090 rads
+		Joint associated to motor 1:
+			Min: -1.570 rads
+			Max: 01.570 rads
+		Joint associated to motor 2:
+			Min: -0.261 rads
+			Max: 00.785 rads
+		Joint associated to motor 3:
+			Min: -1.040 rads
+			Max: 01.040 rads
+		Joint associated to motor 4:
+			Min: 00.000 rads
+			Max: 02.070 rads
+		Joint associated to motor 5:
+			Min: 00.000 rads
+			Max: 01.030 rads
+		Joint associated to motor 6:
+			Min: 00.000 rads
+			Max: 01.030 rads
+		Joint associated to motor 7:
+			Min: -0.819 rads
+			Max: 01.280 rads
+		Joint associated to motor 8:
+			Min: -0.345 rads
+			Max: 00.000 rads
+		Joint associated to motor 9:
+			Min: -0.785 rads
+			Max: 01.570 rads
+		Joint associated to motor 10:
+			Min: 00.000 rads
+			Max: 01.720 rads
+		Joint associated to motor 11:
+			Min: 00.000 rads
+			Max: 01.380 rads
+		Joint associated to motor 12:
+			Min: -0.785 rads
+			Max: 01.570 rads
+		Joint associated to motor 13:
+			Min: 00.000 rads
+			Max: 01.730 rads
+
+Activation Time Constant: 0.050 sec
+Deactivation Time Constant: 0.100 sec
+
+EMG Bounds and Max/Min Differences:
+Electrode:        0,        1,        2,        3,        4,        5,        6,        7,        8,        9,       10,       11,       12,       13,       14,       15
+	Maxes: 0045.302, 0147.605, 0044.673, 0027.572, 0129.432, 0100.543, 0328.240, 0110.203, 0154.383, 0397.360, 0193.066, 0130.345, 0184.116, 0193.982, 0158.479, 0144.832
+	Mins:  0004.518, 0003.127, 0002.751, 0001.977, 0076.750, 0066.957, 0245.844, 0064.621, 0113.700, 0334.229, 0115.550, 0079.506, 0113.742, 0103.332, 0099.727, 0083.424
+Pair:            0- 1,   2- 3,   4- 5,   6- 7,   8- 9,  10-11,  12-13,  14-15
+	Max Delta: 00.823, 00.822, 00.818, 00.819, 00.821, 00.820, 00.820, 00.821
+	Min Delta: -0.535, -0.479, -0.486, -0.484, -0.487, -0.488, -0.489, -0.486
+
+--------------------------------------------------
+
+Simulation Time: 33.300000000 sec
+Running Time: 0.000002 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 000.00 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: 000.00 rads
+		Motor 8
+			ref_pos: 000.00 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: -00.00 rads
+		Motor 1
+			Position: 004.18 rads
+		Motor 2
+			Position: -00.35 rads
+		Motor 3
+			Position: 068.61 rads
+		Motor 4
+			Position: 003.78 rads
+		Motor 5
+			Position: 006.44 rads
+		Motor 6
+			Position: 001.08 rads
+		Motor 7
+			Position: 000.14 rads
+		Motor 8
+			Position: -04.16 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.22 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: -0.0000 rads
+		Joint 1
+			Position: 00.0232 rads
+		Joint 2
+			Position: -0.0019 rads
+		Joint 3
+			Position: 00.3811 rads
+		Joint 4
+			Position: 00.0107 rads
+		Joint 5
+			Position: 00.0183 rads
+		Joint 6
+			Position: 00.0031 rads
+		Joint 7
+			Position: 00.0004 rads
+		Joint 8
+			Position: -0.0118 rads
+		Joint 9
+			Position: 00.0066 rads
+		Joint 10
+			Position: 00.0014 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0061 rads
+		Joint 13
+			Position: 00.0011 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0063 rads
+		Joint 16
+			Position: 00.0068 rads
+		Joint 17
+			Position: 00.0014 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0052 rads
+		Joint 20
+			Position: 00.0065 rads
+		Joint 21
+			Position: 00.0015 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.781	 109.049	 143.894	 162.827
+		   2.279	  94.131	 450.009	 135.651
+		   3.223	 343.552	 216.793	 151.217
+		   2.113	  96.761	 102.709	 139.024
+	Normed EMG:
+		   0.028	   0.250	   0.196	   0.267
+		   0.000	   0.270	   0.291	   0.167
+		   0.011	   0.298	   0.524	   0.325
+		   0.005	   0.292	   0.178	   0.384
+	Muscle Activation:
+		   0.018	   0.154	   0.122	   0.163
+		   0.000	   0.165	   0.177	   0.105
+		   0.007	   0.181	   0.298	   0.195
+		   0.003	   0.177	   0.112	   0.227
+
+--------------------------------------------------
+
+Simulation Time: 33.940000000 sec
+Running Time: 0.023232 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 105.48 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -193.94 rads
+		Motor 8
+			ref_pos: -18.70 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 041.35 rads
+		Motor 1
+			Position: 004.16 rads
+		Motor 2
+			Position: 000.46 rads
+		Motor 3
+			Position: 068.58 rads
+		Motor 4
+			Position: 003.63 rads
+		Motor 5
+			Position: 004.44 rads
+		Motor 6
+			Position: 000.74 rads
+		Motor 7
+			Position: -157.38 rads
+		Motor 8
+			Position: -12.69 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.72 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 00.2297 rads
+		Joint 1
+			Position: 00.0231 rads
+		Joint 2
+			Position: 00.0026 rads
+		Joint 3
+			Position: 00.3810 rads
+		Joint 4
+			Position: 00.0103 rads
+		Joint 5
+			Position: 00.0126 rads
+		Joint 6
+			Position: 00.0021 rads
+		Joint 7
+			Position: -0.4471 rads
+		Joint 8
+			Position: -0.0361 rads
+		Joint 9
+			Position: 00.0065 rads
+		Joint 10
+			Position: 00.0013 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0060 rads
+		Joint 13
+			Position: 00.0011 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0077 rads
+		Joint 16
+			Position: 00.0067 rads
+		Joint 17
+			Position: 00.0014 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0061 rads
+		Joint 20
+			Position: 00.0064 rads
+		Joint 21
+			Position: 00.0014 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.792	  93.920	 149.683	 166.533
+		   1.986	  83.088	 462.733	 165.794
+		   3.003	 362.920	 213.839	 155.958
+		   2.377	  91.405	 111.280	 115.255
+	Normed EMG:
+		   0.028	   0.133	   0.233	   0.287
+		   0.000	   0.160	   0.323	   0.322
+		   0.006	   0.357	   0.509	   0.355
+		   0.014	   0.243	   0.244	   0.220
+	Muscle Activation:
+		   0.055	   0.226	   0.330	   0.452
+		   0.000	   0.279	   0.490	   0.482
+		   0.012	   0.532	   0.666	   0.501
+		   0.026	   0.338	   0.363	   0.388
+
+--------------------------------------------------
+
+Simulation Time: 34.620000000 sec
+Running Time: 0.045831 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 138.66 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -30.17 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 089.23 rads
+		Motor 1
+			Position: 004.08 rads
+		Motor 2
+			Position: -00.18 rads
+		Motor 3
+			Position: 068.49 rads
+		Motor 4
+			Position: 003.52 rads
+		Motor 5
+			Position: 005.44 rads
+		Motor 6
+			Position: 001.01 rads
+		Motor 7
+			Position: -285.67 rads
+		Motor 8
+			Position: -23.38 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.53 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 00.4957 rads
+		Joint 1
+			Position: 00.0226 rads
+		Joint 2
+			Position: -0.0010 rads
+		Joint 3
+			Position: 00.3805 rads
+		Joint 4
+			Position: 00.0100 rads
+		Joint 5
+			Position: 00.0154 rads
+		Joint 6
+			Position: 00.0029 rads
+		Joint 7
+			Position: -0.8116 rads
+		Joint 8
+			Position: -0.0664 rads
+		Joint 9
+			Position: 00.0065 rads
+		Joint 10
+			Position: 00.0014 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0059 rads
+		Joint 13
+			Position: 00.0011 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0072 rads
+		Joint 16
+			Position: 00.0067 rads
+		Joint 17
+			Position: 00.0014 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0054 rads
+		Joint 20
+			Position: 00.0064 rads
+		Joint 21
+			Position: 00.0014 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.781	 108.483	 129.486	 162.270
+		   2.291	  79.913	 463.492	 160.500
+		   3.183	 362.967	 192.203	 134.668
+		   2.338	 100.054	 128.814	 126.906
+	Normed EMG:
+		   0.028	   0.245	   0.102	   0.264
+		   0.000	   0.129	   0.325	   0.295
+		   0.010	   0.357	   0.397	   0.220
+		   0.013	   0.322	   0.378	   0.300
+	Muscle Activation:
+		   0.054	   0.398	   0.196	   0.427
+		   0.000	   0.233	   0.481	   0.462
+		   0.021	   0.519	   0.570	   0.379
+		   0.027	   0.464	   0.531	   0.488
+
+--------------------------------------------------
+
+Simulation Time: 35.340000000 sec
+Running Time: 0.067566 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 210.67 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -35.35 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 147.79 rads
+		Motor 1
+			Position: 004.04 rads
+		Motor 2
+			Position: 000.53 rads
+		Motor 3
+			Position: 068.16 rads
+		Motor 4
+			Position: 003.54 rads
+		Motor 5
+			Position: 006.30 rads
+		Motor 6
+			Position: 001.08 rads
+		Motor 7
+			Position: -288.14 rads
+		Motor 8
+			Position: -32.46 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.42 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 00.8211 rads
+		Joint 1
+			Position: 00.0224 rads
+		Joint 2
+			Position: 00.0029 rads
+		Joint 3
+			Position: 00.3787 rads
+		Joint 4
+			Position: 00.0101 rads
+		Joint 5
+			Position: 00.0179 rads
+		Joint 6
+			Position: 00.0031 rads
+		Joint 7
+			Position: -0.8186 rads
+		Joint 8
+			Position: -0.0922 rads
+		Joint 9
+			Position: 00.0065 rads
+		Joint 10
+			Position: 00.0014 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0060 rads
+		Joint 13
+			Position: 00.0012 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0069 rads
+		Joint 16
+			Position: 00.0068 rads
+		Joint 17
+			Position: 00.0015 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0051 rads
+		Joint 20
+			Position: 00.0063 rads
+		Joint 21
+			Position: 00.0014 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.579	 108.662	 143.677	 158.699
+		   2.241	  81.419	 467.870	 128.995
+		   3.004	 349.261	 204.646	 144.295
+		   2.099	 106.615	 112.979	 115.202
+	Normed EMG:
+		   0.023	   0.247	   0.194	   0.244
+		   0.000	   0.144	   0.336	   0.132
+		   0.006	   0.315	   0.461	   0.281
+		   0.004	   0.381	   0.257	   0.219
+	Muscle Activation:
+		   0.050	   0.431	   0.323	   0.396
+		   0.000	   0.261	   0.493	   0.241
+		   0.010	   0.483	   0.618	   0.424
+		   0.011	   0.536	   0.412	   0.338
+
+--------------------------------------------------
+
+Simulation Time: 36.040000000 sec
+Running Time: 0.089668 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 281.49 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -46.54 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 212.96 rads
+		Motor 1
+			Position: 004.06 rads
+		Motor 2
+			Position: 000.80 rads
+		Motor 3
+			Position: 067.36 rads
+		Motor 4
+			Position: 003.86 rads
+		Motor 5
+			Position: 006.74 rads
+		Motor 6
+			Position: 001.09 rads
+		Motor 7
+			Position: -288.15 rads
+		Motor 8
+			Position: -39.87 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.62 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 01.1831 rads
+		Joint 1
+			Position: 00.0226 rads
+		Joint 2
+			Position: 00.0045 rads
+		Joint 3
+			Position: 00.3742 rads
+		Joint 4
+			Position: 00.0110 rads
+		Joint 5
+			Position: 00.0191 rads
+		Joint 6
+			Position: 00.0031 rads
+		Joint 7
+			Position: -0.8186 rads
+		Joint 8
+			Position: -0.1133 rads
+		Joint 9
+			Position: 00.0064 rads
+		Joint 10
+			Position: 00.0014 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0061 rads
+		Joint 13
+			Position: 00.0013 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0075 rads
+		Joint 16
+			Position: 00.0069 rads
+		Joint 17
+			Position: 00.0015 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0057 rads
+		Joint 20
+			Position: 00.0063 rads
+		Joint 21
+			Position: 00.0015 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.605	  99.958	 151.788	 159.643
+		   2.383	  89.849	 478.501	 195.499
+		   2.695	 347.865	 198.054	 147.778
+		   2.327	  67.380	 113.868	 138.568
+	Normed EMG:
+		   0.024	   0.179	   0.247	   0.249
+		   0.000	   0.228	   0.363	   0.475
+		   0.000	   0.311	   0.427	   0.303
+		   0.013	   0.025	   0.264	   0.381
+	Muscle Activation:
+		   0.048	   0.392	   0.391	   0.416
+		   0.000	   0.360	   0.537	   0.633
+		   0.002	   0.477	   0.609	   0.474
+		   0.027	   0.038	   0.406	   0.558
+
+--------------------------------------------------
+
+Simulation Time: 36.740000000 sec
+Running Time: 0.111530 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 340.97 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -52.34 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 267.70 rads
+		Motor 1
+			Position: 004.14 rads
+		Motor 2
+			Position: 000.48 rads
+		Motor 3
+			Position: 066.37 rads
+		Motor 4
+			Position: 003.78 rads
+		Motor 5
+			Position: 006.15 rads
+		Motor 6
+			Position: 001.03 rads
+		Motor 7
+			Position: -288.16 rads
+		Motor 8
+			Position: -47.80 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.85 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 01.4872 rads
+		Joint 1
+			Position: 00.0230 rads
+		Joint 2
+			Position: 00.0026 rads
+		Joint 3
+			Position: 00.3687 rads
+		Joint 4
+			Position: 00.0107 rads
+		Joint 5
+			Position: 00.0175 rads
+		Joint 6
+			Position: 00.0029 rads
+		Joint 7
+			Position: -0.8186 rads
+		Joint 8
+			Position: -0.1358 rads
+		Joint 9
+			Position: 00.0066 rads
+		Joint 10
+			Position: 00.0015 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0062 rads
+		Joint 13
+			Position: 00.0013 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.0081 rads
+		Joint 16
+			Position: 00.0068 rads
+		Joint 17
+			Position: 00.0015 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0063 rads
+		Joint 20
+			Position: 00.0063 rads
+		Joint 21
+			Position: 00.0015 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.639	 122.379	 140.968	 172.465
+		   2.573	  93.480	 450.623	 167.070
+		   3.549	 358.365	 206.643	 154.738
+		   2.107	  99.229	 118.750	 122.887
+	Normed EMG:
+		   0.047	   0.353	   0.177	   0.319
+		   0.000	   0.264	   0.293	   0.329
+		   0.018	   0.343	   0.472	   0.347
+		   0.005	   0.314	   0.301	   0.272
+	Muscle Activation:
+		   0.083	   0.516	   0.328	   0.528
+		   0.000	   0.434	   0.433	   0.446
+		   0.033	   0.507	   0.635	   0.496
+		   0.016	   0.485	   0.466	   0.381
+
+--------------------------------------------------
+
+Simulation Time: 37.460000000 sec
+Running Time: 0.134306 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 352.76 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -61.79 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 310.89 rads
+		Motor 1
+			Position: 004.21 rads
+		Motor 2
+			Position: 000.36 rads
+		Motor 3
+			Position: 065.77 rads
+		Motor 4
+			Position: 003.82 rads
+		Motor 5
+			Position: 006.40 rads
+		Motor 6
+			Position: 001.05 rads
+		Motor 7
+			Position: -288.16 rads
+		Motor 8
+			Position: -56.11 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 002.79 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 01.7272 rads
+		Joint 1
+			Position: 00.0234 rads
+		Joint 2
+			Position: 00.0020 rads
+		Joint 3
+			Position: 00.3654 rads
+		Joint 4
+			Position: 00.0108 rads
+		Joint 5
+			Position: 00.0182 rads
+		Joint 6
+			Position: 00.0030 rads
+		Joint 7
+			Position: -0.8186 rads
+		Joint 8
+			Position: -0.1594 rads
+		Joint 9
+			Position: 00.0070 rads
+		Joint 10
+			Position: 00.0016 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0062 rads
+		Joint 13
+			Position: 00.0013 rads
+		Joint 14
+			Position: 00.0003 rads
+		Joint 15
+			Position: 00.0079 rads
+		Joint 16
+			Position: 00.0066 rads
+		Joint 17
+			Position: 00.0014 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0065 rads
+		Joint 20
+			Position: 00.0061 rads
+		Joint 21
+			Position: 00.0014 rads
+		Joint 22
+			Position: 00.0003 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.681	 111.865	 136.360	 155.840
+		   2.279	  79.021	 483.834	 153.798
+		   3.073	 350.813	 219.924	 162.032
+		   2.357	  97.497	 103.587	 140.684
+	Normed EMG:
+		   0.026	   0.271	   0.147	   0.229
+		   0.000	   0.120	   0.376	   0.260
+		   0.007	   0.320	   0.541	   0.393
+		   0.014	   0.298	   0.185	   0.395
+	Muscle Activation:
+		   0.047	   0.407	   0.246	   0.412
+		   0.000	   0.205	   0.531	   0.393
+		   0.016	   0.506	   0.700	   0.479
+		   0.025	   0.479	   0.313	   0.570
+
+--------------------------------------------------
+
+Simulation Time: 38.220000000 sec
+Running Time: 0.156536 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 000.00 rads
+		Motor 5
+			ref_pos: 000.00 rads
+		Motor 6
+			ref_pos: 000.00 rads
+		Motor 7
+			ref_pos: -288.29 rads
+		Motor 8
+			ref_pos: -68.49 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 000.00 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 353.83 rads
+		Motor 1
+			Position: 004.36 rads
+		Motor 2
+			Position: -00.75 rads
+		Motor 3
+			Position: 065.81 rads
+		Motor 4
+			Position: 004.06 rads
+		Motor 5
+			Position: 007.00 rads
+		Motor 6
+			Position: 001.08 rads
+		Motor 7
+			Position: -288.16 rads
+		Motor 8
+			Position: -63.50 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 003.10 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 01.9657 rads
+		Joint 1
+			Position: 00.0242 rads
+		Joint 2
+			Position: -0.0042 rads
+		Joint 3
+			Position: 00.3656 rads
+		Joint 4
+			Position: 00.0115 rads
+		Joint 5
+			Position: 00.0199 rads
+		Joint 6
+			Position: 00.0031 rads
+		Joint 7
+			Position: -0.8186 rads
+		Joint 8
+			Position: -0.1804 rads
+		Joint 9
+			Position: 00.0071 rads
+		Joint 10
+			Position: 00.0016 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0061 rads
+		Joint 13
+			Position: 00.0012 rads
+		Joint 14
+			Position: 00.0003 rads
+		Joint 15
+			Position: 00.0088 rads
+		Joint 16
+			Position: 00.0065 rads
+		Joint 17
+			Position: 00.0014 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.0073 rads
+		Joint 20
+			Position: 00.0058 rads
+		Joint 21
+			Position: 00.0013 rads
+		Joint 22
+			Position: 00.0003 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.014	 109.443	 127.391	 192.385
+		   2.291	  82.441	 475.190	 168.929
+		   3.379	 375.923	 201.163	 168.865
+		   2.205	  80.562	 124.317	 112.669
+	Normed EMG:
+		   0.033	   0.253	   0.089	   0.427
+		   0.000	   0.154	   0.355	   0.338
+		   0.014	   0.396	   0.443	   0.436
+		   0.008	   0.145	   0.344	   0.202
+	Muscle Activation:
+		   0.064	   0.398	   0.170	   0.605
+		   0.000	   0.279	   0.524	   0.496
+		   0.028	   0.560	   0.622	   0.617
+		   0.020	   0.274	   0.507	   0.351
+
+--------------------------------------------------
+
+Simulation Time: 38.900000000 sec
+Running Time: 0.178856 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 234.94 rads
+		Motor 5
+			ref_pos: 135.21 rads
+		Motor 6
+			ref_pos: 107.60 rads
+		Motor 7
+			ref_pos: -22.93 rads
+		Motor 8
+			ref_pos: -23.27 rads
+		Motor 9
+			ref_pos: 378.51 rads
+		Motor 10
+			ref_pos: 378.51 rads
+		Motor 11
+			ref_pos: 378.51 rads
+		Motor 12
+			ref_pos: 018.03 rads
+		Motor 13
+			ref_pos: 378.51 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 367.46 rads
+		Motor 1
+			Position: 007.20 rads
+		Motor 2
+			Position: -01.43 rads
+		Motor 3
+			Position: 115.86 rads
+		Motor 4
+			Position: 141.83 rads
+		Motor 5
+			Position: 088.89 rads
+		Motor 6
+			Position: 061.27 rads
+		Motor 7
+			Position: -117.34 rads
+		Motor 8
+			Position: -38.78 rads
+		Motor 9
+			Position: 333.89 rads
+		Motor 10
+			Position: 333.89 rads
+		Motor 11
+			Position: 333.89 rads
+		Motor 12
+			Position: 002.52 rads
+		Motor 13
+			Position: 333.89 rads
+	Joints:
+		Joint 0
+			Position: 02.0415 rads
+		Joint 1
+			Position: 00.0400 rads
+		Joint 2
+			Position: -0.0079 rads
+		Joint 3
+			Position: 00.6437 rads
+		Joint 4
+			Position: 00.4029 rads
+		Joint 5
+			Position: 00.2525 rads
+		Joint 6
+			Position: 00.1741 rads
+		Joint 7
+			Position: -0.3334 rads
+		Joint 8
+			Position: -0.1102 rads
+		Joint 9
+			Position: 00.3775 rads
+		Joint 10
+			Position: 00.3801 rads
+		Joint 11
+			Position: 00.4279 rads
+		Joint 12
+			Position: 00.3735 rads
+		Joint 13
+			Position: 00.3793 rads
+		Joint 14
+			Position: 00.4276 rads
+		Joint 15
+			Position: 00.0071 rads
+		Joint 16
+			Position: 00.2834 rads
+		Joint 17
+			Position: 00.3232 rads
+		Joint 18
+			Position: 00.4244 rads
+		Joint 19
+			Position: 00.0076 rads
+		Joint 20
+			Position: 00.3942 rads
+		Joint 21
+			Position: 00.4105 rads
+		Joint 22
+			Position: 00.4244 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		  10.346	 126.114	 138.778	 167.081
+		  20.990	  80.814	 461.682	 161.768
+		   6.027	 368.618	 202.288	 169.887
+		   4.198	 110.811	 134.893	 130.263
+	Normed EMG:
+		   0.129	   0.381	   0.162	   0.290
+		   0.121	   0.138	   0.321	   0.301
+		   0.073	   0.374	   0.449	   0.443
+		   0.081	   0.419	   0.425	   0.323
+	Muscle Activation:
+		   0.229	   0.555	   0.285	   0.455
+		   0.213	   0.263	   0.481	   0.471
+		   0.134	   0.542	   0.627	   0.612
+		   0.148	   0.572	   0.603	   0.484
+
+--------------------------------------------------
+
+Simulation Time: 39.580000000 sec
+Running Time: 0.201653 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 370.80 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 719.95 rads
+		Motor 5
+			ref_pos: 362.56 rads
+		Motor 6
+			ref_pos: 306.13 rads
+		Motor 7
+			ref_pos: 450.56 rads
+		Motor 8
+			ref_pos: -09.89 rads
+		Motor 9
+			ref_pos: 378.51 rads
+		Motor 10
+			ref_pos: 378.51 rads
+		Motor 11
+			ref_pos: 378.51 rads
+		Motor 12
+			ref_pos: 026.42 rads
+		Motor 13
+			ref_pos: 378.51 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 368.26 rads
+		Motor 1
+			Position: 010.40 rads
+		Motor 2
+			Position: -01.53 rads
+		Motor 3
+			Position: 146.77 rads
+		Motor 4
+			Position: 667.50 rads
+		Motor 5
+			Position: 350.50 rads
+		Motor 6
+			Position: 276.84 rads
+		Motor 7
+			Position: 403.93 rads
+		Motor 8
+			Position: -19.43 rads
+		Motor 9
+			Position: 378.51 rads
+		Motor 10
+			Position: 378.51 rads
+		Motor 11
+			Position: 378.51 rads
+		Motor 12
+			Position: 017.31 rads
+		Motor 13
+			Position: 378.51 rads
+	Joints:
+		Joint 0
+			Position: 02.0459 rads
+		Joint 1
+			Position: 00.0578 rads
+		Joint 2
+			Position: -0.0085 rads
+		Joint 3
+			Position: 00.8154 rads
+		Joint 4
+			Position: 01.8963 rads
+		Joint 5
+			Position: 00.9957 rads
+		Joint 6
+			Position: 00.7865 rads
+		Joint 7
+			Position: 01.1475 rads
+		Joint 8
+			Position: -0.0552 rads
+		Joint 9
+			Position: 00.7475 rads
+		Joint 10
+			Position: 00.6832 rads
+		Joint 11
+			Position: 00.6716 rads
+		Joint 12
+			Position: 00.7617 rads
+		Joint 13
+			Position: 00.6962 rads
+		Joint 14
+			Position: 00.6737 rads
+		Joint 15
+			Position: 00.0492 rads
+		Joint 16
+			Position: 00.6173 rads
+		Joint 17
+			Position: 00.7402 rads
+		Joint 18
+			Position: 00.6901 rads
+		Joint 19
+			Position: 00.0222 rads
+		Joint 20
+			Position: 00.7551 rads
+		Joint 21
+			Position: 00.6912 rads
+		Joint 22
+			Position: 00.6708 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.150	 109.417	 140.996	 158.859
+		   8.323	  79.905	 477.382	 157.627
+		   4.309	 348.264	 196.277	 151.659
+		   2.376	  90.864	 122.148	 131.156
+	Normed EMG:
+		   0.036	   0.252	   0.177	   0.245
+		   0.035	   0.129	   0.360	   0.280
+		   0.035	   0.312	   0.418	   0.328
+		   0.014	   0.238	   0.327	   0.330
+	Muscle Activation:
+		   0.069	   0.403	   0.307	   0.384
+		   0.067	   0.243	   0.535	   0.441
+		   0.067	   0.471	   0.590	   0.484
+		   0.027	   0.387	   0.495	   0.500
+
+--------------------------------------------------
+
+Simulation Time: 40.220000000 sec
+Running Time: 0.224008 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 728.64 rads
+		Motor 5
+			ref_pos: 361.92 rads
+		Motor 6
+			ref_pos: 288.29 rads
+		Motor 7
+			ref_pos: 438.22 rads
+		Motor 8
+			ref_pos: -14.87 rads
+		Motor 9
+			ref_pos: 378.51 rads
+		Motor 10
+			ref_pos: 378.51 rads
+		Motor 11
+			ref_pos: 378.51 rads
+		Motor 12
+			ref_pos: 025.92 rads
+		Motor 13
+			ref_pos: 378.51 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 372.69 rads
+		Motor 1
+			Position: 007.54 rads
+		Motor 2
+			Position: -00.59 rads
+		Motor 3
+			Position: 132.47 rads
+		Motor 4
+			Position: 715.97 rads
+		Motor 5
+			Position: 350.20 rads
+		Motor 6
+			Position: 276.58 rads
+		Motor 7
+			Position: 414.35 rads
+		Motor 8
+			Position: -18.80 rads
+		Motor 9
+			Position: 378.51 rads
+		Motor 10
+			Position: 378.51 rads
+		Motor 11
+			Position: 378.51 rads
+		Motor 12
+			Position: 021.99 rads
+		Motor 13
+			Position: 378.51 rads
+	Joints:
+		Joint 0
+			Position: 02.0705 rads
+		Joint 1
+			Position: 00.0419 rads
+		Joint 2
+			Position: -0.0033 rads
+		Joint 3
+			Position: 00.7360 rads
+		Joint 4
+			Position: 02.0340 rads
+		Joint 5
+			Position: 00.9949 rads
+		Joint 6
+			Position: 00.7857 rads
+		Joint 7
+			Position: 01.1771 rads
+		Joint 8
+			Position: -0.0534 rads
+		Joint 9
+			Position: 00.7767 rads
+		Joint 10
+			Position: 00.6858 rads
+		Joint 11
+			Position: 00.6710 rads
+		Joint 12
+			Position: 00.7846 rads
+		Joint 13
+			Position: 00.6884 rads
+		Joint 14
+			Position: 00.6694 rads
+		Joint 15
+			Position: 00.0625 rads
+		Joint 16
+			Position: 00.7552 rads
+		Joint 17
+			Position: 00.7152 rads
+		Joint 18
+			Position: 00.6742 rads
+		Joint 19
+			Position: 00.0472 rads
+		Joint 20
+			Position: 00.7833 rads
+		Joint 21
+			Position: 00.6866 rads
+		Joint 22
+			Position: 00.6707 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   7.544	 130.106	 146.495	 194.521
+		  10.023	  93.071	 472.527	 166.390
+		   4.176	 367.625	 202.588	 168.739
+		   3.009	  90.673	 117.434	 118.737
+	Normed EMG:
+		   0.067	   0.412	   0.212	   0.439
+		   0.047	   0.260	   0.348	   0.325
+		   0.032	   0.371	   0.451	   0.435
+		   0.037	   0.236	   0.291	   0.244
+	Muscle Activation:
+		   0.127	   0.581	   0.377	   0.611
+		   0.091	   0.386	   0.515	   0.491
+		   0.061	   0.539	   0.624	   0.606
+		   0.074	   0.375	   0.445	   0.401
+
+--------------------------------------------------
+
+Simulation Time: 40.920000000 sec
+Running Time: 0.246170 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 728.64 rads
+		Motor 5
+			ref_pos: 359.69 rads
+		Motor 6
+			ref_pos: 328.92 rads
+		Motor 7
+			ref_pos: 450.56 rads
+		Motor 8
+			ref_pos: -10.24 rads
+		Motor 9
+			ref_pos: 378.51 rads
+		Motor 10
+			ref_pos: 378.51 rads
+		Motor 11
+			ref_pos: 378.51 rads
+		Motor 12
+			ref_pos: 040.79 rads
+		Motor 13
+			ref_pos: 378.51 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 371.38 rads
+		Motor 1
+			Position: 005.57 rads
+		Motor 2
+			Position: -00.49 rads
+		Motor 3
+			Position: 114.42 rads
+		Motor 4
+			Position: 723.34 rads
+		Motor 5
+			Position: 334.00 rads
+		Motor 6
+			Position: 302.81 rads
+		Motor 7
+			Position: 418.32 rads
+		Motor 8
+			Position: -18.92 rads
+		Motor 9
+			Position: 378.51 rads
+		Motor 10
+			Position: 378.51 rads
+		Motor 11
+			Position: 378.51 rads
+		Motor 12
+			Position: 032.21 rads
+		Motor 13
+			Position: 378.51 rads
+	Joints:
+		Joint 0
+			Position: 02.0632 rads
+		Joint 1
+			Position: 00.0309 rads
+		Joint 2
+			Position: -0.0027 rads
+		Joint 3
+			Position: 00.6357 rads
+		Joint 4
+			Position: 02.0549 rads
+		Joint 5
+			Position: 00.9489 rads
+		Joint 6
+			Position: 00.8603 rads
+		Joint 7
+			Position: 01.1884 rads
+		Joint 8
+			Position: -0.0538 rads
+		Joint 9
+			Position: 00.7887 rads
+		Joint 10
+			Position: 00.6875 rads
+		Joint 11
+			Position: 00.6715 rads
+		Joint 12
+			Position: 00.7971 rads
+		Joint 13
+			Position: 00.6868 rads
+		Joint 14
+			Position: 00.6696 rads
+		Joint 15
+			Position: 00.0915 rads
+		Joint 16
+			Position: 00.7907 rads
+		Joint 17
+			Position: 00.6907 rads
+		Joint 18
+			Position: 00.6718 rads
+		Joint 19
+			Position: 00.0882 rads
+		Joint 20
+			Position: 00.7939 rads
+		Joint 21
+			Position: 00.6870 rads
+		Joint 22
+			Position: 00.6718 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   7.335	 123.426	 142.696	 157.227
+		  11.705	  91.181	 453.355	 161.039
+		   3.981	 346.145	 205.027	 145.310
+		   3.125	  99.617	 116.118	 127.336
+	Normed EMG:
+		   0.062	   0.361	   0.188	   0.236
+		   0.058	   0.241	   0.300	   0.297
+		   0.028	   0.306	   0.463	   0.288
+		   0.042	   0.318	   0.281	   0.303
+	Muscle Activation:
+		   0.114	   0.567	   0.305	   0.392
+		   0.108	   0.379	   0.425	   0.473
+		   0.056	   0.472	   0.642	   0.412
+		   0.075	   0.463	   0.441	   0.463
+
+--------------------------------------------------
+
+Simulation Time: 41.560000000 sec
+Running Time: 0.268451 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 656.76 rads
+		Motor 5
+			ref_pos: 289.05 rads
+		Motor 6
+			ref_pos: 284.35 rads
+		Motor 7
+			ref_pos: 343.51 rads
+		Motor 8
+			ref_pos: -28.10 rads
+		Motor 9
+			ref_pos: 280.79 rads
+		Motor 10
+			ref_pos: 280.79 rads
+		Motor 11
+			ref_pos: 280.79 rads
+		Motor 12
+			ref_pos: 032.63 rads
+		Motor 13
+			ref_pos: 280.79 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 374.55 rads
+		Motor 1
+			Position: 004.28 rads
+		Motor 2
+			Position: -00.16 rads
+		Motor 3
+			Position: 095.76 rads
+		Motor 4
+			Position: 695.00 rads
+		Motor 5
+			Position: 308.08 rads
+		Motor 6
+			Position: 303.37 rads
+		Motor 7
+			Position: 382.28 rads
+		Motor 8
+			Position: -21.72 rads
+		Motor 9
+			Position: 300.65 rads
+		Motor 10
+			Position: 300.65 rads
+		Motor 11
+			Position: 300.65 rads
+		Motor 12
+			Position: 039.00 rads
+		Motor 13
+			Position: 300.65 rads
+	Joints:
+		Joint 0
+			Position: 02.0808 rads
+		Joint 1
+			Position: 00.0238 rads
+		Joint 2
+			Position: -0.0009 rads
+		Joint 3
+			Position: 00.5320 rads
+		Joint 4
+			Position: 01.9744 rads
+		Joint 5
+			Position: 00.8752 rads
+		Joint 6
+			Position: 00.8619 rads
+		Joint 7
+			Position: 01.0860 rads
+		Joint 8
+			Position: -0.0617 rads
+		Joint 9
+			Position: 00.7327 rads
+		Joint 10
+			Position: 00.6235 rads
+		Joint 11
+			Position: 00.5930 rads
+		Joint 12
+			Position: 00.7402 rads
+		Joint 13
+			Position: 00.6186 rads
+		Joint 14
+			Position: 00.5908 rads
+		Joint 15
+			Position: 00.1108 rads
+		Joint 16
+			Position: 00.7337 rads
+		Joint 17
+			Position: 00.6234 rads
+		Joint 18
+			Position: 00.5930 rads
+		Joint 19
+			Position: 00.1090 rads
+		Joint 20
+			Position: 00.7216 rads
+		Joint 21
+			Position: 00.6110 rads
+		Joint 22
+			Position: 00.5932 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.814	 122.700	 145.453	 183.944
+		   2.478	  79.486	 463.029	 181.996
+		   3.394	 338.536	 198.525	 172.819
+		   2.392	 108.252	 103.881	 115.394
+	Normed EMG:
+		   0.029	   0.355	   0.206	   0.381
+		   0.000	   0.125	   0.324	   0.406
+		   0.014	   0.282	   0.430	   0.461
+		   0.015	   0.396	   0.187	   0.221
+	Muscle Activation:
+		   0.056	   0.528	   0.328	   0.554
+		   0.000	   0.222	   0.484	   0.576
+		   0.028	   0.440	   0.599	   0.630
+		   0.027	   0.568	   0.301	   0.374
+
+--------------------------------------------------
+
+Simulation Time: 42.260000000 sec
+Running Time: 0.290753 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 540.38 rads
+		Motor 5
+			ref_pos: 136.92 rads
+		Motor 6
+			ref_pos: 213.43 rads
+		Motor 7
+			ref_pos: 181.42 rads
+		Motor 8
+			ref_pos: -60.99 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 054.88 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.03 rads
+		Motor 1
+			Position: 003.26 rads
+		Motor 2
+			Position: 000.05 rads
+		Motor 3
+			Position: 025.73 rads
+		Motor 4
+			Position: 571.52 rads
+		Motor 5
+			Position: 150.16 rads
+		Motor 6
+			Position: 228.69 rads
+		Motor 7
+			Position: 211.63 rads
+		Motor 8
+			Position: -55.96 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 061.42 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0891 rads
+		Joint 1
+			Position: 00.0181 rads
+		Joint 2
+			Position: 00.0003 rads
+		Joint 3
+			Position: 00.1430 rads
+		Joint 4
+			Position: 01.6236 rads
+		Joint 5
+			Position: 00.4266 rads
+		Joint 6
+			Position: 00.6497 rads
+		Joint 7
+			Position: 00.6012 rads
+		Joint 8
+			Position: -0.1590 rads
+		Joint 9
+			Position: 00.1666 rads
+		Joint 10
+			Position: 00.0533 rads
+		Joint 11
+			Position: 00.0247 rads
+		Joint 12
+			Position: 00.1698 rads
+		Joint 13
+			Position: 00.0532 rads
+		Joint 14
+			Position: 00.0249 rads
+		Joint 15
+			Position: 00.1745 rads
+		Joint 16
+			Position: 00.1818 rads
+		Joint 17
+			Position: 00.0539 rads
+		Joint 18
+			Position: 00.0249 rads
+		Joint 19
+			Position: 00.1573 rads
+		Joint 20
+			Position: 00.1258 rads
+		Joint 21
+			Position: 00.0264 rads
+		Joint 22
+			Position: 00.0261 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.188	 129.889	 161.579	 183.627
+		   1.915	  93.926	 480.488	 158.886
+		   2.966	 343.557	 215.349	 145.015
+		   2.297	  91.027	 116.034	 118.912
+	Normed EMG:
+		   0.037	   0.411	   0.310	   0.380
+		   0.000	   0.268	   0.368	   0.286
+		   0.005	   0.298	   0.517	   0.286
+		   0.012	   0.240	   0.280	   0.245
+	Muscle Activation:
+		   0.071	   0.581	   0.467	   0.550
+		   0.000	   0.424	   0.539	   0.445
+		   0.011	   0.459	   0.681	   0.443
+		   0.024	   0.386	   0.440	   0.394
+
+--------------------------------------------------
+
+Simulation Time: 42.940000000 sec
+Running Time: 0.312819 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 525.74 rads
+		Motor 5
+			ref_pos: 096.28 rads
+		Motor 6
+			ref_pos: 199.70 rads
+		Motor 7
+			ref_pos: 150.74 rads
+		Motor 8
+			ref_pos: -69.09 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 069.55 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.20 rads
+		Motor 1
+			Position: 002.43 rads
+		Motor 2
+			Position: -00.15 rads
+		Motor 3
+			Position: 020.33 rads
+		Motor 4
+			Position: 532.22 rads
+		Motor 5
+			Position: 099.51 rads
+		Motor 6
+			Position: 202.93 rads
+		Motor 7
+			Position: 157.31 rads
+		Motor 8
+			Position: -68.01 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 070.63 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: 00.0135 rads
+		Joint 2
+			Position: -0.0008 rads
+		Joint 3
+			Position: 00.1130 rads
+		Joint 4
+			Position: 01.5120 rads
+		Joint 5
+			Position: 00.2827 rads
+		Joint 6
+			Position: 00.5765 rads
+		Joint 7
+			Position: 00.4469 rads
+		Joint 8
+			Position: -0.1932 rads
+		Joint 9
+			Position: 00.0256 rads
+		Joint 10
+			Position: 00.0000 rads
+		Joint 11
+			Position: 00.0003 rads
+		Joint 12
+			Position: 00.0264 rads
+		Joint 13
+			Position: -0.0000 rads
+		Joint 14
+			Position: 00.0003 rads
+		Joint 15
+			Position: 00.2007 rads
+		Joint 16
+			Position: 00.0269 rads
+		Joint 17
+			Position: 00.0000 rads
+		Joint 18
+			Position: 00.0003 rads
+		Joint 19
+			Position: 00.1890 rads
+		Joint 20
+			Position: 00.0197 rads
+		Joint 21
+			Position: 00.0001 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   5.705	 123.773	 148.675	 167.855
+		   2.091	  79.324	 467.490	 162.141
+		   3.164	 349.330	 205.951	 152.227
+		   2.040	  92.715	 122.916	 139.180
+	Normed EMG:
+		   0.026	   0.363	   0.227	   0.294
+		   0.000	   0.123	   0.335	   0.303
+		   0.009	   0.315	   0.468	   0.331
+		   0.002	   0.255	   0.333	   0.385
+	Muscle Activation:
+		   0.052	   0.529	   0.393	   0.470
+		   0.000	   0.232	   0.504	   0.466
+		   0.018	   0.485	   0.648	   0.486
+		   0.004	   0.403	   0.467	   0.556
+
+--------------------------------------------------
+
+Simulation Time: 43.660000000 sec
+Running Time: 0.335043 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 470.43 rads
+		Motor 5
+			ref_pos: 067.22 rads
+		Motor 6
+			ref_pos: 175.65 rads
+		Motor 7
+			ref_pos: 078.98 rads
+		Motor 8
+			ref_pos: -74.88 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 072.70 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.21 rads
+		Motor 1
+			Position: 001.58 rads
+		Motor 2
+			Position: -00.03 rads
+		Motor 3
+			Position: 030.01 rads
+		Motor 4
+			Position: 477.42 rads
+		Motor 5
+			Position: 070.70 rads
+		Motor 6
+			Position: 179.12 rads
+		Motor 7
+			Position: 086.06 rads
+		Motor 8
+			Position: -73.72 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 073.86 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: 00.0088 rads
+		Joint 2
+			Position: -0.0002 rads
+		Joint 3
+			Position: 00.1667 rads
+		Joint 4
+			Position: 01.3563 rads
+		Joint 5
+			Position: 00.2009 rads
+		Joint 6
+			Position: 00.5089 rads
+		Joint 7
+			Position: 00.2445 rads
+		Joint 8
+			Position: -0.2094 rads
+		Joint 9
+			Position: 00.0120 rads
+		Joint 10
+			Position: 00.0020 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0112 rads
+		Joint 13
+			Position: 00.0016 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2098 rads
+		Joint 16
+			Position: 00.0100 rads
+		Joint 17
+			Position: 00.0012 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.2038 rads
+		Joint 20
+			Position: 00.0078 rads
+		Joint 21
+			Position: 00.0011 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.138	 115.967	 145.480	 164.977
+		   2.147	  74.594	 459.152	 170.544
+		   3.328	 340.838	 236.854	 144.533
+		   2.077	  90.732	 106.756	 137.252
+	Normed EMG:
+		   0.036	   0.303	   0.206	   0.278
+		   0.000	   0.076	   0.314	   0.346
+		   0.013	   0.289	   0.628	   0.283
+		   0.004	   0.237	   0.209	   0.372
+	Muscle Activation:
+		   0.072	   0.464	   0.340	   0.432
+		   0.000	   0.154	   0.473	   0.523
+		   0.025	   0.426	   0.772	   0.473
+		   0.006	   0.382	   0.308	   0.541
+
+--------------------------------------------------
+
+Simulation Time: 44.340000000 sec
+Running Time: 0.357628 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 369.75 rads
+		Motor 5
+			ref_pos: 030.31 rads
+		Motor 6
+			ref_pos: 137.36 rads
+		Motor 7
+			ref_pos: -48.99 rads
+		Motor 8
+			ref_pos: -81.39 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 073.53 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.21 rads
+		Motor 1
+			Position: 000.18 rads
+		Motor 2
+			Position: 000.26 rads
+		Motor 3
+			Position: 037.46 rads
+		Motor 4
+			Position: 376.21 rads
+		Motor 5
+			Position: 033.53 rads
+		Motor 6
+			Position: 140.58 rads
+		Motor 7
+			Position: -42.43 rads
+		Motor 8
+			Position: -80.31 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 074.61 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: 00.0010 rads
+		Joint 2
+			Position: 00.0014 rads
+		Joint 3
+			Position: 00.2081 rads
+		Joint 4
+			Position: 01.0688 rads
+		Joint 5
+			Position: 00.0953 rads
+		Joint 6
+			Position: 00.3994 rads
+		Joint 7
+			Position: -0.1205 rads
+		Joint 8
+			Position: -0.2282 rads
+		Joint 9
+			Position: 00.0116 rads
+		Joint 10
+			Position: 00.0029 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0101 rads
+		Joint 13
+			Position: 00.0024 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2120 rads
+		Joint 16
+			Position: 00.0084 rads
+		Joint 17
+			Position: 00.0019 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.2089 rads
+		Joint 20
+			Position: 00.0061 rads
+		Joint 21
+			Position: 00.0014 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.155	 111.331	 139.105	 187.346
+		   2.415	  64.665	 475.473	 176.284
+		   3.361	 366.726	 195.117	 162.766
+		   1.972	  83.296	 104.696	 132.441
+	Normed EMG:
+		   0.036	   0.267	   0.165	   0.400
+		   0.000	   0.000	   0.355	   0.376
+		   0.014	   0.368	   0.412	   0.398
+		   0.000	   0.169	   0.193	   0.338
+	Muscle Activation:
+		   0.071	   0.448	   0.293	   0.565
+		   0.000	   0.005	   0.536	   0.567
+		   0.032	   0.509	   0.604	   0.563
+		   0.003	   0.286	   0.392	   0.453
+
+--------------------------------------------------
+
+Simulation Time: 45.160000000 sec
+Running Time: 0.379435 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 317.83 rads
+		Motor 5
+			ref_pos: 020.46 rads
+		Motor 6
+			ref_pos: 119.92 rads
+		Motor 7
+			ref_pos: -125.62 rads
+		Motor 8
+			ref_pos: -84.66 rads
+		Motor 9
+			ref_pos: 008.67 rads
+		Motor 10
+			ref_pos: 008.67 rads
+		Motor 11
+			ref_pos: 008.67 rads
+		Motor 12
+			ref_pos: 077.51 rads
+		Motor 13
+			ref_pos: 008.67 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.22 rads
+		Motor 1
+			Position: -00.15 rads
+		Motor 2
+			Position: 000.16 rads
+		Motor 3
+			Position: 044.63 rads
+		Motor 4
+			Position: 302.50 rads
+		Motor 5
+			Position: 012.84 rads
+		Motor 6
+			Position: 112.30 rads
+		Motor 7
+			Position: -141.16 rads
+		Motor 8
+			Position: -87.21 rads
+		Motor 9
+			Position: 000.71 rads
+		Motor 10
+			Position: 000.71 rads
+		Motor 11
+			Position: 000.71 rads
+		Motor 12
+			Position: 074.95 rads
+		Motor 13
+			Position: 000.71 rads
+	Joints:
+		Joint 0
+			Position: 02.0901 rads
+		Joint 1
+			Position: -0.0008 rads
+		Joint 2
+			Position: 00.0009 rads
+		Joint 3
+			Position: 00.2480 rads
+		Joint 4
+			Position: 00.8594 rads
+		Joint 5
+			Position: 00.0365 rads
+		Joint 6
+			Position: 00.3190 rads
+		Joint 7
+			Position: -0.4010 rads
+		Joint 8
+			Position: -0.2478 rads
+		Joint 9
+			Position: 00.0107 rads
+		Joint 10
+			Position: 00.0025 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0093 rads
+		Joint 13
+			Position: 00.0021 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2129 rads
+		Joint 16
+			Position: 00.0081 rads
+		Joint 17
+			Position: 00.0019 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.2116 rads
+		Joint 20
+			Position: 00.0063 rads
+		Joint 21
+			Position: 00.0017 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.158	 116.013	 156.502	 183.133
+		   5.073	  90.443	 452.732	 174.709
+		   3.679	 366.845	 214.217	 152.515
+		   2.095	 102.630	 100.427	 123.314
+	Normed EMG:
+		   0.036	   0.303	   0.277	   0.377
+		   0.013	   0.234	   0.298	   0.368
+		   0.021	   0.369	   0.511	   0.333
+		   0.004	   0.345	   0.161	   0.275
+	Muscle Activation:
+		   0.071	   0.447	   0.447	   0.548
+		   0.016	   0.374	   0.469	   0.541
+		   0.036	   0.517	   0.679	   0.476
+		   0.003	   0.529	   0.305	   0.397
+
+--------------------------------------------------
+
+Simulation Time: 45.880000000 sec
+Running Time: 0.401799 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 315.55 rads
+		Motor 5
+			ref_pos: 041.94 rads
+		Motor 6
+			ref_pos: 120.47 rads
+		Motor 7
+			ref_pos: -129.14 rads
+		Motor 8
+			ref_pos: -84.38 rads
+		Motor 9
+			ref_pos: 038.57 rads
+		Motor 10
+			ref_pos: 038.57 rads
+		Motor 11
+			ref_pos: 038.57 rads
+		Motor 12
+			ref_pos: 068.92 rads
+		Motor 13
+			ref_pos: 038.57 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.15 rads
+		Motor 1
+			Position: 001.35 rads
+		Motor 2
+			Position: 000.05 rads
+		Motor 3
+			Position: 062.04 rads
+		Motor 4
+			Position: 325.21 rads
+		Motor 5
+			Position: 046.71 rads
+		Motor 6
+			Position: 125.32 rads
+		Motor 7
+			Position: -120.04 rads
+		Motor 8
+			Position: -82.81 rads
+		Motor 9
+			Position: 033.54 rads
+		Motor 10
+			Position: 033.54 rads
+		Motor 11
+			Position: 033.54 rads
+		Motor 12
+			Position: 070.95 rads
+		Motor 13
+			Position: 033.54 rads
+	Joints:
+		Joint 0
+			Position: 02.0897 rads
+		Joint 1
+			Position: 00.0075 rads
+		Joint 2
+			Position: 00.0003 rads
+		Joint 3
+			Position: 00.3446 rads
+		Joint 4
+			Position: 00.9239 rads
+		Joint 5
+			Position: 00.1327 rads
+		Joint 6
+			Position: 00.3560 rads
+		Joint 7
+			Position: -0.3410 rads
+		Joint 8
+			Position: -0.2352 rads
+		Joint 9
+			Position: 00.1259 rads
+		Joint 10
+			Position: 00.0351 rads
+		Joint 11
+			Position: 00.0150 rads
+		Joint 12
+			Position: 00.1247 rads
+		Joint 13
+			Position: 00.0349 rads
+		Joint 14
+			Position: 00.0150 rads
+		Joint 15
+			Position: 00.2015 rads
+		Joint 16
+			Position: 00.1246 rads
+		Joint 17
+			Position: 00.0347 rads
+		Joint 18
+			Position: 00.0150 rads
+		Joint 19
+			Position: 00.2033 rads
+		Joint 20
+			Position: 00.1157 rads
+		Joint 21
+			Position: 00.0284 rads
+		Joint 22
+			Position: 00.0149 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.337	 108.970	 136.661	 170.156
+		   6.317	  91.934	 458.766	 158.374
+		   3.445	 358.051	 231.724	 188.374
+		   2.672	  81.424	 136.291	 114.632
+	Normed EMG:
+		   0.040	   0.249	   0.149	   0.306
+		   0.022	   0.248	   0.313	   0.284
+		   0.016	   0.342	   0.602	   0.559
+		   0.025	   0.152	   0.436	   0.215
+	Muscle Activation:
+		   0.077	   0.401	   0.240	   0.464
+		   0.045	   0.385	   0.478	   0.421
+		   0.031	   0.501	   0.747	   0.727
+		   0.052	   0.266	   0.576	   0.393
+
+--------------------------------------------------
+
+Simulation Time: 46.600000000 sec
+Running Time: 0.424085 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 396.64 rads
+		Motor 5
+			ref_pos: 105.39 rads
+		Motor 6
+			ref_pos: 159.24 rads
+		Motor 7
+			ref_pos: -40.57 rads
+		Motor 8
+			ref_pos: -73.60 rads
+		Motor 9
+			ref_pos: 179.48 rads
+		Motor 10
+			ref_pos: 179.48 rads
+		Motor 11
+			ref_pos: 179.48 rads
+		Motor 12
+			ref_pos: 069.04 rads
+		Motor 13
+			ref_pos: 179.48 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 375.87 rads
+		Motor 1
+			Position: 002.83 rads
+		Motor 2
+			Position: -00.45 rads
+		Motor 3
+			Position: 078.43 rads
+		Motor 4
+			Position: 382.51 rads
+		Motor 5
+			Position: 098.36 rads
+		Motor 6
+			Position: 152.21 rads
+		Motor 7
+			Position: -54.90 rads
+		Motor 8
+			Position: -75.95 rads
+		Motor 9
+			Position: 172.14 rads
+		Motor 10
+			Position: 172.14 rads
+		Motor 11
+			Position: 172.14 rads
+		Motor 12
+			Position: 066.68 rads
+		Motor 13
+			Position: 172.14 rads
+	Joints:
+		Joint 0
+			Position: 02.0882 rads
+		Joint 1
+			Position: 00.0157 rads
+		Joint 2
+			Position: -0.0025 rads
+		Joint 3
+			Position: 00.4357 rads
+		Joint 4
+			Position: 01.0867 rads
+		Joint 5
+			Position: 00.2794 rads
+		Joint 6
+			Position: 00.4324 rads
+		Joint 7
+			Position: -0.1560 rads
+		Joint 8
+			Position: -0.2158 rads
+		Joint 9
+			Position: 00.2161 rads
+		Joint 10
+			Position: 00.1603 rads
+		Joint 11
+			Position: 00.1972 rads
+		Joint 12
+			Position: 00.2128 rads
+		Joint 13
+			Position: 00.1590 rads
+		Joint 14
+			Position: 00.1970 rads
+		Joint 15
+			Position: 00.1894 rads
+		Joint 16
+			Position: 00.2168 rads
+		Joint 17
+			Position: 00.1609 rads
+		Joint 18
+			Position: 00.1969 rads
+		Joint 19
+			Position: 00.1944 rads
+		Joint 20
+			Position: 00.2517 rads
+		Joint 21
+			Position: 00.1893 rads
+		Joint 22
+			Position: 00.1967 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   7.340	 130.808	 160.679	 165.378
+		   9.928	  84.345	 477.176	 152.986
+		   4.214	 366.828	 218.656	 164.223
+		   3.156	  82.683	 137.137	 135.361
+	Normed EMG:
+		   0.062	   0.418	   0.304	   0.280
+		   0.046	   0.173	   0.360	   0.256
+		   0.033	   0.369	   0.534	   0.407
+		   0.043	   0.164	   0.442	   0.359
+	Muscle Activation:
+		   0.114	   0.585	   0.468	   0.428
+		   0.089	   0.300	   0.529	   0.424
+		   0.065	   0.534	   0.706	   0.561
+		   0.080	   0.286	   0.608	   0.524
+
+--------------------------------------------------
+
+Simulation Time: 47.380000000 sec
+Running Time: 0.446318 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 728.64 rads
+		Motor 5
+			ref_pos: 362.56 rads
+		Motor 6
+			ref_pos: 328.61 rads
+		Motor 7
+			ref_pos: 388.87 rads
+		Motor 8
+			ref_pos: -24.90 rads
+		Motor 9
+			ref_pos: 378.51 rads
+		Motor 10
+			ref_pos: 378.51 rads
+		Motor 11
+			ref_pos: 378.51 rads
+		Motor 12
+			ref_pos: 060.56 rads
+		Motor 13
+			ref_pos: 378.51 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 375.12 rads
+		Motor 1
+			Position: 004.31 rads
+		Motor 2
+			Position: -00.58 rads
+		Motor 3
+			Position: 125.64 rads
+		Motor 4
+			Position: 629.06 rads
+		Motor 5
+			Position: 313.76 rads
+		Motor 6
+			Position: 276.49 rads
+		Motor 7
+			Position: 286.55 rads
+		Motor 8
+			Position: -43.09 rads
+		Motor 9
+			Position: 378.51 rads
+		Motor 10
+			Position: 378.51 rads
+		Motor 11
+			Position: 378.51 rads
+		Motor 12
+			Position: 042.04 rads
+		Motor 13
+			Position: 378.51 rads
+	Joints:
+		Joint 0
+			Position: 02.0840 rads
+		Joint 1
+			Position: 00.0240 rads
+		Joint 2
+			Position: -0.0032 rads
+		Joint 3
+			Position: 00.6980 rads
+		Joint 4
+			Position: 01.7871 rads
+		Joint 5
+			Position: 00.8914 rads
+		Joint 6
+			Position: 00.7855 rads
+		Joint 7
+			Position: 00.8141 rads
+		Joint 8
+			Position: -0.1224 rads
+		Joint 9
+			Position: 00.7533 rads
+		Joint 10
+			Position: 00.6806 rads
+		Joint 11
+			Position: 00.6699 rads
+		Joint 12
+			Position: 00.7522 rads
+		Joint 13
+			Position: 00.6810 rads
+		Joint 14
+			Position: 00.6699 rads
+		Joint 15
+			Position: 00.1194 rads
+		Joint 16
+			Position: 00.7357 rads
+		Joint 17
+			Position: 00.6820 rads
+		Joint 18
+			Position: 00.6702 rads
+		Joint 19
+			Position: 00.1384 rads
+		Joint 20
+			Position: 00.7657 rads
+		Joint 21
+			Position: 00.6888 rads
+		Joint 22
+			Position: 00.6696 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.480	 113.870	 140.944	 173.775
+		  12.527	  83.226	 461.096	 183.497
+		   3.950	 362.762	 199.093	 144.834
+		   2.343	 103.314	 111.164	 121.181
+	Normed EMG:
+		   0.043	   0.287	   0.176	   0.326
+		   0.064	   0.162	   0.319	   0.413
+		   0.027	   0.356	   0.433	   0.285
+		   0.013	   0.351	   0.243	   0.261
+	Muscle Activation:
+		   0.083	   0.424	   0.298	   0.490
+		   0.113	   0.290	   0.496	   0.580
+		   0.051	   0.528	   0.600	   0.440
+		   0.031	   0.513	   0.390	   0.422
+
+--------------------------------------------------
+
+Simulation Time: 48.060000000 sec
+Running Time: 0.468239 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 657.70 rads
+		Motor 5
+			ref_pos: 303.55 rads
+		Motor 6
+			ref_pos: 274.49 rads
+		Motor 7
+			ref_pos: 348.67 rads
+		Motor 8
+			ref_pos: -44.13 rads
+		Motor 9
+			ref_pos: 286.06 rads
+		Motor 10
+			ref_pos: 286.06 rads
+		Motor 11
+			ref_pos: 286.06 rads
+		Motor 12
+			ref_pos: 038.11 rads
+		Motor 13
+			ref_pos: 286.06 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 375.73 rads
+		Motor 1
+			Position: 003.53 rads
+		Motor 2
+			Position: -00.14 rads
+		Motor 3
+			Position: 108.10 rads
+		Motor 4
+			Position: 687.93 rads
+		Motor 5
+			Position: 318.59 rads
+		Motor 6
+			Position: 289.54 rads
+		Motor 7
+			Position: 379.32 rads
+		Motor 8
+			Position: -39.09 rads
+		Motor 9
+			Position: 301.77 rads
+		Motor 10
+			Position: 301.77 rads
+		Motor 11
+			Position: 301.77 rads
+		Motor 12
+			Position: 043.15 rads
+		Motor 13
+			Position: 301.77 rads
+	Joints:
+		Joint 0
+			Position: 02.0874 rads
+		Joint 1
+			Position: 00.0196 rads
+		Joint 2
+			Position: -0.0008 rads
+		Joint 3
+			Position: 00.6006 rads
+		Joint 4
+			Position: 01.9543 rads
+		Joint 5
+			Position: 00.9051 rads
+		Joint 6
+			Position: 00.8225 rads
+		Joint 7
+			Position: 01.0776 rads
+		Joint 8
+			Position: -0.1111 rads
+		Joint 9
+			Position: 00.7494 rads
+		Joint 10
+			Position: 00.6451 rads
+		Joint 11
+			Position: 00.6157 rads
+		Joint 12
+			Position: 00.7483 rads
+		Joint 13
+			Position: 00.6444 rads
+		Joint 14
+			Position: 00.6157 rads
+		Joint 15
+			Position: 00.1226 rads
+		Joint 16
+			Position: 00.7482 rads
+		Joint 17
+			Position: 00.6455 rads
+		Joint 18
+			Position: 00.6157 rads
+		Joint 19
+			Position: 00.1330 rads
+		Joint 20
+			Position: 00.7404 rads
+		Joint 21
+			Position: 00.6349 rads
+		Joint 22
+			Position: 00.6158 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.506	 109.492	 156.459	 174.164
+		   4.022	  87.135	 457.455	 175.816
+		   3.344	 343.483	 216.513	 180.708
+		   2.298	  81.973	 116.043	 123.638
+	Normed EMG:
+		   0.044	   0.253	   0.277	   0.328
+		   0.006	   0.201	   0.310	   0.374
+		   0.013	   0.297	   0.523	   0.511
+		   0.012	   0.157	   0.280	   0.278
+	Muscle Activation:
+		   0.082	   0.459	   0.450	   0.477
+		   0.009	   0.361	   0.473	   0.534
+		   0.024	   0.443	   0.694	   0.672
+		   0.027	   0.313	   0.465	   0.450
+
+--------------------------------------------------
+
+Simulation Time: 48.780000000 sec
+Running Time: 0.490532 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 621.00 rads
+		Motor 5
+			ref_pos: 227.60 rads
+		Motor 6
+			ref_pos: 248.28 rads
+		Motor 7
+			ref_pos: 289.21 rads
+		Motor 8
+			ref_pos: -61.19 rads
+		Motor 9
+			ref_pos: 135.58 rads
+		Motor 10
+			ref_pos: 135.58 rads
+		Motor 11
+			ref_pos: 135.58 rads
+		Motor 12
+			ref_pos: 056.15 rads
+		Motor 13
+			ref_pos: 135.58 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.20 rads
+		Motor 1
+			Position: 002.96 rads
+		Motor 2
+			Position: 000.02 rads
+		Motor 3
+			Position: 057.36 rads
+		Motor 4
+			Position: 621.87 rads
+		Motor 5
+			Position: 228.03 rads
+		Motor 6
+			Position: 248.71 rads
+		Motor 7
+			Position: 290.08 rads
+		Motor 8
+			Position: -61.05 rads
+		Motor 9
+			Position: 136.02 rads
+		Motor 10
+			Position: 136.02 rads
+		Motor 11
+			Position: 136.02 rads
+		Motor 12
+			Position: 056.29 rads
+		Motor 13
+			Position: 136.02 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: 00.0165 rads
+		Joint 2
+			Position: 00.0001 rads
+		Joint 3
+			Position: 00.3187 rads
+		Joint 4
+			Position: 01.7667 rads
+		Joint 5
+			Position: 00.6478 rads
+		Joint 6
+			Position: 00.7066 rads
+		Joint 7
+			Position: 00.8241 rads
+		Joint 8
+			Position: -0.1734 rads
+		Joint 9
+			Position: 00.3596 rads
+		Joint 10
+			Position: 00.2739 rads
+		Joint 11
+			Position: 00.2536 rads
+		Joint 12
+			Position: 00.3602 rads
+		Joint 13
+			Position: 00.2735 rads
+		Joint 14
+			Position: 00.2536 rads
+		Joint 15
+			Position: 00.1599 rads
+		Joint 16
+			Position: 00.3590 rads
+		Joint 17
+			Position: 00.2737 rads
+		Joint 18
+			Position: 00.2537 rads
+		Joint 19
+			Position: 00.1546 rads
+		Joint 20
+			Position: 00.3374 rads
+		Joint 21
+			Position: 00.2584 rads
+		Joint 22
+			Position: 00.2544 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.002	 135.215	 138.126	 172.305
+		   2.460	  73.419	 467.329	 155.465
+		   3.210	 371.173	 203.659	 156.873
+		   1.969	 105.137	 111.837	 138.735
+	Normed EMG:
+		   0.033	   0.452	   0.158	   0.318
+		   0.000	   0.064	   0.335	   0.269
+		   0.010	   0.382	   0.456	   0.361
+		   0.000	   0.368	   0.248	   0.382
+	Muscle Activation:
+		   0.065	   0.616	   0.276	   0.482
+		   0.000	   0.108	   0.506	   0.433
+		   0.014	   0.528	   0.623	   0.512
+		   0.000	   0.479	   0.437	   0.556
+
+--------------------------------------------------
+
+Simulation Time: 49.520000000 sec
+Running Time: 0.512931 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 553.54 rads
+		Motor 5
+			ref_pos: 131.78 rads
+		Motor 6
+			ref_pos: 201.96 rads
+		Motor 7
+			ref_pos: 200.09 rads
+		Motor 8
+			ref_pos: -85.51 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 069.73 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.19 rads
+		Motor 1
+			Position: 002.35 rads
+		Motor 2
+			Position: -00.13 rads
+		Motor 3
+			Position: 024.51 rads
+		Motor 4
+			Position: 567.41 rads
+		Motor 5
+			Position: 137.72 rads
+		Motor 6
+			Position: 208.61 rads
+		Motor 7
+			Position: 213.83 rads
+		Motor 8
+			Position: -83.42 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 072.41 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0899 rads
+		Joint 1
+			Position: 00.0131 rads
+		Joint 2
+			Position: -0.0007 rads
+		Joint 3
+			Position: 00.1362 rads
+		Joint 4
+			Position: 01.6120 rads
+		Joint 5
+			Position: 00.3913 rads
+		Joint 6
+			Position: 00.5927 rads
+		Joint 7
+			Position: 00.6075 rads
+		Joint 8
+			Position: -0.2370 rads
+		Joint 9
+			Position: 00.0659 rads
+		Joint 10
+			Position: 00.0087 rads
+		Joint 11
+			Position: 00.0039 rads
+		Joint 12
+			Position: 00.0678 rads
+		Joint 13
+			Position: 00.0092 rads
+		Joint 14
+			Position: 00.0039 rads
+		Joint 15
+			Position: 00.2057 rads
+		Joint 16
+			Position: 00.0650 rads
+		Joint 17
+			Position: 00.0085 rads
+		Joint 18
+			Position: 00.0040 rads
+		Joint 19
+			Position: 00.1942 rads
+		Joint 20
+			Position: 00.0496 rads
+		Joint 21
+			Position: 00.0002 rads
+		Joint 22
+			Position: 00.0045 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.040	 126.501	 162.800	 182.354
+		   2.517	  92.930	 485.598	 170.252
+		   3.419	 344.032	 204.261	 159.954
+		   2.203	  83.969	 110.143	 124.121
+	Normed EMG:
+		   0.034	   0.384	   0.318	   0.373
+		   0.000	   0.258	   0.381	   0.345
+		   0.015	   0.299	   0.459	   0.380
+		   0.008	   0.176	   0.235	   0.281
+	Muscle Activation:
+		   0.062	   0.548	   0.452	   0.550
+		   0.000	   0.428	   0.541	   0.498
+		   0.029	   0.440	   0.613	   0.545
+		   0.012	   0.306	   0.392	   0.439
+
+--------------------------------------------------
+
+Simulation Time: 50.220000000 sec
+Running Time: 0.534939 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 406.53 rads
+		Motor 5
+			ref_pos: 058.10 rads
+		Motor 6
+			ref_pos: 139.14 rads
+		Motor 7
+			ref_pos: 018.21 rads
+		Motor 8
+			ref_pos: -98.37 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 069.93 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.20 rads
+		Motor 1
+			Position: 000.64 rads
+		Motor 2
+			Position: 000.10 rads
+		Motor 3
+			Position: 028.67 rads
+		Motor 4
+			Position: 446.02 rads
+		Motor 5
+			Position: 077.75 rads
+		Motor 6
+			Position: 158.79 rads
+		Motor 7
+			Position: 058.25 rads
+		Motor 8
+			Position: -91.78 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 076.51 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: 00.0035 rads
+		Joint 2
+			Position: 00.0006 rads
+		Joint 3
+			Position: 00.1593 rads
+		Joint 4
+			Position: 01.2671 rads
+		Joint 5
+			Position: 00.2209 rads
+		Joint 6
+			Position: 00.4511 rads
+		Joint 7
+			Position: 00.1655 rads
+		Joint 8
+			Position: -0.2607 rads
+		Joint 9
+			Position: 00.0165 rads
+		Joint 10
+			Position: 00.0009 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0155 rads
+		Joint 13
+			Position: 00.0006 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2174 rads
+		Joint 16
+			Position: 00.0136 rads
+		Joint 17
+			Position: 00.0003 rads
+		Joint 18
+			Position: 00.0003 rads
+		Joint 19
+			Position: 00.2103 rads
+		Joint 20
+			Position: 00.0104 rads
+		Joint 21
+			Position: 00.0004 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.256	 121.204	 136.259	 167.182
+		   2.424	  67.217	 451.821	 169.053
+		   3.081	 353.348	 180.353	 152.299
+		   2.393	  91.622	 114.167	 124.895
+	Normed EMG:
+		   0.038	   0.343	   0.146	   0.290
+		   0.000	   0.003	   0.296	   0.339
+		   0.007	   0.328	   0.336	   0.332
+		   0.015	   0.245	   0.266	   0.286
+	Muscle Activation:
+		   0.069	   0.514	   0.239	   0.472
+		   0.000	   0.053	   0.456	   0.510
+		   0.015	   0.493	   0.517	   0.483
+		   0.028	   0.419	   0.416	   0.443
+
+--------------------------------------------------
+
+Simulation Time: 50.920000000 sec
+Running Time: 0.557032 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 283.88 rads
+		Motor 5
+			ref_pos: 012.12 rads
+		Motor 6
+			ref_pos: 091.41 rads
+		Motor 7
+			ref_pos: -136.15 rads
+		Motor 8
+			ref_pos: -107.01 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 069.47 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.24 rads
+		Motor 1
+			Position: -00.68 rads
+		Motor 2
+			Position: 000.24 rads
+		Motor 3
+			Position: 036.13 rads
+		Motor 4
+			Position: 330.97 rads
+		Motor 5
+			Position: 035.56 rads
+		Motor 6
+			Position: 114.84 rads
+		Motor 7
+			Position: -88.40 rads
+		Motor 8
+			Position: -99.16 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 077.32 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0902 rads
+		Joint 1
+			Position: -0.0038 rads
+		Joint 2
+			Position: 00.0013 rads
+		Joint 3
+			Position: 00.2007 rads
+		Joint 4
+			Position: 00.9403 rads
+		Joint 5
+			Position: 00.1010 rads
+		Joint 6
+			Position: 00.3263 rads
+		Joint 7
+			Position: -0.2511 rads
+		Joint 8
+			Position: -0.2817 rads
+		Joint 9
+			Position: 00.0126 rads
+		Joint 10
+			Position: 00.0028 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0108 rads
+		Joint 13
+			Position: 00.0022 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2197 rads
+		Joint 16
+			Position: 00.0089 rads
+		Joint 17
+			Position: 00.0017 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.2161 rads
+		Joint 20
+			Position: 00.0065 rads
+		Joint 21
+			Position: 00.0013 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.029	 127.391	 152.779	 161.619
+		   2.309	  77.771	 451.557	 157.792
+		   3.119	 351.224	 207.025	 160.338
+		   2.502	  95.121	 120.804	 124.327
+	Normed EMG:
+		   0.033	   0.391	   0.253	   0.260
+		   0.000	   0.108	   0.295	   0.281
+		   0.008	   0.321	   0.474	   0.382
+		   0.019	   0.277	   0.317	   0.282
+	Muscle Activation:
+		   0.064	   0.543	   0.406	   0.403
+		   0.000	   0.245	   0.468	   0.439
+		   0.020	   0.492	   0.646	   0.547
+		   0.034	   0.389	   0.470	   0.447
+
+--------------------------------------------------
+
+Simulation Time: 51.600000000 sec
+Running Time: 0.579216 sec
+
+Command:
+	Motor:
+		Motor 0
+			ref_pos: 376.20 rads
+		Motor 1
+			ref_pos: 000.00 rads
+		Motor 2
+			ref_pos: 000.00 rads
+		Motor 3
+			ref_pos: 000.00 rads
+		Motor 4
+			ref_pos: 262.62 rads
+		Motor 5
+			ref_pos: 013.16 rads
+		Motor 6
+			ref_pos: 086.14 rads
+		Motor 7
+			ref_pos: -178.26 rads
+		Motor 8
+			ref_pos: -107.24 rads
+		Motor 9
+			ref_pos: 000.00 rads
+		Motor 10
+			ref_pos: 000.00 rads
+		Motor 11
+			ref_pos: 000.00 rads
+		Motor 12
+			ref_pos: 075.18 rads
+		Motor 13
+			ref_pos: 000.00 rads
+
+Sensors:
+	Motors:
+		Motor 0
+			Position: 376.20 rads
+		Motor 1
+			Position: -00.33 rads
+		Motor 2
+			Position: 000.13 rads
+		Motor 3
+			Position: 042.64 rads
+		Motor 4
+			Position: 279.03 rads
+		Motor 5
+			Position: 021.33 rads
+		Motor 6
+			Position: 094.31 rads
+		Motor 7
+			Position: -161.62 rads
+		Motor 8
+			Position: -104.51 rads
+		Motor 9
+			Position: 000.00 rads
+		Motor 10
+			Position: 000.00 rads
+		Motor 11
+			Position: 000.00 rads
+		Motor 12
+			Position: 077.92 rads
+		Motor 13
+			Position: 000.00 rads
+	Joints:
+		Joint 0
+			Position: 02.0900 rads
+		Joint 1
+			Position: -0.0018 rads
+		Joint 2
+			Position: 00.0007 rads
+		Joint 3
+			Position: 00.2369 rads
+		Joint 4
+			Position: 00.7927 rads
+		Joint 5
+			Position: 00.0606 rads
+		Joint 6
+			Position: 00.2679 rads
+		Joint 7
+			Position: -0.4592 rads
+		Joint 8
+			Position: -0.2969 rads
+		Joint 9
+			Position: 00.0101 rads
+		Joint 10
+			Position: 00.0022 rads
+		Joint 11
+			Position: 00.0004 rads
+		Joint 12
+			Position: 00.0089 rads
+		Joint 13
+			Position: 00.0019 rads
+		Joint 14
+			Position: 00.0004 rads
+		Joint 15
+			Position: 00.2214 rads
+		Joint 16
+			Position: 00.0079 rads
+		Joint 17
+			Position: 00.0018 rads
+		Joint 18
+			Position: 00.0004 rads
+		Joint 19
+			Position: 00.2194 rads
+		Joint 20
+			Position: 00.0064 rads
+		Joint 21
+			Position: 00.0017 rads
+		Joint 22
+			Position: 00.0004 rads
+
+EMG:
+	Receiving Frequency: 20.000
+	Trigger: 0
+	Switch1: 1
+	Switch2: 0
+	Raw EMG:
+		   6.284	 102.608	 153.738	 164.629
+		   2.335	  89.724	 473.413	 155.824
+		   3.634	 375.313	 220.084	 157.889
+		   2.117	  87.236	 110.362	 125.105
+	Normed EMG:
+		   0.039	   0.200	   0.259	   0.276
+		   0.000	   0.226	   0.350	   0.271
+		   0.020	   0.394	   0.541	   0.367
+		   0.005	   0.205	   0.237	   0.288
+	Muscle Activation:
+		   0.077	   0.362	   0.424	   0.430
+		   0.000	   0.361	   0.525	   0.422
+		   0.039	   0.558	   0.700	   0.563
+		   0.011	   0.364	   0.388	   0.468
+
+--------------------------------------------------
+
+Ending time: Sat Apr 24 11:29:47 2021

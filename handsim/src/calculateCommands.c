@@ -4,7 +4,26 @@
 
 #include "../include/handsim/calculateCommands.h"
 
-void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, struct EMGData *emg, bool usingEMG, int counter)
+float secondOrderDynamics(int motor, float T_des, struct EMGData *emg, struct prevCom *prior)
+{
+  float Wn = 2*M_PI*emg->freq_n;
+  float b = 2*Wn;
+  float k = Wn*Wn;
+
+  float Ts = 1/emg->samplingFreq;
+  float Ts2 = Ts*Ts;
+
+  float k1 = (1/Ts2 + b/Ts + k);
+  float k2 = -(2/Ts2 + b/Ts);
+  float k3 = 1/Ts2;
+
+  float prev = prior->prevT[motor];
+  float prev2 = prior->prev2T[motor];
+
+  return k*Ts2*T_des - k2/k1*prev - k3/k1*prev2;
+}
+
+void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, struct EMGData *emg, struct prevCom *prior, bool usingEMG, int counter)
 {
   int i;
   float a0, a1, a2;         // gains for EMG
@@ -30,6 +49,8 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
   float D_arr[14] = {0};  /* TUNE ME */
 
   float inc;
+  float delta;
+  float th_u, th_l;
 
   if (usingEMG)
   {
@@ -106,10 +127,11 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       al_ag = getFilteredEMG(emg, agonist);    // flexion
       al_an = getFilteredEMG(emg, antagonist); // extension
 
-      float delta = al_ag - al_an; // delta activation
+      delta = al_ag - al_an; // difference in activation
 
-      float th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
-      float th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
+      th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
+      th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
+      motorRange = th_u - th_l;
 
       // int pair = agonist/2; // TODO: make me a nice function instead
       // float maxD = emg->deltas[pair];
@@ -117,39 +139,33 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
       // float K1 = (th_u - th_l)/(maxD - minD);
       // float K2 = (-minD*th_u + maxD*th_l)/(maxD - minD);
-
-      // pos = K1*delta + K2;
-      // if (delta > 0)
-      // {
-      //   pos = motorPos + 100*delta;
-      // }
-      // else if (delta < 0)
-      // {
-      //   pos = motorPos - 100*delta;
-      // }
-      // else
-      // {
-      //   pos = motorPos;
-      // }
-
+      
       if (i == 0)
       {
+        delta = delta + 0.075;
         if (delta > 0)
         {
-          inc = 2500;
+          inc = 500;
         }
         else
         {
-          inc = 2000;
+          inc = 500;
         }
-        // inc = 5000; // elbow
       }
       else
       {
-        inc = 1000; // hand
+        delta = delta + 0.02;
+        if (delta > 0)
+        {
+          inc = 200;
+        }
+        else
+        {
+          inc = 400;
+        }
       }
 
-      pos = motorPos + inc*delta;
+      pos = motorPos + inc*delta*motorRange/100;
 
       if (pos < th_l)
       {
@@ -160,22 +176,27 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
         pos = th_u;
       }
 
-      // if (i == 0)
-      // {
-      //   printf("Position commanded: %f\n", pos);
-      //   // printf("Delta: %f\n", delta);
-      //   printf("\n");
-      // }
+      if (i == 4)
+      {
+        // printf("Position commanded: %f\n", pos);
+        printf("Delta: %f\n", delta);
+        printf("\n");
+      }
 
       // set in command struct
       cmd->ref_pos[i] = pos;
       cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
 
-      if (i == 3) // force wrist z to stay at 0
+      // force wristx, wristy, wristz to stay at 0
+      if (i == 3 || i == 2 || i == 1) 
       {
         cmd->ref_pos[i] = 0;
       }
     }
+
+    // update previous commands stored
+    prior->prev2T[i] = prior->prevT[i];
+    prior->prevT[i] = cmd->ref_pos[i];
 
     // Set what these commands are - we use a reference position and a position gain
     cmd->ref_pos_enabled = 1;
@@ -185,7 +206,6 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
   else
   {
     int original = 1; // this is the original, built in example controller - sinusoidal wave
-    float motorRange;
 
     if (original)
     {
@@ -193,8 +213,8 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       for (i = 0; i < numMotors; ++i)
       {
         // Set the desired position of this motor
-        float th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
-        float th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
+        th_l = robotInfo->motor_limit[i][0]; // this corresponds to the agonist muscle
+        th_u = robotInfo->motor_limit[i][1]; // this corresponds to the antagonist muscle
         motorRange = th_u - th_l;
 
         cmd->ref_pos[i] = (float)(motorRange/2 * 
