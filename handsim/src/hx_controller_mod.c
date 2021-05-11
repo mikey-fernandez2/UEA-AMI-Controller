@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     str = "without EMG or Polhemus";
   }
   printf("Starting arm controller %s\n", str);
-   
+
   int i;
   int counter = 0;
   hxRobotInfo robotInfo;
@@ -110,6 +110,7 @@ int main(int argc, char **argv)
 
   ///////////////////////////////
   // Capture SIGINT signal.
+  printf("Performing robot checks...\n");
   if (signal(SIGINT, sigHandler) == SIG_ERR)
     printf("Error catching SIGINT\n");
 
@@ -131,10 +132,10 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  printf("Robot checks passed.\n\n");
-
   // Print the robot information.
   printRobotInfo(&robotInfo);
+  
+  printf("Robot checks passed.\n\n");
 
   // Uncomment this block to start logging.
   // if (hxs_start_logging("/tmp/log/") != hxOK)
@@ -167,8 +168,9 @@ int main(int argc, char **argv)
   float tauA = 0.05; // 50 ms activation time constant
   float tauD = 0.10; // 100 ms deactivation time constant
 
-  struct prevCom *prior = malloc(sizeof(struct prevCom));
-  memset(prior, 0, sizeof(struct prevCom)); // zero out struct
+  struct secOrd *dynamics = malloc(sizeof(struct secOrd));
+  memset(dynamics, 0, sizeof(dynamics)); // zero out struct
+  dynamics->freq_n = 3; // frequency (Hz) of critically damped limb movement
 
   if (usingEMG)
   {
@@ -189,7 +191,7 @@ int main(int argc, char **argv)
     if (n >= 0) 
     {
       memcpy(emg->bounds, buffer2, scaleFactorsLen); // copy EMG normalization bounds into appropriate field of struct
-      printEMGNorms(emg->bounds);
+      // printEMGNorms(emg->bounds);
     }
     else
     {
@@ -220,10 +222,11 @@ int main(int argc, char **argv)
   ////////////////////////////////
   // start logging
   char logPath[1000] = "/home/haptix-e15-463/haptix/haptix_controller/logs/";
-  strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
 
   if (logging)
   {
+    strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
+
     if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg))
     {
       printf("startLogging(): error.\n");
@@ -232,6 +235,7 @@ int main(int argc, char **argv)
     printf("Logging to %s.\n", logPath);
   }
 
+  printf("All tests passed. Beginning movement.\n");
   ///////////////////////////////
   start = clock(); end = clock(); // for timing control loop
 
@@ -250,18 +254,8 @@ int main(int argc, char **argv)
 
     loopStart = clock(); // for adjusting wait time
 
-    // calculate next control command
-    calculateCommands(&robotInfo, &cmd, &sensor, emg, prior, usingEMG, counter);
-    // printCommandMotor(&robotInfo, &cmd, 2);
-
-    // Send the new joint command and receive the state update.
-    if (hx_update(&cmd, &sensor) != hxOK)
-    {
-      printf("hx_update(): Request error.\n");
-      continue;
-    }
-
     ////// Perform sensor reading below
+
     if (usingPolhemus)
     {
       polhemus_get_poses(conn, poses, &num_poses, 10);
@@ -270,6 +264,7 @@ int main(int argc, char **argv)
 
     if (usingEMG)
     {
+
       fd1 = open(EMGPipe, O_RDONLY); 
       n = read(fd1, buffer, msgLen);
       close(fd1);
@@ -289,6 +284,17 @@ int main(int argc, char **argv)
       }
 
       ++steps;
+    }
+
+    // calculate next control command
+    calculateCommands(&robotInfo, &cmd, &sensor, emg, dynamics, usingEMG, counter);
+    // printCommandMotor(&robotInfo, &cmd, 2);
+
+    // Send the new joint command and receive the state update.
+    if (hx_update(&cmd, &sensor) != hxOK)
+    {
+      printf("hx_update(): Request error.\n");
+      continue;
     }
 
     // Debug output: Print the state.
@@ -314,7 +320,7 @@ int main(int argc, char **argv)
 
     loopEnd = clock();
 
-    waitTime = usingEMG ? 10000 : 1000; // wait longer if using EMG
+    waitTime = usingEMG ? 1e6/emg->samplingFreq : 1000; // wait longer if using EMG
     unsigned int sleeptime_us = waitTime - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
     if (sleeptime_us <= 0)
     {
@@ -349,6 +355,7 @@ int main(int argc, char **argv)
 
   // free the memory used
   free(emg);
+  free(dynamics);
 
   printf("Exited successfully.\n");
 

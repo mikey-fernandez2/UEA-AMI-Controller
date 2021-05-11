@@ -80,8 +80,8 @@ void printRobotInfo(const hxRobotInfo *_robotInfo)
   for (i = 0; i < _robotInfo->motor_count; ++i)
   {
     printf("\tJoint associated to motor %d:\n", i);
-    printf("\t\t Min: %f rads.\n", _robotInfo->joint_limit[i][0]);
-    printf("\t\t Max: %f rads.\n", _robotInfo->joint_limit[i][1]);
+    printf("\t\t Min: %f rads.\n", _robotInfo->joint_limit[i][0]); // lower limit
+    printf("\t\t Max: %f rads.\n", _robotInfo->joint_limit[i][1]); // upper limit
   }
 
   printf("\n");

@@ -68,16 +68,42 @@ void muscleDynamics(struct EMGData *emg)
 // get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
 void getElectrodes(int motor, int *agonist, int *antagonist)
 {
-  // motorMap[i][o] is the electrode corresponding to the agonist muscle for motor i
+  // motorMap[i][0] is the electrode corresponding to the agonist muscle for motor i
   // motorMap[i][1] is the electrode corresponding to the antagonist muscle for motor i
-  int motorMap[14][2] = {{0, 2},                         // elbow
-                         {8, 8}, {8, 8}, {8, 8},         // wristx, wristy, wristz
-                         {1, 3}, {1, 3}, {1, 3}, {1, 3}, // thumb0, thumb1, thumb2, thumb3
-                         {1, 3}, {1, 3},             // index0, index1
-                         {1, 3},                       // middle1
-                         {1, 3},                       // ring1
-                         {1, 3}, {1, 3}};            // pinky0, pinky1
+  int motorMap[14][2] = {{0, 1},                         // elbow
+                         {2, 3}, {4, 5}, {6, 7},         // wristx, wristy, wristz
+                         {8, 9}, {14, 15}, {14, 15}, {14, 15}, // thumb0, thumb1, thumb2, thumb3
+                         {10, 11}, {10, 11},             // index0, index1
+                         {12, 13},                       // middle1
+                         {12, 13},                       // ring1
+                         {12, 13}, {12, 13}};            // pinky0, pinky1
 
   *agonist = motorMap[motor][0];
   *antagonist = motorMap[motor][1];
+}
+
+// get the gains for each electrode to control a given movement
+//   the gains come from a 2D array of gains, which is (numDoF) x (numElectrodes)
+void getGains(int motor, float *gains, int numElec)
+{                // electrode: 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15    gains corresponding to
+  float gainMatrix[14][16] = {{0.354, 0.0097, 1.0913, -0.8021, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor0:  elbow 
+                              {0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor1:  wrist_y 
+                              {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor2:  wrist_x
+                              {0.9321, -0.7007, 0.0517, 0.0203, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor3:  wrist_z
+                              {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},  // motor4:  thumb_0
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},  // motor5:  thumb_1
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},  // motor6:  thumb_2
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},  // motor7:  thumb_3
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},  // motor8:  index_0
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},  // motor9:  index_1
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},  // motor10: middle_1
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},  // motor11: ring_1
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},  // motor12: pinky_0
+                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0}}; // motor13: pinky_1
+
+  int i;
+  for (i = 0; i < numElec; i++)
+  {
+    *(gains + i) = gainMatrix[motor][i];
+  }
 }

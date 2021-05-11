@@ -12,7 +12,8 @@ for ii = 1:size(u,1)
     if ii == 1 || ii == 2
         a(ii,j) =  0;
     else
-        a(ii,j) = k*Ts^2 * u(ii, j) - k2/k1*a(ii-1,j) - k3/k1*a(ii-2,j);
+        % a(ii,j) = k*Ts^2 * u(ii, j) - k2/k1*a(ii-1,j) - k3/k1*a(ii-2,j);
+        a(ii,j) = k/k1 * u(ii, j) - k2/k1*a(ii-1,j) - k3/k1*a(ii-2,j); % should be this
     end
 end
 

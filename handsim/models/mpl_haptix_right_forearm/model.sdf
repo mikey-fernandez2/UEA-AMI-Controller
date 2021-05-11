@@ -1032,6 +1032,7 @@
     </sensor>
   </link>
   <joint name='wristz' type='revolute'>
+    <gravity>0</gravity>
     <child>wristz</child>
     <parent>wristx</parent>
     <axis>
@@ -1043,7 +1044,7 @@
         <velocity>-1</velocity>
       </limit>
       <dynamics>
-        <damping>2</damping>
+        <damping>1</damping>
         <friction>0</friction>
         <spring_reference>0</spring_reference>
         <spring_stiffness>0</spring_stiffness>
