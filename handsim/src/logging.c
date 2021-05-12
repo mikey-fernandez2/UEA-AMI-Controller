@@ -4,7 +4,7 @@
 
 #include "../include/handsim/logging.h"
 
-int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *robotInfo, struct EMGData *emg)
+int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *robotInfo, struct EMGData *emg, struct secOrd *dynamics)
 {
     FILE *log;
     log = fopen(logPath, "w");
@@ -20,6 +20,7 @@ int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *
     time(&rawtime);
     timeinfo = localtime(&rawtime);
 
+    fprintf(log, "%s\n", logPath);
     fprintf(log, "This log file was generated automatically starting at %s\n", asctime(timeinfo));
     fprintf(log, "Settings for this run:\n\tusingEMG? %s\n\tusingPolhemus? %s\n", usingEMG ? "true" : "false", usingPolhemus ? "true" : "false");
 
@@ -58,6 +59,8 @@ int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *
          emg->deltas[0], emg->deltas[1], emg->deltas[2], emg->deltas[3], emg->deltas[4], emg->deltas[5], emg->deltas[6], emg->deltas[7]);
         fprintf(log, "\tMin Delta: %06.3f, %06.3f, %06.3f, %06.3f, %06.3f, %06.3f, %06.3f, %06.3f\n",
          emg->deltas[8], emg->deltas[9], emg->deltas[10], emg->deltas[11], emg->deltas[12], emg->deltas[13], emg->deltas[14], emg->deltas[15]);
+
+        fprintf(log, "\nNatural frequency of critically damped limb movement: %05.2f Hz\n", dynamics->freq_n);
     }
 
     fprintf(log, "\n--------------------------------------------------\n");
@@ -67,7 +70,7 @@ int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *
     return 1;
 }
 
-int addLog(char *logPath, bool usingEMG, bool usingPolhemus, double runTime, hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, polhemus_pose_t *poses, int num_poses, struct EMGData *emg)
+int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime, hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, polhemus_pose_t *poses, int num_poses, struct EMGData *emg)
 {
     FILE *log;
     log = fopen(logPath, "a");
@@ -81,30 +84,31 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, double runTime, hxR
 
     // Times
     fprintf(log, "\nSimulation Time: %d.%09d sec\n", sensor->time_stamp.sec, sensor->time_stamp.nsec);
-    fprintf(log, "Running Time: %f sec\n", runTime);
+    fprintf(log, "Running Time: %Lf sec\n", runTime);
 
     // Command
-    fprintf(log, "\nCommand:\n");
-    fprintf(log, "\tMotor:\n");
+    // fprintf(log, "\nCommand:\n");
+    fprintf(log, "\nMotors and Joints:\n");
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
-    fprintf(log, "\t\tMotor %d\n", i);
-    fprintf(log, "\t\t\tref_pos: %06.2f rads\n", cmd->ref_pos[i]);
+    fprintf(log, "\t\tMotor %2d ", i);
+    fprintf(log, "ref_pos: %07.2f rads\t\t", cmd->ref_pos[i]);
+    fprintf(log, "position: %07.2f rads\n", sensor->motor_pos[i]);
     }
 
     // Sensors
-    fprintf(log, "\nSensors:\n");
-    fprintf(log, "\tMotors:\n");
-    for (i = 0; i < robotInfo->motor_count; ++i)
-    {
-    fprintf(log, "\t\tMotor %d\n", i);
-    fprintf(log, "\t\t\tPosition: %06.2f rads\n", sensor->motor_pos[i]);
-    }
-    fprintf(log, "\tJoints:\n");
+    // fprintf(log, "\nSensors:\n");
+    // fprintf(log, "\tMotors:\n");
+    // for (i = 0; i < robotInfo->motor_count; ++i)
+    // {
+    // fprintf(log, "\t\tMotor %2d ", i);
+    // }
+    // fprintf(log, "\tJoints:\n");
+    fprintf(log, "\n");
     for (i = 0; i < robotInfo->joint_count; ++i)
     {
-    fprintf(log, "\t\tJoint %d\n", i);
-    fprintf(log, "\t\t\tPosition: %07.4f rads\n", sensor->joint_pos[i]);
+    fprintf(log, "\t\tJoint %2d ", i);
+    fprintf(log, "Position: %07.2f rads\n", sensor->joint_pos[i]);
     }
     fprintf(log, "\n");
 

@@ -82,6 +82,7 @@ int main(int argc, char **argv)
   hxCommand cmd = {0};
   hxSensor sensor = {0};
   clock_t start, end, loopStart, loopEnd;
+  struct timeval startT, endT;
 
   // Polhemus settings
   polhemus_conn_t* conn;
@@ -227,7 +228,7 @@ int main(int argc, char **argv)
   {
     strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
 
-    if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg))
+    if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg, dynamics))
     {
       printf("startLogging(): error.\n");
       return -1;
@@ -241,7 +242,9 @@ int main(int argc, char **argv)
 
   int steps = 0;
   int waitTime;
+  bool notFirst = false;
 
+  gettimeofday(&startT, NULL);
   // Send commands, read from sensors
   while (running)
   {
@@ -298,14 +301,18 @@ int main(int argc, char **argv)
     }
 
     // Debug output: Print the state.
-    if (!(counter % 100))
+    if (!(counter % 20))
     {
       // printCommand(&robotInfo, &cmd);
-      printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move
+      printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move [however, function was modified to do nothing]
      
-      if (logging)
+      if (logging && notFirst)
       {
-        if (!addLog(logPath, usingEMG, usingPolhemus, (double)(loopStart - start)/CLOCKS_PER_SEC, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
+        gettimeofday(&endT);
+        long double sec = endT.tv_sec + 1e-6*endT.tv_usec;
+        long double first = startT.tv_sec + 1e-6*startT.tv_usec;
+
+        if (!addLog(logPath, usingEMG, usingPolhemus, sec - first, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
         {
           printf("addLog(): error.\n");
           return -1;
@@ -321,11 +328,13 @@ int main(int argc, char **argv)
     loopEnd = clock();
 
     waitTime = usingEMG ? 1e6/emg->samplingFreq : 1000; // wait longer if using EMG
-    unsigned int sleeptime_us = waitTime - (int)(loopEnd - loopStart)*1e6/CLOCKS_PER_SEC; // adjustment made for how long running this loop takes
+    unsigned int sleeptime_us = waitTime - (int)((loopEnd - loopStart)*1e6/CLOCKS_PER_SEC); // adjustment made for how long running this loop takes
     if (sleeptime_us <= 0)
     {
       sleeptime_us = waitTime; // if loop took too long to run, just wait the default time
     }
+
+    notFirst = true;
 
     usleep(sleeptime_us);
     end = clock();

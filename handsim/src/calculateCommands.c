@@ -94,38 +94,37 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
   int numMotors = robotInfo->motor_count;
 
+  float K_act_arr[14] = {0, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300};
+  float K_pas_arr[14] = {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
   // arat.world - these are the default P gains for these joints
   // NOTE: With addition of controllable elbow joint, assumed default P gain of 100
   //    float jointPgains[23] = {100, 100, 100, 100, 30, 20, 8, 2, 20, 10, 5, 1, 10, 5, 1, 20, 10, 5, 1, 15, 10, 5, 1};
-  float K0_arr[14] = {100, 100, 100, 100, 30, 20, 8, 2, 20, 10, 10, 10, 10, 5}; /* TUNE ME */
-  float K1_arr[14] = {0}; /* TUNE ME */
-  float K2_arr[14] = {0}; /* TUNE ME */
-  float D_arr[14] = {0};  /* TUNE ME */
+  // float K0_arr[14] = {100, 100, 100, 100, 30, 20, 8, 2, 20, 10, 10, 10, 10, 5}; /* TUNE ME */
+  // float K1_arr[14] = {0}; /* TUNE ME */
+  // float K2_arr[14] = {0}; /* TUNE ME */
+  // float D_arr[14] = {0};  /* TUNE ME */
 
-  float inc;
-  float delta;
+  // float inc;
+  // float delta;
   float th_u, th_l;
 
   if (usingEMG)
   {
-    // T_des[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) - D[i]*om[i]
-    //     
-    //     Starting point:
-    //         a0 = 0
-    //         a1 = full flex angle      (robotInfo->joint_limit[i][0])
-    //         a2 = full extension angle (robotInfo->joint_limit[i][1])
-    //
-    //         0 <= al_ag, al_an <= 1 (normalized EMG)
-    //
-    //         th[i] = sensor->motor_pos[i]
-    //         om[i] = sensor->motor_vel[i]
-    //
-    //         K0[i] is the constant stiffness of the joint
-    //         K1[i] must be tuned (contribution of flexor)
-    //         K2[i] must be tuned (contribution of extensor)
-
     float numElec = emg->numElec;
-    K_pas = 0;
+
+    /* CONTROL LAW */
+    // T_des[i] = K_active[i]*dot(gains[i]*muscleAct)/TorqueNorm[i] - K_passive[i]*(motorPos[i] - th_0[i])
+    //
+    //   where:
+    //     T_des[i] is the desired motor torque (position) input to motor i
+    //     K_active[i] is the active torque gain for motor i
+    //     gains[i] are the 16 synergy gains for the DoF controlled by motor i
+    //     muscleAct are the current muscle activation values
+    //     TorqueNorm[i] is the normalization factor from the synergy motor intent for motor i
+    //     K_passive[i] is the pasive spring stiffness for motor i (for opening the hand)
+    //     motorPos[i] is the position of motor i
+    //     th_0[i] is the reference position of motor i for the passive spring
 
     for (i = 0; i < numMotors; i++)
     {
@@ -133,20 +132,13 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       motorPos = sensor->motor_pos[i];
       motorVel = sensor->motor_vel[i];
 
-      // passive spring constant (only apply to hand)
-      if (i >= 3)
-      {
-        K_pas = 1;
-      }
+      // get the reference position for the passive spring
       // th_0 = robotInfo->motor_limit[i][0];
       th_0 = 0;
 
-      K_active = 300;
-
-      // find al_ag, al_an - map between EMG electrodes and their corresponding motors in 'EMGStruct.c'
-      getElectrodes(i, &agonist, &antagonist);
-      al_ag = getFilteredEMG(emg, agonist);    // flexion
-      al_an = getFilteredEMG(emg, antagonist); // extension
+      // get active and passive torque gains
+      K_active = K_act_arr[i];
+      K_pas = K_pas_arr[i];
 
       // get synergy gains for the DoF this motor controls
       getGains(i, gains, numElec);
@@ -157,6 +149,44 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       T_pas = -K_pas*(motorPos - th_0);
 
       T_des = T_active + T_pas;
+
+      // calculate position by using second order dynamics
+      pos = secondOrderDynamics(i, T_des, emg, dynamics); 
+
+      // set in command struct
+      cmd->ref_pos[i] = pos;
+      cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
+
+      if (i == 0 || i == 3)
+      {
+        // printMuscleActivation(emg->muscleAct);
+        // printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
+        // printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
+        // gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
+        // printf("Motor Intent: %f\n", weightedAct);
+      }
+
+      /* OLD IMPEDANCE CONTROLLER */
+      // T_des[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) - D[i]*om[i]
+      //     
+      //     Starting point:
+      //         a0 = 0
+      //         a1 = full flex angle      (robotInfo->joint_limit[i][0])
+      //         a2 = full extension angle (robotInfo->joint_limit[i][1])
+      //
+      //         0 <= al_ag, al_an <= 1 (normalized EMG)
+      //
+      //         th[i] = sensor->motor_pos[i]
+      //         om[i] = sensor->motor_vel[i]
+      //
+      //         K0[i] is the constant stiffness of the joint
+      //         K1[i] must be tuned (contribution of flexor)
+      //         K2[i] must be tuned (contribution of extensor)
+
+      // find al_ag, al_an - map between EMG electrodes and their corresponding motors in 'EMGStruct.c'
+      // getElectrodes(i, &agonist, &antagonist);
+      // al_ag = getFilteredEMG(emg, agonist);    // flexion
+      // al_an = getFilteredEMG(emg, antagonist); // extension
 
       // // find a0, a1, a2
       // a0 = 0;
@@ -191,27 +221,11 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       // T_des = K_net*(motorVT - motorPos) - D_arr[i]*motorVel;
       // T_des = K_net*(motorVT - motorPos) - D_arr[i]*motorVel + K_pas*(motorPos - robotInfo->motor_limit[i][0]);
 
-      // calculate position by using second order dynamics
-      pos = secondOrderDynamics(i, T_des, emg, dynamics); 
-
-      // set in command struct
-      cmd->ref_pos[i] = pos;
-      cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
-
       // if (i == 0)
       // {
       //   // printf("\t   al_ag: %06.4f\t   al_an: %06.4f\n\t   T_des: %06.2f\n\tmotorPos: %06.2f\tmotorVT:  %06.2f\n\t  desPos: %06.2f\t   K_net: %06.2f\n\n",
       //   //        al_ag, al_an, T_des, motorPos, motorVT, pos, K_net);
       // }
-
-      if (i == 0 || i == 3)
-      {
-        // printMuscleActivation(emg->muscleAct);
-        printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
-        printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
-        gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
-        printf("Motor Intent: %f\n", weightedAct);
-      }
     }
 
     // for (i = 0; i < numMotors; i++)

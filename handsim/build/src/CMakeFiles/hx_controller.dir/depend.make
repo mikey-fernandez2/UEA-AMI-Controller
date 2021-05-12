@@ -16,6 +16,7 @@ src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../include/handsim/print
 src/CMakeFiles/hx_controller.dir/hx_controller_mod.c.o: ../src/hx_controller_mod.c
 
 src/CMakeFiles/hx_controller.dir/logging.c.o: ../include/handsim/EMGStruct.h
+src/CMakeFiles/hx_controller.dir/logging.c.o: ../include/handsim/calculateCommands.h
 src/CMakeFiles/hx_controller.dir/logging.c.o: ../include/handsim/logging.h
 src/CMakeFiles/hx_controller.dir/logging.c.o: ../include/handsim/polhemus_driver.h
 src/CMakeFiles/hx_controller.dir/logging.c.o: ../src/logging.c
