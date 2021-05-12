@@ -1,5 +1,0 @@
-This log file was generated automatically starting at Fri Apr 23 18:21:19 2021
-
-Settings for this run:
-	usingEMG? true
-	usingPolhemus? false
