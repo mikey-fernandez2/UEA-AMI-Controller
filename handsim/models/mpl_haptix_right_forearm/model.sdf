@@ -779,6 +779,7 @@
   </joint>
 
   <link name='wristz'>
+    <gravity>0</gravity>
     <pose>0.00375708 -0.557636 0.135067 -2.87105e-13 1.42109e-14 -0.0115373</pose>
     <inertial>
       <pose>0.00368152 -0.0358755 0.00265927 0 0 0</pose>
@@ -1032,7 +1033,6 @@
     </sensor>
   </link>
   <joint name='wristz' type='revolute'>
-    <gravity>0</gravity>
     <child>wristz</child>
     <parent>wristx</parent>
     <axis>

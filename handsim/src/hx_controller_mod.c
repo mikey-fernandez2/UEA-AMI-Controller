@@ -242,7 +242,6 @@ int main(int argc, char **argv)
 
   int steps = 0;
   int waitTime;
-  bool notFirst = false;
 
   gettimeofday(&startT, NULL);
   // Send commands, read from sensors
@@ -301,12 +300,12 @@ int main(int argc, char **argv)
     }
 
     // Debug output: Print the state.
-    if (!(counter % 20))
+    if (!(counter % 100))
     {
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move [however, function was modified to do nothing]
      
-      if (logging && notFirst)
+      if (logging)
       {
         gettimeofday(&endT);
         long double sec = endT.tv_sec + 1e-6*endT.tv_usec;
@@ -333,8 +332,6 @@ int main(int argc, char **argv)
     {
       sleeptime_us = waitTime; // if loop took too long to run, just wait the default time
     }
-
-    notFirst = true;
 
     usleep(sleeptime_us);
     end = clock();

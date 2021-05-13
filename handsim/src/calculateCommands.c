@@ -2,9 +2,6 @@
 //
 // Mikey Fernandez 04/11/2021
 
-/* TODO 05/07
-*/
-
 #include "../include/handsim/calculateCommands.h"
 
 float secondOrderDynamics(int motor, float T_des, struct EMGData *emg, struct secOrd *dynamics)
@@ -157,14 +154,14 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       cmd->ref_pos[i] = pos;
       cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
 
-      if (i == 0 || i == 3)
-      {
-        // printMuscleActivation(emg->muscleAct);
-        // printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
-        // printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
-        // gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
-        // printf("Motor Intent: %f\n", weightedAct);
-      }
+      // if (i == 0 || i == 3)
+      // {
+      //   printMuscleActivation(emg->muscleAct);
+      //   printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
+      //   printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
+      //   gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
+      //   printf("Motor Intent: %f\n", weightedAct);
+      // }
 
       /* OLD IMPEDANCE CONTROLLER */
       // T_des[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) - D[i]*om[i]

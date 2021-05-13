@@ -81,19 +81,27 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
     }
 
     int i;
+    float ref_pos;
 
     // Times
-    fprintf(log, "\nSimulation Time: %d.%09d sec\n", sensor->time_stamp.sec, sensor->time_stamp.nsec);
-    fprintf(log, "Running Time: %Lf sec\n", runTime);
+    // fprintf(log, "\nSimulation Time: %d.%09d sec\n", sensor->time_stamp.sec, sensor->time_stamp.nsec);
+    fprintf(log, "\nRunning Time: %Lf sec\n", runTime);
 
     // Command
     // fprintf(log, "\nCommand:\n");
     fprintf(log, "\nMotors and Joints:\n");
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
-    fprintf(log, "\t\tMotor %2d ", i);
-    fprintf(log, "ref_pos: %07.2f rads\t\t", cmd->ref_pos[i]);
-    fprintf(log, "position: %07.2f rads\n", sensor->motor_pos[i]);
+        ref_pos = cmd->ref_pos[i];
+        // this is stupid but the only way I can ensure the formatting is consistent for easy automated processing
+        if (fabs((double)ref_pos) >= 10000)
+        {
+            ref_pos = 0;
+        }
+        
+        fprintf(log, "\t\tMotor %2d ", i);
+        fprintf(log, "ref_pos: %07.2f rads\t\t", ref_pos);
+        fprintf(log, "position: %07.2f rads\n", sensor->motor_pos[i]);
     }
 
     // Sensors
