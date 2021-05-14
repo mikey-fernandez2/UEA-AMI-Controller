@@ -53,8 +53,8 @@ float motorIntent(struct EMGData *emg, float *gains)
 
 float normalizeTorque(int motor, float weightedAct)
 {
-  float maxTorques[14] = {0.7767, 1, 1, 0.8837, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-  float minTorques[14] = {0.9013, 1, 1, 0.6858, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+  float maxTorques[14] = {1, 1, 1, 0.5331, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514};
+  float minTorques[14] = {1, 1, 1, 0.7874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874};
   float normedTorque;
 
   if (weightedAct > 0)
@@ -91,8 +91,8 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
   int numMotors = robotInfo->motor_count;
 
-  float K_act_arr[14] = {0, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300};
-  float K_pas_arr[14] = {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+  float K_act_arr[14] = {0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200};
+  float K_pas_arr[14] = {0, 0, 0, 0, .5, .5, .5, .5, .5, .5, .5, .5, .5, .5};
 
   // arat.world - these are the default P gains for these joints
   // NOTE: With addition of controllable elbow joint, assumed default P gain of 100
@@ -154,14 +154,14 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
       cmd->ref_pos[i] = pos;
       cmd->gain_pos[i] = 1; // position error gain needs to be 1 for force to be equal to desired torque
 
-      // if (i == 0 || i == 3)
-      // {
-      //   printMuscleActivation(emg->muscleAct);
-      //   printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
-      //   printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
-      //   gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
-      //   printf("Motor Intent: %f\n", weightedAct);
-      // }
+      if (i == 5)
+      {
+        // printMuscleActivation(emg->muscleAct);
+        printf("Motor: %d\nActive Torque: %f\nPassive Torque: %f\nDesired Position: %f\nCurrent Position: %f\n", i, T_active, T_pas, pos, motorPos);
+        // printf("Gains: %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
+        // gains[0], gains[1], gains[2], gains[3], gains[4], gains[5], gains[6], gains[7], gains[8], gains[9], gains[10], gains[11], gains[12], gains[13], gains[14], gains[15]);
+        // printf("Motor Intent: %f\n", weightedAct);
+      }
 
       /* OLD IMPEDANCE CONTROLLER */
       // T_des[i] = (K0[i] + K1[i]*al_ag + K2[i]*al_an)*(a0[i] + (a1[i]*al_ag - a2[i]*al_an) - th[i]) - D[i]*om[i]

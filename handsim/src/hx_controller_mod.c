@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 
   struct secOrd *dynamics = malloc(sizeof(struct secOrd));
   memset(dynamics, 0, sizeof(dynamics)); // zero out struct
-  dynamics->freq_n = 3; // frequency (Hz) of critically damped limb movement
+  dynamics->freq_n = 4; // frequency (Hz) of critically damped limb movement
 
   if (usingEMG)
   {
