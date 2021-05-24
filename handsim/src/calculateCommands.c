@@ -91,7 +91,7 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
   int numMotors = robotInfo->motor_count;
 
-  float K_act_arr[14] = {0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200};
+  float K_act_arr[14] = {0, 0, 0, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   float K_pas_arr[14] = {0, 0, 0, 0, .5, .5, .5, .5, .5, .5, .5, .5, .5, .5};
 
   // arat.world - these are the default P gains for these joints

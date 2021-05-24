@@ -88,7 +88,6 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
     fprintf(log, "\nRunning Time: %Lf sec\n", runTime);
 
     // Command
-    // fprintf(log, "\nCommand:\n");
     fprintf(log, "\nMotors and Joints:\n");
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
@@ -104,14 +103,6 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
         fprintf(log, "position: %07.2f rads\n", sensor->motor_pos[i]);
     }
 
-    // Sensors
-    // fprintf(log, "\nSensors:\n");
-    // fprintf(log, "\tMotors:\n");
-    // for (i = 0; i < robotInfo->motor_count; ++i)
-    // {
-    // fprintf(log, "\t\tMotor %2d ", i);
-    // }
-    // fprintf(log, "\tJoints:\n");
     fprintf(log, "\n");
     for (i = 0; i < robotInfo->joint_count; ++i)
     {
@@ -154,7 +145,6 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
         {
             fprintf(log, "\n");
         }
-
     }
 
     // Polhemus
