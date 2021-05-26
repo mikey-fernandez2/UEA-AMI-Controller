@@ -20,7 +20,7 @@
 #include "polhemus_driver.h"
 #include "calculateCommands.h"
 
-int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *robotInfo, struct EMGData *emg, struct secOrd *dynamics);
+int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *robotInfo, struct EMGData *emg, struct secOrd *dynamics, int num_poses);
 
 int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime, hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor, polhemus_pose_t *poses, int num_poses, struct EMGData *emg);
 

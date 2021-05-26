@@ -226,9 +226,10 @@ int main(int argc, char **argv)
 
   if (logging)
   {
-    strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
+    // strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
+    strcat(logPath, logFile); strcat(logPath, ".csv"); // get full path to log file in .csv format
 
-    if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg, dynamics))
+    if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg, dynamics, num_poses))
     {
       printf("startLogging(): error.\n");
       return -1;

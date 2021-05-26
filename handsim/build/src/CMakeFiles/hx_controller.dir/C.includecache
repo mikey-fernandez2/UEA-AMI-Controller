@@ -24,10 +24,12 @@ EMGStruct.h
 stdio.h
 -
 
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/logging.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/hx_controller.h
 math.h
 -
 stdbool.h
+-
+signal.h
 -
 stdio.h
 -
@@ -49,14 +51,26 @@ unistd.h
 -
 EMGStruct.h
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
-polhemus_driver.h
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 calculateCommands.h
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/calculateCommands.h
+polhemus_driver.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
+printFunctions.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
 
 /home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
 
-/home/haptix-e15-463/haptix/haptix_controller/handsim/src/logging.c
-../include/handsim/logging.h
-/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/logging.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/printFunctions.h
+stdio.h
+-
+haptix/comm/haptix.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/EMGStruct.h
+-
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/polhemus_driver.h
+-
+
+/home/haptix-e15-463/haptix/haptix_controller/handsim/src/hx_controller_mod.c
+../include/handsim/hx_controller.h
+/home/haptix-e15-463/haptix/haptix_controller/handsim/include/handsim/hx_controller.h
 

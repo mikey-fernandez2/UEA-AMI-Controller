@@ -171,7 +171,6 @@ class logParser:
             if (i == self.robot["joints"]//2 - 1): plt.xlabel('Time (s)')
             plt.ylabel(str(2*i))
 
-
             ax = plt.subplot(self.robot["joints"]//2, 2, 2*i + 2)
             ax.plot(self.times, self.jointPos[2*i + 1], 'b', linewidth=1)
             if (i == self.robot["joints"]//2 - 1): plt.xlabel('Time (s)')
