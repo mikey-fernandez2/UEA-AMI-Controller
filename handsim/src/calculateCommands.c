@@ -53,8 +53,11 @@ float motorIntent(struct EMGData *emg, float *gains)
 
 float normalizeTorque(int motor, float weightedAct)
 {
-  float maxTorques[14] = {1, 1, 1, 0.5331, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514};
-  float minTorques[14] = {1, 1, 1, 0.7874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874};
+  // float maxTorques[14] = {1, 1, 1, 0.5331, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514, 1.1514};
+  // float minTorques[14] = {1, 1, 1, 0.7874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874, 1.3874};
+  int i;
+  float maxTorques[14] = {0}; for (i = 0; i < 14; i++) { maxTorques[i] = 1; }
+  float minTorques[14] = {0}; for (i = 0; i < 14; i++) { minTorques[i] = 1; }
   float normedTorque;
 
   if (weightedAct > 0)
@@ -91,8 +94,10 @@ void calculateCommands(hxRobotInfo *robotInfo, hxCommand *cmd, hxSensor *sensor,
 
   int numMotors = robotInfo->motor_count;
 
-  float K_act_arr[14] = {0, 0, 0, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
-  float K_pas_arr[14] = {0, 0, 0, 0, .5, .5, .5, .5, .5, .5, .5, .5, .5, .5};
+  // float K_act_arr[14] = {0, 0, 0, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+  // float K_pas_arr[14] = {0, 0, 0, 0, .5, .5, .5, .5, .5, .5, .5, .5, .5, .5};
+  float K_act_arr[14] = {0}; for (i = 0; i < 14; i++) { K_act_arr[i] = 100; }
+  float K_pas_arr[14] = {0}; for (i = 0; i < 14; i++) { K_pas_arr[i] = 1; }
 
   // arat.world - these are the default P gains for these joints
   // NOTE: With addition of controllable elbow joint, assumed default P gain of 100

@@ -245,6 +245,7 @@ int main(int argc, char **argv)
   int waitTime;
 
   gettimeofday(&startT, NULL);
+  long double first = startT.tv_sec + 1e-6*startT.tv_usec;
   // Send commands, read from sensors
   while (running)
   {
@@ -301,7 +302,7 @@ int main(int argc, char **argv)
     }
 
     // Debug output: Print the state.
-    if (!(counter % 100))
+    if (!(counter % 20))
     {
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move [however, function was modified to do nothing]
@@ -310,7 +311,6 @@ int main(int argc, char **argv)
       {
         gettimeofday(&endT);
         long double sec = endT.tv_sec + 1e-6*endT.tv_usec;
-        long double first = startT.tv_sec + 1e-6*startT.tv_usec;
 
         if (!addLog(logPath, usingEMG, usingPolhemus, sec - first, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
         {
@@ -320,7 +320,7 @@ int main(int argc, char **argv)
       }
     }
 
-    if (++counter == 2000) // originally 10000
+    if (++counter == 10000) // originally 10000
     {
       counter = 0;
     }

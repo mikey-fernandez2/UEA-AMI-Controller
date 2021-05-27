@@ -102,11 +102,19 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
     }
 
     int i;
+    float ref_pos;
 
     fprintf(log, "%Lf", runTime);
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
-        fprintf(log, ", %07.2f, %07.2f", cmd->ref_pos[i], sensor->motor_pos[i]);
+        ref_pos = cmd->ref_pos[i];
+        // this is stupid but the only way I can ensure the formatting is consistent for easy automated processing
+        if (fabs((double)ref_pos) >= 10000)
+        {
+            ref_pos = 0;
+        }
+
+        fprintf(log, ", %07.2f, %07.2f", ref_pos, sensor->motor_pos[i]);
     }
     for (i = 0; i < robotInfo->joint_count; ++i)
     {

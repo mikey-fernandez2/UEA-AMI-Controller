@@ -86,9 +86,9 @@ void getElectrodes(int motor, int *agonist, int *antagonist)
 //   the gains come from a 2D array of gains, which is (numDoF) x (numElectrodes)
 void getGains(int motor, float *gains, int numElec)
 {                // electrode: 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15    gains corresponding to
-  float gainMatrix[14][16] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor0:  elbow 
-                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor1:  wrist_y 
-                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor2:  wrist_x
+  float gainMatrix[14][16] = {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor0:  elbow 
+                              {0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor1:  wrist_y 
+                              {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor2:  wrist_x
                               {-0.0181, 0.60330, 0.3266, 0.5346, -1.0191, -0.2806, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor3:  wrist_z
                               {-3.8913, 0.4458, 0.3357, -0.2121, 0.15244, 3.1729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor4:  thumb_0
                               {-3.8913, 0.4458, 0.3357, -0.2121, 0.15244, 3.1729, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  // motor5:  thumb_1
