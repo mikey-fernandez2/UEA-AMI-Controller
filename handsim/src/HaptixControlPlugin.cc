@@ -97,7 +97,7 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
 
   // start a transport node for polhemus head pose view point control
   this->gazeboNode = gazebo::transport::NodePtr(new gazebo::transport::Node());
-  fprintf(stderr, "ARE YOU REGISTERING MY CHANGES world name: [%s]\n", this->world->GetName().c_str());
+  fprintf(stderr, "world name: [%s]\n", this->world->GetName().c_str());
   this->gazeboNode->Init(this->world->GetName());
   this->viewpointJoyPub =
     this->gazeboNode->Advertise<gazebo::msgs::Pose>("~/user_camera/joy_pose");
@@ -118,9 +118,9 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
     this->gazeboNode->Subscribe("~/user_camera/pose",
       &HaptixControlPlugin::OnUserCameraPose, this);
 
-  this->hydraSub =
-    this->gazeboNode->Subscribe("~/hydra",
-      &HaptixControlPlugin::OnHydra, this);
+  // this->hydraSub =
+  //   this->gazeboNode->Subscribe("~/hydra",
+  //     &HaptixControlPlugin::OnHydra, this);
 
   // Set the update rate
   if (this->sdf->HasElement("update_rate"))

@@ -239,6 +239,48 @@ hx_controller/fast:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/hx_controller.dir/build.make src/CMakeFiles/hx_controller.dir/build
 .PHONY : hx_controller/fast
 
+# Convenience name for target.
+src/CMakeFiles/polhemus_example.dir/rule:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example.dir/rule
+.PHONY : src/CMakeFiles/polhemus_example.dir/rule
+
+# Convenience name for target.
+polhemus_example: src/CMakeFiles/polhemus_example.dir/rule
+.PHONY : polhemus_example
+
+# fast build rule for target.
+polhemus_example/fast:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/build
+.PHONY : polhemus_example/fast
+
+# Convenience name for target.
+src/CMakeFiles/polhemus_example_continuous.dir/rule:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example_continuous.dir/rule
+.PHONY : src/CMakeFiles/polhemus_example_continuous.dir/rule
+
+# Convenience name for target.
+polhemus_example_continuous: src/CMakeFiles/polhemus_example_continuous.dir/rule
+.PHONY : polhemus_example_continuous
+
+# fast build rule for target.
+polhemus_example_continuous/fast:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/build
+.PHONY : polhemus_example_continuous/fast
+
+# Convenience name for target.
+src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule
+.PHONY : src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule
+
+# Convenience name for target.
+polhemus_example_multiple_sensors: src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule
+.PHONY : polhemus_example_multiple_sensors
+
+# fast build rule for target.
+polhemus_example_multiple_sensors/fast:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/build
+.PHONY : polhemus_example_multiple_sensors/fast
+
 EMGStruct.o: EMGStruct.c.o
 .PHONY : EMGStruct.o
 
@@ -457,6 +499,78 @@ WrenchHelper.cc.s:
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/HaptixControlPlugin.dir/build.make src/CMakeFiles/HaptixControlPlugin.dir/WrenchHelper.cc.s
 	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/HaptixWorldPlugin.dir/build.make src/CMakeFiles/HaptixWorldPlugin.dir/WrenchHelper.cc.s
 .PHONY : WrenchHelper.cc.s
+
+__/examples/polhemus_example.o: __/examples/polhemus_example.c.o
+.PHONY : __/examples/polhemus_example.o
+
+# target to build an object file
+__/examples/polhemus_example.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/__/examples/polhemus_example.c.o
+.PHONY : __/examples/polhemus_example.c.o
+
+__/examples/polhemus_example.i: __/examples/polhemus_example.c.i
+.PHONY : __/examples/polhemus_example.i
+
+# target to preprocess a source file
+__/examples/polhemus_example.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/__/examples/polhemus_example.c.i
+.PHONY : __/examples/polhemus_example.c.i
+
+__/examples/polhemus_example.s: __/examples/polhemus_example.c.s
+.PHONY : __/examples/polhemus_example.s
+
+# target to generate assembly for a file
+__/examples/polhemus_example.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/__/examples/polhemus_example.c.s
+.PHONY : __/examples/polhemus_example.c.s
+
+__/examples/polhemus_example_continuous.o: __/examples/polhemus_example_continuous.c.o
+.PHONY : __/examples/polhemus_example_continuous.o
+
+# target to build an object file
+__/examples/polhemus_example_continuous.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/__/examples/polhemus_example_continuous.c.o
+.PHONY : __/examples/polhemus_example_continuous.c.o
+
+__/examples/polhemus_example_continuous.i: __/examples/polhemus_example_continuous.c.i
+.PHONY : __/examples/polhemus_example_continuous.i
+
+# target to preprocess a source file
+__/examples/polhemus_example_continuous.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/__/examples/polhemus_example_continuous.c.i
+.PHONY : __/examples/polhemus_example_continuous.c.i
+
+__/examples/polhemus_example_continuous.s: __/examples/polhemus_example_continuous.c.s
+.PHONY : __/examples/polhemus_example_continuous.s
+
+# target to generate assembly for a file
+__/examples/polhemus_example_continuous.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/__/examples/polhemus_example_continuous.c.s
+.PHONY : __/examples/polhemus_example_continuous.c.s
+
+__/examples/polhemus_example_multiple_sensors.o: __/examples/polhemus_example_multiple_sensors.c.o
+.PHONY : __/examples/polhemus_example_multiple_sensors.o
+
+# target to build an object file
+__/examples/polhemus_example_multiple_sensors.c.o:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/__/examples/polhemus_example_multiple_sensors.c.o
+.PHONY : __/examples/polhemus_example_multiple_sensors.c.o
+
+__/examples/polhemus_example_multiple_sensors.i: __/examples/polhemus_example_multiple_sensors.c.i
+.PHONY : __/examples/polhemus_example_multiple_sensors.i
+
+# target to preprocess a source file
+__/examples/polhemus_example_multiple_sensors.c.i:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/__/examples/polhemus_example_multiple_sensors.c.i
+.PHONY : __/examples/polhemus_example_multiple_sensors.c.i
+
+__/examples/polhemus_example_multiple_sensors.s: __/examples/polhemus_example_multiple_sensors.c.s
+.PHONY : __/examples/polhemus_example_multiple_sensors.s
+
+# target to generate assembly for a file
+__/examples/polhemus_example_multiple_sensors.c.s:
+	cd /home/haptix-e15-463/haptix/haptix_controller/handsim/build && $(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/__/examples/polhemus_example_multiple_sensors.c.s
+.PHONY : __/examples/polhemus_example_multiple_sensors.c.s
 
 __/include/handsim/moc_HaptixGUIPlugin.o: __/include/handsim/moc_HaptixGUIPlugin.cxx.o
 .PHONY : __/include/handsim/moc_HaptixGUIPlugin.o
@@ -743,6 +857,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... package"
 	@echo "... package_source"
+	@echo "... polhemus_example"
+	@echo "... polhemus_example_continuous"
+	@echo "... polhemus_example_multiple_sensors"
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... EMGStruct.o"
@@ -772,6 +889,15 @@ help:
 	@echo "... WrenchHelper.o"
 	@echo "... WrenchHelper.i"
 	@echo "... WrenchHelper.s"
+	@echo "... __/examples/polhemus_example.o"
+	@echo "... __/examples/polhemus_example.i"
+	@echo "... __/examples/polhemus_example.s"
+	@echo "... __/examples/polhemus_example_continuous.o"
+	@echo "... __/examples/polhemus_example_continuous.i"
+	@echo "... __/examples/polhemus_example_continuous.s"
+	@echo "... __/examples/polhemus_example_multiple_sensors.o"
+	@echo "... __/examples/polhemus_example_multiple_sensors.i"
+	@echo "... __/examples/polhemus_example_multiple_sensors.s"
 	@echo "... __/include/handsim/moc_HaptixGUIPlugin.o"
 	@echo "... __/include/handsim/moc_HaptixGUIPlugin.i"
 	@echo "... __/include/handsim/moc_HaptixGUIPlugin.s"

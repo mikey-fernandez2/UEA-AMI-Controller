@@ -9,4 +9,7 @@
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/CMakeFiles/gtest.dir
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/test/CMakeFiles/gtest_main.dir
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/hx_controller.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/polhemus_example.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/polhemus_example_continuous.dir
+/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/polhemus_example_multiple_sensors.dir
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/uninstall.dir

@@ -50,6 +50,8 @@ main(void)
       printf("%d %lf %lf %lf %lf %lf %lf\n", poses[i].station_id,
              poses[i].x, poses[i].y, poses[i].z,
              poses[i].roll, poses[i].pitch, poses[i].yaw);
+  
+    printf("\n");
   }
 
   polhemus_disconnect_usb(conn);

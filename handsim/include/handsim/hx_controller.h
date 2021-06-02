@@ -24,4 +24,6 @@
 
 void sigHandler(int signo);
 
+void pose_cb(double x, double y, double z, double roll, double pitch, double yaw);
+
 #endif

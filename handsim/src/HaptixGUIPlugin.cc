@@ -717,8 +717,9 @@ void HaptixGUIPlugin::Load(sdf::ElementPtr _elem)
       boost::bind(&HaptixGUIPlugin::OnKeyPress, this, _1));
 
   // hydra trigger maps to grasp
-  this->hydraSub = this->node->Subscribe("~/hydra",
-      &HaptixGUIPlugin::OnHydra, this);
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // this->hydraSub = this->node->Subscribe("~/hydra",
+  //     &HaptixGUIPlugin::OnHydra, this);
 
   // Setup default arm starting pose
   this->armStartPose.rot = gazebo::math::Quaternion(0, 0, -1.5707);
@@ -737,9 +738,9 @@ void HaptixGUIPlugin::Load(sdf::ElementPtr _elem)
   this->optitrackAliveSub = this->node->Subscribe("~/optitrack/" +
       haptix::tracking::Optitrack::optitrackAliveTopic,
       &HaptixGUIPlugin::OnOptitrackAlive, this);
-
-  this->pollTrackingThread = boost::thread(
-      std::bind(&HaptixGUIPlugin::PollTracking, this));
+////////////////////////////////////////////////////////////////////////////////////////////
+  // this->pollTrackingThread = boost::thread(
+  //     std::bind(&HaptixGUIPlugin::PollTracking, this));
 
   // latched subscription, HaptixControlPlugin only publishes this once.
   this->initializeSub = this->node->Subscribe("~/haptix_load",

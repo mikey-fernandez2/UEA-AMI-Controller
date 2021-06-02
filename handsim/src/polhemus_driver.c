@@ -80,7 +80,7 @@ polhemus_write_usb(polhemus_conn_t* conn, unsigned char* data, int data_len)
 {
   int ret;
   int sent;
-  int timeout = 50;
+  int timeout = 500;
   if((ret = libusb_bulk_transfer(conn->usb_handle, conn->write_endpoint,
                                  data, data_len, &sent, timeout)))
   {
@@ -95,7 +95,7 @@ polhemus_read_usb(polhemus_conn_t* conn, unsigned char* data, int data_len)
 {
   int ret;
   int received;
-  int timeout = 50;
+  int timeout = 500;
   if((ret = libusb_bulk_transfer(conn->usb_handle, conn->read_endpoint,
                                  data, data_len, &received, timeout)))
   {

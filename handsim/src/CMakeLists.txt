@@ -56,7 +56,7 @@ add_library(HaptixWorldPlugin SHARED HaptixWorldPlugin.cc WrenchHelper.cc)
 target_link_libraries(HaptixControlPlugin
   ${GAZEBO_LIBRARIES}
   ${IGNITION-TRANSPORT_LIBRARIES}
-  HaptixTracking)
+  HaptixTracking haptix-comm)
 
 target_link_libraries(HaptixGUIPlugin ${GAZEBO_LIBRARIES}
   ${QT_LIBRARIES} ${PROTOBUF_LIBRARIES} ${IGNITION-TRANSPORT_LIBRARIES}
@@ -79,6 +79,15 @@ install (TARGETS HaptixControlPlugin HaptixGUIPlugin HaptixWorldPlugin DESTINATI
 ########################################
 #add_executable(hx_controller hx_controller.c)
 #target_link_libraries(hx_controller ${HAPTIX-COMM_LIBRARIES} m)
+
+add_executable(polhemus_example ../examples/polhemus_example.c)
+target_link_libraries(polhemus_example HaptixTracking)
+
+add_executable(polhemus_example_continuous ../examples/polhemus_example_continuous.c)
+target_link_libraries(polhemus_example_continuous HaptixTracking)
+
+add_executable(polhemus_example_multiple_sensors ../examples/polhemus_example_multiple_sensors.c)
+target_link_libraries(polhemus_example_multiple_sensors HaptixTracking)
 
 # Modified Version
 add_executable(hx_controller hx_controller_mod.c printFunctions.c EMGStruct.c calculateCommands.c logging.c)

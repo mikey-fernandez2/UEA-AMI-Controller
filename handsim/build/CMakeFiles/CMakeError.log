@@ -1,21 +1,21 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec223547575/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec223547575.dir/build.make CMakeFiles/cmTryCompileExec223547575.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec2688374651/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2688374651.dir/build.make CMakeFiles/cmTryCompileExec2688374651.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec223547575.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec223547575.dir/CheckSymbolExists.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTryCompileExec223547575
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec223547575.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec223547575.dir/CheckSymbolExists.c.o  -o cmTryCompileExec223547575 -rdynamic 
-CMakeFiles/cmTryCompileExec223547575.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTryCompileExec2688374651.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2688374651.dir/CheckSymbolExists.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec2688374651
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2688374651.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec2688374651.dir/CheckSymbolExists.c.o  -o cmTryCompileExec2688374651 -rdynamic 
+CMakeFiles/cmTryCompileExec2688374651.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-make[1]: *** [cmTryCompileExec223547575] Error 1
+make[1]: *** [cmTryCompileExec2688374651] Error 1
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-make: *** [cmTryCompileExec223547575/fast] Error 2
+make: *** [cmTryCompileExec2688374651/fast] Error 2
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -35,38 +35,38 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec2122190488/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2122190488.dir/build.make CMakeFiles/cmTryCompileExec2122190488.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec5292753/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec5292753.dir/build.make CMakeFiles/cmTryCompileExec5292753.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec2122190488.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec2122190488.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
-Linking C executable cmTryCompileExec2122190488
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2122190488.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec2122190488.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2122190488 -rdynamic -lpthreads 
+Building C object CMakeFiles/cmTryCompileExec5292753.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec5292753.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec5292753
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec5292753.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec5292753.dir/CheckFunctionExists.c.o  -o cmTryCompileExec5292753 -rdynamic -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [cmTryCompileExec2122190488] Error 1
+make[1]: *** [cmTryCompileExec5292753] Error 1
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-make: *** [cmTryCompileExec2122190488/fast] Error 2
+make: *** [cmTryCompileExec5292753/fast] Error 2
 
 
 Determining if the Q_WS_WIN exist failed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec3671529180/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3671529180.dir/build.make CMakeFiles/cmTryCompileExec3671529180.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec2676287232/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2676287232.dir/build.make CMakeFiles/cmTryCompileExec2676287232.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3671529180.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec3671529180.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTryCompileExec2676287232.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec2676287232.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
    return ((int*)(&Q_WS_WIN))[argc];
                    ^
-make[1]: *** [CMakeFiles/cmTryCompileExec3671529180.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: *** [CMakeFiles/cmTryCompileExec2676287232.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-make: *** [cmTryCompileExec3671529180/fast] Error 2
+make: *** [cmTryCompileExec2676287232/fast] Error 2
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
@@ -86,19 +86,19 @@ int main(int argc, char** argv)
 Determining if the Q_WS_QWS exist failed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec2334846127/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2334846127.dir/build.make CMakeFiles/cmTryCompileExec2334846127.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1090089755/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1090089755.dir/build.make CMakeFiles/cmTryCompileExec1090089755.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2334846127.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec2334846127.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTryCompileExec1090089755.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec1090089755.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
    return ((int*)(&Q_WS_QWS))[argc];
                    ^
-make[1]: *** [CMakeFiles/cmTryCompileExec2334846127.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: *** [CMakeFiles/cmTryCompileExec1090089755.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-make: *** [cmTryCompileExec2334846127/fast] Error 2
+make: *** [cmTryCompileExec1090089755/fast] Error 2
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
@@ -118,19 +118,19 @@ int main(int argc, char** argv)
 Determining if the Q_WS_MAC exist failed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command:/usr/bin/make "cmTryCompileExec686687887/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec686687887.dir/build.make CMakeFiles/cmTryCompileExec686687887.dir/build
+Run Build Command:/usr/bin/make "cmTryCompileExec1373188339/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1373188339.dir/build.make CMakeFiles/cmTryCompileExec1373188339.dir/build
 make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 /usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec686687887.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec686687887.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTryCompileExec1373188339.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec1373188339.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
    return ((int*)(&Q_WS_MAC))[argc];
                    ^
-make[1]: *** [CMakeFiles/cmTryCompileExec686687887.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: *** [CMakeFiles/cmTryCompileExec1373188339.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-make: *** [cmTryCompileExec686687887/fast] Error 2
+make: *** [cmTryCompileExec1373188339/fast] Error 2
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */

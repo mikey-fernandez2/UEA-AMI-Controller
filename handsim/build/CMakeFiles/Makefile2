@@ -92,6 +92,9 @@ src/all: src/CMakeFiles/HaptixGUIPlugin.dir/all
 src/all: src/CMakeFiles/HaptixTracking.dir/all
 src/all: src/CMakeFiles/HaptixWorldPlugin.dir/all
 src/all: src/CMakeFiles/hx_controller.dir/all
+src/all: src/CMakeFiles/polhemus_example.dir/all
+src/all: src/CMakeFiles/polhemus_example_continuous.dir/all
+src/all: src/CMakeFiles/polhemus_example_multiple_sensors.dir/all
 .PHONY : src/all
 
 # Convenience name for "clean" pass in the directory.
@@ -100,6 +103,9 @@ src/clean: src/CMakeFiles/HaptixGUIPlugin.dir/clean
 src/clean: src/CMakeFiles/HaptixTracking.dir/clean
 src/clean: src/CMakeFiles/HaptixWorldPlugin.dir/clean
 src/clean: src/CMakeFiles/hx_controller.dir/clean
+src/clean: src/CMakeFiles/polhemus_example.dir/clean
+src/clean: src/CMakeFiles/polhemus_example_continuous.dir/clean
+src/clean: src/CMakeFiles/polhemus_example_multiple_sensors.dir/clean
 .PHONY : src/clean
 
 # Convenience name for "preinstall" pass in the directory.
@@ -282,6 +288,111 @@ src/CMakeFiles/hx_controller.dir/clean:
 
 # clean rule for target.
 clean: src/CMakeFiles/hx_controller.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/polhemus_example.dir
+
+# All Build rule for target.
+src/CMakeFiles/polhemus_example.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+	$(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/depend
+	$(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  31
+	@echo "Built target polhemus_example"
+.PHONY : src/CMakeFiles/polhemus_example.dir/all
+
+# Include target in all.
+all: src/CMakeFiles/polhemus_example.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/polhemus_example.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/polhemus_example.dir/rule
+
+# Convenience name for target.
+polhemus_example: src/CMakeFiles/polhemus_example.dir/rule
+.PHONY : polhemus_example
+
+# clean rule for target.
+src/CMakeFiles/polhemus_example.dir/clean:
+	$(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/clean
+.PHONY : src/CMakeFiles/polhemus_example.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/polhemus_example.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/polhemus_example_continuous.dir
+
+# All Build rule for target.
+src/CMakeFiles/polhemus_example_continuous.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+	$(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/depend
+	$(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  32
+	@echo "Built target polhemus_example_continuous"
+.PHONY : src/CMakeFiles/polhemus_example_continuous.dir/all
+
+# Include target in all.
+all: src/CMakeFiles/polhemus_example_continuous.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/polhemus_example_continuous.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example_continuous.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/polhemus_example_continuous.dir/rule
+
+# Convenience name for target.
+polhemus_example_continuous: src/CMakeFiles/polhemus_example_continuous.dir/rule
+.PHONY : polhemus_example_continuous
+
+# clean rule for target.
+src/CMakeFiles/polhemus_example_continuous.dir/clean:
+	$(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/clean
+.PHONY : src/CMakeFiles/polhemus_example_continuous.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/polhemus_example_continuous.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/polhemus_example_multiple_sensors.dir
+
+# All Build rule for target.
+src/CMakeFiles/polhemus_example_multiple_sensors.dir/all: src/CMakeFiles/HaptixTracking.dir/all
+	$(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/depend
+	$(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles  33
+	@echo "Built target polhemus_example_multiple_sensors"
+.PHONY : src/CMakeFiles/polhemus_example_multiple_sensors.dir/all
+
+# Include target in all.
+all: src/CMakeFiles/polhemus_example_multiple_sensors.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/polhemus_example_multiple_sensors.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule
+
+# Convenience name for target.
+polhemus_example_multiple_sensors: src/CMakeFiles/polhemus_example_multiple_sensors.dir/rule
+.PHONY : polhemus_example_multiple_sensors
+
+# clean rule for target.
+src/CMakeFiles/polhemus_example_multiple_sensors.dir/clean:
+	$(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/clean
+.PHONY : src/CMakeFiles/polhemus_example_multiple_sensors.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/polhemus_example_multiple_sensors.dir/clean
 .PHONY : clean
 
 #=============================================================================

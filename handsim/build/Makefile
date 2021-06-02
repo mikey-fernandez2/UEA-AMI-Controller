@@ -248,6 +248,45 @@ hx_controller/fast:
 .PHONY : hx_controller/fast
 
 #=============================================================================
+# Target rules for targets named polhemus_example
+
+# Build rule for target.
+polhemus_example: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 polhemus_example
+.PHONY : polhemus_example
+
+# fast build rule for target.
+polhemus_example/fast:
+	$(MAKE) -f src/CMakeFiles/polhemus_example.dir/build.make src/CMakeFiles/polhemus_example.dir/build
+.PHONY : polhemus_example/fast
+
+#=============================================================================
+# Target rules for targets named polhemus_example_continuous
+
+# Build rule for target.
+polhemus_example_continuous: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 polhemus_example_continuous
+.PHONY : polhemus_example_continuous
+
+# fast build rule for target.
+polhemus_example_continuous/fast:
+	$(MAKE) -f src/CMakeFiles/polhemus_example_continuous.dir/build.make src/CMakeFiles/polhemus_example_continuous.dir/build
+.PHONY : polhemus_example_continuous/fast
+
+#=============================================================================
+# Target rules for targets named polhemus_example_multiple_sensors
+
+# Build rule for target.
+polhemus_example_multiple_sensors: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 polhemus_example_multiple_sensors
+.PHONY : polhemus_example_multiple_sensors
+
+# fast build rule for target.
+polhemus_example_multiple_sensors/fast:
+	$(MAKE) -f src/CMakeFiles/polhemus_example_multiple_sensors.dir/build.make src/CMakeFiles/polhemus_example_multiple_sensors.dir/build
+.PHONY : polhemus_example_multiple_sensors/fast
+
+#=============================================================================
 # Target rules for targets named gtest
 
 # Build rule for target.
@@ -346,6 +385,9 @@ help:
 	@echo "... HaptixTracking"
 	@echo "... HaptixWorldPlugin"
 	@echo "... hx_controller"
+	@echo "... polhemus_example"
+	@echo "... polhemus_example_continuous"
+	@echo "... polhemus_example_multiple_sensors"
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... INTEGRATION_physics"
