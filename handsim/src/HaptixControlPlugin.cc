@@ -187,12 +187,12 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
   this->cameraToHeadSensor = math::Pose(0, 0.10, 0, 0.0, -0.3, 0.0);
 
   // transformation from camera to marker in camera frame (optitrack)
-  this->headMarker = math::Pose(0, 0, 0, M_PI/2, 0, 0);
-  if (_sdf->HasElement("optitrack_head_to_marker_offset"))
-  {
-    this->headMarker =
-      _sdf->Get<math::Pose>("optitrack_head_to_marker_offset");
-  }
+  // this->headMarker = math::Pose(0, 0, 0, M_PI/2, 0, 0);
+  // if (_sdf->HasElement("optitrack_head_to_marker_offset"))
+  // {
+  //   this->headMarker =
+  //     _sdf->Get<math::Pose>("optitrack_head_to_marker_offset");
+  // }
 
 
   this->viewpointRotationsSub = this->gazeboNode->Subscribe(
@@ -200,12 +200,12 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
           &HaptixControlPlugin::OnToggleViewpointRotations, this);
 
   // hydra sensor offset
-  this->baseLinkToHydraSensor = math::Pose(0, -0.3, 0, 0, 1.0*M_PI, -0.5*M_PI);
-  if (_sdf->HasElement("hydra_control_point_offset"))
-  {
-    this->baseLinkToHydraSensor =
-      _sdf->Get<math::Pose>("hydra_control_point_offset");
-  }
+  // this->baseLinkToHydraSensor = math::Pose(0, -0.3, 0, 0, 1.0*M_PI, -0.5*M_PI);
+  // if (_sdf->HasElement("hydra_control_point_offset"))
+  // {
+  //   this->baseLinkToHydraSensor =
+  //     _sdf->Get<math::Pose>("hydra_control_point_offset");
+  // }
 
   // for controller time control
   this->lastTime = this->world->GetSimTime();
@@ -294,21 +294,21 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
   this->torqueFilter.SetFc(1.0, 1000.0);
 
   // Subscribe to Optitrack update topics: head, arm and origin
-  this->optitrackHeadSub = this->gazeboNode->Subscribe
-              ("~/optitrack/" + haptix::tracking::Optitrack::headTrackerName,
-              &HaptixControlPlugin::OnUpdateOptitrackHead, this);
-  this->optitrackArmSub = this->gazeboNode->Subscribe
-              ("~/optitrack/" + haptix::tracking::Optitrack::armTrackerName,
-              &HaptixControlPlugin::OnUpdateOptitrackArm, this);
-  this->optitrackMonitorSub = this->gazeboNode->Subscribe
-              ("~/optitrack/" + haptix::tracking::Optitrack::originTrackerName,
-              &HaptixControlPlugin::OnUpdateOptitrackMonitor, this);
+  // this->optitrackHeadSub = this->gazeboNode->Subscribe
+  //             ("~/optitrack/" + haptix::tracking::Optitrack::headTrackerName,
+  //             &HaptixControlPlugin::OnUpdateOptitrackHead, this);
+  // this->optitrackArmSub = this->gazeboNode->Subscribe
+  //             ("~/optitrack/" + haptix::tracking::Optitrack::armTrackerName,
+  //             &HaptixControlPlugin::OnUpdateOptitrackArm, this);
+  // this->optitrackMonitorSub = this->gazeboNode->Subscribe
+  //             ("~/optitrack/" + haptix::tracking::Optitrack::originTrackerName,
+  //             &HaptixControlPlugin::OnUpdateOptitrackMonitor, this);
 
-  this->optitrack.SetWorld(this->world->GetName());
+  // this->optitrack.SetWorld(this->world->GetName());
 
-  // Start receiving Optitrack tracking updates.
-  this->optitrackThread = std::make_shared<std::thread>(std::thread(
-      &haptix::tracking::Optitrack::StartReception, std::ref(this->optitrack)));
+  // // Start receiving Optitrack tracking updates.
+  // this->optitrackThread = std::make_shared<std::thread>(std::thread(
+  //     &haptix::tracking::Optitrack::StartReception, std::ref(this->optitrack)));
   // initialize polhemus
   this->havePolhemus = false;
   if (!(this->polhemusConn = polhemus_connect_usb(LIBERTY_HS_VENDOR_ID,

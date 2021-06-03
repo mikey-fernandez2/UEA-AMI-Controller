@@ -7,8 +7,8 @@
     <optitrack_head_to_marker_offset>0 0 0 0 1.5707 0</optitrack_head_to_marker_offset> -->
     <!-- <base_joint>elbow</base_joint>
     <base_link>forearm</base_link> -->
-    <base_joint>elbow_dummy</base_joint>
-    <base_link>forearm_dummy</base_link>
+    <base_joint>shoulder</base_joint>
+    <base_link>upper_arm</base_link>
     <base_link_sensor_offset>0 0 0.07 3.14159 -1.570796 0</base_link_sensor_offset>
     <world_screen_location>0 -0.65 1.5 0 0 0</world_screen_location>
     <base_pid_pos cmd_max="10000.0" cmd_min="-10000.0" d="10.0" i="0" p="700.0"/>
@@ -401,11 +401,12 @@
 
   <!-- Model SDF copied from gazebo_models -->
   <!-- EDITED 04/16/2021 - New dummy base joint, base link so that elbow joint can be controlled as all others -->
-<joint name='elbow_dummy' type='revolute'>
-    <child>forearm_dummy</child>
+  <!-- EDITED 06/03/2021 - Move base joint to the shoulder so Polhemus can be integrated -->
+<joint name='shoulder' type='revolute'>
+    <child>upper_arm</child>
     <parent>world</parent>
     <axis>
-      <xyz>0 0 1.0</xyz>
+      <xyz>1.0 0 0</xyz>
       <limit>
         <lower>0</lower>
         <upper>0</upper>
@@ -433,12 +434,14 @@
       </ode>
     </physics>
   </joint>
-  <link name='forearm_dummy'>
+  <!-- <link name='forearm_dummy'> -->
+  <link name='upper_arm'>
     <gravity>0</gravity>
-    <pose>0.00660504 -0.294573 0.119123 -1.21334e-13 2.77556e-17 -0.0115373</pose>
+    <!-- <pose>0.00660504 -0.294573 0.119123 -1.21334e-13 2.77556e-17 -0.0115373</pose> -->
+    <pose>0.03 -0.3 0.159123 -1.57 0.52 0.52</pose>
     <inertial>
       <pose>-0.000589428 -0.0733139 0.0215526 0 0 0</pose>
-      <mass>0.0997005</mass>
+      <mass>0.2097005</mass>
       <inertia>
         <ixx>0.0004998</ixx>
         <ixy>-5.83136e-06</ixy>
@@ -447,12 +450,24 @@
         <iyz>3.76069e-05</iyz>
         <izz>0.000498862</izz>
       </inertia>
-    </inertial>  
+    </inertial>
+    <visual name='visual'>
+      <geometry>
+        <mesh>
+          <uri>model://mpl_haptix_right_forearm/meshes/forearm.stl</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <script>
+          <name>Gazebo/FlatBlack</name>
+        </script>
+      </material>
+    </visual> 
   </link>
 
   <joint name='elbow' type='revolute'>
     <child>forearm</child>
-    <parent>forearm_dummy</parent>
+    <parent>upper_arm</parent>
     <axis>
       <xyz>0 0 1.0</xyz>    <!-- x is up-down, y is rotate about long axis, z is move in the horizontal plane-->
       <limit>
