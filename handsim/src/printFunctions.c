@@ -218,7 +218,7 @@ void printPolhemus(polhemus_pose_t *poses, int num_poses)
 {
   int i;
   for(i = 0; i < num_poses; i++)
-    printf("%d: %lf %lf %lf %lf %lf %lf\n", poses[i].station_id,
+    printf("%d: %08.3lf %08.3lf %08.3lf %08.3lf %08.3lf %08.3lf\n", poses[i].station_id,
           poses[i].x, poses[i].y, poses[i].z,
           poses[i].roll, poses[i].pitch, poses[i].yaw);
 

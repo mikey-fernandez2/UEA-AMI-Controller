@@ -157,19 +157,19 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
 
   // get polhemus_source model location
   // for tracking polhemus setup, where is the source in the world frame
-  this->polhemusSourceModel = this->world->GetModel("polhemus_source");
+  // this->polhemusSourceModel = this->world->GetModel("polhemus_source");
 
-  if (!this->polhemusSourceModel)
-  {
-    /// \TODO: make this a sdf param for the plugin?
-    gzwarn << "no polhemus_source model detected using predefine location.\n";
-    this->sourceWorldPose = math::Pose(-0.5, 0, 1.3, 3.14159, 0, -1.57159);
-  }
-  else
-  {
-    this->sourceWorldPose = this->polhemusSourceModel->GetWorldPose();
-  }
-  gzdbg << "Polhemus Source Pose [" << this->sourceWorldPose << "]\n";
+  // if (!this->polhemusSourceModel)
+  // {
+  //   /// \TODO: make this a sdf param for the plugin?
+  //   gzwarn << "no polhemus_source model detected using predefine location.\n";
+  //   this->sourceWorldPose = math::Pose(-0.5, 0, 1.3, 3.14159, 0, -1.57159);
+  // }
+  // else
+  // {
+  //   this->sourceWorldPose = this->polhemusSourceModel->GetWorldPose();
+  // }
+  // gzdbg << "Polhemus Source Pose [" << this->sourceWorldPose << "]\n";
   this->sourceWorldPoseArmOffset = math::Pose();
   this->sourceWorldPoseHeadOffset = math::Pose();
   // transform from polhemus sensor orientation to base link frame
@@ -195,9 +195,9 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
   // }
 
 
-  this->viewpointRotationsSub = this->gazeboNode->Subscribe(
-      "~/motion_tracking/viewpoint_rotations",
-          &HaptixControlPlugin::OnToggleViewpointRotations, this);
+  // this->viewpointRotationsSub = this->gazeboNode->Subscribe(
+  //     "~/motion_tracking/viewpoint_rotations",
+  //         &HaptixControlPlugin::OnToggleViewpointRotations, this);
 
   // hydra sensor offset
   // this->baseLinkToHydraSensor = math::Pose(0, -0.3, 0, 0, 1.0*M_PI, -0.5*M_PI);
@@ -310,36 +310,36 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
   // this->optitrackThread = std::make_shared<std::thread>(std::thread(
   //     &haptix::tracking::Optitrack::StartReception, std::ref(this->optitrack)));
   // initialize polhemus
-  this->havePolhemus = false;
-  if (!(this->polhemusConn = polhemus_connect_usb(LIBERTY_HS_VENDOR_ID,
-                                                  LIBERTY_HS_PRODUCT_ID,
-                                                  LIBERTY_HS_WRITE_ENDPOINT,
-                                                  LIBERTY_HS_READ_ENDPOINT)))
-  {
-    fprintf(stderr, "Failed to connect to Polhemus\n");
-  }
-  else
-  {
-    if (polhemus_init_comm(this->polhemusConn, 10))
-    {
-      fprintf(stderr, "Failed to initialize comms with Polhemus\n");
-    }
-    else
-    {
-      this->havePolhemus = true;
-      msgs::GzString msg;
-      msg.set_data("have_polhemus");
-      this->gazeboNode->Publish<msgs::GzString>("~/arrange_polhemus", msg);
-    }
-  }
+  // this->havePolhemus = false;
+  // if (!(this->polhemusConn = polhemus_connect_usb(LIBERTY_HS_VENDOR_ID,
+  //                                                 LIBERTY_HS_PRODUCT_ID,
+  //                                                 LIBERTY_HS_WRITE_ENDPOINT,
+  //                                                 LIBERTY_HS_READ_ENDPOINT)))
+  // {
+  //   fprintf(stderr, "Failed to connect to Polhemus\n");
+  // }
+  // else
+  // {
+  //   if (polhemus_init_comm(this->polhemusConn, 10))
+  //   {
+  //     fprintf(stderr, "Failed to initialize comms with Polhemus\n");
+  //   }
+  //   else
+  //   {
+  //     this->havePolhemus = true;
+  //     msgs::GzString msg;
+  //     msg.set_data("have_polhemus");
+  //     this->gazeboNode->Publish<msgs::GzString>("~/arrange_polhemus", msg);
+  //   }
+  // }
 
-  // spin up a separate thread to get polhemus sensor data
-  // update target pose if using polhemus
-  if (this->havePolhemus)
-    this->polhemusThread = boost::thread(
-      boost::bind(&HaptixControlPlugin::UpdatePolhemus, this));
-  else
-    gzwarn << "No usable polhemus setup detected.\n";
+  // // spin up a separate thread to get polhemus sensor data
+  // // update target pose if using polhemus
+  // if (this->havePolhemus)
+  //   this->polhemusThread = boost::thread(
+  //     boost::bind(&HaptixControlPlugin::UpdatePolhemus, this));
+  // else
+  //   gzwarn << "No usable polhemus setup detected.\n";
 
   this->haveKeyboard = false;
 

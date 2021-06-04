@@ -25,7 +25,7 @@ int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *
     fprintf(log, "Start time, %s\n", asctime(timeinfo));
     fprintf(log, "usingEMG, %d, usingPolhemus, %d\n", usingEMG ? 1 : 0, usingPolhemus ? 1 : 0);
 
-    fprintf(log, "Motors, %d, Joints, %d, Contact Sensors, %d, IMUs, %d, Update rate, %06.2f\n", robotInfo->motor_count, robotInfo->joint_count, robotInfo->contact_sensor_count,
+    fprintf(log, "Motors, %d, Joints, %d, Contact Sensors, %d, IMUs, %d, Update rate, %f\n", robotInfo->motor_count, robotInfo->joint_count, robotInfo->contact_sensor_count,
         robotInfo->imu_count, robotInfo->update_rate);
     
     fprintf(log, "\nMotor, Lower Limit, Upper Limit\n");
@@ -33,24 +33,24 @@ int startLogging(char *logPath, bool usingEMG, bool usingPolhemus, hxRobotInfo *
     int i, j;
     for (i = 0; i < robotInfo->motor_count; ++i)
     {
-        fprintf(log, "%d, %06.3f, %06.3f\n", i, robotInfo->joint_limit[i][0], robotInfo->joint_limit[i][1]);
+        fprintf(log, "%d, %f, %f\n", i, robotInfo->joint_limit[i][0], robotInfo->joint_limit[i][1]);
     }
 
     if (usingEMG)
     {
-        fprintf(log, "\nActivation Time Constant, %05.3f, Deactivation Time Constant, %05.3f\n", emg->tauA, emg->tauD);
-        fprintf(log, "Natural frequency, %05.2f\n", dynamics->freq_n);
+        fprintf(log, "\nActivation Time Constant, %f, Deactivation Time Constant, %f\n", emg->tauA, emg->tauD);
+        fprintf(log, "Natural frequency, %f\n", dynamics->freq_n);
 
         fprintf(log, "\nElectrode, Min, Max\n");
         for (j = 0; j < emg->numElec; ++j)
         {
-            fprintf(log, "%d, %08.3f, %08.3f\n", j, emg->bounds[j + emg->numElec], emg->bounds[j]);
+            fprintf(log, "%d, %f, %f\n", j, emg->bounds[j + emg->numElec], emg->bounds[j]);
         }
         
         fprintf(log, "\nPair, Min Delta, Max Delta\n");
         for (j = 0; j < emg->numElec/2; ++j)
         {
-            fprintf(log, "%d-%d, %06.3f, %06.3f\n", 2*j, 2*j + 1, emg->deltas[j + emg->numElec/2], emg->deltas[j]);
+            fprintf(log, "%d-%d, %f, %f\n", 2*j, 2*j + 1, emg->deltas[j + emg->numElec/2], emg->deltas[j]);
         }
     }
 
@@ -109,25 +109,25 @@ int addLog(char *logPath, bool usingEMG, bool usingPolhemus, long double runTime
     {
         ref_pos = cmd->ref_pos[i];
         // this is stupid but the only way I can ensure the formatting is consistent for easy automated processing
-        if (fabs((double)ref_pos) >= 10000)
-        {
-            ref_pos = 0;
-        }
+        // if (fabs((double)ref_pos) >= 10000)
+        // {
+        //     ref_pos = 0;
+        // }
 
-        fprintf(log, ", %07.2f, %07.2f", ref_pos, sensor->motor_pos[i]);
+        fprintf(log, ", %f, %f", ref_pos, sensor->motor_pos[i]);
     }
     for (i = 0; i < robotInfo->joint_count; ++i)
     {
-        fprintf(log, ", %07.2f", sensor->joint_pos[i]);
+        fprintf(log, ", %f", sensor->joint_pos[i]);
     }
 
     if (usingEMG)
     {
-        fprintf(log, ", %06.3f, %d, %d, %d", emg->samplingFreq, emg->trigger, emg->switch1, emg->switch2);
+        fprintf(log, ", %f, %d, %d, %d", emg->samplingFreq, emg->trigger, emg->switch1, emg->switch2);
 
         for (i = 0; i < emg->numElec; ++i)
         {
-            fprintf(log, ", %8.3f, %8.3f, %8.3f", emg->rawEMG[i], emg->normedEMG[i], emg->muscleAct[i]);
+            fprintf(log, ", %f, %f, %f", emg->rawEMG[i], emg->normedEMG[i], emg->muscleAct[i]);
         }
     }
 

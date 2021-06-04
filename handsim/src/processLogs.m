@@ -6,7 +6,7 @@
 clc; clear; close all;
 
 %% Enter log filename
-logName = 'EMGLong.csv';
+logName = 'Both.csv';
 
 %% Extract Values
 logDir = '/home/haptix-e15-463/haptix/haptix_controller/logs';
@@ -55,17 +55,19 @@ if (usingEMG)
     rawEMG = loggedData(:, emgBase + 4:3:emgBase + 4 + 3*numElec - 1);
     normedEMG = loggedData(:, emgBase + 5:3:emgBase + 5 + 3*numElec - 1);
     muscleAct = loggedData(:, emgBase + 6:3:emgBase + 6 + 3*numElec - 1);
-elseif (usingPolhemus && ~usingEMG)
+end
+
+if (usingPolhemus && ~usingEMG)
     polhemusBase = jointStart + numJoints;
     trackers = zeros(size(loggedData, 1), 6, numPoses);
     for i = 1:numPoses
-        trackers(:, :, i) = loggedData(:, polhemusBase + 6*(i - 1):polhemusBase + 6*i);
+        trackers(:, :, i) = loggedData(:, polhemusBase + 6*(i - 1):polhemusBase + 6*i - 1);
     end
 elseif (usingPolhemus && usingEMG)
-    polhemusBase = jointStart + numJoints + 3*numElec + 6;
+    polhemusBase = jointStart + numJoints + 3*numElec + 4;
     trackers = zeros(size(loggedData, 1), 6, numPoses);
     for i = 1:numPoses
-        trackers(:, :, i) = loggedData(:, polhemusBase + 6*(i - 1):polhemusBase + 6*i);
+        trackers(:, :, i) = loggedData(:, polhemusBase + 6*(i - 1):polhemusBase + 6*i - 1);
     end
 end
 
@@ -77,7 +79,7 @@ for i = 1:numMotors
     subplot(floor((numMotors + 1)/2), 2, i)
     plot(times, motorPos(:, i), 'b', times, ref_pos(:, i), 'b--')
     xlim([times(1) times(end)])
-    ylabel(['Motor ' num2str(i)])
+    ylabel(['Motor ' num2str(i - 1)])
     xlabel('Time (s)')
 end
 legend({'Position', 'Command'})
@@ -90,7 +92,7 @@ for i = 1:numJoints
     subplot(floor((numJoints + 1)/2), 2, i)
     plot(times, jointPos(:, i), 'b')
     xlim([times(1) times(end)])
-    ylabel(['Joint ' num2str(i)])
+    ylabel(['Joint ' num2str(i - 1)])
     xlabel('Time (s)')
 end
 set(gcf, 'Position', get(0, 'Screensize'));
@@ -103,7 +105,7 @@ if (usingEMG)
         plot(times, normedEMG(:, i))
         xlim([times(1) times(end)])
         xlabel('Time (s)')
-        ylabel(['Electrode ' num2str(i)])
+        ylabel(['Electrode ' num2str(i - 1)])
     end
     set(gcf, 'Position', get(0, 'Screensize'));
     
@@ -114,7 +116,7 @@ if (usingEMG)
         plot(times, muscleAct(:, i))
         xlim([times(1) times(end)])
         xlabel('Time (s)')
-        ylabel(['Electrode ' num2str(i)])
+        ylabel(['Electrode ' num2str(i - 1)])
     end
     set(gcf, 'Position', get(0, 'Screensize'));
 end
@@ -127,9 +129,10 @@ if (usingPolhemus)
         quat = eul2quat([trackers(:, 4, i), trackers(:, 5, i), trackers(:, 6, i)], 'ZYX');
         subplot(2, 2, i)
         quiver3(trackers(:, 1, i), trackers(:, 2, i), trackers(:, 3, i), quat(:, 1), quat(:, 2), quat(:, 3))
-        xlabel('x (m)')
-        ylabel('y (m)')
-        zlabel('z (m)')
+        xlabel('x (cm)')
+        ylabel('y (cm)')
+        zlabel('z (cm)')
+        title(['Tracker ' num2str(i - 1)])
     end
     set(gcf, 'Position', get(0, 'Screensize'));
 end

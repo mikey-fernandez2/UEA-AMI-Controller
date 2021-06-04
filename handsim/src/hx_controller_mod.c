@@ -25,11 +25,6 @@ void sigHandler(int signo)
   running = 0;
 }
 
-void pose_cb(double x, double y, double z, double roll, double pitch, double yaw)
-{
-  printf("%lf %lf %lf %lf %lf %lf\n", x, y, z, roll, pitch, yaw);
-}
-
 // All printing functions relegated to "printFunctions.c"
 
 //////////////////////////////////////////////////
@@ -252,13 +247,6 @@ int main(int argc, char **argv)
   gettimeofday(&startT, NULL);
   long double first = startT.tv_sec + 1e-6*startT.tv_usec;
 
-  if (usingPolhemus)
-  {
-    if(!polhemus_start_continuous_mode(conn, pose_cb))
-    {
-      return -1;
-    }
-  }
   // Send commands, read from sensors
   while (running)
   {
@@ -275,7 +263,7 @@ int main(int argc, char **argv)
 
     if (usingPolhemus)
     {
-      // polhemus_get_poses(conn, poses, &num_poses, 10);
+      polhemus_get_poses(conn, poses, &num_poses, 10);
       // printPolhemus(poses, num_poses); // print received Polhemus poses
     }
 
@@ -315,21 +303,22 @@ int main(int argc, char **argv)
     }
 
     // Debug output: Print the state.
-    if (!(counter % 20))
+    if (!(counter % 100))
     {
       // printCommand(&robotInfo, &cmd);
       printState(&robotInfo, &sensor); // printState() cannot be commented out or the limb won't move [however, function was modified to do nothing]
      
-      if (logging)
-      {
-        gettimeofday(&endT);
-        long double sec = endT.tv_sec + 1e-6*endT.tv_usec;
+    }
 
-        if (!addLog(logPath, usingEMG, usingPolhemus, sec - first, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
-        {
-          printf("addLog(): error.\n");
-          return -1;
-        }
+    if (logging)
+    {
+      gettimeofday(&endT);
+      long double sec = endT.tv_sec + 1e-6*endT.tv_usec;
+
+      if (!addLog(logPath, usingEMG, usingPolhemus, sec - first, &robotInfo, &cmd, &sensor, poses, num_poses, emg))
+      {
+        printf("addLog(): error.\n");
+        return -1;
       }
     }
 
@@ -363,7 +352,10 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  polhemus_disconnect_usb(conn);
+  if (usingPolhemus)
+  {
+    polhemus_disconnect_usb(conn);
+  }
 
   // stop the log
   if (logging)
