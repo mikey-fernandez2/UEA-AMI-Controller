@@ -36,6 +36,8 @@
 #include <memory>
 #include <thread>
 #include <vector>
+#include <fstream>
+#include <iostream>
 
 #include <gazebo/physics/physics.hh>
 #include <gazebo/sensors/sensors.hh>
@@ -74,6 +76,9 @@ namespace gazebo
 
     /// \brief Gazebo loop: Update the controller on every simulation tick.
     private: void GazeboUpdateStates();
+
+    /// \brief pipe polhemus poses to be accessed by controller
+    private: int polhemus_send_poses(const polhemus_pose_t *poses, int numPoses);
 
     /// \brief convenience utility function
     private: math::Pose convertPolhemusToPose(double x, double y, double z,

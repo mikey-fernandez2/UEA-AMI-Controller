@@ -37,6 +37,10 @@ thread
 -
 vector
 -
+fstream
+-
+iostream
+-
 gazebo/physics/physics.hh
 -
 gazebo/sensors/sensors.hh

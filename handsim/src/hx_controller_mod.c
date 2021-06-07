@@ -85,29 +85,8 @@ int main(int argc, char **argv)
   struct timeval startT, endT;
 
   // Polhemus settings
-  polhemus_conn_t* conn;
-  double x, y, z, roll, pitch, yaw; // these hold the pose from the sensors
   int num_poses = 4;                // have 4 sensors
   polhemus_pose_t poses[num_poses];
-
-  ///////////////////////////////
-  if (usingPolhemus)
-  {
-    if(!(conn = polhemus_connect_usb(LIBERTY_HS_VENDOR_ID,
-                                     LIBERTY_HS_PRODUCT_ID,
-                                     LIBERTY_HS_WRITE_ENDPOINT,
-                                     LIBERTY_HS_READ_ENDPOINT)))
-    {
-      fprintf(stderr, "Failed to connect to Polhemus\n");
-      return -1;
-    }
-
-    if(polhemus_init_comm(conn, 100))
-    {
-      fprintf(stderr, "Failed to initialize comms to Polhemus\n");
-      return -1;
-    }
-  }
 
   ///////////////////////////////
   // Capture SIGINT signal.
@@ -141,6 +120,13 @@ int main(int argc, char **argv)
   // Uncomment this block to start logging.
   // if (hxs_start_logging("/tmp/log/") != hxOK)
   //   printf("hxs_start_logging(): error.\n");
+
+  ///////////////////////////////
+  // Set up for receiving Polhemus poses
+  int poseMsgLen = 56*num_poses;
+  char buffer0[poseMsgLen];
+  char *polPipe = "/tmp/poses"; // Pipe for receiving Polhemus poses
+  int fd0;                      // Pipe file descriptor
 
   ///////////////////////////////
   // Set up for receiving EMG data
@@ -226,7 +212,7 @@ int main(int argc, char **argv)
 
   if (logging)
   {
-    // strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file
+    // strcat(logPath, logFile); strcat(logPath, ".txt"); // get full path to log file in .txt format
     strcat(logPath, logFile); strcat(logPath, ".csv"); // get full path to log file in .csv format
 
     if (!startLogging(logPath, usingEMG, usingPolhemus, &robotInfo, emg, dynamics, num_poses))
@@ -259,12 +245,23 @@ int main(int argc, char **argv)
 
     loopStart = clock(); // for adjusting wait time
 
-    ////// Perform sensor reading below
-
+    /////////////////////////////
+    // Perform sensor reading below
     if (usingPolhemus)
     {
-      polhemus_get_poses(conn, poses, &num_poses, 10);
-      // printPolhemus(poses, num_poses); // print received Polhemus poses
+      fd0 = open(polPipe, O_RDONLY);
+      n = read(fd0, buffer0, poseMsgLen);
+      close(fd0);
+
+      if (n >= 0)
+      {
+        memcpy(poses, buffer0, poseMsgLen);
+        printPolhemus(poses, num_poses);
+      }
+      else
+      {
+        printf("read(): Error reading Polhemus poses.\n");
+      }
     }
 
     if (usingEMG)
@@ -273,6 +270,7 @@ int main(int argc, char **argv)
       fd1 = open(EMGPipe, O_RDONLY); 
       n = read(fd1, buffer, msgLen);
       close(fd1);
+
       if (n >= 0) 
       {
         memcpy(emg, buffer, msgLen); // copy incoming EMG data into EMG struct
@@ -350,11 +348,6 @@ int main(int argc, char **argv)
   {
     printf("hx_close(): Request error.\n");
     return -1;
-  }
-
-  if (usingPolhemus)
-  {
-    polhemus_disconnect_usb(conn);
   }
 
   // stop the log
