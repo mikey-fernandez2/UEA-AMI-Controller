@@ -421,6 +421,22 @@
       </dynamics>
       <use_parent_model_frame>1</use_parent_model_frame>
     </axis>
+    <!-- <axis2>
+      <xyz>0 0 1.0</xyz>
+      <limit>
+        <lower>0</lower>
+        <upper>0</upper>
+        <effort>10000</effort>
+        <velocity>-1</velocity>
+      </limit>
+      <dynamics>
+        <damping>20</damping>
+        <friction>0</friction>
+        <spring_reference>0</spring_reference>
+        <spring_stiffness>0</spring_stiffness>
+      </dynamics>
+      <use_parent_model_frame>1</use_parent_model_frame>
+    </axis2> -->
     <physics>
       <provide_feedback>1</provide_feedback>
       <ode>
@@ -438,9 +454,11 @@
   <link name='upper_arm'>
     <gravity>0</gravity>
     <!-- <pose>0.00660504 -0.294573 0.119123 -1.21334e-13 2.77556e-17 -0.0115373</pose> -->
-    <pose>0.03 -0.3 0.159123 -1.57 0.52 0.52</pose>
+    <!-- <pose>0.03 -0.3 0.159123 -1.57 0.52 0.52</pose> -->
+    <pose>0.1 -0.2 0.259123 0 0.78 0.78</pose>
     <inertial>
-      <pose>-0.000589428 -0.0733139 0.0215526 0 0 0</pose>
+      <pose>0.1 -0.2 0.259123 0 0.78 0.78</pose>
+      <!-- <pose>-0.000589428 -0.0733139 0.0215526 0 0 0</pose> -->
       <mass>0.2097005</mass>
       <inertia>
         <ixx>0.0004998</ixx>
@@ -453,9 +471,13 @@
     </inertial>
     <visual name='visual'>
       <geometry>
-        <mesh>
+        <cylinder>
+          <radius>.03</radius>
+          <length>.30</length>
+        </cylinder>
+        <!-- <mesh>
           <uri>model://mpl_haptix_right_forearm/meshes/forearm.stl</uri>
-        </mesh>
+        </mesh> -->
       </geometry>
       <material>
         <script>

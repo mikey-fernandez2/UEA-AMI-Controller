@@ -175,9 +175,11 @@ void HaptixControlPlugin::Load(physics::ModelPtr _parent,
   this->sourceWorldPoseArmOffset = math::Pose();
   this->sourceWorldPoseHeadOffset = math::Pose();
   // transform from polhemus sensor orientation to base link frame
-  // -0.3 meters towards wrist from elbow
-  // 90 degrees yaw to the left
-  this->baseLinkToArmSensor = math::Pose(0, -0.3, 0, 0, 0, -0.5*M_PI);
+  // !!! OLD -0.3 meters towards wrist from elbow
+  // !!! OLD 90 degrees yaw to the left
+  // -0.3 meteres towards elbow from shoulder
+  // 90 degrees yaw to the right
+  this->baseLinkToArmSensor = math::Pose(0, -0.3, 0, 0, 0, 0.5*M_PI);
   if (_sdf->HasElement("base_link_to_arm_sensor_pose"))
   {
     this->baseLinkToArmSensor =

@@ -219,8 +219,8 @@
           <arm inc_key="w" dec_key="s" index="0" increment=0.025></arm>
           <arm inc_key="a" dec_key="d" index="1" increment=0.025></arm>
           <arm inc_key="q" dec_key="e" index="2" increment=0.025></arm>
-          <arm inc_key="W" dec_key="S" index="3" increment=0.025></arm>
-          <arm inc_key="A" dec_key="D" index="4" increment=0.025></arm>
+          <arm inc_key="W" dec_key="S" index="4" increment=0.025></arm>
+          <arm inc_key="A" dec_key="D" index="3" increment=0.025></arm>
           <arm inc_key="Q" dec_key="E" index="5" increment=0.025></arm>
         </arm_keys>
 
@@ -488,7 +488,7 @@
 
       <initial_arrangement>no_polhemus</initial_arrangement>
       <arrangement name="no_polhemus">
-        <pose model="polhemus_source">0.5 0 1.0 3.1416 0 3.1416</pose>
+        <pose model="polhemus_source">0.5 0 1.0 -3.1416 0 -3.1416</pose>
       </arrangement>
       <arrangement name="have_polhemus">
         <pose model="polhemus_source">-.5 0 1.3 0 3.1416 1.57</pose>
