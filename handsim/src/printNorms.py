@@ -20,8 +20,6 @@ def printNorms(norms):
           norms[18], norms[22], norms[26], norms[30],
           norms[19], norms[23], norms[27], norms[31]))
 
-    return
-
 def main(path):    
     try:
         print("Accessing EMG normalization factors...\n")
@@ -33,8 +31,6 @@ def main(path):
 
     except OSError as e:
         print("Could not open file - %s" % e)
-
-    return
 
 if __name__ == "__main__":
     path = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
