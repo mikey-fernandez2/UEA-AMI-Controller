@@ -1,0 +1,87 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 74,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/lib",
+			"paths" : 
+			[
+				"src/libHaptixTracking.so"
+			],
+			"targetId" : "HaptixTracking::@145eef247bfb46b6828c",
+			"targetIndex" : 2,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/lib",
+			"paths" : 
+			[
+				"src/libHaptixControlPlugin.so"
+			],
+			"targetId" : "HaptixControlPlugin::@145eef247bfb46b6828c",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/lib",
+			"paths" : 
+			[
+				"src/libHaptixGUIPlugin.so"
+			],
+			"targetId" : "HaptixGUIPlugin::@145eef247bfb46b6828c",
+			"targetIndex" : 1,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/lib",
+			"paths" : 
+			[
+				"src/libHaptixWorldPlugin.so"
+			],
+			"targetId" : "HaptixWorldPlugin::@145eef247bfb46b6828c",
+			"targetIndex" : 3,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src",
+		"source" : "src"
+	}
+}

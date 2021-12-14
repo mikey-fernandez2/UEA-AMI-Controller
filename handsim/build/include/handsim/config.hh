@@ -11,5 +11,5 @@
 #define HANDSIM_VERSION_HEADER "handsim, version 1.0.0\nCopyright (C) 2014 Open Source Robotics Foundation.\nReleased under the Apache 2.0 License.\n\n"
 
 /* #undef BUILD_TYPE_PROFILE */
-/* #undef BUILD_TYPE_DEBUG */
+#define BUILD_TYPE_DEBUG 1
 /* #undef BUILD_TYPE_RELEASE */

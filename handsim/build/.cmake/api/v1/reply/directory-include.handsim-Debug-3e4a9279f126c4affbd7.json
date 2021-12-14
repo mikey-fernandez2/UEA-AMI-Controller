@@ -1,0 +1,75 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"handsim_install_includes"
+		],
+		"files" : 
+		[
+			"cmake/Utils.cmake",
+			"include/handsim/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 73,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 73,
+				"parent" : 3
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 2,
+			"component" : "headers",
+			"destination" : "include/handsim",
+			"paths" : 
+			[
+				"build/include/handsim/handsim.hh"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "headers",
+			"destination" : "include/handsim/handsim",
+			"paths" : 
+			[
+				"include/handsim/MotorInfo.hh",
+				"include/handsim/OptitrackBridge.hh",
+				"include/handsim/polhemus_driver.h"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "include/handsim",
+		"source" : "include/handsim"
+	}
+}

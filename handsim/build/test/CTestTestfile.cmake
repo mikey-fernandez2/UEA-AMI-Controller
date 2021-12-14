@@ -4,6 +4,6 @@
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
-SUBDIRS(integration)
-SUBDIRS(performance)
-SUBDIRS(regression)
+subdirs("integration")
+subdirs("performance")
+subdirs("regression")

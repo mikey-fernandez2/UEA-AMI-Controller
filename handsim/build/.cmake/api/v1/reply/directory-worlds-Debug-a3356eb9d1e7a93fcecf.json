@@ -1,0 +1,48 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"worlds/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/worlds",
+			"paths" : 
+			[
+				"worlds/arat.world",
+				"worlds/arat_left.world",
+				"worlds/handsim_empty.world",
+				"worlds/luke_hand.world",
+				"worlds/luke_left_hand.world",
+				"worlds/primitive_hand.world"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "worlds",
+		"source" : "worlds"
+	}
+}

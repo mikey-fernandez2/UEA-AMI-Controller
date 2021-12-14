@@ -6,7 +6,7 @@ set(HANDSIM_CONFIG_INCLUDED TRUE)
 list(APPEND HANDSIM_INCLUDE_DIRS /usr/local/include)
 list(APPEND HANDSIM_INCLUDE_DIRS /usr/local/include/HANDSIM)
 
-list(APPEND HANDSIM_LIBRARY_DIRS /usr/local/lib/x86_64-linux-gnu)
+list(APPEND HANDSIM_LIBRARY_DIRS /usr/local/lib)
 
 list(APPEND HANDSIM_CFLAGS -I/usr/local/include)
 list(APPEND HANDSIM_CFLAGS -I/usr/local/include/HANDSIM)
@@ -14,7 +14,7 @@ list(APPEND HANDSIM_CFLAGS -I/usr/local/include/HANDSIM)
 foreach(lib HaptixTracking)
   set(onelib "${lib}-NOTFOUND")
   find_library(onelib ${lib}
-    PATHS /usr/local/lib/x86_64-linux-gnu
+    PATHS /usr/local/lib
     NO_DEFAULT_PATH
     )
   if(NOT onelib)
@@ -39,5 +39,5 @@ foreach(dep )
   list(APPEND HANDSIM_LIBRARIES ${${dep_lib}_LIBRARIES})
 endforeach()
 
-list(APPEND HANDSIM_LDFLAGS -Wl,-rpath,/usr/local/lib/x86_64-linux-gnu)
-list(APPEND HANDSIM_LDFLAGS -L/usr/local/lib/x86_64-linux-gnu)
+list(APPEND HANDSIM_LDFLAGS -Wl,-rpath,/usr/local/lib)
+list(APPEND HANDSIM_LDFLAGS -L/usr/local/lib)

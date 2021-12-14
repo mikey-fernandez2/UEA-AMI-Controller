@@ -1,0 +1,107 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"models/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/models",
+			"paths" : 
+			[
+				"models/mpl_haptix_right_forearm"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/models",
+			"paths" : 
+			[
+				"models/mpl_haptix_left_forearm"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/models",
+			"paths" : 
+			[
+				"models/spring_buckle_test_1"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/models",
+			"paths" : 
+			[
+				"models/spring_buckle_test_2"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/models",
+			"paths" : 
+			[
+				"models/spring_buckle_test_3"
+			],
+			"type" : "directory"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "models",
+		"source" : "models"
+	}
+}

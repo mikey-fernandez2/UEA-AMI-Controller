@@ -1,0 +1,58 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"images/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 20,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "/usr/local/share/gazebo-7/media/gui/arat/arat_icons",
+			"paths" : 
+			[
+				"images/spring.jpg",
+				"images/grasp_1.jpg",
+				"images/grasp_3.jpg",
+				"images/grasp_2.jpg",
+				"images/grasp_4.jpg",
+				"images/grasp_5.jpg",
+				"images/grasp_6.jpg",
+				"images/grip_1.jpg",
+				"images/grip_3.jpg",
+				"images/grip_2.jpg",
+				"images/grip_4.jpg",
+				"images/hand_left.svg",
+				"images/hand_right.svg",
+				"images/pinch_1.jpg",
+				"images/pinch_2.jpg",
+				"images/settings.png"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "images",
+		"source" : "images"
+	}
+}

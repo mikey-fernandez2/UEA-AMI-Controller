@@ -1,47 +1,57 @@
 # Install script for directory: /home/haptix-e15-463/haptix/haptix_controller/handsim/worlds
 
 # Set the install prefix
-IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/usr/local")
-ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
+endif()
+string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
 # Set the install configuration name.
-IF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
-  IF(BUILD_TYPE)
-    STRING(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
+if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
+  if(BUILD_TYPE)
+    string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
-  ELSE(BUILD_TYPE)
-    SET(CMAKE_INSTALL_CONFIG_NAME "RelWithDebInfo")
-  ENDIF(BUILD_TYPE)
-  MESSAGE(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
-ENDIF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
+  else()
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+  endif()
+  message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
+endif()
 
 # Set the component getting installed.
-IF(NOT CMAKE_INSTALL_COMPONENT)
-  IF(COMPONENT)
-    MESSAGE(STATUS "Install component: \"${COMPONENT}\"")
-    SET(CMAKE_INSTALL_COMPONENT "${COMPONENT}")
-  ELSE(COMPONENT)
-    SET(CMAKE_INSTALL_COMPONENT)
-  ENDIF(COMPONENT)
-ENDIF(NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT)
+  if(COMPONENT)
+    message(STATUS "Install component: \"${COMPONENT}\"")
+    set(CMAKE_INSTALL_COMPONENT "${COMPONENT}")
+  else()
+    set(CMAKE_INSTALL_COMPONENT)
+  endif()
+endif()
 
 # Install shared libraries without execute permission?
-IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  SET(CMAKE_INSTALL_SO_NO_EXE "1")
-ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
 
-IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/x86_64-linux-gnu-objdump")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
    "/usr/local/share/gazebo-7/worlds/arat.world;/usr/local/share/gazebo-7/worlds/arat_left.world;/usr/local/share/gazebo-7/worlds/handsim_empty.world;/usr/local/share/gazebo-7/worlds/luke_hand.world;/usr/local/share/gazebo-7/worlds/luke_left_hand.world;/usr/local/share/gazebo-7/worlds/primitive_hand.world")
-  IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-  IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/usr/local/share/gazebo-7/worlds" TYPE FILE FILES
+  endif()
+  file(INSTALL DESTINATION "/usr/local/share/gazebo-7/worlds" TYPE FILE FILES
     "/home/haptix-e15-463/haptix/haptix_controller/handsim/worlds/arat.world"
     "/home/haptix-e15-463/haptix/haptix_controller/handsim/worlds/arat_left.world"
     "/home/haptix-e15-463/haptix/haptix_controller/handsim/worlds/handsim_empty.world"
@@ -49,5 +59,5 @@ FILE(INSTALL DESTINATION "/usr/local/share/gazebo-7/worlds" TYPE FILE FILES
     "/home/haptix-e15-463/haptix/haptix_controller/handsim/worlds/luke_left_hand.world"
     "/home/haptix-e15-463/haptix/haptix_controller/handsim/worlds/primitive_hand.world"
     )
-ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+endif()
 

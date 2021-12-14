@@ -1,0 +1,99 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"handsim_install_includes"
+		],
+		"files" : 
+		[
+			"cmake/Utils.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 232,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 73,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 1,
+				"line" : 265,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 1,
+				"line" : 279,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 1,
+				"line" : 289,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 2,
+			"component" : "headers",
+			"destination" : "include/handsim/handsim",
+			"paths" : 
+			[
+				"build/include/handsim/config.hh"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "pkgconfig",
+			"destination" : "lib/pkgconfig",
+			"paths" : 
+			[
+				"build/cmake/pkgconfig/handsim.pc"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "cmake",
+			"destination" : "lib/cmake/handsim",
+			"paths" : 
+			[
+				"build/handsim-config.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "cmake",
+			"destination" : "/usr/local/lib/cmake/handsim",
+			"paths" : 
+			[
+				"build/cmake/polhemus_driver-config.cmake"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	}
+}

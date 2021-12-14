@@ -1,0 +1,344 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						4,
+						8,
+						9,
+						10
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7454354c6fd7e11fb416.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						14
+					]
+				},
+				{
+					"build" : "src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-src-Debug-ee7314a4cbcde547863e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						10,
+						11,
+						12,
+						13
+					]
+				},
+				{
+					"build" : "include",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-include-Debug-7ead17b99bffc88b66bb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "include"
+				},
+				{
+					"build" : "include/handsim",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-include.handsim-Debug-3e4a9279f126c4affbd7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "include/handsim"
+				},
+				{
+					"build" : "test",
+					"childIndexes" : 
+					[
+						5,
+						6,
+						7
+					],
+					"jsonFile" : "directory-test-Debug-451c0598f41488bb20b9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "test",
+					"targetIndexes" : 
+					[
+						8,
+						9
+					]
+				},
+				{
+					"build" : "test/integration",
+					"jsonFile" : "directory-test.integration-Debug-42768210a3330e997378.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 0,
+					"source" : "test/integration",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6
+					]
+				},
+				{
+					"build" : "test/performance",
+					"jsonFile" : "directory-test.performance-Debug-125ef407b41daa8ca794.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 0,
+					"source" : "test/performance"
+				},
+				{
+					"build" : "test/regression",
+					"jsonFile" : "directory-test.regression-Debug-d19897ea52e8f071b066.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 0,
+					"source" : "test/regression",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "images",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-images-Debug-23f3aa88b6be84efaea2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "images"
+				},
+				{
+					"build" : "worlds",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-worlds-Debug-a3356eb9d1e7a93fcecf.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "worlds"
+				},
+				{
+					"build" : "models",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-models-Debug-8a7a8cb5ba4e4faf3688.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "models"
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					],
+					"name" : "handsim",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "HaptixControlPlugin::@145eef247bfb46b6828c",
+					"jsonFile" : "target-HaptixControlPlugin-Debug-78870543e50c743bed0d.json",
+					"name" : "HaptixControlPlugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "HaptixGUIPlugin::@145eef247bfb46b6828c",
+					"jsonFile" : "target-HaptixGUIPlugin-Debug-48612e3c304cc5ec84df.json",
+					"name" : "HaptixGUIPlugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "HaptixTracking::@145eef247bfb46b6828c",
+					"jsonFile" : "target-HaptixTracking-Debug-be3bbef9d8a9c0bb5df6.json",
+					"name" : "HaptixTracking",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "HaptixWorldPlugin::@145eef247bfb46b6828c",
+					"jsonFile" : "target-HaptixWorldPlugin-Debug-9cf34930aadadf199f04.json",
+					"name" : "HaptixWorldPlugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "INTEGRATION_physics::@52504cf1fab3ef64dbbb",
+					"jsonFile" : "target-INTEGRATION_physics-Debug-aa862537b253ef4783d9.json",
+					"name" : "INTEGRATION_physics",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "INTEGRATION_sim_api::@52504cf1fab3ef64dbbb",
+					"jsonFile" : "target-INTEGRATION_sim_api-Debug-db050cbb847f876c9c87.json",
+					"name" : "INTEGRATION_sim_api",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "INTEGRATION_sim_api_client::@52504cf1fab3ef64dbbb",
+					"jsonFile" : "target-INTEGRATION_sim_api_client-Debug-e6646850055c0dc17895.json",
+					"name" : "INTEGRATION_sim_api_client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "REGRESSION_86_motor_values::@a791830527a2bfcfc28f",
+					"jsonFile" : "target-REGRESSION_86_motor_values-Debug-98c4086dc4af21e299ee.json",
+					"name" : "REGRESSION_86_motor_values",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gtest::@36f028580bb02cc8272a",
+					"jsonFile" : "target-gtest-Debug-2fdeb7de6a2466d510c9.json",
+					"name" : "gtest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gtest_main::@36f028580bb02cc8272a",
+					"jsonFile" : "target-gtest_main-Debug-6dd304c771d896dac123.json",
+					"name" : "gtest_main",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "hx_controller::@145eef247bfb46b6828c",
+					"jsonFile" : "target-hx_controller-Debug-99cd4b3a7ce755832b21.json",
+					"name" : "hx_controller",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polhemus_example::@145eef247bfb46b6828c",
+					"jsonFile" : "target-polhemus_example-Debug-33a63d404fc427d24268.json",
+					"name" : "polhemus_example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polhemus_example_continuous::@145eef247bfb46b6828c",
+					"jsonFile" : "target-polhemus_example_continuous-Debug-ac74f88ffae8a3b3f887.json",
+					"name" : "polhemus_example_continuous",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polhemus_example_multiple_sensors::@145eef247bfb46b6828c",
+					"jsonFile" : "target-polhemus_example_multiple_sensors-Debug-7a1bd36c7e522a7e531b.json",
+					"name" : "polhemus_example_multiple_sensors",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-ed0446cd99bd64c11980.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/haptix-e15-463/haptix/haptix_controller/handsim/build",
+		"source" : "/home/haptix-e15-463/haptix/haptix_controller/handsim"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
