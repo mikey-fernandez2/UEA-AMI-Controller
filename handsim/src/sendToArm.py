@@ -61,6 +61,12 @@ class LUKE_Command_Sender:
 
         print("Exited safely.")
 
+    def printCommandHex(self):
+        """ Print the commands in a nice format """
+        print("[", ", ".join("{:02x}".format(i) for i in self.dACI1),
+             "] [", ", ".join("{:02x}".format(i) for i in self.dACI2),
+              "] [", ", ".join("{:02x}".format(i) for i in self.dACI3), "]")
+
     def writeEmptyCommand(self):
         """ Write an empty command """
         self.dACI1 = [0]*8
@@ -100,7 +106,7 @@ class LUKE_Command_Sender:
             self.dACI2 = commands[8:16]
             self.dACI3 = commands[16:]
 
-            print(self.dACI1, self.dACI2, self.dACI3)
+            self.printCommandHex()
 
             if (self.dACI1 == [] or self.dACI2 == [] or self.dACI3 == []):
                 ValueError('receiveData(): empty commands send to arm')

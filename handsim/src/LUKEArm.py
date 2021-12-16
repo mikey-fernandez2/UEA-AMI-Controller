@@ -214,6 +214,13 @@ class LUKEArm:
             else:
                 raise ValueError(f'messageCallback(): Invalid sensor message arbitration_id {msg_id:03X}')
 
+    def passiveUpdate(self, duration):
+        # stupid little function to passively update sensors
+        T = time.time()
+        while time.time() - T < duration:
+            self.recv()
+            self.messageCallback()
+
     def isValidCommand(self):
         # returns true if all commands in the list are between 0x000 and 0x3FF (0 to 1023)
         commandCAN = self.command.values()
@@ -324,42 +331,40 @@ class LUKEArm:
 
     def shortModeSwitch(self, newMode):
         # only do anything if arm mode is not correct?
-        if self.modeRead != newMode:
+        while self.modeSend != newMode and self.modeRead != newMode:
             self.buildEmptyCommand()
             self.changeMode(0x3FF)
             T = time.time()
             while (time.time() - T < 0.1):
                 self.recv()
-                if self.arbitration_id == self.syncID:
-                    self.syncAck()
+                self.messageCallback()
+
                 self.sendCommand()
-                time.sleep(0.003)
+                time.sleep(0.007)
 
             self.changeMode(0x000)
             self.sendCommand()
 
-        if self.modeRead == 0: # initial power on
-            pass
-        elif newMode in [1, 2, 3]:
-            self.changeMode(newMode)
-        else:
-            raise ValueError(f'shortModeSwitch(): wrong mode {newMode} for mode switch')
+            if newMode in [1, 2, 3]:
+                self.changeMode(newMode)
+            else:
+                raise ValueError(f'shortModeSwitch(): wrong mode {newMode} for mode switch')
 
     def longModeSwitch(self):
-        self.buildEmptyCommand()
-        self.changeMode(0x3FF)
-        T = time.time()
-        while (time.time() - T < 1):
-            self.recv()
-            if self.arbitration_id == self.syncID:
-                self.syncAck()
+        while self.modeRead != 0:
+            self.buildEmptyCommand()
+            self.changeMode(0x3FF)
+            T = time.time()
+            while (time.time() - T < 1):
+                self.recv()
+                self.messageCallback()
+    
+                self.sendCommand()
+                time.sleep(0.007)
+    
+            self.changeMode(0x000)
             self.sendCommand()
-            time.sleep(0.003)
 
-        self.changeMode(0x000)
-        self.sendCommand()
-
-        self.changeMode(0) # put arm into standby
         print("In standby mode")
 
     def changeMode(self, modeSend):
@@ -396,14 +401,14 @@ class LUKEArm:
                     # index = self.genSinusoid(3, 'indexPos')
                     mrp = self.sensors['mrpPos']
                     # mrp = self.genSinusoid(3, 'mrpPos')
-                    # wristRot = self.sensors('wristRot')
+                    # wristRot = self.sensors['wristRot']
                     wristRot = self.genSinusoid(10, 'wristRot')
                     wristFlex = self.sensors['wristFlex']
                     # wristFlex = self.genSinusoid(3, 'wristFlex')
                     humPos = self.sensors['humPos']
                     # humPos = self.genSinusoid(10, 'humPos')
-                    elbow = self.sensors['elbowPos']
-                    # elbow = self.genSinusoid(10, 'elbowPos')
+                    # elbow = self.sensors['elbowPos']
+                    elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
@@ -417,35 +422,43 @@ class LUKEArm:
                 count += 1
 
         except KeyboardInterrupt:
-            print("\nProgram Exited")
+            print("\nControl ended.")
 
         except can.CanError:
             print("\nCAN Error")
 
     ## FOR TESTING BELOW
-    def goToZeroCom(self, period):
+    def goToZeroPos(self, period):
+        self.shortModeSwitch(1) # make sure to switch to arm mode first!
+
         try:
             startPos = self.getCurPos()
+            print("Start pos: ", startPos)
             start = time.time()
             elapsedTime = 0
-            while(elapsedTime/period < 1):
+            while(elapsedTime < period):
                 # handle arm communication
                 self.recv()
                 self.messageCallback()
 
                 # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
-                posCom = [elapsedTime/period*pos for pos in startPos]
+                posCom = [(1 - elapsedTime/period)*pos for pos in startPos]
+                # print(posCom)
 
-                self.buildCommand(posCom=posCom)
+                # try changing just one joint since this is all weird?
+                sendCom = startPos[0:4] + [posCom[4]] + startPos[5:]
+                print(sendCom)
+
+                self.buildCommand(posCom=sendCom)
 
                 # update time
                 elapsedTime = time.time() - start
 
-        except KeyboardInterrupt:
-            print("\nProgram Exited")
-
         except can.CanError:
             print("\nCAN Error")
+
+        print("Final command: ", posCom)
+        print("End pos: ", self.getCurPos())
 
         print("\nAt zero position. Ending this movement.")
 
@@ -485,15 +498,18 @@ def main(usingEMG, usingLogging):
         while True:
             run = callback()
 
-            print(f"Original mode read: {arm.modeRead}")
-            print(f"Original mode send: {arm.modeSend}")
-
             if run == "startup":
                 print("\n\nGoing through startup...")
                 arm.startup()
+                arm.passiveUpdate(0.1)
                 print("\n")
 
             elif run in movementModes:
+                # this is dumb but I have to make sure that you're in hand mode when you want to switch to arm from standby
+                if (arm.modeSend in [-1, 0]):
+                    print(f"\nInvalid command {run} from standby mode - run startup first")
+                    continue
+
                 print(f"\n\nSwitching to {run} mode...")
                 arm.shortModeSwitch(movementModes.index(run) + 1)
                 arm.mainControlLoop(emg, controller) if usingEMG else arm.mainControlLoop()
@@ -506,7 +522,7 @@ def main(usingEMG, usingLogging):
 
             elif run == "zero": # TODO fix this joint zeroing thing, it isn't doing what I asked
                 print("\n\nZeroing joints...")
-                arm.goToZeroCom(10)
+                arm.goToZeroPos(10)
                 print("\n")
             
             elif run == "exit":
@@ -514,9 +530,6 @@ def main(usingEMG, usingLogging):
 
             else:
                 print("Invalid command.")
-            
-            print(f"New mode send: {arm.modeSend}")
-            print(f"New mode read: {arm.modeRead}")
 
     except KeyboardInterrupt:
         print("\nExiting.")
