@@ -5,21 +5,18 @@
 
 import sys
 import time
-import os
 import can
 from can.interface import Bus
+import threading
+import zmq
 
 # what I need to do in this file
     # set up the reader to receive the arm commands
-    # then open and read from the command file
-    # send these commands to the arm (arbitrarily fast, knowing arm will only accept ~100 Hz commands)
+    # then make the socket that will receive commands
+    # send these commands to the arm (arbitrarily fast, knowing arm will only execute ~100 Hz commands)
 
 class LUKE_Command_Sender:
-    def __init__(self, commPath):
-
-        self.path = commPath
-        self.emptyCom = bytearray([0]*24) # all zeros
-
+    def __init__(self, socketAddr):
         self.dACI1 = None
         self.dACI2 = None
         self.dACI3 = None
@@ -37,6 +34,14 @@ class LUKE_Command_Sender:
         self.dACI2 = None
         self.dACI3 = None
 
+        self.receiveThread = None
+
+        self.ctx = zmq.Context()
+        self.sock = self.ctx.socket(zmq.SUB)
+        self.sock.connect(socketAddr)
+        self.sock.subscribe("") # Subscribe to all topics
+        self.notStopped = True
+
         self.startup()
 
     def __del__(self):
@@ -45,71 +50,79 @@ class LUKE_Command_Sender:
             # shutdown the bus
             self.bus.shutdown()
         except:
-            pass
+            print("__del__: Bus shutdown error")
 
         try:
-            # delete the empty file
-            os.remove(self.path)
+            # close the socket
+            self.sock.close()
+            self.ctx.term()
         except:
-            pass
+            print("__del__: Socket closing error")
 
         print("Exited safely.")
 
     def writeEmptyCommand(self):
-        """ Write an empty command to the file """
-        with open(self.path, 'wb') as output:
-            output.write(self.emptyCom)
+        """ Write an empty command """
+        self.dACI1 = [0]*8
+        self.dACI2 = [0]*8
+        self.dACI3 = [0]*8
 
     def startup(self):
         """ Ensure the arm will be started up with a "do nothing" command for safety """
-
-        # do nothing until the arm is on?
+        # do nothing until the arm is on - this is a blocking call, so no issues
         self.bus.recv()
         print("First message received - beginning communication with the arm")
 
         self.writeEmptyCommand()
 
+        self.sendThread = threading.Thread(target=self.sendData)
+        self.sendThread.daemon = True
+        self.sendThread.start()
+
     def safetyCheck(self, commands):
         return len(commands) != 0 and commands[0:8] != [] and commands[8:16] != [] and commands[16:] != []
 
     def receiveData(self):
-        try:
-            while True:
-                # open the commands file, read, prepare to send
-                with open(self.path, 'rb') as fifo:
-                    commsPacked = fifo.read()
+        while True:
+            try:
+                commsPacked = self.sock.recv()
+            except KeyboardInterrupt:
+                break
 
-                commands = list(commsPacked)
-                # try to do some safey checks here?
-                if not self.safetyCheck(commands):
-                    ValueError('receiveData(): problem with received data')
+            commands = list(commsPacked)
 
-                # should be packing just a bunch of bytes, just access the right elements of the byte array here?
-                self.dACI1 = commands[0:8]
-                self.dACI2 = commands[8:16]
-                self.dACI3 = commands[16:]
+            # try to do some safey checks here?
+            if not self.safetyCheck(commands):
+                ValueError('receiveData(): problem with received data')
 
-                if (self.dACI1 == [] or self.dACI2 == [] or self.dACI3 == []):
-                    ValueError('receiveData(): empty commands send to arm')
+            # should be packing just a bunch of bytes, just access the right elements of the byte array here?
+            self.dACI1 = commands[0:8]
+            self.dACI2 = commands[8:16]
+            self.dACI3 = commands[16:]
 
-                self.sendData()
-                time.sleep(0.007) # sleep for a little bit before sending the new message, give time to update
-                print(self.dACI1, self.dACI2, self.dACI2)
+            print(self.dACI1, self.dACI2, self.dACI3)
 
-        except KeyboardInterrupt:
-            print("Exiting.\n")
+            if (self.dACI1 == [] or self.dACI2 == [] or self.dACI3 == []):
+                ValueError('receiveData(): empty commands send to arm')
+
+        self.notStopped = False
+        self.sendThread.join()
+        print("\nExiting...")
 
     def sendData(self):
         """ Send the messages to the arm """
-        ACI1 = can.Message(timestamp=time.time(), arbitration_id=0x210, data=self.dACI1, is_extended_id=False)
-        ACI2 = can.Message(timestamp=time.time(), arbitration_id=0x211, data=self.dACI2, is_extended_id=False)
-        ACI3 = can.Message(timestamp=time.time(), arbitration_id=0x212, data=self.dACI3, is_extended_id=False)
-        self.bus.send(ACI1, timeout=None)
-        self.bus.send(ACI2, timeout=None)
-        self.bus.send(ACI3, timeout=None)
+        while self.notStopped:
+            ACI1 = can.Message(timestamp=time.time(), arbitration_id=0x210, data=self.dACI1, is_extended_id=False)
+            ACI2 = can.Message(timestamp=time.time(), arbitration_id=0x211, data=self.dACI2, is_extended_id=False)
+            ACI3 = can.Message(timestamp=time.time(), arbitration_id=0x212, data=self.dACI3, is_extended_id=False)
+            self.bus.send(ACI1, timeout=None)
+            self.bus.send(ACI2, timeout=None)
+            self.bus.send(ACI3, timeout=None)
+
+            time.sleep(0.007) # sleep for a little bit before sending the new message, give time to update
 
 if __name__ == "__main__":
 
-    commPath = "/tmp/command"
-    sender = LUKE_Command_Sender(commPath)
+    socketAddr = "tcp://127.0.0.1:1234"
+    sender = LUKE_Command_Sender(socketAddr=socketAddr)
     sender.receiveData()
