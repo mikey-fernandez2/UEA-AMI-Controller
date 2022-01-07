@@ -36,39 +36,42 @@ class EMG:
         print("EMG Bounds:")
         norms = self.bounds
         
-        print("\tMaxes:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-            (norms[0], norms[4], norms[8],  norms[12],
-            norms[1], norms[5], norms[9],  norms[13],
-            norms[2], norms[6], norms[10], norms[14],
-            norms[3], norms[7], norms[11], norms[15]))
+        print(f"""\tMaxes:\n\t\t{norms[0]:07.2f} {norms[1]:07.2f} {norms[2]:07.2f} {norms[3]:07.2f}
+            \t\t{norms[4]:07.2f} {norms[5]:07.2f} {norms[6]:07.2f} {norms[7]:07.2f}
+            \t\t{norms[8]:07.2f} {norms[9]:07.2f} {norms[10]:07.2f} {norms[11]:07.2f}
+            \t\t{norms[12]:07.2f} {norms[13]:07.2f} {norms[14]:07.2f} {norms[15]:07.2f}""")
 
-        print("\tMins:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-            (norms[16], norms[20], norms[24], norms[28],
-            norms[17], norms[21], norms[25], norms[29],
-            norms[18], norms[22], norms[26], norms[30],
-            norms[19], norms[23], norms[27], norms[31]))
+        print(f"""\Mins:\n\t\t{norms[16]:07.2f} {norms[17]:07.2f} {norms[18]:07.2f} {norms[19]:07.2f}
+            \t\t{norms[20]:07.2f} {norms[21]:07.2f} {norms[22]:07.2f} {norms[23]:07.2f}
+            \t\t{norms[24]:07.2f} {norms[25]:07.2f} {norms[26]:07.2f} {norms[27]:07.2f}
+            \t\t{norms[28]:07.2f} {norms[29]:07.2f} {norms[30]:07.2f} {norms[31]:07.2f}""")
 
     def printDeltas(self):
         print("EMG Deltas:")
         deltas = self.deltas
         
-        print("\tMaxes:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-            (deltas[0], deltas[1], deltas[2], deltas[3],
-            deltas[4], deltas[5], deltas[6], deltas[7]))
+        print(f"""\tMaxes:\n\t\t{deltas[0]:07.2f} {deltas[1]:07.2f} {deltas[2]:07.2f} {deltas[3]:07.2f}\n\t\t{deltas[4]:07.2f} {deltas[5]:07.2f} {deltas[6]:07.2f} {deltas[7]:07.2f}""")
 
-        print("\tMins:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-            (deltas[8], deltas[9], deltas[10], deltas[11],
-            deltas[12], deltas[13], deltas[14], deltas[15]))
+        print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
+
 
     def printRawEMG(self):
         print("Raw EMG:")
         raw = self.rawEMG
 
-        print("\t%07.2f %07.2f %07.2f %07.2f\n\t%07.2f %07.2f %07.2f %07.2f\n\t%07.2f %07.2f %07.2f %07.2f\n\t%07.2f %07.2f %07.2f %07.2f" % 
-            (raw[0], raw[4], raw[8],  raw[12],
-             raw[1], raw[5], raw[9],  raw[13],
-             raw[2], raw[6], raw[10], raw[14],
-             raw[3], raw[7], raw[11], raw[15]))
+        print(f"""\t{raw[0]:07.2f} {raw[1]:07.2f} {raw[2]:07.2f} {raw[3]:07.2f}\n\t{raw[4]:07.2f} {raw[5]:07.2f} {raw[6]:07.2f} {raw[7]:07.2f}\n\t{raw[8]:07.2f} {raw[9]:07.2f} {raw[10]:07.2f} {raw[11]:07.2f}\n\t{raw[12]:07.2f} {raw[13]:07.2f} {raw[14]:07.2f} {raw[15]:07.2f}""")
+
+    def printNormedEMG(self):
+        print("Normed EMG:")
+        emg = self.normedEMG
+
+        print(f"""\t{emg[0]:07.2f} {emg[1]:07.2f} {emg[2]:07.2f} {emg[3]:07.2f}\n\t{emg[4]:07.2f} {emg[5]:07.2f} {emg[6]:07.2f} {emg[7]:07.2f}\n\t{emg[8]:07.2f} {emg[9]:07.2f} {emg[10]:07.2f} {emg[11]:07.2f}\n\t{emg[12]:07.2f} {emg[13]:07.2f} {emg[14]:07.2f} {emg[15]:07.2f}""")
+
+    def printMuscleAct(self):
+        print("Muscle Activation:")
+        mAct = self.muscleAct
+
+        print(f"""\t{mAct[0]:07.2f} {mAct[1]:07.2f} {mAct[2]:07.2f} {mAct[3]:07.2f}\n\t{mAct[4]:07.2f} {mAct[5]:07.2f} {mAct[6]:07.2f} {mAct[7]:07.2f}\n\t{mAct[8]:07.2f} {mAct[9]:07.2f} {mAct[10]:07.2f} {mAct[11]:07.2f}\n\t{mAct[12]:07.2f} {mAct[13]:07.2f} {mAct[14]:07.2f} {mAct[15]:07.2f}""")
 
     def getBounds(self):
         try:
@@ -79,7 +82,7 @@ class EMG:
             self.bounds = list(norms)
 
         except OSError as e:
-            print("getBounds(): Could not read bounds - %s" % e)
+            print(f"getBounds(): Could not read bounds - {e}")
 
     def getDeltas(self):
         try:
@@ -90,7 +93,7 @@ class EMG:
             self.deltas = list(deltas)
 
         except OSError as e:
-            print("getDeltas(): Could not read deltas - %s" % e)
+            print(f"getDeltas(): Could not read deltas - {e}")
 
     def readEMG(self):
         try:
@@ -98,9 +101,9 @@ class EMG:
                 emgPack = fifo.read()
 
             emg = struct.unpack("ffffffffffffffffffIIIIf", emgPack)
-            self.rawEMG = emg[0:16]
-            self.OS_time = emg[16]
-            self.OS_tick = emg[17]
+            self.OS_time = emg[0]
+            self.OS_tick = emg[1]
+            self.rawEMG = emg[2:18]
             self.trigger = emg[18]
             self.switch1 = emg[19]
             self.switch2 = emg[20]
@@ -108,7 +111,7 @@ class EMG:
             self.samplingFreq = emg[22]
 
         except OSError as e:
-            print("readEMG(): Could not read EMG - %s" % e)
+            print(f"readEMG(): Could not read EMG - {e}")
 
     def normEMG(self):
         for i in range(self.numElectrodes):
@@ -139,4 +142,4 @@ class EMG:
             self.prevAct[i] = self.muscleAct[i]
             prevA = self.prevAct[i]
 
-            self.muscleAct[i] = (u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA)
+            self.muscleAct[i] = abs((u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA))

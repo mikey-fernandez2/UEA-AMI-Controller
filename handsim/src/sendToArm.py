@@ -129,6 +129,7 @@ class LUKE_Command_Sender:
 
 if __name__ == "__main__":
 
+    print("waiting for arm to be turned on...")
     socketAddr = "tcp://127.0.0.1:1234"
     sender = LUKE_Command_Sender(socketAddr=socketAddr)
     sender.receiveData()

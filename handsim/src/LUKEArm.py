@@ -45,6 +45,7 @@ class LUKEArm:
         can.rc['bitrate'] = 1000000
         can.rc['state'] = can.bus.BusState.PASSIVE
         self.bus = Bus()
+        self.firstMessage = True
 
         # setup message state
         self.message = None
@@ -106,9 +107,9 @@ class LUKEArm:
         self.timestamp = message.timestamp
         self.message = message
 
-        # I don't like checking this every time but I don't want to set a boolean flag
-        if self.timestamp < self.startTimestamp:
+        if self.firstMessage:
             self.startTimestamp = self.timestamp
+            self.firstMessage = False
 
     def printSensors(self):
         s = self.sensors # to save me from typing
@@ -123,7 +124,11 @@ class LUKEArm:
         print(f"\t\t  Index Lat: {s['indLatF']:8.3f} ({s['indLatStat']}) | index tip: {s['indTipF']:8.3f} ({s['indTipStat']}) |   mid tip: {s['midTipF']:8.3f} ({s['midTipStat']}) |   ring tip: {s['ringTipF']:8.3f} ({s['ringTipStat']}) | pinky tip: {s['pinkTipF']:8.3f} ({s['pinkTipStat']})")
         print(f"\t\t  Palm dist: {s['palmDistF']:8.3f} ({s['palmDistStat']}) | palm prox: {s['palmProxF']:8.3f} ({s['palmProxStat']}) | hand edge: {s['handEdgeF']:8.3f} ({s['handEdgeStat']}) |  hand dors: {s['handDorsF']:8.3f} ({s['handDorsStat']})")
         print(f"\t\tThumb ulnar: {s['thumbUlF']:8.3f} ({s['thumbUlStat']}) | thumb rad: {s['thumbRaF']:8.3f} ({s['thumbRaStat']}) | thumb tip: {s['thumbTipF']:8.3f} ({s['thumbTipStat']}) | thumb dors: {s['thumbDorsF']:8.3f} ({s['thumbDorsStat']})")
-        print("\n")
+        print()
+
+    def printCurPos(self):
+        s = self.sensors # decrease typing
+        print(f"Joint positions: [{s['thumbPPos']:8.3f}, {s['thumbYPos']:8.3f}, {s['indexPos']:8.3f}, {s['mrpPos']:8.3f}, {s['wristRot']:8.3f}, {s['wristFlex']:8.3f}, {s['humPos']:8.3f}, {s['elbowPos']:8.3f}]")
 
     def printCANPos(self):
         s = self.sensors # save me from typing
@@ -141,7 +146,7 @@ class LUKEArm:
         print(f"\tIndex pos: {c['index']:03x} |     MRP pos: {c['mrp']:03x}")
         print("Hand Mode:")
         print(f"\tHand OC: {c['handOC']} | Grip: {c['grip']}")
-        print("\n")
+        print()
 
     def posToCAN(self, pos, joint):
         # convert a position command for a joint to its CAN command
@@ -149,13 +154,12 @@ class LUKEArm:
         canCom = math.floor(self.ACICountsPerDegree[joint]*pos) + self.zeroPos[joint]
         return canCom
 
-    def CANtoPos(self, CAN, joint):
-        # convert a 2 byte CAN signal to the corresponding joint position using the joint ROM and scaling appropriately
-        rom = self.jointRoM[joint]
+    def CANtoPos(self, CAN):
+        # convert a 2 byte CAN signal to the corresponding joint position
         fullCAN = (CAN[0] << 0x8) + CAN[1]
-        scaledCAN = fullCAN//2**6
-        percent = scaledCAN/0x3FF
-        return rom[0] + percent*(rom[1] - rom[0])
+        scaledCAN = fullCAN/2**6
+        pos = scaledCAN if scaledCAN <= 180 else scaledCAN - 1024    
+        return pos
 
     def syncAck(self):
         status = self.data[0]
@@ -171,17 +175,17 @@ class LUKEArm:
                 self.syncAck()
                 self.sendCommand() # reply to sync message
             elif msg_id == 0x4AA:
-                self.sensors['wristRot'] = self.CANtoPos(data[0:2], 'wristRot')
-                self.sensors['wristFlex'] = self.CANtoPos(data[2:4], 'wristFlex')
-                self.sensors['indexPos'] = self.CANtoPos(data[4:6], 'indexPos')
-                self.sensors['mrpPos'] = self.CANtoPos(data[6:8], 'mrpPos')
+                self.sensors['wristRot'] = self.CANtoPos(data[0:2])
+                self.sensors['wristFlex'] = self.CANtoPos(data[2:4])
+                self.sensors['indexPos'] = self.CANtoPos(data[4:6])
+                self.sensors['mrpPos'] = self.CANtoPos(data[6:8])
             elif msg_id == 0x4BF:
-                self.sensors['thumbPPos'] = self.CANtoPos(data[0:2], 'thumbPPos')
-                self.sensors['thumbYPos'] = self.CANtoPos(data[2:4], 'thumbYPos')
+                self.sensors['thumbPPos'] = self.CANtoPos(data[0:2])
+                self.sensors['thumbYPos'] = self.CANtoPos(data[2:4])
             elif msg_id == 0x1A0:
-                self.sensors['humPos'] = self.CANtoPos(data[4:6], 'humPos')
+                self.sensors['humPos'] = self.CANtoPos(data[4:6])
             elif msg_id == 0x1A4:
-                self.sensors['elbowPos'] = self.CANtoPos(data[4:6], 'elbowPos')
+                self.sensors['elbowPos'] = self.CANtoPos(data[4:6])
             elif msg_id == 0x241:
                 self.sensors['indLatF'] = data[0] / 10
                 self.sensors['indTipF'] = data[1] / 10
@@ -382,15 +386,12 @@ class LUKEArm:
                 self.recv()
                 self.messageCallback()
 
-                if self.usingEMG:
-                    # update EMG reading
-                    emg.readEMG()
-        
-                    # now build control off this
-                    emg.normEMG()
-                    emg.muscleDynamics()
-                    
-                    posCom = controller.calculateEMGCommand()
+                if self.usingEMG:                   
+                    # posCom = controller.calculateEMGCommand()
+                    diffCom = controller.differentialActCommand(threshold=0.05, gain=0.1)
+                    posCom = self.getCurPos()
+                    # try with index first - this is elemenet 2 of the lists
+                    posCom[2] = diffCom[2]
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -398,21 +399,24 @@ class LUKEArm:
                     thumbY = self.sensors['thumbYPos']
                     # thumbY = self.genSinusoid(3, 'thumbYPos')
                     index = self.sensors['indexPos']
-                    # index = self.genSinusoid(3, 'indexPos')
+                    # index = self.genSinusoid(7, 'indexPos')
                     mrp = self.sensors['mrpPos']
                     # mrp = self.genSinusoid(3, 'mrpPos')
                     # wristRot = self.sensors['wristRot']
-                    wristRot = self.genSinusoid(10, 'wristRot')
+                    wristRot = self.genSinusoid(20, 'wristRot')
                     wristFlex = self.sensors['wristFlex']
                     # wristFlex = self.genSinusoid(3, 'wristFlex')
                     humPos = self.sensors['humPos']
                     # humPos = self.genSinusoid(10, 'humPos')
-                    # elbow = self.sensors['elbowPos']
-                    elbow = self.genSinusoid(10, 'elbowPos')
+                    elbow = self.sensors['elbowPos']
+                    # elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
+                # self.printCurPos()
+
+                # print(f"posCom: {posCom}")
                 # wait a second or two to start moving for safety
                 if count == 2000:
                     print("Starting movement")
@@ -485,8 +489,8 @@ def main(usingEMG, usingLogging):
         print("Connected.")
         emg.readEMG() # need to get first signal to avoid errors
 
-        # setup second order dynamics
-        controller = impedanceController(arm.numMotors, 3, LUKEArm, emg)
+        # setup the controller class
+        controller = impedanceController(numMotors=arm.numMotors, freq_n=3, LUKEArm=arm, emg=emg)
 
     print("Initializing sensor readings...")
     arm.initSensors()
@@ -502,7 +506,6 @@ def main(usingEMG, usingLogging):
                 print("\n\nGoing through startup...")
                 arm.startup()
                 arm.passiveUpdate(0.1)
-                print("\n")
 
             elif run in movementModes:
                 # this is dumb but I have to make sure that you're in hand mode when you want to switch to arm from standby
@@ -513,17 +516,14 @@ def main(usingEMG, usingLogging):
                 print(f"\n\nSwitching to {run} mode...")
                 arm.shortModeSwitch(movementModes.index(run) + 1)
                 arm.mainControlLoop(emg, controller) if usingEMG else arm.mainControlLoop()
-                print("\n")
 
             elif run == "standby":
                 print("\n\nSwitching to standby mode...")
                 arm.shutdown()
-                print("\n")
 
             elif run == "zero": # TODO fix this joint zeroing thing, it isn't doing what I asked
                 print("\n\nZeroing joints...")
                 arm.goToZeroPos(10)
-                print("\n")
             
             elif run == "exit":
                 break

@@ -3,6 +3,8 @@
 # impedanceController.py
 # Make the impedance controller class
 
+import math
+
 class impedanceController:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
         self.LUKEArm = LUKEArm
@@ -15,7 +17,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 2], [3, 4], [0, 0], [0, 0], [0, 0], [0, 0]]
+        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
@@ -145,3 +147,48 @@ class impedanceController:
         posCom[5] = p_filt[5]
 
         return posCom
+
+    def differentialActCommand(self, threshold, gain):
+        # update EMG reading
+        self.emg.readEMG()
+
+        # now build control off this
+        self.emg.normEMG()
+        self.emg.muscleDynamics()
+
+        # get arm current position
+        curPos = self.LUKEArm.getCurPos()
+
+        # get the difference in activation between the two muscles
+        # diffs = [self.emg.muscleAct[elec[0]] - self.emg.muscleAct[elec[1]] for elec in self.motorElectrodeMap]
+        diffs = [self.emg.normedEMG[elec[0]] - self.emg.normedEMG[elec[1]] for elec in self.motorElectrodeMap]
+        # self.emg.printMuscleAct()
+        # self.emg.printRawEMG()
+
+        # then return a directional array if the difference is above threshold and based on direction of movement
+        # if the value is 0, below threshold - dont move
+        # if value is 1, increase the angle
+        # if value is -1, decrease the angle
+        direction = [0 if abs(diff) < threshold else (1 if diff > 0 else -1) for diff in diffs]
+        newCom = []
+        for i in range(self.numMotors):
+            motor = self.motorMap[i]
+            limits = self.LUKEArm.jointRoM[motor]
+            RoM = limits[1] - limits[0]
+            diff = gain*RoM*direction[i]
+            thisNew = curPos[i] + diff
+            # print(f"{motor}: {diff}")
+
+            # check bounds
+            if thisNew > limits[1]:
+                thisNew = limits[1]
+            elif thisNew < limits[0]:
+                thisNew = limits[0]
+            
+            newCom.append(thisNew)
+            print(f"{motor}: {diff}, {thisNew}")
+
+        # newCom = [diff + cur for diff, cur in zip(diffCom, curPos)]
+
+        print(f"newCom: {newCom}\n")
+        return newCom
