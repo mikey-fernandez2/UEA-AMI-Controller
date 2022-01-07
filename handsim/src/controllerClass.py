@@ -157,7 +157,8 @@ class impedanceController:
         self.emg.muscleDynamics()
 
         # get arm current position
-        curPos = self.LUKEArm.getCurPos()
+        # curPos = self.LUKEArm.getCurPos()
+        lastCom = self.LUKEArm.lastposCom
 
         # get the difference in activation between the two muscles
         # diffs = [self.emg.muscleAct[elec[0]] - self.emg.muscleAct[elec[1]] for elec in self.motorElectrodeMap]
@@ -176,7 +177,8 @@ class impedanceController:
             limits = self.LUKEArm.jointRoM[motor]
             RoM = limits[1] - limits[0]
             diff = gain*RoM*direction[i]
-            thisNew = curPos[i] + diff
+            # thisNew = curPos[i] + diff
+            thisNew = lastCom[i] + diff
             # print(f"{motor}: {diff}")
 
             # check bounds
@@ -186,7 +188,8 @@ class impedanceController:
                 thisNew = limits[0]
             
             newCom.append(thisNew)
-            print(f"{motor}: {diff}, {thisNew}")
+            # if motor == 'indexPos': print(f"{motor}: {curPos[i]}, {diff}, {thisNew}")
+            if motor == 'indexPos': print(f"{motor}: {lastCom[i]}, {diff}, {thisNew}")
 
         # newCom = [diff + cur for diff, cur in zip(diffCom, curPos)]
 

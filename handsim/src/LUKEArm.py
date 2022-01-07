@@ -86,6 +86,11 @@ class LUKEArm:
         else:
             raise ValueError(f"LUKEArm(): invalid handedness {self.hand}")
 
+        # command structure
+        self.lastposCom = None
+        self.lastvelCom = None
+        self.lastgripCom = None
+
     def __del__(self):
         """ Garbage collection """
         try:
@@ -252,6 +257,8 @@ class LUKEArm:
             self.command['humPos'] = self.posToCAN(posCom[6], 'humPos')
             self.command['elbow'] = self.posToCAN(posCom[7], 'elbowPos')
 
+            self.lastposCom = posCom
+
         elif posCom == None and velCom != None and gripCom == None:
             # build the velocity commands here
             # CONTRACT: these velocities will be in [-1, 1] representing fraction of maximum velocity in each direction
@@ -266,11 +273,15 @@ class LUKEArm:
             self.command['humPos'] = math.floor(maxVel*velCom[6]) + self.zeroVel
             self.command['elbow'] = math.floor(maxVel*velCom[7]) + self.zeroVel
 
+            self.lastvelCom = velCom
+
         elif posCom == None and velCom == None and gripCom != None:
             # build the grip commands here
             # CONTRACT: TODO
             self.command['handOC'] = gripCom[0]
             self.command['grip'] = gripCom[1]
+
+            self.lastgripCom = gripCom
 
         else:
             raise ValueError('buildCommand(): command type incorrect')
@@ -388,40 +399,39 @@ class LUKEArm:
 
                 if self.usingEMG:                   
                     # posCom = controller.calculateEMGCommand()
-                    diffCom = controller.differentialActCommand(threshold=0.05, gain=0.1)
+                    diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     posCom = self.getCurPos()
                     # try with index first - this is elemenet 2 of the lists
                     posCom[2] = diffCom[2]
 
                 else:
-                    thumbP = self.sensors['thumbPPos']
-                    # thumbP = self.genSinusoid(3, 'thumbPPos')
-                    thumbY = self.sensors['thumbYPos']
-                    # thumbY = self.genSinusoid(3, 'thumbYPos')
-                    index = self.sensors['indexPos']
-                    # index = self.genSinusoid(7, 'indexPos')
-                    mrp = self.sensors['mrpPos']
-                    # mrp = self.genSinusoid(3, 'mrpPos')
+                    # thumbP = self.sensors['thumbPPos']
+                    thumbP = self.genSinusoid(3, 'thumbPPos')
+                    # thumbY = self.sensors['thumbYPos']
+                    thumbY = self.genSinusoid(3, 'thumbYPos')
+                    # index = self.sensors['indexPos']
+                    index = self.genSinusoid(4, 'indexPos')
+                    # mrp = self.sensors['mrpPos']
+                    mrp = self.genSinusoid(4, 'mrpPos')
                     # wristRot = self.sensors['wristRot']
-                    wristRot = self.genSinusoid(20, 'wristRot')
-                    wristFlex = self.sensors['wristFlex']
-                    # wristFlex = self.genSinusoid(3, 'wristFlex')
-                    humPos = self.sensors['humPos']
-                    # humPos = self.genSinusoid(10, 'humPos')
-                    elbow = self.sensors['elbowPos']
-                    # elbow = self.genSinusoid(10, 'elbowPos')
+                    wristRot = self.genSinusoid(6, 'wristRot')
+                    # wristFlex = self.sensors['wristFlex']
+                    wristFlex = self.genSinusoid(6, 'wristFlex')
+                    # humPos = self.sensors['humPos']
+                    humPos = self.genSinusoid(8, 'humPos')
+                    # elbow = self.sensors['elbowPos']
+                    elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                # self.printCurPos()
-
-                # print(f"posCom: {posCom}")
                 # wait a second or two to start moving for safety
                 if count == 2000:
                     print("Starting movement")
                 if count > 2000:
                     self.buildCommand(posCom=posCom)
+                    if not count % 1000:
+                        self.printSensors()
 
                 count += 1
 
@@ -431,13 +441,12 @@ class LUKEArm:
         except can.CanError:
             print("\nCAN Error")
 
-    ## FOR TESTING BELOW
     def goToZeroPos(self, period):
         self.shortModeSwitch(1) # make sure to switch to arm mode first!
 
         try:
             startPos = self.getCurPos()
-            print("Start pos: ", startPos)
+            self.printCurPos()
             start = time.time()
             elapsedTime = 0
             while(elapsedTime < period):
@@ -447,24 +456,18 @@ class LUKEArm:
 
                 # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                 posCom = [(1 - elapsedTime/period)*pos for pos in startPos]
-                # print(posCom)
 
-                # try changing just one joint since this is all weird?
-                sendCom = startPos[0:4] + [posCom[4]] + startPos[5:]
-                print(sendCom)
-
-                self.buildCommand(posCom=sendCom)
+                self.buildCommand(posCom=posCom)
 
                 # update time
                 elapsedTime = time.time() - start
 
         except can.CanError:
-            print("\nCAN Error")
+            print("CAN Error")
 
-        print("Final command: ", posCom)
-        print("End pos: ", self.getCurPos())
+        self.printCurPos()
 
-        print("\nAt zero position. Ending this movement.")
+        print("At zero position. Ending this movement.")
 
     def genSinusoid(self, period, joint):
         rom = self.jointRoM[joint]
@@ -521,9 +524,9 @@ def main(usingEMG, usingLogging):
                 print("\n\nSwitching to standby mode...")
                 arm.shutdown()
 
-            elif run == "zero": # TODO fix this joint zeroing thing, it isn't doing what I asked
+            elif run == "zero":
                 print("\n\nZeroing joints...")
-                arm.goToZeroPos(10)
+                arm.goToZeroPos(5)
             
             elif run == "exit":
                 break
@@ -532,7 +535,7 @@ def main(usingEMG, usingLogging):
                 print("Invalid command.")
 
     except KeyboardInterrupt:
-        print("\nExiting.")
+        print("Exiting.")
 
     arm.shutdown()
     print("Shutting down.")
