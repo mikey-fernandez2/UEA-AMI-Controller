@@ -3,7 +3,9 @@
 # EMGClass.py
 # Define the EMG class for use with the LUKE arm
 
-import struct, os, sys
+import struct, os, sys, zmq, math
+import numpy as np
+from CausalButter import CausalButter
 
 class EMG:
     def __init__(self, numElectrodes=16, tauA=0.05, tauD=0.1):
@@ -15,6 +17,12 @@ class EMG:
         self.boundsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
         self.deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
 
+        self.socketAddr = "tcp://127.0.0.1:1235"
+        self.ctx = zmq.Context()
+        self.sock = self.ctx.socket(zmq.SUB)
+        self.sock.connect(self.socketAddr)
+        self.sock.subscribe("")
+
         # this is how the EMG package gets broken up
         self.OS_time = None
         self.OS_tick = None
@@ -22,16 +30,35 @@ class EMG:
         self.switch1 = None
         self.switch2 = None
         self.end = None
-        self.samplingFreq = None
+        self.samplingFreq = None # this SHOULD be 1 kHz - operate on that assumption
 
         self.getBounds() # first 16: maximum values, second 16: minimum values
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
 
-        self.rawEMG = [-1]*self.numElectrodes
+        self.rawEMG = [-1]*self.numElectrodes # this is RAW from the board - need to get iEMG
+        self.iEMG = [-1]*self.numElectrodes # this is iEMG
         self.normedEMG = [-1]*self.numElectrodes # array of normalized EMG values
         self.muscleAct = [-1]*self.numElectrodes # array of muscle activation (through low pass muscle activation dynamics)
         self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
 
+    def __del__(self):
+        try:
+            # close the socket
+            self.sock.close()
+            self.ctx.term()
+        except:
+            print("__del__: Socket closing error")
+
+    def initFilters(self):
+        # parameters for calculating iEMG
+        self.int_window = .05 # 50 ms integration window
+        self.samples_window = math.ceil(self.int_window*self.samplingFreq)
+        self.rawHistory = np.zeros((self.numElectrodes, self.samples_window))
+        self.powerLineFilter = CausalButter(4, 60 - 2, 60 + 2, self.samplingFreq, 1) # filter out the 60 Hz noise
+        self.highpassFilter = CausalButter(4, 10, 1000, self.samplingFreq, 0)
+
+    ##########################################################################
+    # print functions
     def printNorms(self):
         print("EMG Bounds:")
         norms = self.bounds
@@ -51,9 +78,7 @@ class EMG:
         deltas = self.deltas
         
         print(f"""\tMaxes:\n\t\t{deltas[0]:07.2f} {deltas[1]:07.2f} {deltas[2]:07.2f} {deltas[3]:07.2f}\n\t\t{deltas[4]:07.2f} {deltas[5]:07.2f} {deltas[6]:07.2f} {deltas[7]:07.2f}""")
-
         print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
-
 
     def printRawEMG(self):
         print("Raw EMG:")
@@ -72,6 +97,8 @@ class EMG:
         mAct = self.muscleAct
 
         print(f"""\t{mAct[0]:07.2f} {mAct[1]:07.2f} {mAct[2]:07.2f} {mAct[3]:07.2f}\n\t{mAct[4]:07.2f} {mAct[5]:07.2f} {mAct[6]:07.2f} {mAct[7]:07.2f}\n\t{mAct[8]:07.2f} {mAct[9]:07.2f} {mAct[10]:07.2f} {mAct[11]:07.2f}\n\t{mAct[12]:07.2f} {mAct[13]:07.2f} {mAct[14]:07.2f} {mAct[15]:07.2f}""")
+
+    ##########################################################################
 
     def getBounds(self):
         try:
@@ -97,8 +124,12 @@ class EMG:
 
     def readEMG(self):
         try:
-            with open(self.emgPath, 'rb') as fifo:
-                emgPack = fifo.read()
+            # with open(self.emgPath, 'rb') as fifo:
+            #     emgPack = fifo.read()
+
+            emgPack = self.sock.recv()
+
+            # print(f"Bytes: {len(emgPack)}")
 
             emg = struct.unpack("ffffffffffffffffffIIIIf", emgPack)
             self.OS_time = emg[0]
@@ -113,12 +144,21 @@ class EMG:
         except OSError as e:
             print(f"readEMG(): Could not read EMG - {e}")
 
+    def intEMG(self):
+        for i in range(self.numElectrodes):
+            emg = np.append(self.rawHistory[i, 1:], self.rawEMG[i])
+            emg = self.powerLineFilter.inputData(emg)
+            emg = self.highpassFilter.inputData(emg)
+            self.rawHistory[i, :] = emg
+            
+        self.iEMG = np.trapz(abs(np.array(self.rawHistory)), axis=1)/self.samples_window
+
     def normEMG(self):
         for i in range(self.numElectrodes):
             maxVal = self.bounds[i]
             minVal = self.bounds[self.numElectrodes + i]
 
-            normed = (self.rawEMG[i] - minVal)/maxVal
+            normed = (self.iEMG[i] - minVal)/maxVal
 
             if normed < 0: normed = 0
             elif normed > 1: normed = 1

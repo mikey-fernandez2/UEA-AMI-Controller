@@ -17,7 +17,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+        self.motorElectrodeMap = [[0, 0], [0, 0], [0, 2], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
@@ -149,13 +149,6 @@ class impedanceController:
         return posCom
 
     def differentialActCommand(self, threshold, gain):
-        # update EMG reading
-        self.emg.readEMG()
-
-        # now build control off this
-        self.emg.normEMG()
-        self.emg.muscleDynamics()
-
         # get arm current position
         # curPos = self.LUKEArm.getCurPos()
         lastCom = self.LUKEArm.lastposCom
@@ -165,6 +158,7 @@ class impedanceController:
         diffs = [self.emg.normedEMG[elec[0]] - self.emg.normedEMG[elec[1]] for elec in self.motorElectrodeMap]
         # self.emg.printMuscleAct()
         # self.emg.printRawEMG()
+        self.emg.printNormedEMG()
 
         # then return a directional array if the difference is above threshold and based on direction of movement
         # if the value is 0, below threshold - dont move
@@ -177,9 +171,7 @@ class impedanceController:
             limits = self.LUKEArm.jointRoM[motor]
             RoM = limits[1] - limits[0]
             diff = gain*RoM*direction[i]
-            # thisNew = curPos[i] + diff
             thisNew = lastCom[i] + diff
-            # print(f"{motor}: {diff}")
 
             # check bounds
             if thisNew > limits[1]:
@@ -188,10 +180,7 @@ class impedanceController:
                 thisNew = limits[0]
             
             newCom.append(thisNew)
-            # if motor == 'indexPos': print(f"{motor}: {curPos[i]}, {diff}, {thisNew}")
-            if motor == 'indexPos': print(f"{motor}: {lastCom[i]}, {diff}, {thisNew}")
+            if motor == 'indexPos': print(f"{motor}: {lastCom[i]:06.3f}, {diff:06.3f}, {thisNew:06.3f}, {self.LUKEArm.posToCAN(thisNew, motor):06.3f}")
 
-        # newCom = [diff + cur for diff, cur in zip(diffCom, curPos)]
-
-        print(f"newCom: {newCom}\n")
+        # print(f"newCom: {newCom}\n")
         return newCom

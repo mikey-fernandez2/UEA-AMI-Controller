@@ -18,7 +18,7 @@
 # "print"
 #    Print the EMG normalization factors and the EMG deltas
 
-import os, sys, time, struct
+import os, sys, time, struct, zmq
    
 def printNorms(norms):
     print("EMG Normalization Factors:")
@@ -52,6 +52,12 @@ class EMGProcessing(object):
         self.sfPath = scaleFactorsPath
         self.dPath = deltasPath
         self.sendingFreq = sendingFreq
+
+        self.socketAddr = "tcp://127.0.0.1:1235"
+        self.ctx = zmq.Context()
+        self.sock = self.ctx.socket(zmq.SUB)
+        self.sock.connect(self.socketAddr)
+        self.sock.subscribe("")
 
         self.numElectrodes = numElectrodes
         self.numPairs = numElectrodes//2
@@ -118,11 +124,12 @@ class EMGProcessing(object):
                 self.minDelta[pair] = self.deltas[pair]
 
     def receiveEMG(self):
-        recLen = 0
-        while recLen == 0:
-            with open(self.path, 'rb') as fifo:
-                EMGData = fifo.read()
-            recLen = len(EMGData)
+        # recLen = 0
+        # while recLen == 0:
+        #     with open(self.path, 'rb') as fifo:
+        #         EMGData = fifo.read()
+        #     recLen = len(EMGData)
+        EMGData = self.sock.recv()
 
         self.rawData = struct.unpack("ffffffffffffffffffIIIIf", EMGData)
         self.rawEMG = self.rawData[2:2 + self.numElectrodes] # extract the EMG data

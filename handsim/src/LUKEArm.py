@@ -28,7 +28,7 @@ class LUKEArm:
         self.commandType = commandType
         self.usingEMG = usingEMG
 
-        # for IPC use a zmq socket
+        # for communication with the command sender use a zmq socket
         self.socketAddr = socketAddr
         self.ctx = zmq.Context()
         self.sock = self.ctx.socket(zmq.PUB)
@@ -76,7 +76,7 @@ class LUKEArm:
         # CAN controller settings
         self.ACICountsPerDegree = {'wristRot': 2.90, 'wristFlex': 8.47, 'indexPos': 10.36, 'mrpPos': 10.36, 'thumbPPos': 9.32, 'thumbYPos': 12.43, 'humPos': 5, 'elbowPos': 6.84}
         self.zeroPos = {'indexPos': 50, 'mrpPos': 50, 'thumbYPos': 50, 'thumbPPos': 50, 'wristFlex': 511, 'wristRot': 511, 'humPos': 511, 'elbowPos': 50} # the ACI command for a position of 0
-        self.zeroVel = 512 # the ACI command for a velocity of 0
+        self.zeroVel = 511 # the ACI command for a velocity of 0
 
         # joint limits
         if self.hand == "R":
@@ -86,7 +86,7 @@ class LUKEArm:
         else:
             raise ValueError(f"LUKEArm(): invalid handedness {self.hand}")
 
-        # command structure
+        # store prior commands for some reason
         self.lastposCom = None
         self.lastvelCom = None
         self.lastgripCom = None
@@ -150,8 +150,7 @@ class LUKEArm:
         print(f"\tThumb yaw: {c['thumbY']:03x} | thumb pitch: {c['thumbP']:03x}")
         print(f"\tIndex pos: {c['index']:03x} |     MRP pos: {c['mrp']:03x}")
         print("Hand Mode:")
-        print(f"\tHand OC: {c['handOC']} | Grip: {c['grip']}")
-        print()
+        print(f"\tHand OC: {c['handOC']} | Grip: {c['grip']}\n")
 
     def posToCAN(self, pos, joint):
         # convert a position command for a joint to its CAN command
@@ -163,7 +162,7 @@ class LUKEArm:
         # convert a 2 byte CAN signal to the corresponding joint position
         fullCAN = (CAN[0] << 0x8) + CAN[1]
         scaledCAN = fullCAN/2**6
-        pos = scaledCAN if scaledCAN <= 180 else scaledCAN - 1024    
+        pos = scaledCAN if scaledCAN <= 180 else (scaledCAN - 1024)
         return pos
 
     def syncAck(self):
@@ -398,42 +397,56 @@ class LUKEArm:
                 self.messageCallback()
 
                 if self.usingEMG:                   
+                    # update EMG reading
+                    emg.readEMG()
+                    emg.intEMG()
+                    emg.normEMG()
+                    emg.muscleDynamics()
+
                     # posCom = controller.calculateEMGCommand()
                     diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     posCom = self.getCurPos()
-                    # try with index first - this is elemenet 2 of the lists
+                    # try with index first - this is element 2 of the lists
                     posCom[2] = diffCom[2]
+                    # posCom = diffCom
 
                 else:
-                    # thumbP = self.sensors['thumbPPos']
-                    thumbP = self.genSinusoid(3, 'thumbPPos')
-                    # thumbY = self.sensors['thumbYPos']
-                    thumbY = self.genSinusoid(3, 'thumbYPos')
-                    # index = self.sensors['indexPos']
-                    index = self.genSinusoid(4, 'indexPos')
-                    # mrp = self.sensors['mrpPos']
-                    mrp = self.genSinusoid(4, 'mrpPos')
-                    # wristRot = self.sensors['wristRot']
-                    wristRot = self.genSinusoid(6, 'wristRot')
-                    # wristFlex = self.sensors['wristFlex']
-                    wristFlex = self.genSinusoid(6, 'wristFlex')
-                    # humPos = self.sensors['humPos']
-                    humPos = self.genSinusoid(8, 'humPos')
-                    # elbow = self.sensors['elbowPos']
+                    thumbP = self.sensors['thumbPPos']
+                    thumbY = self.sensors['thumbYPos']
+                    index = self.sensors['indexPos']
+                    mrp = self.sensors['mrpPos']
+                    wristRot = self.sensors['wristRot']
+                    wristFlex = self.sensors['wristFlex']
+                    humPos = self.sensors['humPos']
+                    elbow = self.sensors['elbowPos']
+
+                    # thumbP = self.genSinusoid(3, 'thumbPPos')
+                    # thumbY = self.genSinusoid(3, 'thumbYPos')
+                    # index = self.genSinusoid(4, 'indexPos')
+                    # mrp = self.genSinusoid(4, 'mrpPos')
+                    # wristRot = self.genSinusoid(6, 'wristRot')
+                    # wristFlex = self.genSinusoid(6, 'wristFlex')
+                    # humPos = self.genSinusoid(8, 'humPos')
                     elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
                 # wait a second or two to start moving for safety
-                if count == 2000:
-                    print("Starting movement")
-                if count > 2000:
-                    self.buildCommand(posCom=posCom)
-                    if not count % 1000:
-                        self.printSensors()
+                # if count == 2000:
+                #     print("Starting movement")
+                # if count > 2000:
+                #     self.buildCommand(posCom=posCom)
+                #     if not count % 1000:
+                #         self.printSensors()
+
+                self.buildCommand(posCom=posCom)
+                # if not count % 1000:
+                    # self.printSensors()
 
                 count += 1
+        
+                # time.sleep(0.001) # tiny break for stuff to update?
 
         except KeyboardInterrupt:
             print("\nControl ended.")
@@ -489,8 +502,9 @@ def main(usingEMG, usingLogging):
     if usingEMG:
         print("Connecting to EMG board...")
         emg = EMG()
-        print("Connected.")
         emg.readEMG() # need to get first signal to avoid errors
+        emg.initFilters() # this sets the appropriate filteres for calculating iEMG
+        print("Connected.")
 
         # setup the controller class
         controller = impedanceController(numMotors=arm.numMotors, freq_n=3, LUKEArm=arm, emg=emg)
