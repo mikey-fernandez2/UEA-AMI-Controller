@@ -17,7 +17,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [0, 2], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [2, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
@@ -154,11 +154,7 @@ class impedanceController:
         lastCom = self.LUKEArm.lastposCom
 
         # get the difference in activation between the two muscles
-        # diffs = [self.emg.muscleAct[elec[0]] - self.emg.muscleAct[elec[1]] for elec in self.motorElectrodeMap]
-        diffs = [self.emg.normedEMG[elec[0]] - self.emg.normedEMG[elec[1]] for elec in self.motorElectrodeMap]
-        # self.emg.printMuscleAct()
-        # self.emg.printRawEMG()
-        self.emg.printNormedEMG()
+        diffs = [self.emg.muscleAct[elec[0]] - self.emg.muscleAct[elec[1]] for elec in self.motorElectrodeMap]
 
         # then return a directional array if the difference is above threshold and based on direction of movement
         # if the value is 0, below threshold - dont move
@@ -174,13 +170,10 @@ class impedanceController:
             thisNew = lastCom[i] + diff
 
             # check bounds
-            if thisNew > limits[1]:
-                thisNew = limits[1]
-            elif thisNew < limits[0]:
-                thisNew = limits[0]
+            thisNew = limits[0] if thisNew <= limits[0] else (limits[1] if thisNew >= limits[1] else thisNew)
             
             newCom.append(thisNew)
-            if motor == 'indexPos': print(f"{motor}: {lastCom[i]:06.3f}, {diff:06.3f}, {thisNew:06.3f}, {self.LUKEArm.posToCAN(thisNew, motor):06.3f}")
+            # if motor == 'elbowPos': print(f"{motor}: {lastCom[i]:06.3f}, {diff:06.3f}, {thisNew:06.3f}, {self.LUKEArm.posToCAN(thisNew, motor):06.3f}")
 
         # print(f"newCom: {newCom}\n")
         return newCom

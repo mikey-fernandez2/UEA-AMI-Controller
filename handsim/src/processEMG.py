@@ -18,131 +18,114 @@
 # "print"
 #    Print the EMG normalization factors and the EMG deltas
 
-import os, sys, time, struct, zmq
-   
-def printNorms(norms):
-    print("EMG Normalization Factors:")
-    
-    print("\tMaxes:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-        (norms[0], norms[4], norms[8],  norms[12],
-        norms[1], norms[5], norms[9],  norms[13],
-        norms[2], norms[6], norms[10], norms[14],
-        norms[3], norms[7], norms[11], norms[15]))
-
-    print("\tMins:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-        (norms[16], norms[20], norms[24], norms[28],
-        norms[17], norms[21], norms[25], norms[29],
-        norms[18], norms[22], norms[26], norms[30],
-        norms[19], norms[23], norms[27], norms[31]))
-
-def printDeltas(deltas):
-    print("EMG Deltas:")
-    
-    print("\tMaxes:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-        (deltas[0], deltas[1], deltas[2], deltas[3],
-        deltas[4], deltas[5], deltas[6], deltas[7]))
-
-    print("\tMins:\n\t\t%07.2f %07.2f %07.2f %07.2f\n\t\t%07.2f %07.2f %07.2f %07.2f" % 
-        (deltas[8], deltas[9], deltas[10], deltas[11],
-        deltas[12], deltas[13], deltas[14], deltas[15]))
+import os, sys, time, struct, zmq, math
+from EMGClass import EMG
 
 class EMGProcessing(object):
-    def __init__(self, path, scaleFactorsPath, deltasPath, numElectrodes, sendingFreq):
-        self.path = path
+    def __init__(self, socketAddr, scaleFactorsPath, deltasPath, numElectrodes):
         self.sfPath = scaleFactorsPath
         self.dPath = deltasPath
-        self.sendingFreq = sendingFreq
 
-        self.socketAddr = "tcp://127.0.0.1:1235"
-        self.ctx = zmq.Context()
-        self.sock = self.ctx.socket(zmq.SUB)
-        self.sock.connect(self.socketAddr)
-        self.sock.subscribe("")
+        self.emg = EMG(numElectrodes, tauA=0.05, tauD=0.1)
+        self.emg.readEMG()
+        self.emg.initFilters()
+        self.populateHistory()
 
         self.numElectrodes = numElectrodes
         self.numPairs = numElectrodes//2
 
-        self.msgLen = struct.calcsize("ffffffffffffffffffIIIIf")
-
-        self.rawData = []
-        self.rawEMG = []
-
         self.makeMaxMin()
+
+    # need to populate the raw EMG history
+    def populateHistory(self):
+        window = 0.05 # seconds
+        for i in range(int(window*self.emg.samplingFreq)):
+            self.emg.pipelineEMG()
 
     def makeMaxMin(self):
         # EMG normalization
         try:
             # If EMG norms exist, use them to initialize arrays
-            with open(self.sfPath, 'rb') as fifo:
-                normsPack = fifo.read()
+            # with open(self.sfPath, 'rb') as fifo:
+            #     normsPack = fifo.read()
 
-            norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
-            self.maxes = norms[0:16]
-            self.mins = norms[16:len(norms)]
+            # norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
+            # self.maxes = norms[:16]
+            # self.mins = norms[16:]
+            pass
 
         except:
             # Otherwise, initialize to 0 (maxes) and maximum value for system (mins)
-            self.maxes = [0]*self.numElectrodes
+            self.maxes = [-math.inf]*self.numElectrodes
             self.mins = [sys.maxsize]*self.numElectrodes
 
         # EMG Deltas
         try:
             # If EMG deltas exist, use them to initialize arrays
-            with open(self.dPath, 'rb') as fifo:
-                deltasPack = fifo.read()
+            # with open(self.dPath, 'rb') as fifo:
+            #     deltasPack = fifo.read()
 
-            deltas = struct.unpack("ffffffffffffffff", deltasPack)
-            self.maxDelta = deltas[0:8]
-            self.minDelta = deltas[8:len(deltas)]
-
+            # deltas = struct.unpack("ffffffffffffffff", deltasPack)
+            # self.maxDelta = deltas[:8]
+            # self.minDelta = deltas[8:]
+            pass
+        
         except:
             # Otherwise, initialize to 0 (maxes) and maximum value for system (mins)
-            self.maxDelta = [0]*self.numPairs
+            self.maxDelta = [-math.inf]*self.numPairs
             self.minDelta = [sys.maxsize]*self.numPairs
 
-        self.normedEMG = [0]*self.numElectrodes
+        # self.normedEMG = [0]*self.numElectrodes
         self.deltas = [0]*self.numPairs
 
-    def compareNorms(self):
-        for electrode in range(self.numElectrodes):
-            # Compare maxes
-            if self.rawEMG[electrode] > self.maxes[electrode]:
-                self.maxes[electrode] = self.rawEMG[electrode]
-        
-            # Compare mins
-            if self.rawEMG[electrode] < self.mins[electrode]:
-                self.mins[electrode] = self.rawEMG[electrode]
+    def printNorms(self, norms):
+        print("EMG Bounds:")    
+        print(f"""\tMaxes:\n\t\t{norms[0]:07.2f} {norms[1]:07.2f} {norms[2]:07.2f} {norms[3]:07.2f}\n\t\t{norms[4]:07.2f} {norms[5]:07.2f} {norms[6]:07.2f} {norms[7]:07.2f}\n\t\t{norms[8]:07.2f} {norms[9]:07.2f} {norms[10]:07.2f} {norms[11]:07.2f}\n\t\t{norms[12]:07.2f} {norms[13]:07.2f} {norms[14]:07.2f} {norms[15]:07.2f}""")
+
+        print(f"""\tMins:\n\t\t{norms[16]:07.2f} {norms[17]:07.2f} {norms[18]:07.2f} {norms[19]:07.2f}\n\t\t{norms[20]:07.2f} {norms[21]:07.2f} {norms[22]:07.2f} {norms[23]:07.2f}\n\t\t{norms[24]:07.2f} {norms[25]:07.2f} {norms[26]:07.2f} {norms[27]:07.2f}\n\t\t{norms[28]:07.2f} {norms[29]:07.2f} {norms[30]:07.2f} {norms[31]:07.2f}""")
+
+    def printDeltas(self, deltas):
+        print("EMG Deltas:")       
+        print(f"""\tMaxes:\n\t\t{deltas[0]:07.2f} {deltas[1]:07.2f} {deltas[2]:07.2f} {deltas[3]:07.2f}\n\t\t{deltas[4]:07.2f} {deltas[5]:07.2f} {deltas[6]:07.2f} {deltas[7]:07.2f}""")
+        print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
+    
+    def compareNorms(self, iemg):
+        if not iemg:
+            for electrode in range(self.numElectrodes):
+                # Compare maxes
+                if self.emg.rawEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.rawEMG[electrode]
+                # Compare mins
+                if self.emg.rawEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.rawEMG[electrode]
+
+        else:
+            for electrode in range(self.numElectrodes):
+                # Compare maxes
+                if self.emg.iEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.iEMG[electrode]
+                # Compare mins
+                if self.emg.iEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.iEMG[electrode]
 
     def compareDeltas(self):
         for pair in range(self.numPairs):
             # Compare maxes
-            if self.deltas[pair] > self.maxDelta[pair]:
-                self.maxDelta[pair] = self.deltas[pair]
+            if self.deltas[pair] > self.maxDelta[pair]: self.maxDelta[pair] = self.deltas[pair]
             
             # Compare mins
-            if self.deltas[pair] < self.minDelta[pair]:
-                self.minDelta[pair] = self.deltas[pair]
+            if self.deltas[pair] < self.minDelta[pair]: self.minDelta[pair] = self.deltas[pair]
 
     def receiveEMG(self):
-        # recLen = 0
-        # while recLen == 0:
-        #     with open(self.path, 'rb') as fifo:
-        #         EMGData = fifo.read()
-        #     recLen = len(EMGData)
-        EMGData = self.sock.recv()
+        self.emg.sock.recv()
 
-        self.rawData = struct.unpack("ffffffffffffffffffIIIIf", EMGData)
-        self.rawEMG = self.rawData[2:2 + self.numElectrodes] # extract the EMG data
+        self.emg.pipelineEMG()
 
     def normEMG(self):
         for i in range(self.numElectrodes):
-            normed = (self.rawEMG[i] - self.mins[i])/self.maxes[i]
+            normed = (self.emg.rawEMG[i] - self.mins[i])/self.maxes[i]
 
             # Implement bounds on normalized EMG
             if normed < 0: normed = 0
             elif normed > 1: normed = 1
 
-            self.normedEMG[i] = normed
+            self.emg.normedEMG[i] = normed
 
     def writeNorms(self):
         normsBytes = struct.pack("ffffffffffffffffffffffffffffffff", self.maxes[0], self.maxes[1], self.maxes[2], self.maxes[3], self.maxes[4], self.maxes[5], self.maxes[6], self.maxes[7],
@@ -160,21 +143,27 @@ class EMGProcessing(object):
         with open(self.dPath, 'wb') as output:
             output.write(deltasBytes)
 
-    def emgExtrema(self):
+    def emgExtrema(self, iemg):
         try:
             print("Recording EMG normalization factors...\n")
 
-            self.maxes = [0]*self.numElectrodes
+            self.maxes = [-math.inf]*self.numElectrodes
             self.mins = [sys.maxsize]*self.numElectrodes
 
             while(1):
                 self.receiveEMG()
-                self.compareNorms()
 
-                time.sleep(1/self.sendingFreq)
+                if not iemg:
+                    self.emg.printRawEMG()
+                else:
+                    self.emg.printiEMG()
+
+                self.compareNorms(iemg)
+
+                time.sleep(1/self.emg.samplingFreq)
 
         except KeyboardInterrupt:
-            print("\nReceiving complete.\nWriting normalization factors to %s\n" % self.sfPath)
+            print(f"\nReceiving complete.\nWriting normalization factors to {self.sfPath}")
             self.writeNorms()
 
     def emgManual(self):
@@ -220,68 +209,69 @@ class EMGProcessing(object):
         # Save the input arrays
         self.maxes = maxes
         self.mins = mins
-        print("\nInput received.\nWriting normalization factors to %s\n" % self.sfPath)
+        print(f"\nInput received.\nWriting normalization factors to {self.sfPath}")
         self.writeNorms()
 
     def deltaExtrema(self):
         try:
             print("Recording activation extrema...\n")
 
-            self.maxDelta = [0]*(self.numPairs)
+            self.maxDelta = [-math.inf]*(self.numPairs)
             self.minDelta = [sys.maxsize]*(self.numPairs)
 
             while(1):
                 self.receiveEMG()
-                self.normEMG()
 
                 for i in range(self.numPairs):
-                    self.deltas[i] = self.normedEMG[2*i] - self.normedEMG[2*i + 1]
+                    # self.deltas[i] = self.emg.normedEMG[2*i] - self.emg.normedEMG[2*i + 1]
+                    self.deltas[i] = self.emg.iEMG[2*i] - self.emg.iEMG[2*i + 1]
 
                 self.compareDeltas()
                 
-                time.sleep(1/self.sendingFreq)
+                time.sleep(1/self.emg.samplingFreq)
 
         except KeyboardInterrupt:
-            print("\nReceiving complete.\nWriting activation extrema to %s\n" % self.dPath)
+            print(f"\nReceiving complete.\nWriting activation extrema to {self.dPath}")
             self.writeDeltas()
 
-    def printEMG(self):
+    def printVals(self):
         try:
             with open(self.sfPath, 'rb') as fifo:
                 normsPack = fifo.read()
 
             norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
-            printNorms(norms)
+            self.printNorms(norms)
 
         except OSError as e:
-            print("Could not open scale factors file - %s" % e)
+            print(f"Could not open scale factors file - {e}")
 
+        print()
+        
         try:
             with open(self.dPath, 'rb') as fifo:
                 deltasPack = fifo.read()
 
             deltas = struct.unpack("ffffffffffffffff", deltasPack)
-            printDeltas(deltas)
+            self.printDeltas(deltas)
 
         except OSError as e:
-            print("Could not open EMG deltas file - %s" % e)
+            print(f"Could not open EMG deltas file - {e}")
 
 def callback():
     run = ""
-    while run not in ["norm", "delta", "print", "manual", "exit"]:
-        run = input("Enter 'norm' to find EMG normalization factors.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'exit' to quit:\n")
+    while run not in ["norm", "iemg", "delta", "print", "manual", "exit"]:
+        run = input("Enter 'norm' to find EMG normalization factors.\nEnter 'iemg' to find normalization factors with iEMG.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'exit' to quit:\n")
 
     return run
 
 if __name__ == "__main__":
 
-    path = "/tmp/emg"
+    socketAddr = "tcp://127.0.0.1:1235"
     scaleFactorsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
     deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
-    sendingFreq = 20
     numElectrodes = 16
 
-    emg = EMGProcessing(path, scaleFactorsPath, deltasPath, numElectrodes, sendingFreq)
+    emg = EMGProcessing(socketAddr, scaleFactorsPath, deltasPath, numElectrodes)
 
     try:
         while(1):
@@ -289,7 +279,12 @@ if __name__ == "__main__":
 
             if run == "norm":
                 print("\n\nFinding EMG norming factors")
-                emg.emgExtrema()
+                emg.emgExtrema(iemg=False)
+                print("\n\n")
+
+            if run == "iemg":
+                print("\n\nFinding iEMG norming factors")
+                emg.emgExtrema(iemg=True)
                 print("\n\n")
 
             elif run == "delta":
@@ -299,7 +294,7 @@ if __name__ == "__main__":
 
             elif run == "print":
                 print("\n\nPrinting EMG bounds")
-                emg.printEMG()
+                emg.printVals()
                 print("\n\n")
 
             elif run == "manual":

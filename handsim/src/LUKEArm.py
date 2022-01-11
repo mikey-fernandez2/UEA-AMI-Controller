@@ -398,16 +398,12 @@ class LUKEArm:
 
                 if self.usingEMG:                   
                     # update EMG reading
-                    emg.readEMG()
-                    emg.intEMG()
-                    emg.normEMG()
-                    emg.muscleDynamics()
+                    emg.pipelineEMG()
 
-                    # posCom = controller.calculateEMGCommand()
                     diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     posCom = self.getCurPos()
                     # try with index first - this is element 2 of the lists
-                    posCom[2] = diffCom[2]
+                    posCom[-1] = diffCom[-1]
                     # posCom = diffCom
 
                 else:
@@ -441,8 +437,8 @@ class LUKEArm:
                 #         self.printSensors()
 
                 self.buildCommand(posCom=posCom)
-                # if not count % 1000:
-                    # self.printSensors()
+                if not count % 100:
+                    emg.printMuscleAct()
 
                 count += 1
         

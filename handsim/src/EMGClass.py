@@ -5,7 +5,7 @@
 
 import struct, os, sys, zmq, math
 import numpy as np
-from CausalButter import CausalButter
+from scipy import signal
 
 class EMG:
     def __init__(self, numElectrodes=16, tauA=0.05, tauD=0.1):
@@ -13,7 +13,6 @@ class EMG:
         self.tauA = tauA
         self.tauD = tauD
 
-        self.emgPath = "/tmp/emg"
         self.boundsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
         self.deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
 
@@ -30,7 +29,7 @@ class EMG:
         self.switch1 = None
         self.switch2 = None
         self.end = None
-        self.samplingFreq = None # this SHOULD be 1 kHz - operate on that assumption
+        self.samplingFreq = None # this SHOULD be 1 kHz - but don't assume that
 
         self.getBounds() # first 16: maximum values, second 16: minimum values
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
@@ -51,18 +50,18 @@ class EMG:
 
     def initFilters(self):
         # parameters for calculating iEMG
-        self.int_window = .05 # 50 ms integration window
+        self.int_window = .05 # sec - 50 ms integration window
         self.samples_window = math.ceil(self.int_window*self.samplingFreq)
         self.rawHistory = np.zeros((self.numElectrodes, self.samples_window))
-        self.powerLineFilter = CausalButter(4, 60 - 2, 60 + 2, self.samplingFreq, 1) # filter out the 60 Hz noise
-        self.highpassFilter = CausalButter(4, 10, 1000, self.samplingFreq, 0)
+        self.powerLineFilter = signal.butter(4, [58, 62], btype='bandstop', output='sos', fs=self.samplingFreq)
+        self.highpassFilter = signal.butter(4, 20, btype='highpass', output='sos', fs=self.samplingFreq)
+        self.lowpassFilter = signal.butter(4, 10, btype='lowpass', output='sos', fs=self.samplingFreq)
 
     ##########################################################################
     # print functions
     def printNorms(self):
         print("EMG Bounds:")
         norms = self.bounds
-        
         print(f"""\tMaxes:\n\t\t{norms[0]:07.2f} {norms[1]:07.2f} {norms[2]:07.2f} {norms[3]:07.2f}
             \t\t{norms[4]:07.2f} {norms[5]:07.2f} {norms[6]:07.2f} {norms[7]:07.2f}
             \t\t{norms[8]:07.2f} {norms[9]:07.2f} {norms[10]:07.2f} {norms[11]:07.2f}
@@ -81,24 +80,42 @@ class EMG:
         print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
 
     def printRawEMG(self):
-        print("Raw EMG:")
+        print(f"Raw EMG: {self.OS_time}")
         raw = self.rawEMG
 
-        print(f"""\t{raw[0]:07.2f} {raw[1]:07.2f} {raw[2]:07.2f} {raw[3]:07.2f}\n\t{raw[4]:07.2f} {raw[5]:07.2f} {raw[6]:07.2f} {raw[7]:07.2f}\n\t{raw[8]:07.2f} {raw[9]:07.2f} {raw[10]:07.2f} {raw[11]:07.2f}\n\t{raw[12]:07.2f} {raw[13]:07.2f} {raw[14]:07.2f} {raw[15]:07.2f}""")
+        print(f"""\t{raw[0]:07.2f} {raw[1]:07.2f} {raw[2]:07.2f} {raw[3]:07.2f}\n\t{raw[4]:07.2f} {raw[5]:07.2f} {raw[6]:07.2f} {raw[7]:07.2f}\n\t{raw[8]:07.2f} {raw[9]:07.2f} {raw[10]:07.2f} {raw[11]:07.2f}\n\t{raw[12]:07.2f} {raw[13]:07.2f} {raw[14]:07.2f} {raw[15]:07.2f}\n""")
+
+    def printiEMG(self):
+        print(f"iEMG: {self.OS_time}")
+        iEMG = self.iEMG
+
+        print(f"""\t{iEMG[0]:07.2f} {iEMG[1]:07.2f} {iEMG[2]:07.2f} {iEMG[3]:07.2f}\n\t{iEMG[4]:07.2f} {iEMG[5]:07.2f} {iEMG[6]:07.2f} {iEMG[7]:07.2f}\n\t{iEMG[8]:07.2f} {iEMG[9]:07.2f} {iEMG[10]:07.2f} {iEMG[11]:07.2f}\n\t{iEMG[12]:07.2f} {iEMG[13]:07.2f} {iEMG[14]:07.2f} {iEMG[15]:07.2f}\n""")
 
     def printNormedEMG(self):
-        print("Normed EMG:")
+        print(f"Normed EMG: {self.OS_time}")
         emg = self.normedEMG
 
-        print(f"""\t{emg[0]:07.2f} {emg[1]:07.2f} {emg[2]:07.2f} {emg[3]:07.2f}\n\t{emg[4]:07.2f} {emg[5]:07.2f} {emg[6]:07.2f} {emg[7]:07.2f}\n\t{emg[8]:07.2f} {emg[9]:07.2f} {emg[10]:07.2f} {emg[11]:07.2f}\n\t{emg[12]:07.2f} {emg[13]:07.2f} {emg[14]:07.2f} {emg[15]:07.2f}""")
+        print(f"""\t{emg[0]:07.2f} {emg[1]:07.2f} {emg[2]:07.2f} {emg[3]:07.2f}\n\t{emg[4]:07.2f} {emg[5]:07.2f} {emg[6]:07.2f} {emg[7]:07.2f}\n\t{emg[8]:07.2f} {emg[9]:07.2f} {emg[10]:07.2f} {emg[11]:07.2f}\n\t{emg[12]:07.2f} {emg[13]:07.2f} {emg[14]:07.2f} {emg[15]:07.2f}\n""")
 
     def printMuscleAct(self):
-        print("Muscle Activation:")
+        print(f"Muscle Activation: {self.OS_time}")
         mAct = self.muscleAct
 
-        print(f"""\t{mAct[0]:07.2f} {mAct[1]:07.2f} {mAct[2]:07.2f} {mAct[3]:07.2f}\n\t{mAct[4]:07.2f} {mAct[5]:07.2f} {mAct[6]:07.2f} {mAct[7]:07.2f}\n\t{mAct[8]:07.2f} {mAct[9]:07.2f} {mAct[10]:07.2f} {mAct[11]:07.2f}\n\t{mAct[12]:07.2f} {mAct[13]:07.2f} {mAct[14]:07.2f} {mAct[15]:07.2f}""")
+        print(f"""\t{mAct[0]:07.2f} {mAct[1]:07.2f} {mAct[2]:07.2f} {mAct[3]:07.2f}\n\t{mAct[4]:07.2f} {mAct[5]:07.2f} {mAct[6]:07.2f} {mAct[7]:07.2f}\n\t{mAct[8]:07.2f} {mAct[9]:07.2f} {mAct[10]:07.2f} {mAct[11]:07.2f}\n\t{mAct[12]:07.2f} {mAct[13]:07.2f} {mAct[14]:07.2f} {mAct[15]:07.2f}\n""")
 
     ##########################################################################
+    # get fields
+    def getRawEMG(self, electrode):
+        return self.rawEMG[electrode]
+
+    def getiEMG(self, electrode):
+        return self.iEMG[electrode] 
+
+    def getNormedEMG(self, electrode):
+        return self.normedEMG[electrode]
+
+    def getFilteredEMG(self, electrode):
+        return self.muscleAct[electrode]
 
     def getBounds(self):
         try:
@@ -122,16 +139,14 @@ class EMG:
         except OSError as e:
             print(f"getDeltas(): Could not read deltas - {e}")
 
+    ##########################################################################
+    # actual calculations
     def readEMG(self):
         try:
-            # with open(self.emgPath, 'rb') as fifo:
-            #     emgPack = fifo.read()
-
             emgPack = self.sock.recv()
 
-            # print(f"Bytes: {len(emgPack)}")
-
             emg = struct.unpack("ffffffffffffffffffIIIIf", emgPack)
+
             self.OS_time = emg[0]
             self.OS_tick = emg[1]
             self.rawEMG = emg[2:18]
@@ -144,42 +159,49 @@ class EMG:
         except OSError as e:
             print(f"readEMG(): Could not read EMG - {e}")
 
+    ## The below are all done using numpy, make sure you understand what they do
+    # calculate integrated EMG
     def intEMG(self):
-        for i in range(self.numElectrodes):
-            emg = np.append(self.rawHistory[i, 1:], self.rawEMG[i])
-            emg = self.powerLineFilter.inputData(emg)
-            emg = self.highpassFilter.inputData(emg)
-            self.rawHistory[i, :] = emg
-            
-        self.iEMG = np.trapz(abs(np.array(self.rawHistory)), axis=1)/self.samples_window
+        # shift the time history and add the latest raw EMG signal
+        emg = np.hstack((self.rawHistory[:, 1:], np.reshape(self.rawEMG, (-1, 1))))
+        self.rawHistory = emg
 
+        emg = signal.sosfilt(self.powerLineFilter, emg, axis=1) # remove the electrical noise
+        emg = signal.sosfilt(self.highpassFilter, emg, axis=1) # remove the drift and motion artifacts
+        emg = abs(emg)
+        emg = signal.sosfilt(self.lowpassFilter, emg, axis=1) # low pass filter to smooth signal
+        
+        self.iEMG = np.trapz(emg, axis=1)/self.samples_window # trapezoidal numerical integration
+
+    # normalize the EMG
     def normEMG(self):
-        for i in range(self.numElectrodes):
-            maxVal = self.bounds[i]
-            minVal = self.bounds[self.numElectrodes + i]
+        maxVals = np.asarray(self.bounds[:self.numElectrodes])
+        minVals = np.asarray(self.bounds[self.numElectrodes:])
 
-            normed = (self.iEMG[i] - minVal)/maxVal
+        normed = (self.iEMG - minVals)/(maxVals - minVals)
 
-            if normed < 0: normed = 0
-            elif normed > 1: normed = 1
+        # correct the bounds
+        normed[normed < 0] = 0
+        normed[normed > 1] = 1
 
-            self.normedEMG[i] = normed
+        self.normedEMG = normed
 
-    def getNormedEMG(self, electrode):
-        return self.normedEMG[electrode]
-
-    def getFilteredEMG(self, electrode):
-        return self.muscleAct[electrode]
-
+    # first order muscle activation dynamics
     def muscleDynamics(self):
         tauA = self.tauA
         tauD = self.tauD
         b = tauA/tauD
         Ts = 1/self.samplingFreq
 
-        for i in range(self.numElectrodes):
-            u = self.normedEMG[i]
-            self.prevAct[i] = self.muscleAct[i]
-            prevA = self.prevAct[i]
+        u = np.asarray(self.normedEMG)
+        self.prevAct = self.muscleAct
+        prevA = np.asarray(self.prevAct)
 
-            self.muscleAct[i] = abs((u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA))
+        self.muscleAct = abs((u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA))
+
+    # full EMG update pipeline
+    def pipelineEMG(self):
+        self.readEMG()
+        self.intEMG()
+        self.normEMG()
+        self.muscleDynamics()

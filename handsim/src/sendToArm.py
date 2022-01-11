@@ -16,7 +16,7 @@ import zmq
     # send these commands to the arm (arbitrarily fast, knowing arm will only execute ~100 Hz commands)
 
 class LUKE_Command_Sender:
-    def __init__(self, socketAddr):
+    def __init__(self, socketAddr="tcp://127.0.0.1:1234"):
         self.dACI1 = None
         self.dACI2 = None
         self.dACI3 = None
@@ -99,7 +99,7 @@ class LUKE_Command_Sender:
 
             # try to do some safey checks here?
             if not self.safetyCheck(commands):
-                ValueError('receiveData(): problem with received data')
+                raise ValueError('receiveData(): problem with received data')
 
             # should be packing just a bunch of bytes, just access the right elements of the byte array here?
             self.dACI1 = commands[0:8]
@@ -109,7 +109,7 @@ class LUKE_Command_Sender:
             self.printCommandHex()
 
             if (self.dACI1 == [] or self.dACI2 == [] or self.dACI3 == []):
-                ValueError('receiveData(): empty commands send to arm')
+                raise ValueError('receiveData(): empty commands send to arm')
 
         self.notStopped = False
         self.sendThread.join()
@@ -128,8 +128,8 @@ class LUKE_Command_Sender:
             time.sleep(0.007) # sleep for a little bit before sending the new message, give time to update
 
 if __name__ == "__main__":
+    print("Waiting for arm to be turned on...")
 
-    print("waiting for arm to be turned on...")
     socketAddr = "tcp://127.0.0.1:1234"
     sender = LUKE_Command_Sender(socketAddr=socketAddr)
     sender.receiveData()
