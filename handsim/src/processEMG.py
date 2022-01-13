@@ -150,7 +150,7 @@ class EMGProcessing(object):
                     self.emg.printRawEMG()
                 else:
                     pass
-                    # self.emg.printiEMG()
+                    self.emg.printiEMG()
                     # print(f"Channel 0: {self.emg.iEMG[0]}")
                     # print(f"Channel 5: {self.emg.iEMG[5]}\n")
 

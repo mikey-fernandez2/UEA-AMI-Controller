@@ -54,13 +54,9 @@ class EMG:
         self.int_window = .05 # sec - 50 ms integration window
         self.window_len = math.ceil(self.int_window*self.samplingFreq)
         self.rawHistory = np.zeros((self.numElectrodes, self.window_len))
-        # self.powerLineFilter = signal.butter(4, [58, 62], btype='bandstop', output='sos', fs=self.samplingFreq)
-        # self.highpassFilter = signal.butter(4, 20, btype='highpass', output='sos', fs=self.samplingFreq)
-        # self.lowpassFilter = signal.butter(4, 10, btype='lowpass', output='sos', fs=self.samplingFreq)
         self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=60 - 2, f_high=60 + 2, fs=self.samplingFreq, bandstop=1)
-        self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=1000, fs=self.samplingFreq, bandstop=0)
-        # self.lowpassFilters = CausalButterArr(self.numElectrodes, 4, 3, self.samplingFreq/30, self.samplingFreq/15, 1)
-        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=3, f_high=10, fs=self.samplingFreq, bandstop=0)
+        self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0)
+        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=3, f_high=self.samplingFreq/40, fs=self.samplingFreq/20, bandstop=1)
 
     ##########################################################################
     # print functions
@@ -179,15 +175,15 @@ class EMG:
         # self.iEMG = np.trapz(emg, axis=1)/self.window_len # trapezoidal numerical integration
 
         emg = self.rawEMG
-        print(emg)
+        # print(emg)
         emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        print(emg)
+        # print(emg)
         # TODO: These blow up to nan here -- WHY?????
         emg = [self.highPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        print(emg)
+        # print(emg)
         
         self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
-        iEMG = np.trapz(self.rawHistory, axis=1)/self.window_len # trapezoidal numerical integration
+        iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
 
         self.iEMG = [self.lowPassFilters.filters[i].inputData(iEMG[i]) for i in range(self.numElectrodes)]
 
