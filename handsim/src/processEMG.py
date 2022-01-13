@@ -29,18 +29,11 @@ class EMGProcessing(object):
         self.emg = EMG(numElectrodes, tauA=0.05, tauD=0.1)
         self.emg.readEMG()
         self.emg.initFilters()
-        self.populateHistory()
 
         self.numElectrodes = numElectrodes
         self.numPairs = numElectrodes//2
 
         self.makeMaxMin()
-
-    # need to populate the raw EMG history
-    def populateHistory(self):
-        window = 0.05 # seconds
-        for i in range(int(window*self.emg.samplingFreq)):
-            self.emg.pipelineEMG()
 
     def makeMaxMin(self):
         # EMG normalization
@@ -69,7 +62,7 @@ class EMGProcessing(object):
             # self.maxDelta = deltas[:8]
             # self.minDelta = deltas[8:]
             pass
-        
+
         except:
             # Otherwise, initialize to 0 (maxes) and maximum value for system (mins)
             self.maxDelta = [-math.inf]*self.numPairs
@@ -156,7 +149,10 @@ class EMGProcessing(object):
                 if not iemg:
                     self.emg.printRawEMG()
                 else:
-                    self.emg.printiEMG()
+                    pass
+                    # self.emg.printiEMG()
+                    # print(f"Channel 0: {self.emg.iEMG[0]}")
+                    # print(f"Channel 5: {self.emg.iEMG[5]}\n")
 
                 self.compareNorms(iemg)
 

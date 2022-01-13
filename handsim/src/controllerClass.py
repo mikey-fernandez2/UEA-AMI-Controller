@@ -17,7 +17,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [2, 0]]
+        self.motorElectrodeMap = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [4, 0], [0, 0], [0, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
@@ -161,12 +161,14 @@ class impedanceController:
         # if value is 1, increase the angle
         # if value is -1, decrease the angle
         direction = [0 if abs(diff) < threshold else (1 if diff > 0 else -1) for diff in diffs]
+        # direction = 1 if self.emg.normedEMG[2] > 0.67 else -1
         newCom = []
         for i in range(self.numMotors):
             motor = self.motorMap[i]
             limits = self.LUKEArm.jointRoM[motor]
             RoM = limits[1] - limits[0]
             diff = gain*RoM*direction[i]
+            # diff = gain*RoM*direction
             thisNew = lastCom[i] + diff
 
             # check bounds

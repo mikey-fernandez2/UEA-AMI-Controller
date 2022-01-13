@@ -403,7 +403,7 @@ class LUKEArm:
                     diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     posCom = self.getCurPos()
                     # try with index first - this is element 2 of the lists
-                    posCom[-1] = diffCom[-1]
+                    posCom[5] = diffCom[5]
                     # posCom = diffCom
 
                 else:
@@ -438,7 +438,9 @@ class LUKEArm:
 
                 self.buildCommand(posCom=posCom)
                 if not count % 100:
-                    emg.printMuscleAct()
+                    if self.usingEMG:
+                        emg.printMuscleAct()
+                    self.printSensors()
 
                 count += 1
         
