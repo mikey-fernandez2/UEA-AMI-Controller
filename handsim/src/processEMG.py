@@ -19,6 +19,7 @@
 #    Print the EMG normalization factors and the EMG deltas
 
 import os, sys, time, struct, zmq, math
+import numpy as np
 from EMGClass import EMG
 
 class EMGProcessing(object):
@@ -30,6 +31,8 @@ class EMGProcessing(object):
         self.emg.readEMG()
         self.emg.initFilters()
 
+        self.allReadings = np.empty((numElectrodes, 1))
+
         self.numElectrodes = numElectrodes
         self.numPairs = numElectrodes//2
 
@@ -39,13 +42,12 @@ class EMGProcessing(object):
         # EMG normalization
         try:
             # If EMG norms exist, use them to initialize arrays
-            # with open(self.sfPath, 'rb') as fifo:
-            #     normsPack = fifo.read()
+            with open(self.sfPath, 'rb') as fifo:
+                normsPack = fifo.read()
 
-            # norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
-            # self.maxes = norms[:16]
-            # self.mins = norms[16:]
-            pass
+            norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
+            self.maxes = norms[:16]
+            self.mins = norms[16:]
 
         except:
             # Otherwise, initialize to 0 (maxes) and maximum value for system (mins)
@@ -55,20 +57,18 @@ class EMGProcessing(object):
         # EMG Deltas
         try:
             # If EMG deltas exist, use them to initialize arrays
-            # with open(self.dPath, 'rb') as fifo:
-            #     deltasPack = fifo.read()
+            with open(self.dPath, 'rb') as fifo:
+                deltasPack = fifo.read()
 
-            # deltas = struct.unpack("ffffffffffffffff", deltasPack)
-            # self.maxDelta = deltas[:8]
-            # self.minDelta = deltas[8:]
-            pass
+            deltas = struct.unpack("ffffffffffffffff", deltasPack)
+            self.maxDelta = deltas[:8]
+            self.minDelta = deltas[8:]
 
         except:
             # Otherwise, initialize to 0 (maxes) and maximum value for system (mins)
             self.maxDelta = [-math.inf]*self.numPairs
             self.minDelta = [sys.maxsize]*self.numPairs
 
-        # self.normedEMG = [0]*self.numElectrodes
         self.deltas = [0]*self.numPairs
 
     def printNorms(self, norms):
@@ -82,20 +82,20 @@ class EMGProcessing(object):
         print(f"""\tMaxes:\n\t\t{deltas[0]:07.2f} {deltas[1]:07.2f} {deltas[2]:07.2f} {deltas[3]:07.2f}\n\t\t{deltas[4]:07.2f} {deltas[5]:07.2f} {deltas[6]:07.2f} {deltas[7]:07.2f}""")
         print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
     
-    def compareNorms(self, iemg):
-        if not iemg:
-            for electrode in range(self.numElectrodes):
-                # Compare maxes
-                if self.emg.rawEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.rawEMG[electrode]
-                # Compare mins
-                if self.emg.rawEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.rawEMG[electrode]
+    # def compareNorms(self, iemg):
+    #     if not iemg:
+    #         for electrode in range(self.numElectrodes):
+    #             # Compare maxes
+    #             if self.emg.rawEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.rawEMG[electrode]
+    #             # Compare mins
+    #             if self.emg.rawEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.rawEMG[electrode]
 
-        else:
-            for electrode in range(self.numElectrodes):
-                # Compare maxes
-                if self.emg.iEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.iEMG[electrode]
-                # Compare mins
-                if self.emg.iEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.iEMG[electrode]
+    #     else:
+    #         for electrode in range(self.numElectrodes):
+    #             # Compare maxes
+    #             if self.emg.iEMG[electrode] > self.maxes[electrode]: self.maxes[electrode] = self.emg.iEMG[electrode]
+    #             # Compare mins
+    #             if self.emg.iEMG[electrode] < self.mins[electrode]: self.mins[electrode] = self.emg.iEMG[electrode]
 
     def compareDeltas(self):
         for pair in range(self.numPairs):
@@ -107,7 +107,6 @@ class EMGProcessing(object):
 
     def receiveEMG(self):
         self.emg.sock.recv()
-
         self.emg.pipelineEMG()
 
     def normEMG(self):
@@ -139,27 +138,26 @@ class EMGProcessing(object):
     def emgExtrema(self, iemg):
         try:
             print("Recording EMG normalization factors...\n")
-
-            self.maxes = [-math.inf]*self.numElectrodes
-            self.mins = [sys.maxsize]*self.numElectrodes
-
             while(1):
                 self.receiveEMG()
 
                 if not iemg:
                     self.emg.printRawEMG()
+                    self.allReadings = np.append(self.allReadings, np.reshape(self.emg.rawEMG, (-1, 1)), axis=1)
                 else:
-                    pass
+                    # pass
                     self.emg.printiEMG()
-                    # print(f"Channel 0: {self.emg.iEMG[0]}")
-                    # print(f"Channel 5: {self.emg.iEMG[5]}\n")
-
-                self.compareNorms(iemg)
+                    self.allReadings = np.append(self.allReadings, np.reshape(self.emg.iEMG, (-1, 1)), axis=1)
 
                 time.sleep(1/self.emg.samplingFreq)
 
         except KeyboardInterrupt:
             print(f"\nReceiving complete.\nWriting normalization factors to {self.sfPath}")
+
+            # use 90th percentile for the maxes and 1st percentile for the mins
+            self.maxes = np.percentile(self.allReadings, 90, axis=1)
+            self.mins = np.percentile(self.allReadings, 1, axis=1)
+
             self.writeNorms()
 
     def emgManual(self):
@@ -256,7 +254,7 @@ class EMGProcessing(object):
 def callback():
     run = ""
     while run not in ["norm", "iemg", "delta", "print", "manual", "exit"]:
-        run = input("Enter 'norm' to find EMG normalization factors.\nEnter 'iemg' to find normalization factors with iEMG.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'exit' to quit:\n")
+        run = input("Enter 'norm' to find raw EMG normalization factors.\nEnter 'iemg' to find normalization factors with iEMG.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'exit' to quit:\n")
 
     return run
 

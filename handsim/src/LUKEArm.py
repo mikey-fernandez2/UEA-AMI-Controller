@@ -494,7 +494,7 @@ def callback():
 
 def main(usingEMG, usingLogging):
     # instantiate arm class
-    arm = LUKEArm(config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=usingEMG)
+    arm = LUKEArm(config='HC', hand='R', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=usingEMG)
 
     # connect to EMG board
     if usingEMG:

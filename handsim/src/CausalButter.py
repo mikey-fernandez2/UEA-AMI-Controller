@@ -10,8 +10,6 @@ class CausalButterArr():
         self.numChannels = numChannels
 
         self.filters = [CausalButter(order, f_low, f_high, fs, bandstop)]*numChannels
-        # self.filters[0].printParams()
-        # print()
 
 class CausalButter:
     # the default init method assumes Causal butter is a bandpass filter, and allows signal frequency from f_low to f_high to pass.
@@ -73,16 +71,11 @@ class CausalButter:
 
     def inputData(self, raw_data):
         #BUGMAN 5/24/2017 modified the npts
-
-        # npts = len(raw_data)
+        # Mikey Fernandez 01/13/2022 take in only a single data point at a time
         x = raw_data
 
         # the default is to create a bandpass causal butter filter
         if not self.bandstop:
-            # for pnt in range(npts):
-            #     x = raw_data[pnt]
-            #     print(f"raw: {raw_data}, x: {x}")
-
             for i in range(self.n):
                 self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
                 x = self.A[i]*(self.w0[i] - 2.0*self.w2[i] + self.w4[i])
@@ -94,9 +87,6 @@ class CausalButter:
             filtered_data = x
 
         else:
-            # for pnt in range(npts):
-            #     x = raw_data[pnt]
-
             for i in range(self.n):
                 self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
                 # bandstop method changed some coefficients here

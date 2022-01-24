@@ -54,9 +54,11 @@ class EMG:
         self.int_window = .05 # sec - 50 ms integration window
         self.window_len = math.ceil(self.int_window*self.samplingFreq)
         self.rawHistory = np.zeros((self.numElectrodes, self.window_len))
-        self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=60 - 2, f_high=60 + 2, fs=self.samplingFreq, bandstop=1)
-        self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0)
-        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=3, f_high=self.samplingFreq/40, fs=self.samplingFreq/20, bandstop=1)
+        self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=58, f_high=62, fs=self.samplingFreq, bandstop=1) # removes power line 60 Hz noise
+        # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
+        self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
+        # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
+        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=3, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
 
     ##########################################################################
     # print functions
@@ -163,24 +165,9 @@ class EMG:
     ## The below are all done using numpy, make sure you understand what they do
     # calculate integrated EMG
     def intEMG(self):
-        # shift the time history and add the latest raw EMG signal
-        # emg = np.hstack((self.rawHistory[:, 1:], np.reshape(self.rawEMG, (-1, 1))))
-        # self.rawHistory = emg
-
-        # emg = signal.sosfilt(self.powerLineFilter, emg, axis=1) # remove the electrical noise
-        # emg = signal.sosfilt(self.highpassFilter, emg, axis=1) # remove the drift and motion artifacts
-        # emg = abs(emg)
-        # emg = signal.sosfilt(self.lowpassFilter, emg, axis=1) # low pass filter to smooth signal
-        
-        # self.iEMG = np.trapz(emg, axis=1)/self.window_len # trapezoidal numerical integration
-
         emg = self.rawEMG
-        # print(emg)
         emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        # print(emg)
-        # TODO: These blow up to nan here -- WHY?????
         emg = [self.highPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        # print(emg)
         
         self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
         iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
@@ -211,7 +198,11 @@ class EMG:
         self.prevAct = self.muscleAct
         prevA = np.asarray(self.prevAct)
 
-        self.muscleAct = abs((u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA))
+        muscleAct = abs((u/tauA + prevA/Ts)/(1/Ts + (b + (1 - b)*u)/tauA))
+        muscleAct[muscleAct < 0] = 0
+        muscleAct[muscleAct > 1] = 1
+
+        self.muscleAct = muscleAct
 
     # full EMG update pipeline
     def pipelineEMG(self):
