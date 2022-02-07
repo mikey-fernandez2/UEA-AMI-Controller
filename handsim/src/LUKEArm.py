@@ -235,6 +235,14 @@ class LUKEArm:
         vals = [(com >= 0x000 and com <= 0x3FF) for com in commandCAN]
         return all(vals)
 
+    def isValidPosJoint(self, pos, joint):
+        return (pos >= self.jointRoM[joint][0] and pos <= self.jointRoM[joint][1])
+
+    def isValidPosList(self, posList):
+        # returns true if all positions given are in the appropriate joint range
+        joints = ['thumbPPos', 'thumbYPos', 'indexPos', 'mrpPos', 'wristRot', 'wristFlex', 'humPos', 'elbowPos']
+        return all([self.isValidPosJoint(posList[i], joints[i]) for i in range(len(posList))])
+
     def getCurPos(self):
         return [self.sensors['thumbPPos'], self.sensors['thumbYPos'], self.sensors['indexPos'], self.sensors['mrpPos'], self.sensors['wristRot'], self.sensors['wristFlex'], self.sensors['humPos'], self.sensors['elbowPos']]
 
@@ -480,6 +488,52 @@ class LUKEArm:
 
         print("At zero position. Ending this movement.")
 
+    def manualPos(self):
+        while(True):
+            print("Enter: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]")
+            posRaw = input() # Take input
+            if (posRaw == "exit"): # Escape valve
+                return
+            
+            try: # Turn input into array of floats
+                posDes = [float(x) for x in posRaw.split()]
+            except: # Uh-oh! Formatting wrong
+                posDes = []
+
+            if (len(posDes) != self.numMotors or not self.isValidPosList(posDes)): # repeat if not valid
+                print("Input formatted incorrectly. Enter 8 valid joint positions.\n")
+            else: # Otherwise exit
+                break
+
+        self.shortModeSwitch(1) # make sure to switch to arm mode first!
+
+        try:
+            startPos = self.getCurPos()
+            self.printCurPos()
+
+            start = time.time()
+            elapsedTime = 0
+            period = 5 # do this over 5 seconds
+            while(elapsedTime < period):
+                # handle arm communication
+                self.recv()
+                self.messageCallback()
+
+                # do a linear interpolation
+                posCom = [(elapsedTime/period)*(posDes[i] - startPos[i]) + startPos[i] for i in range(len(startPos))]
+
+                self.buildCommand(posCom=posCom)
+
+                # update time
+                elapsedTime = time.time() - start
+
+        except can.CanError:
+            print("CAN Error")
+
+        self.printCurPos()
+
+        print("At desired position. Ending this movement.")
+
     def genSinusoid(self, period, joint):
         rom = self.jointRoM[joint]
         return 0.5*(rom[1] - rom[0])*(math.sin(2*math.pi*(self.startTimestamp - self.timestamp)/period) + 1) + rom[0]
@@ -487,8 +541,8 @@ class LUKEArm:
 ###################################################################
 def callback():
     run = ""
-    while run not in ["standby", "arm", "hand", "simul", "startup", "zero", "exit"]:
-        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'simul' to switch to simultaneous mode.\nEnte 'zero' to return the arm to joint positions of 0.\nEnter 'exit' to put the arm in standby mode and quit:\n")
+    while run not in ["standby", "arm", "hand", "simul", "startup", "zero", "manual", "exit"]:
+        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'simul' to switch to simultaneous mode.\nEnter 'zero' to return the arm to joint positions of 0.\nEnter 'manual' to enter manual joint positions.\nEnter 'exit' to put the arm in standby mode and quit:\n")
 
     return run
 
@@ -539,6 +593,10 @@ def main(usingEMG, usingLogging):
             elif run == "zero":
                 print("\n\nZeroing joints...")
                 arm.goToZeroPos(5)
+
+            elif run == "manual":
+                print("\n\nAccepting manual input...")
+                arm.manualPos()
             
             elif run == "exit":
                 break

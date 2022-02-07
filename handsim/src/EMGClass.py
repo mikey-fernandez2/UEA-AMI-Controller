@@ -9,7 +9,7 @@ from scipy import signal
 from CausalButter import CausalButterArr
 
 class EMG:
-    def __init__(self, numElectrodes=16, tauA=0.05, tauD=0.1):
+    def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1):
         self.numElectrodes = numElectrodes
         self.tauA = tauA
         self.tauD = tauD
@@ -17,7 +17,7 @@ class EMG:
         self.boundsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
         self.deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
 
-        self.socketAddr = "tcp://127.0.0.1:1235"
+        self.socketAddr = socketAddr
         self.ctx = zmq.Context()
         self.sock = self.ctx.socket(zmq.SUB)
         self.sock.connect(self.socketAddr)

@@ -27,7 +27,7 @@ class EMGProcessing(object):
         self.sfPath = scaleFactorsPath
         self.dPath = deltasPath
 
-        self.emg = EMG(numElectrodes, tauA=0.05, tauD=0.1)
+        self.emg = EMG(socketAddr, numElectrodes, tauA=0.05, tauD=0.1)
         self.emg.readEMG()
         self.emg.initFilters()
 
@@ -163,7 +163,7 @@ class EMGProcessing(object):
     def emgManual(self):
         try:
             print("Enter 16 maximum electrode readings for normalization.\n")
-            while (True):
+            while(True):
                 maxesRaw = input() # Take input
 
                 if (maxesRaw == "exit"): # Escape valve
@@ -180,7 +180,7 @@ class EMGProcessing(object):
                     print("Input formatted incorrectly. Enter 16 floats.\n")
 
             print("\nEnter 16 minimum electrode readings for normalization.\n")
-            while (True):
+            while(True):
                 minsRaw = input() # Take input
 
                 if (minsRaw == "exit"): # Escape value
