@@ -10,8 +10,8 @@ import math
 from EMGClass import EMG
 from controllerClass import impedanceController
 import sys
-import struct
 import zmq
+import numpy as np
 
 class LUKEArm:
     def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):        
@@ -64,6 +64,7 @@ class LUKEArm:
         self.messagesReceived = dict.fromkeys(self.sensorIDs + [self.syncID], 0) # for tracking number of messages received
 
         # initial command and sensor settings
+        self.jointNames = ['thumbPCom', 'thumbYCom', 'indexCom', 'mrpCom', 'wristRotCom', 'wristFlexCom', 'humPosCom', 'elbowPosCom']
         self.sensorPositions = ['humPos', 'elbowPos', 'wristRot', 'wristFlex', 'thumbYPos', 'thumbPPos', 'indexPos', 'mrpPos']
         self.sensorForces = ['indLatF', 'indTipF', 'midTipF', 'ringTipF', 'pinkTipF', 'palmDistF', 'palmProxF', 'handEdgeF', 'handDorsF', 'thumbUlF', 'thumbRaF', 'thumbTipF', 'thumbDorsF']
         self.sensorStatus = ['indLatStat', 'indTipStat', 'midTipStat', 'ringTipStat', 'pinkTipStat', 'palmDistStat', 'palmProxStat', 'handEdgeStat', 'handDorsStat', 'thumbUlStat', 'thumbRaStat', 'thumbTipStat', 'thumbDorsStat']
@@ -85,6 +86,9 @@ class LUKEArm:
             self.jointRoM = {'indexPos': [0, 90], 'mrpPos': [0, 90], 'thumbYPos': [0, 75], 'thumbPPos': [0, 75], 'wristFlex': [-55, 55], 'wristRot': [-175, 120], 'elbowPos': [0, 135], 'humPos': [-95, 95]}
         else:
             raise ValueError(f"LUKEArm(): invalid handedness {self.hand}")
+
+        # for recording
+        self.recording = False
 
         # store prior commands for some reason
         self.lastposCom = None
@@ -241,7 +245,8 @@ class LUKEArm:
     def isValidPosList(self, posList):
         # returns true if all positions given are in the appropriate joint range
         joints = ['thumbPPos', 'thumbYPos', 'indexPos', 'mrpPos', 'wristRot', 'wristFlex', 'humPos', 'elbowPos']
-        return all([self.isValidPosJoint(posList[i], joints[i]) for i in range(len(posList))])
+        # return all([self.isValidPosJoint(posList[i], joints[i]) for i in range(len(posList))])
+        return all([(posList[i] >= self.jointRoM[joints[i]][0] and posList[i] <= self.jointRoM[joints[i]][1]) for i in range(len(posList))])
 
     def getCurPos(self):
         return [self.sensors['thumbPPos'], self.sensors['thumbYPos'], self.sensors['indexPos'], self.sensors['mrpPos'], self.sensors['wristRot'], self.sensors['wristFlex'], self.sensors['humPos'], self.sensors['elbowPos']]
@@ -258,7 +263,6 @@ class LUKEArm:
             self.command['thumbY'] = self.posToCAN(posCom[1], 'thumbYPos')
             self.command['index'] = self.posToCAN(posCom[2], 'indexPos')
             self.command['mrp'] = self.posToCAN(posCom[3], 'mrpPos')
-
             self.command['wristRot'] = self.posToCAN(posCom[4], 'wristRot')
             self.command['wristFlex'] = self.posToCAN(posCom[5], 'wristFlex')
             self.command['humPos'] = self.posToCAN(posCom[6], 'humPos')
@@ -396,9 +400,30 @@ class LUKEArm:
     def shutdown(self):
         self.longModeSwitch()
 
+    # set the first row of the recorded data - the title of each column
+    def resetRecording(self):
+        titles = ['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command)
+        self.recordedData = np.array(titles)
+
+    def addLogEntry(self):
+        # add, in order, the timestamp, the position command, the joint position readings, the force sensor readings, the force sensor statuses, and the hex command sent
+        newEntry = [self.timestamp]
+        newEntry.extend(self.lastposCom)
+        for joint in self.sensorPositions:
+            newEntry.extend([self.sensors[joint]])
+        for sensor in self.sensorForces:
+            newEntry.extend([self.sensors[sensor]])
+        for status in self.sensorStatus:
+            newEntry.extend([self.sensors[status]])
+        for comm in list(self.command):
+            newEntry.extend([self.command[comm]])
+
+        self.recordedData = np.vstack((self.recordedData, newEntry))
+
     def mainControlLoop(self, emg=None, controller=None):
         try:
             count = 0
+            T = time.time()
             while(True):
                 # handle arm communication
                 self.recv()
@@ -410,6 +435,7 @@ class LUKEArm:
 
                     diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     posCom = self.getCurPos()
+
                     # try with index first - this is element 2 of the lists
                     posCom[5] = diffCom[5]
                     # posCom = diffCom
@@ -426,23 +452,15 @@ class LUKEArm:
 
                     # thumbP = self.genSinusoid(3, 'thumbPPos')
                     # thumbY = self.genSinusoid(3, 'thumbYPos')
-                    # index = self.genSinusoid(4, 'indexPos')
+                    index = self.genSinusoid(4, 'indexPos')
                     # mrp = self.genSinusoid(4, 'mrpPos')
                     # wristRot = self.genSinusoid(6, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
                     # humPos = self.genSinusoid(8, 'humPos')
-                    elbow = self.genSinusoid(10, 'elbowPos')
+                    # elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
-
-                # wait a second or two to start moving for safety
-                # if count == 2000:
-                #     print("Starting movement")
-                # if count > 2000:
-                #     self.buildCommand(posCom=posCom)
-                #     if not count % 1000:
-                #         self.printSensors()
 
                 self.buildCommand(posCom=posCom)
                 if not count % 100:
@@ -451,9 +469,12 @@ class LUKEArm:
                     self.printSensors()
 
                 count += 1
-        
-                # time.sleep(0.001) # tiny break for stuff to update?
 
+                # record at 100 Hz?
+                if self.recording and (time.time() - T) >= 0.01:
+                    self.addLogEntry()
+                    T = time.time()
+        
         except KeyboardInterrupt:
             print("\nControl ended.")
 
@@ -541,12 +562,12 @@ class LUKEArm:
 ###################################################################
 def callback():
     run = ""
-    while run not in ["standby", "arm", "hand", "simul", "startup", "zero", "manual", "exit"]:
-        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'simul' to switch to simultaneous mode.\nEnter 'zero' to return the arm to joint positions of 0.\nEnter 'manual' to enter manual joint positions.\nEnter 'exit' to put the arm in standby mode and quit:\n")
+    while run not in ["standby", "arm", "hand", "startup", "record", "zero", "manual", "exit"]:
+        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'record' and then a control mode to record the arm's movement.\nEnter 'zero' to return the arm to joint positions of 0.\nEnter 'manual' to enter manual joint positions.\nEnter 'exit' to put the arm in standby mode and quit:\n")
 
     return run
 
-def main(usingEMG, usingLogging):
+def main(usingEMG):
     # instantiate arm class
     arm = LUKEArm(config='HC', hand='R', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=usingEMG)
 
@@ -566,7 +587,7 @@ def main(usingEMG, usingLogging):
     print("Sensors initialized.")
 
     # set up case/switch for arm using an input/callback structure -- this allows the behavior of the arm to be controlled without stopping this code
-    movementModes = ["arm", "hand", "simul"]
+    movementModes = ["arm", "hand"]
     try:
         while True:
             run = callback()
@@ -586,9 +607,20 @@ def main(usingEMG, usingLogging):
                 arm.shortModeSwitch(movementModes.index(run) + 1)
                 arm.mainControlLoop(emg, controller) if usingEMG else arm.mainControlLoop()
 
+                # set recording to false, regardless of whether you have been recording
+                if arm.recording:
+                    filename = input('Enter a .csv filename: ')
+                    np.savetxt(filename + '.csv', arm.recordedData, delimiter='\t', fmt='%s')
+                    arm.recording = False
+
             elif run == "standby":
                 print("\n\nSwitching to standby mode...")
                 arm.shutdown()
+
+            elif run == "record":
+                print("\n\nRecording next arm movement...")
+                arm.recording = True
+                arm.resetRecording()
 
             elif run == "zero":
                 print("\n\nZeroing joints...")
@@ -612,24 +644,19 @@ def main(usingEMG, usingLogging):
 
 if __name__ == '__main__':
     usingEMG = False
-    usingLogging = False
 
     if len(sys.argv) == 1:
-        print("Starting LUKEArm.py (no EMG, no logging)...\n")
+        print("Starting LUKEArm.py (no EMG)...\n")
+
     elif len(sys.argv) == 2:
         try:
             isNum = int(sys.argv[1])
             
-            print("Starting LUKEArm.py (EMG, no logging)...\n")
+            print("Starting LUKEArm.py (with EMG)...\n")
             usingEMG = True
         except:
-            print("Starting LUKEArm.py (no EMG, logging)...\n")
-            usingLogging = True
-    elif len(sys.argv) == 3:
-        print("Starting LUKEArm.py (EMG, logging)...\n")
-        usingEMG = True
-        usingLogging = True
+            raise ValueError(f"Wrong argument type (expected int, given {type(sys.argv[1])})")
     else:
         raise ValueError(f"Wrong number of arguments ({len(sys.argv) - 1})")
 
-    main(usingEMG, usingLogging)
+    main(usingEMG)

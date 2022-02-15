@@ -1,46 +1,24 @@
-# The set of languages for which implicit dependencies are needed:
-SET(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/HaptixGUIPlugin.cc" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir/HaptixGUIPlugin.cc.o"
-  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/TaskButton.cc" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir/TaskButton.cc.o"
-  "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/__/include/handsim/moc_HaptixGUIPlugin.cxx" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_HaptixGUIPlugin.cxx.o"
-  "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/__/include/handsim/moc_TaskButton.cxx" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_TaskButton.cxx.o"
-  "/usr/include/haptix/comm/msg/hxGrasp.pb.cc" "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixGUIPlugin.dir/usr/include/haptix/comm/msg/hxGrasp.pb.cc.o"
-  )
-SET(CMAKE_CXX_COMPILER_ID "GNU")
 
-# Preprocessor definitions for this target.
-SET(CMAKE_TARGET_DEFINITIONS
-  "QT_CORE_LIB"
-  "QT_GUI_LIB"
-  "QT_NO_DEBUG"
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/HaptixGUIPlugin.cc" "src/CMakeFiles/HaptixGUIPlugin.dir/HaptixGUIPlugin.cc.o" "gcc" "src/CMakeFiles/HaptixGUIPlugin.dir/HaptixGUIPlugin.cc.o.d"
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/src/TaskButton.cc" "src/CMakeFiles/HaptixGUIPlugin.dir/TaskButton.cc.o" "gcc" "src/CMakeFiles/HaptixGUIPlugin.dir/TaskButton.cc.o.d"
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/__/include/handsim/moc_HaptixGUIPlugin.cxx" "src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_HaptixGUIPlugin.cxx.o" "gcc" "src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_HaptixGUIPlugin.cxx.o.d"
+  "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/__/include/handsim/moc_TaskButton.cxx" "src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_TaskButton.cxx.o" "gcc" "src/CMakeFiles/HaptixGUIPlugin.dir/__/include/handsim/moc_TaskButton.cxx.o.d"
+  "/usr/include/haptix/comm/msg/hxGrasp.pb.cc" "src/CMakeFiles/HaptixGUIPlugin.dir/usr/include/haptix/comm/msg/hxGrasp.pb.cc.o" "gcc" "src/CMakeFiles/HaptixGUIPlugin.dir/usr/include/haptix/comm/msg/hxGrasp.pb.cc.o.d"
   )
 
 # Targets to which this target links.
-SET(CMAKE_TARGET_LINKED_INFO_FILES
+set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/src/CMakeFiles/HaptixTracking.dir/DependInfo.cmake"
   )
 
-# The include file search paths:
-SET(CMAKE_C_TARGET_INCLUDE_PATH
-  "../test/gtest/include"
-  "../include"
-  "include"
-  "/usr/include/gazebo-7"
-  "/usr/include/sdformat-4.4"
-  "/usr/include/ignition/math2"
-  "/usr/include/OGRE"
-  "/usr/include/OGRE/Terrain"
-  "/usr/include/OGRE/Paging"
-  "/usr/include/ignition/transport1"
-  "/usr/include/uuid"
-  "/usr/include/qt4"
-  "/usr/include/qt4/QtGui"
-  "/usr/include/qt4/QtCore"
-  )
-SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
-SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
-SET(CMAKE_ASM_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

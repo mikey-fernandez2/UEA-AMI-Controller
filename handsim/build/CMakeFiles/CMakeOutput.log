@@ -1,498 +1,6 @@
 The system is: Linux - 4.4.0-148-generic - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /usr/bin/cc 
-Build flags: 
-Id flags: 
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
-
-The C compiler identification is GNU, found in "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/2.8.12.2/CompilerIdC/a.out"
-
-Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /usr/bin/c++ 
-Build flags: 
-Id flags: 
-
-The output was:
-0
-
-
-Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
-
-The CXX compiler identification is GNU, found in "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/2.8.12.2/CompilerIdCXX/a.out"
-
-Determining if the C compiler works passed with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec901537556/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec901537556.dir/build.make CMakeFiles/cmTryCompileExec901537556.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec901537556.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec901537556.dir/testCCompiler.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTryCompileExec901537556
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec901537556.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec901537556.dir/testCCompiler.c.o  -o cmTryCompileExec901537556 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec2405857176/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2405857176.dir/build.make CMakeFiles/cmTryCompileExec2405857176.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
-Linking C executable cmTryCompileExec2405857176
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2405857176.dir/link.txt --verbose=1
-/usr/bin/cc     -v CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec2405857176 -rdynamic  
-Using built-in specs.
-COLLECT_GCC=/usr/bin/cc
-COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper
-Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.8.4-2ubuntu1~14.04.4' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
-Thread model: posix
-gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) 
-COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/
-LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec2405857176' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec2405857176 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Parsed C implicit link information from above output:
-  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
-  ignore line: []
-  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec2405857176/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec2405857176.dir/build.make CMakeFiles/cmTryCompileExec2405857176.dir/build]
-  ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
-  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building C object CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTryCompileExec2405857176]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2405857176.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec2405857176 -rdynamic  ]
-  ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/cc]
-  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper]
-  ignore line: [Target: x86_64-linux-gnu]
-  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.8.4-2ubuntu1~14.04.4' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
-  ignore line: [Thread model: posix]
-  ignore line: [gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) ]
-  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/]
-  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec2405857176' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec2405857176 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/collect2] ==> ignore
-    arg [--sysroot=/] ==> ignore
-    arg [--build-id] ==> ignore
-    arg [--eh-frame-hdr] ==> ignore
-    arg [-m] ==> ignore
-    arg [elf_x86_64] ==> ignore
-    arg [--hash-style=gnu] ==> ignore
-    arg [--as-needed] ==> ignore
-    arg [-export-dynamic] ==> ignore
-    arg [-dynamic-linker] ==> ignore
-    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
-    arg [-zrelro] ==> ignore
-    arg [-o] ==> ignore
-    arg [cmTryCompileExec2405857176] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o] ==> ignore
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib]
-    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
-    arg [-L/lib/../lib] ==> dir [/lib/../lib]
-    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
-    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..]
-    arg [CMakeFiles/cmTryCompileExec2405857176.dir/CMakeCCompilerABI.c.o] ==> ignore
-    arg [-lgcc] ==> lib [gcc]
-    arg [--as-needed] ==> ignore
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [--no-as-needed] ==> ignore
-    arg [-lc] ==> lib [c]
-    arg [-lgcc] ==> lib [gcc]
-    arg [--as-needed] ==> ignore
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [--no-as-needed] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o] ==> ignore
-  remove lib [gcc]
-  remove lib [gcc_s]
-  remove lib [gcc]
-  remove lib [gcc_s]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.8]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib] ==> [/usr/lib]
-  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
-  collapse library dir [/lib/../lib] ==> [/lib]
-  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
-  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> [/usr/lib]
-  implicit libs: [c]
-  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.8;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
-  implicit fwks: []
-
-
-Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec2668889615/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2668889615.dir/build.make CMakeFiles/cmTryCompileExec2668889615.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2668889615.dir/testCXXCompiler.cxx.o
-/usr/bin/c++     -o CMakeFiles/cmTryCompileExec2668889615.dir/testCXXCompiler.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTryCompileExec2668889615
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2668889615.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTryCompileExec2668889615.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec2668889615 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec470334030/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec470334030.dir/build.make CMakeFiles/cmTryCompileExec470334030.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++     -o CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTryCompileExec470334030
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec470334030.dir/link.txt --verbose=1
-/usr/bin/c++      -v CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec470334030 -rdynamic  
-Using built-in specs.
-COLLECT_GCC=/usr/bin/c++
-COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper
-Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.8.4-2ubuntu1~14.04.4' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
-Thread model: posix
-gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) 
-COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/
-LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec470334030' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec470334030 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Parsed CXX implicit link information from above output:
-  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
-  ignore line: []
-  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec470334030/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec470334030.dir/build.make CMakeFiles/cmTryCompileExec470334030.dir/build]
-  ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
-  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTryCompileExec470334030]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec470334030.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec470334030 -rdynamic  ]
-  ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/c++]
-  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.8/lto-wrapper]
-  ignore line: [Target: x86_64-linux-gnu]
-  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.8.4-2ubuntu1~14.04.4' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
-  ignore line: [Thread model: posix]
-  ignore line: [gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.4) ]
-  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/]
-  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec470334030' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec470334030 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o]
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/collect2] ==> ignore
-    arg [--sysroot=/] ==> ignore
-    arg [--build-id] ==> ignore
-    arg [--eh-frame-hdr] ==> ignore
-    arg [-m] ==> ignore
-    arg [elf_x86_64] ==> ignore
-    arg [--hash-style=gnu] ==> ignore
-    arg [--as-needed] ==> ignore
-    arg [-export-dynamic] ==> ignore
-    arg [-dynamic-linker] ==> ignore
-    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
-    arg [-zrelro] ==> ignore
-    arg [-o] ==> ignore
-    arg [cmTryCompileExec470334030] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o] ==> ignore
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib]
-    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
-    arg [-L/lib/../lib] ==> dir [/lib/../lib]
-    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
-    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
-    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..]
-    arg [CMakeFiles/cmTryCompileExec470334030.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
-    arg [-lstdc++] ==> lib [stdc++]
-    arg [-lm] ==> lib [m]
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [-lgcc] ==> lib [gcc]
-    arg [-lc] ==> lib [c]
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [-lgcc] ==> lib [gcc]
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o] ==> ignore
-  remove lib [gcc_s]
-  remove lib [gcc]
-  remove lib [gcc_s]
-  remove lib [gcc]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.8]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib] ==> [/usr/lib]
-  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
-  collapse library dir [/lib/../lib] ==> [/lib]
-  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
-  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
-  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..] ==> [/usr/lib]
-  implicit libs: [stdc++;m;c]
-  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.8;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
-  implicit fwks: []
-
-
-Determining if files pthread.h exist passed with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec3616184612/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3616184612.dir/build.make CMakeFiles/cmTryCompileExec3616184612.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3616184612.dir/CheckIncludeFiles.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3616184612.dir/CheckIncludeFiles.c.o   -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
-Linking C executable cmTryCompileExec3616184612
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3616184612.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec3616184612.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec3616184612 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Determining if the function pthread_create exists in the pthread passed with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec3426901437/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3426901437.dir/build.make CMakeFiles/cmTryCompileExec3426901437.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3426901437.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3426901437.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
-Linking C executable cmTryCompileExec3426901437
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3426901437.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3426901437.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3426901437 -rdynamic -lpthread 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-
-Determining if the Q_WS_X11 exist passed with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec815737347/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec815737347.dir/build.make CMakeFiles/cmTryCompileExec815737347.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec815737347.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec815737347.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-Linking CXX executable cmTryCompileExec815737347
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec815737347.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTryCompileExec815737347.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec815737347 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
-/* */
-#include <QtCore/qglobal.h>
-
-int main(int argc, char** argv)
-{
-  (void)argv;
-#ifndef Q_WS_X11
-  return ((int*)(&Q_WS_X11))[argc];
-#else
-  (void)argc;
-  return 0;
-#endif
-}
-
-Performing C++ SOURCE FILE Test R-Wall succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1838149198/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1838149198.dir/build.make CMakeFiles/cmTryCompileExec1838149198.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1838149198.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall   -Wall -o CMakeFiles/cmTryCompileExec1838149198.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1838149198
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1838149198.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wall    CMakeFiles/cmTryCompileExec1838149198.dir/src.cxx.o  -o cmTryCompileExec1838149198 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wextra succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec441400653/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec441400653.dir/build.make CMakeFiles/cmTryCompileExec441400653.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec441400653.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra   -Wextra -o CMakeFiles/cmTryCompileExec441400653.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec441400653
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec441400653.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wextra    CMakeFiles/cmTryCompileExec441400653.dir/src.cxx.o  -o cmTryCompileExec441400653 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wno-long-long succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec3442182704/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3442182704.dir/build.make CMakeFiles/cmTryCompileExec3442182704.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3442182704.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long   -Wno-long-long -o CMakeFiles/cmTryCompileExec3442182704.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec3442182704
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3442182704.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-long-long    CMakeFiles/cmTryCompileExec3442182704.dir/src.cxx.o  -o cmTryCompileExec3442182704 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wno-unused-value succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1755781692/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1755781692.dir/build.make CMakeFiles/cmTryCompileExec1755781692.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1755781692.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value   -Wno-unused-value -o CMakeFiles/cmTryCompileExec1755781692.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1755781692
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1755781692.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wno-unused-value    CMakeFiles/cmTryCompileExec1755781692.dir/src.cxx.o  -o cmTryCompileExec1755781692 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wfloat-equal succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec414259804/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec414259804.dir/build.make CMakeFiles/cmTryCompileExec414259804.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec414259804.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal   -Wfloat-equal -o CMakeFiles/cmTryCompileExec414259804.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec414259804
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec414259804.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wfloat-equal    CMakeFiles/cmTryCompileExec414259804.dir/src.cxx.o  -o cmTryCompileExec414259804 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wshadow succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1749610381/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1749610381.dir/build.make CMakeFiles/cmTryCompileExec1749610381.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1749610381.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow   -Wshadow -o CMakeFiles/cmTryCompileExec1749610381.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1749610381
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1749610381.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wshadow    CMakeFiles/cmTryCompileExec1749610381.dir/src.cxx.o  -o cmTryCompileExec1749610381 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Winit-self succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1282399771/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1282399771.dir/build.make CMakeFiles/cmTryCompileExec1282399771.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1282399771.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self   -Winit-self -o CMakeFiles/cmTryCompileExec1282399771.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1282399771
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1282399771.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Winit-self    CMakeFiles/cmTryCompileExec1282399771.dir/src.cxx.o  -o cmTryCompileExec1282399771 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wswitch-default succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1120792876/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1120792876.dir/build.make CMakeFiles/cmTryCompileExec1120792876.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1120792876.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default   -Wswitch-default -o CMakeFiles/cmTryCompileExec1120792876.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1120792876
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1120792876.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wswitch-default    CMakeFiles/cmTryCompileExec1120792876.dir/src.cxx.o  -o cmTryCompileExec1120792876 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-Wmissing-include-dirs succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1597029546/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1597029546.dir/build.make CMakeFiles/cmTryCompileExec1597029546.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1597029546.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs   -Wmissing-include-dirs -o CMakeFiles/cmTryCompileExec1597029546.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1597029546
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1597029546.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-Wmissing-include-dirs    CMakeFiles/cmTryCompileExec1597029546.dir/src.cxx.o  -o cmTryCompileExec1597029546 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-Performing C++ SOURCE FILE Test R-pedantic succeded with the following output:
-Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
-
-Run Build Command:/usr/bin/make "cmTryCompileExec1525218677/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1525218677.dir/build.make CMakeFiles/cmTryCompileExec1525218677.dir/build
-make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-/usr/bin/cmake -E cmake_progress_report /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1525218677.dir/src.cxx.o
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic   -pedantic -o CMakeFiles/cmTryCompileExec1525218677.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
-<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name [enabled by default]
-Linking CXX executable cmTryCompileExec1525218677
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1525218677.dir/link.txt --verbose=1
-/usr/bin/c++    -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11 -DR-pedantic    CMakeFiles/cmTryCompileExec1525218677.dir/src.cxx.o  -o cmTryCompileExec1525218677 -rdynamic 
-make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
-
-Source file was:
-int main() { return 0;}
-The system is: Linux - 4.4.0-148-generic - x86_64
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /usr/bin/x86_64-linux-gnu-gcc-4.9 
+Compiler: /usr/bin/gcc 
 Build flags: 
 Id flags:  
 
@@ -505,7 +13,7 @@ Compilation of the C compiler identification source "CMakeCCompilerId.c" produce
 The C compiler identification is GNU, found in "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/3.21.1/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /usr/bin/x86_64-linux-gnu-g++-4.9 
+Compiler: /usr/bin/g++ 
 Build flags: 
 Id flags:  
 
@@ -520,15 +28,18 @@ The CXX compiler identification is GNU, found in "/home/haptix-e15-463/haptix/ha
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_c85ba && [1/2] Building C object CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_8ce74/fast && /usr/bin/make  -f CMakeFiles/cmTC_8ce74.dir/build.make CMakeFiles/cmTC_8ce74.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc   -v -o CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c
 Using built-in specs.
-COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9
+COLLECT_GCC=/usr/bin/gcc
 Target: x86_64-linux-gnu
 Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
 Thread model: posix
 gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/cceWy8gB.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/cc5QE2il.s
 GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
 	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -546,15 +57,17 @@ GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
 	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: c5106fb2579f32f5e29912bcd8d3bc82
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o /tmp/cceWy8gB.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o /tmp/cc5QE2il.s
 GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
-[2/2] Linking C executable cmTC_c85ba
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_8ce74
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ce74.dir/link.txt --verbose=1
+/usr/bin/gcc  -v -rdynamic CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -o cmTC_8ce74 
 Using built-in specs.
-COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9
+COLLECT_GCC=/usr/bin/gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper
 Target: x86_64-linux-gnu
 Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
@@ -562,8 +75,9 @@ Thread model: posix
 gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c85ba' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOIe3YE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_c85ba /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_8ce74' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccBD684o.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_8ce74 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 
@@ -585,18 +99,21 @@ Parsed C implicit include dir info from above output: rv=done
 
 
 Parsed C implicit link information from above output:
-  link line regex: [^( *|.*[/\])(x86_64-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_c85ba && [1/2] Building C object CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o]
+  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_8ce74/fast && /usr/bin/make  -f CMakeFiles/cmTC_8ce74.dir/build.make CMakeFiles/cmTC_8ce74.dir/build]
+  ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc   -v -o CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
   ignore line: [Target: x86_64-linux-gnu]
   ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/cceWy8gB.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/cc5QE2il.s]
   ignore line: [GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -614,15 +131,17 @@ Parsed C implicit link information from above output:
   ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: c5106fb2579f32f5e29912bcd8d3bc82]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o /tmp/cceWy8gB.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o /tmp/cc5QE2il.s]
   ignore line: [GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [[2/2] Linking C executable cmTC_c85ba]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_8ce74]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ce74.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc  -v -rdynamic CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -o cmTC_8ce74 ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper]
   ignore line: [Target: x86_64-linux-gnu]
   ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
@@ -630,13 +149,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c85ba' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOIe3YE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_c85ba /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_8ce74' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccBD684o.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_8ce74 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccOIe3YE.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccBD684o.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -654,7 +173,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_c85ba] ==> ignore
+    arg [cmTC_8ce74] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o]
@@ -666,7 +185,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..]
-    arg [CMakeFiles/cmTC_c85ba.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_8ce74.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -698,15 +217,18 @@ Parsed C implicit link information from above output:
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_b8538 && [1/2] Building CXX object CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_eb4d4/fast && /usr/bin/make  -f CMakeFiles/cmTC_eb4d4.dir/build.make CMakeFiles/cmTC_eb4d4.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++   -v -o CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
-COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9
+COLLECT_GCC=/usr/bin/g++
 Target: x86_64-linux-gnu
 Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
 Thread model: posix
 gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccipznsI.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccWHBFTk.s
 GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
 	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -728,15 +250,17 @@ GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
 	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: e7137bb4cc46fb63f5e22418eff966b7
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccipznsI.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccWHBFTk.s
 GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-[2/2] Linking CXX executable cmTC_b8538
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_eb4d4
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb4d4.dir/link.txt --verbose=1
+/usr/bin/g++  -v -rdynamic CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_eb4d4 
 Using built-in specs.
-COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9
+COLLECT_GCC=/usr/bin/g++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper
 Target: x86_64-linux-gnu
 Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
@@ -744,8 +268,9 @@ Thread model: posix
 gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b8538' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWUMSfM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_b8538 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_eb4d4' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccG2lq3j.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_eb4d4 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 
@@ -773,18 +298,21 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 
 Parsed CXX implicit link information from above output:
-  link line regex: [^( *|.*[/\])(x86_64-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_b8538 && [1/2] Building CXX object CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_eb4d4/fast && /usr/bin/make  -f CMakeFiles/cmTC_eb4d4.dir/build.make CMakeFiles/cmTC_eb4d4.dir/build]
+  ignore line: [make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++   -v -o CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
   ignore line: [Target: x86_64-linux-gnu]
   ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccipznsI.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccWHBFTk.s]
   ignore line: [GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -806,15 +334,17 @@ Parsed CXX implicit link information from above output:
   ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: e7137bb4cc46fb63f5e22418eff966b7]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccipznsI.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccWHBFTk.s]
   ignore line: [GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [[2/2] Linking CXX executable cmTC_b8538]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_eb4d4]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb4d4.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++  -v -rdynamic CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_eb4d4 ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper]
   ignore line: [Target: x86_64-linux-gnu]
   ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
@@ -822,13 +352,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b8538' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWUMSfM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_b8538 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_eb4d4' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccG2lq3j.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_eb4d4 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccWUMSfM.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccG2lq3j.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -846,7 +376,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_b8538] ==> ignore
+    arg [cmTC_eb4d4] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o]
@@ -858,7 +388,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..]
-    arg [CMakeFiles/cmTC_b8538.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_eb4d4.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -890,8 +420,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_b2c8f && [1/2] Building CXX object CMakeFiles/cmTC_b2c8f.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_b2c8f
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_07dca/fast && /usr/bin/make  -f CMakeFiles/cmTC_07dca.dir/build.make CMakeFiles/cmTC_07dca.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_07dca.dir/feature_tests.cxx.o
+/usr/bin/g++   -std=c++14 -o CMakeFiles/cmTC_07dca.dir/feature_tests.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_07dca
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07dca.dir/link.txt --verbose=1
+/usr/bin/g++ -rdynamic CMakeFiles/cmTC_07dca.dir/feature_tests.cxx.o -o cmTC_07dca 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 
@@ -955,24 +491,42 @@ Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_b2c8f && [1/2
 Determining if the include file pthread.h exists passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_ca6e0 && [1/2] Building C object CMakeFiles/cmTC_ca6e0.dir/CheckIncludeFile.c.o
-[2/2] Linking C executable cmTC_ca6e0
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_be922/fast && /usr/bin/make  -f CMakeFiles/cmTC_be922.dir/build.make CMakeFiles/cmTC_be922.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_be922.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTC_be922.dir/CheckIncludeFile.c.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_be922
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_be922.dir/link.txt --verbose=1
+/usr/bin/gcc -rdynamic CMakeFiles/cmTC_be922.dir/CheckIncludeFile.c.o -o cmTC_be922 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_58faa && [1/2] Building C object CMakeFiles/cmTC_58faa.dir/CheckFunctionExists.c.o
-[2/2] Linking C executable cmTC_58faa
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bef9b/fast && /usr/bin/make  -f CMakeFiles/cmTC_bef9b.dir/build.make CMakeFiles/cmTC_bef9b.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bef9b.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_bef9b.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.21/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bef9b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bef9b.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_bef9b.dir/CheckFunctionExists.c.o -o cmTC_bef9b  -lpthread 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 
 Determining if the Q_WS_X11 exist passed with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_92e85 && [1/2] Building CXX object CMakeFiles/cmTC_92e85.dir/CheckSymbolExists.cxx.o
-[2/2] Linking CXX executable cmTC_92e85
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6c418/fast && /usr/bin/make  -f CMakeFiles/cmTC_6c418.dir/build.make CMakeFiles/cmTC_6c418.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6c418.dir/CheckSymbolExists.cxx.o
+/usr/bin/g++  -I/usr/include/qt4  -o CMakeFiles/cmTC_6c418.dir/CheckSymbolExists.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTC_6c418
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c418.dir/link.txt --verbose=1
+/usr/bin/g++ -rdynamic CMakeFiles/cmTC_6c418.dir/CheckSymbolExists.cxx.o -o cmTC_6c418 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
@@ -992,9 +546,15 @@ int main(int argc, char** argv)
 Performing C++ SOURCE FILE Test R-Wall succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_ccdb7 && [1/2] Building CXX object CMakeFiles/cmTC_ccdb7.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6dd4d/fast && /usr/bin/make  -f CMakeFiles/cmTC_6dd4d.dir/build.make CMakeFiles/cmTC_6dd4d.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6dd4d.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wall -Wall -o CMakeFiles/cmTC_6dd4d.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_ccdb7
+Linking CXX executable cmTC_6dd4d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6dd4d.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_6dd4d.dir/src.cxx.o -o cmTC_6dd4d 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1002,9 +562,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wextra succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_98bc3 && [1/2] Building CXX object CMakeFiles/cmTC_98bc3.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_14754/fast && /usr/bin/make  -f CMakeFiles/cmTC_14754.dir/build.make CMakeFiles/cmTC_14754.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_14754.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wextra -Wextra -o CMakeFiles/cmTC_14754.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_98bc3
+Linking CXX executable cmTC_14754
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14754.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_14754.dir/src.cxx.o -o cmTC_14754 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1012,9 +578,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wno-long-long succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_8a350 && [1/2] Building CXX object CMakeFiles/cmTC_8a350.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c89f1/fast && /usr/bin/make  -f CMakeFiles/cmTC_c89f1.dir/build.make CMakeFiles/cmTC_c89f1.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c89f1.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wno-long-long -Wno-long-long -o CMakeFiles/cmTC_c89f1.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_8a350
+Linking CXX executable cmTC_c89f1
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c89f1.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_c89f1.dir/src.cxx.o -o cmTC_c89f1 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1022,9 +594,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wno-unused-value succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_1ae18 && [1/2] Building CXX object CMakeFiles/cmTC_1ae18.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6e0f4/fast && /usr/bin/make  -f CMakeFiles/cmTC_6e0f4.dir/build.make CMakeFiles/cmTC_6e0f4.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6e0f4.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wno-unused-value -Wno-unused-value -o CMakeFiles/cmTC_6e0f4.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_1ae18
+Linking CXX executable cmTC_6e0f4
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e0f4.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_6e0f4.dir/src.cxx.o -o cmTC_6e0f4 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1032,9 +610,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wfloat-equal succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_a1d61 && [1/2] Building CXX object CMakeFiles/cmTC_a1d61.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_39498/fast && /usr/bin/make  -f CMakeFiles/cmTC_39498.dir/build.make CMakeFiles/cmTC_39498.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_39498.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wfloat-equal -Wfloat-equal -o CMakeFiles/cmTC_39498.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_a1d61
+Linking CXX executable cmTC_39498
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39498.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_39498.dir/src.cxx.o -o cmTC_39498 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1042,9 +626,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wshadow succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_8d075 && [1/2] Building CXX object CMakeFiles/cmTC_8d075.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_dc567/fast && /usr/bin/make  -f CMakeFiles/cmTC_dc567.dir/build.make CMakeFiles/cmTC_dc567.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_dc567.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wshadow -Wshadow -o CMakeFiles/cmTC_dc567.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_8d075
+Linking CXX executable cmTC_dc567
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dc567.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_dc567.dir/src.cxx.o -o cmTC_dc567 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1052,9 +642,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Winit-self succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_6fe17 && [1/2] Building CXX object CMakeFiles/cmTC_6fe17.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_7ccd8/fast && /usr/bin/make  -f CMakeFiles/cmTC_7ccd8.dir/build.make CMakeFiles/cmTC_7ccd8.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7ccd8.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Winit-self -Winit-self -o CMakeFiles/cmTC_7ccd8.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_6fe17
+Linking CXX executable cmTC_7ccd8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ccd8.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_7ccd8.dir/src.cxx.o -o cmTC_7ccd8 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1062,9 +658,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wswitch-default succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_5b0f3 && [1/2] Building CXX object CMakeFiles/cmTC_5b0f3.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_06e24/fast && /usr/bin/make  -f CMakeFiles/cmTC_06e24.dir/build.make CMakeFiles/cmTC_06e24.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_06e24.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wswitch-default -Wswitch-default -o CMakeFiles/cmTC_06e24.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_5b0f3
+Linking CXX executable cmTC_06e24
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_06e24.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_06e24.dir/src.cxx.o -o cmTC_06e24 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1072,9 +674,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-Wmissing-include-dirs succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_a9b95 && [1/2] Building CXX object CMakeFiles/cmTC_a9b95.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_efa19/fast && /usr/bin/make  -f CMakeFiles/cmTC_efa19.dir/build.make CMakeFiles/cmTC_efa19.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_efa19.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-Wmissing-include-dirs -Wmissing-include-dirs -o CMakeFiles/cmTC_efa19.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_a9b95
+Linking CXX executable cmTC_efa19
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efa19.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_efa19.dir/src.cxx.o -o cmTC_efa19 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -1082,9 +690,614 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test R-pedantic succeeded with the following output:
 Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_bfe31 && [1/2] Building CXX object CMakeFiles/cmTC_bfe31.dir/src.cxx.o
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_0240b/fast && /usr/bin/make  -f CMakeFiles/cmTC_0240b.dir/build.make CMakeFiles/cmTC_0240b.dir/build
+make[1]: Entering directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_0240b.dir/src.cxx.o
+/usr/bin/g++   -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11    -DR-pedantic -pedantic -o CMakeFiles/cmTC_0240b.dir/src.cxx.o -c /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/src.cxx
 <command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
-[2/2] Linking CXX executable cmTC_bfe31
+Linking CXX executable cmTC_0240b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0240b.dir/link.txt --verbose=1
+/usr/bin/g++  -g -O2 -mssse3 -msse3 -mfpmath=sse -msse -msse2  -std=c++11  -rdynamic CMakeFiles/cmTC_0240b.dir/src.cxx.o -o cmTC_0240b 
+make[1]: Leaving directory `/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main() { return 0; }
+The system is: Linux - 4.4.0-148-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/x86_64-linux-gnu-gcc-4.9 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/3.21.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/x86_64-linux-gnu-g++-4.9 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/3.21.1/CompilerIdCXX/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_a6ab5 && [1/2] Building C object CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o
+Using built-in specs.
+COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccfiz69q.s
+GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
+	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
+	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: c5106fb2579f32f5e29912bcd8d3bc82
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o /tmp/ccfiz69q.s
+GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+[2/2] Linking C executable cmTC_a6ab5
+Using built-in specs.
+COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_a6ab5' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccdBlSpt.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_a6ab5 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+    add: [/usr/local/include]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.9/include;/usr/local/include;/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(x86_64-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_a6ab5 && [1/2] Building C object CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccfiz69q.s]
+  ignore line: [GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: c5106fb2579f32f5e29912bcd8d3bc82]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o /tmp/ccfiz69q.s]
+  ignore line: [GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [[2/2] Linking C executable cmTC_a6ab5]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-gcc-4.9]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_a6ab5' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccdBlSpt.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_a6ab5 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccdBlSpt.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_a6ab5] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..]
+    arg [CMakeFiles/cmTC_a6ab5.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> [/usr/lib/x86_64-linux-gnu/crt1.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/crt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o;/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.9;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+  implicit fwks: []
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_d3859 && [1/2] Building CXX object CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o
+Using built-in specs.
+COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccCnXKuv.s
+GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
+	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/4.9"
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/include/c++/4.9
+ /usr/include/x86_64-linux-gnu/c++/4.9
+ /usr/include/c++/4.9/backward
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)
+	compiled by GNU C version 4.9.4, GMP version 5.1.3, MPFR version 3.1.3, MPC version 1.0.1
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: e7137bb4cc46fb63f5e22418eff966b7
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccCnXKuv.s
+GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+[2/2] Linking CXX executable cmTC_d3859
+Using built-in specs.
+COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_d3859' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccSiatyx.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_d3859 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/include/c++/4.9]
+    add: [/usr/include/x86_64-linux-gnu/c++/4.9]
+    add: [/usr/include/c++/4.9/backward]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+    add: [/usr/local/include]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/include/c++/4.9] ==> [/usr/include/c++/4.9]
+  collapse include dir [/usr/include/x86_64-linux-gnu/c++/4.9] ==> [/usr/include/x86_64-linux-gnu/c++/4.9]
+  collapse include dir [/usr/include/c++/4.9/backward] ==> [/usr/include/c++/4.9/backward]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/include/c++/4.9;/usr/include/x86_64-linux-gnu/c++/4.9;/usr/include/c++/4.9/backward;/usr/lib/gcc/x86_64-linux-gnu/4.9/include;/usr/local/include;/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(x86_64-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_d3859 && [1/2] Building CXX object CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o -version -fstack-protector -Wformat -Wformat-security -o /tmp/ccCnXKuv.s]
+  ignore line: [GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/4.9"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/include/c++/4.9]
+  ignore line: [ /usr/include/x86_64-linux-gnu/c++/4.9]
+  ignore line: [ /usr/include/c++/4.9/backward]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++ (Ubuntu 4.9.4-2ubuntu1~14.04.1) version 4.9.4 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.9.4  GMP version 5.1.3  MPFR version 3.1.3  MPC version 1.0.1]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: e7137bb4cc46fb63f5e22418eff966b7]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccCnXKuv.s]
+  ignore line: [GNU assembler version 2.24 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.24]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [[2/2] Linking CXX executable cmTC_d3859]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/x86_64-linux-gnu-g++-4.9]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.9.4-2ubuntu1~14.04.1' --with-bugurl=file:///usr/share/doc/gcc-4.9/README.Bugs --enable-languages=c c++ java go d fortran objc obj-c++ --prefix=/usr --program-suffix=-4.9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.9 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.9-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.9-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.4 (Ubuntu 4.9.4-2ubuntu1~14.04.1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.9/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_d3859' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccSiatyx.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_d3859 /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../.. CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/4.9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccSiatyx.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_d3859] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..]
+    arg [CMakeFiles/cmTC_d3859.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crt1.o] ==> [/usr/lib/x86_64-linux-gnu/crt1.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/4.9/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/crt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/4.9/crtbegin.o;/usr/lib/gcc/x86_64-linux-gnu/4.9/crtend.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.9;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_66d9e && [1/2] Building CXX object CMakeFiles/cmTC_66d9e.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_66d9e
+
+
+
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_8a171 && [1/2] Building C object CMakeFiles/cmTC_8a171.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_8a171
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_1bdd7 && [1/2] Building C object CMakeFiles/cmTC_1bdd7.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_1bdd7
+
+
+
+Determining if the Q_WS_X11 exist passed with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_3e384 && [1/2] Building CXX object CMakeFiles/cmTC_3e384.dir/CheckSymbolExists.cxx.o
+[2/2] Linking CXX executable cmTC_3e384
+
+
+File /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_X11
+  return ((int*)(&Q_WS_X11))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C++ SOURCE FILE Test R-Wall succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_d9e9c && [1/2] Building CXX object CMakeFiles/cmTC_d9e9c.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_d9e9c
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wextra succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_e1605 && [1/2] Building CXX object CMakeFiles/cmTC_e1605.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_e1605
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wno-long-long succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_1b865 && [1/2] Building CXX object CMakeFiles/cmTC_1b865.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_1b865
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wno-unused-value succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_1e6c0 && [1/2] Building CXX object CMakeFiles/cmTC_1e6c0.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_1e6c0
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wfloat-equal succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_ea31a && [1/2] Building CXX object CMakeFiles/cmTC_ea31a.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_ea31a
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wshadow succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_ad2d0 && [1/2] Building CXX object CMakeFiles/cmTC_ad2d0.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_ad2d0
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Winit-self succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_b7304 && [1/2] Building CXX object CMakeFiles/cmTC_b7304.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_b7304
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wswitch-default succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_0247a && [1/2] Building CXX object CMakeFiles/cmTC_0247a.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_0247a
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-Wmissing-include-dirs succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_bb5dd && [1/2] Building CXX object CMakeFiles/cmTC_bb5dd.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_bb5dd
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test R-pedantic succeeded with the following output:
+Change Dir: /home/haptix-e15-463/haptix/haptix_controller/handsim/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/home/haptix-e15-463/anaconda3/bin/ninja cmTC_7f55a && [1/2] Building CXX object CMakeFiles/cmTC_7f55a.dir/src.cxx.o
+<command-line>:0:2: warning: ISO C99 requires whitespace after the macro name
+[2/2] Linking CXX executable cmTC_7f55a
 
 
 Source file was:

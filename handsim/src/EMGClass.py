@@ -35,11 +35,7 @@ class EMG:
         self.getBounds() # first 16: maximum values, second 16: minimum values
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
 
-        self.rawEMG = [-1]*self.numElectrodes # this is RAW from the board - need to get iEMG
-        self.iEMG = [-1]*self.numElectrodes # this is iEMG
-        self.normedEMG = [-1]*self.numElectrodes # array of normalized EMG values
-        self.muscleAct = [-1]*self.numElectrodes # array of muscle activation (through low pass muscle activation dynamics)
-        self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
+        self.resetEMG()
 
     def __del__(self):
         try:
@@ -48,6 +44,14 @@ class EMG:
             self.ctx.term()
         except:
             print("__del__: Socket closing error")
+
+    def resetEMG(self):
+        self.rawEMG = [-1]*self.numElectrodes # this is RAW from the board - need to get iEMG
+        self.iEMG = [-1]*self.numElectrodes # this is iEMG
+        self.normedEMG = [-1]*self.numElectrodes # array of normalized EMG values
+        self.muscleAct = [-1]*self.numElectrodes # array of muscle activation (through low pass muscle activation dynamics)
+        self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
+
 
     def initFilters(self):
         # parameters for calculating iEMG

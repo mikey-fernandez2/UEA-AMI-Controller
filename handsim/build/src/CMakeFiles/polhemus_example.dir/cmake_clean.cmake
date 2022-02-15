@@ -1,10 +1,11 @@
-FILE(REMOVE_RECURSE
+file(REMOVE_RECURSE
   "CMakeFiles/polhemus_example.dir/__/examples/polhemus_example.c.o"
-  "polhemus_example.pdb"
+  "CMakeFiles/polhemus_example.dir/__/examples/polhemus_example.c.o.d"
   "polhemus_example"
+  "polhemus_example.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
-FOREACH(lang C)
-  INCLUDE(CMakeFiles/polhemus_example.dir/cmake_clean_${lang}.cmake OPTIONAL)
-ENDFOREACH(lang)
+foreach(lang C)
+  include(CMakeFiles/polhemus_example.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
