@@ -3,7 +3,16 @@
 # impedanceController.py
 # Make the impedance controller class
 
+# need to add the location of Junqing's model + functions to the path
+import sys
+sys.path.append("/home/haptix-e15-463/haptix/Prosthetic-Joints-Automatic-Caliberation/Algorithm/Analysis/Different_Models/Upper_Extremity_4Joints")
+
 import math
+from Dynamics.AMI_Joint_Dynamic import AMI_Joint
+from Dynamics.Muscle import Muscle
+from Dynamics.System_Dynamic_Model import System_Dynamic_Model
+import torch
+from torch.utils.data import DataLoader
 
 class impedanceController:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
@@ -32,6 +41,9 @@ class impedanceController:
 
         self.motorMap = {0: 'thumbPPos', 1:'thumbYPos', 2:'indexPos', 3:'mrpPos', 4:'wristRot', 5:'wristFlex', 6:'humPos', 7:'elbowPos'}
         self.th_0 = [0, 0, 0, 0, 0, 0, 0, 0]
+
+        # set the used EMG channels here
+        self.usedChannels = [0, 2, 3, 4, 5, 6, 7, 9]
 
     # get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
     def getElectrodesforMotor(self, motor):
@@ -101,7 +113,6 @@ class impedanceController:
             RoM = self.LUKEArm.jointRoM[motor]
             p = (RoM[1] - RoM[0])*T_filt[i]
 
-            # TODO: figure out how to get the command in [0, 1] to be scaled better
             if p > RoM[1]: p = RoM[1]
             elif p < RoM[0]: p = RoM[0]
 
@@ -177,3 +188,31 @@ class impedanceController:
 
         # print(f"newCom: {newCom}\n")
         return newCom
+
+    def resetModel(self):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model_save_path = '/home/haptix-e15-463/haptix/Prosthetic-Joints-Automatic-Caliberation/Algorithm/Analysis/Different_Models/Upper_Extremity_4Joints/offlineModel_bilinear.tar'
+        # Build whole model based on muscles and masses
+        self.system_dynamic_model = System_Dynamic_Model.get_model(self.device)
+
+        # set initial conditions
+        self.hidden1 = torch.FloatTensor([[0,0]]).to(self.device)
+        self.hidden2 = torch.FloatTensor([[0,0]]).to(self.device)
+        self.hidden3 = torch.FloatTensor([[0,0]]).to(self.device)
+        self.hidden4 = torch.FloatTensor([[0,0]]).to(self.device)
+
+    def forwardDynamics(self):
+        allEMG = self.emg.iEMG
+        usedEMG = allEMG[self.usedChannels]
+        EMG = torch.FloatTensor([usedEMG]).to(self.device)
+
+        joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
+        posDegrees = [math.degrees(rad) for rad in [joint1, joint2, joint3, joint4]] # convert the radian output to degrees
+
+        curPos = self.LUKEArm.getCurPos()
+
+        # joint order: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
+        # TODO For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
+        jointPos = [joint1, joint1, joint2, joint2, joint3, curPos[5], curPos[6], joint4]
+
+        return jointPos

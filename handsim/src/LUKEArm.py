@@ -90,6 +90,9 @@ class LUKEArm:
         # for recording
         self.recording = False
 
+        # main control loop rate
+        self.Hz = 60
+
         # store prior commands for some reason
         self.lastposCom = None
         self.lastvelCom = None
@@ -402,10 +405,12 @@ class LUKEArm:
 
     # set the first row of the recorded data - the title of each column
     def resetRecording(self):
-        titles = ['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command)
+        rawEMGNames = [f'raw{i}' for i in range(16)]
+        iEMGNames = [f'iEMG{i}' for i in range(16)]
+        titles = ['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command) + rawEMGNames + iEMGNames + ['Trigger']
         self.recordedData = np.array(titles)
 
-    def addLogEntry(self):
+    def addLogEntry(self, emg=None):
         # add, in order, the timestamp, the position command, the joint position readings, the force sensor readings, the force sensor statuses, and the hex command sent
         newEntry = [self.timestamp]
         newEntry.extend(self.lastposCom)
@@ -417,6 +422,10 @@ class LUKEArm:
             newEntry.extend([self.sensors[status]])
         for comm in list(self.command):
             newEntry.extend([self.command[comm]])
+        if emg == None:
+            newEntry.extend([0]*33)
+        else:
+            newEntry.extend(emg.rawEMG + emg.iEMG + [emg.trigger])
 
         self.recordedData = np.vstack((self.recordedData, newEntry))
 
@@ -439,6 +448,8 @@ class LUKEArm:
                     # try with index first - this is element 2 of the lists
                     posCom[5] = diffCom[5]
                     # posCom = diffCom
+
+                    posCom = controller.forwardDynamics()
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -463,17 +474,16 @@ class LUKEArm:
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
                 self.buildCommand(posCom=posCom)
-                if not count % 100:
-                    if self.usingEMG:
-                        emg.printMuscleAct()
+                if count == 0:
                     self.printSensors()
 
-                count += 1
+                # record at 60 Hz - rate this loop is run at
+                time.sleep(max(1/self.Hz - (time.time() - T), 0))
+                if self.recording: self.addLogEntry(emg)
+                T = time.time()
 
-                # record at 100 Hz?
-                if self.recording and (time.time() - T) >= 0.01:
-                    self.addLogEntry()
-                    T = time.time()
+                count += 1
+                if count == 60: count = 0
         
         except KeyboardInterrupt:
             print("\nControl ended.")
@@ -605,7 +615,11 @@ def main(usingEMG):
 
                 print(f"\n\nSwitching to {run} mode...")
                 arm.shortModeSwitch(movementModes.index(run) + 1)
-                arm.mainControlLoop(emg, controller) if usingEMG else arm.mainControlLoop()
+                if usingEMG:
+                    arm.mainControlLoop(emg, controller)
+                    controller.resetModel()
+                else:
+                    arm.mainControlLoop()
 
                 # set recording to false, regardless of whether you have been recording
                 if arm.recording:

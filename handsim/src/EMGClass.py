@@ -52,7 +52,6 @@ class EMG:
         self.muscleAct = [-1]*self.numElectrodes # array of muscle activation (through low pass muscle activation dynamics)
         self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
 
-
     def initFilters(self):
         # parameters for calculating iEMG
         self.int_window = .05 # sec - 50 ms integration window
