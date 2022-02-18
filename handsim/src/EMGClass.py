@@ -7,6 +7,7 @@ import struct, os, sys, zmq, math
 import numpy as np
 from scipy import signal
 from CausalButter import CausalButterArr
+import time
 
 class EMG:
     def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1):
@@ -61,7 +62,8 @@ class EMG:
         # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
         self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
         # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
-        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=3, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
+        # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
+        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=4, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope
 
     ##########################################################################
     # print functions
@@ -169,13 +171,17 @@ class EMG:
     # calculate integrated EMG
     def intEMG(self):
         emg = self.rawEMG
-        emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # print(emg)
         emg = [self.highPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
         
-        self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
-        iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
+        # self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
+        # iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
 
-        self.iEMG = [self.lowPassFilters.filters[i].inputData(iEMG[i]) for i in range(self.numElectrodes)]
+        # self.iEMG = [self.lowPassFilters.filters[i].inputData(iEMG[i]) for i in range(self.numElectrodes)]
+        self.iEMG = [self.lowPassFilters.filters[i].inputData(abs(emg[i])) for i in range(self.numElectrodes)]
+
+        iEMG = self.iEMG
 
     # normalize the EMG
     def normEMG(self):
@@ -209,7 +215,8 @@ class EMG:
 
     # full EMG update pipeline
     def pipelineEMG(self):
-        self.readEMG()
-        self.intEMG()
-        self.normEMG()
-        self.muscleDynamics()
+        while(True):
+            self.readEMG()
+            self.intEMG()
+            self.normEMG()
+            # self.muscleDynamics()

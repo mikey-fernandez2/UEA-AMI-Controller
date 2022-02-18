@@ -106,7 +106,7 @@ class LUKE_Command_Sender:
             self.dACI2 = commands[8:16]
             self.dACI3 = commands[16:]
 
-            self.printCommandHex()
+            # self.printCommandHex()
 
             if (self.dACI1 == [] or self.dACI2 == [] or self.dACI3 == []):
                 raise ValueError('receiveData(): empty commands send to arm')

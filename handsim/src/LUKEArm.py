@@ -13,6 +13,8 @@ import sys
 import zmq
 import numpy as np
 import threading
+from CausalButter import CausalButterArr
+
 
 class LUKEArm:
     def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):        
@@ -94,6 +96,9 @@ class LUKEArm:
         # main control loop rate
         self.Hz = 120
 
+        # lowpass filter joint commands
+        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
+
         # store prior commands for some reason
         self.lastposCom = None
         self.lastvelCom = None
@@ -163,6 +168,9 @@ class LUKEArm:
     def posToCAN(self, pos, joint):
         # convert a position command for a joint to its CAN command
         # need to convert the desired position in degrees to the number of degrees from the bottom of the range then scale by the ACI counts and add the zero offset
+        if pos > self.jointRoM[joint][1]: pos = self.jointRoM[joint][1]
+        if pos < self.jointRoM[joint][0]: pos = self.jointRoM[joint][0]
+
         canCom = math.floor(self.ACICountsPerDegree[joint]*pos) + self.zeroPos[joint]
         return canCom
 
@@ -447,18 +455,20 @@ class LUKEArm:
 
                 if self.usingEMG:                   
                     # update EMG reading
-                    emg.pipelineEMG()
+                    # emg.pipelineEMG()
 
-                    diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
-                    posCom = self.getCurPos()
+                    # diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
+                    # posCom = self.getCurPos()
 
                     # try with index first - this is element 2 of the lists
-                    posCom[2] = diffCom[2]
+                    # posCom[2] = diffCom[2]
                     # posCom = diffCom
 
-                    # posCom = controller.forwardDynamics()
+                    posCom = controller.forwardDynamics()
+                    posCom = [self.lowpassCommands.filters[i].inputData(posCom[i]) for i in range(self.numMotors)]
 
-                    emg.printMuscleAct()
+                    # emg.printNormedEMG()
+                    # emg.printRawEMG()
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -473,8 +483,8 @@ class LUKEArm:
                     # thumbP = self.genSinusoid(3, 'thumbPPos')
                     # thumbY = self.genSinusoid(3, 'thumbYPos')
                     index = self.genSinusoid(2, 'indexPos')
-                    mrp = self.genSinusoid(3, 'mrpPos')
-                    # wristRot = self.genSinusoid(6, 'wristRot')
+                    # mrp = self.genSinusoid(3, 'mrpPos')
+                    # wristRot = self.genSinusoid(10, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
                     # humPos = self.genSinusoid(8, 'humPos')
                     # elbow = self.genSinusoid(10, 'elbowPos')
@@ -482,12 +492,16 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
+                # dont move arm
+                # posCom = self.getCurPos()
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
                 if self.recording: self.addLogEntry(emg)
 
                 T = time.time()
+                if count % (self.Hz/4) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+                count += 1
     
         except KeyboardInterrupt:
             print("\nControl ended.")
@@ -590,7 +604,12 @@ def main(usingEMG):
         print("Connecting to EMG board...")
         emg = EMG()
         emg.readEMG() # need to get first signal to avoid errors
+        # emg.samplingFreq = arm.Hz
         emg.initFilters() # this sets the appropriate filteres for calculating iEMG
+
+        emgThread = threading.Thread(target=emg.pipelineEMG)
+        emgThread.daemon = False
+        emgThread.start()
         print("Connected.")
 
         # setup the controller class
@@ -620,6 +639,7 @@ def main(usingEMG):
                 print(f"\n\nSwitching to {run} mode...")
                 arm.shortModeSwitch(movementModes.index(run) + 1)
                 if usingEMG:
+                    controller.resetModel()
                     arm.mainControlLoop(emg, controller)
                     controller.resetModel()
                 else:
@@ -659,6 +679,8 @@ def main(usingEMG):
 
     except KeyboardInterrupt:
         print("Exiting.")
+        if arm.usingEMG:
+            emgThread.join()
 
     arm.shutdown()
     print("Shutting down.")

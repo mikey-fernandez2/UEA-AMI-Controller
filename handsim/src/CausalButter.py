@@ -9,8 +9,9 @@ class CausalButterArr():
     def __init__(self, numChannels, order, f_low, f_high, fs, bandstop=0):
         self.numChannels = numChannels
 
-        self.filters = [CausalButter(order, f_low, f_high, fs, bandstop)]*numChannels
-
+        self.filters = []
+        for i in range(self.numChannels):
+            self.filters.append(CausalButter(order, f_low, f_high, fs, bandstop))
 class CausalButter:
     # the default init method assumes Causal butter is a bandpass filter, and allows signal frequency from f_low to f_high to pass.
     # when bandstop == 1, the causal butter filter becomes bandstop and signal frequency from f_low to f_high will be filtered out
