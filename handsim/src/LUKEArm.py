@@ -12,6 +12,7 @@ from controllerClass import impedanceController
 import sys
 import zmq
 import numpy as np
+import threading
 
 class LUKEArm:
     def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):        
@@ -91,7 +92,7 @@ class LUKEArm:
         self.recording = False
 
         # main control loop rate
-        self.Hz = 60
+        self.Hz = 120
 
         # store prior commands for some reason
         self.lastposCom = None
@@ -407,8 +408,8 @@ class LUKEArm:
     def resetRecording(self):
         rawEMGNames = [f'raw{i}' for i in range(16)]
         iEMGNames = [f'iEMG{i}' for i in range(16)]
-        titles = ['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command) + rawEMGNames + iEMGNames + ['Trigger']
-        self.recordedData = np.array(titles)
+        titles = [['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command) + rawEMGNames + iEMGNames + ['Trigger']]
+        self.recordedData = titles
 
     def addLogEntry(self, emg=None):
         # add, in order, the timestamp, the position command, the joint position readings, the force sensor readings, the force sensor statuses, and the hex command sent
@@ -425,15 +426,21 @@ class LUKEArm:
         if emg == None:
             newEntry.extend([0]*33)
         else:
-            newEntry.extend(emg.rawEMG + emg.iEMG + [emg.trigger])
+            newEntry.extend(emg.rawEMG)
+            newEntry.extend(emg.iEMG)
+            newEntry.extend([emg.trigger])
 
-        self.recordedData = np.vstack((self.recordedData, newEntry))
+        self.recordedData.append(newEntry)
 
     def mainControlLoop(self, emg=None, controller=None):
         try:
             count = 0
             T = time.time()
             while(True):
+                # to run this loop at a consistent interval, use this empty while loop
+                while(time.time() - T < 1/self.Hz):
+                    pass
+
                 # handle arm communication
                 self.recv()
                 self.messageCallback()
@@ -446,10 +453,12 @@ class LUKEArm:
                     posCom = self.getCurPos()
 
                     # try with index first - this is element 2 of the lists
-                    posCom[5] = diffCom[5]
+                    posCom[2] = diffCom[2]
                     # posCom = diffCom
 
-                    posCom = controller.forwardDynamics()
+                    # posCom = controller.forwardDynamics()
+
+                    emg.printMuscleAct()
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -463,8 +472,8 @@ class LUKEArm:
 
                     # thumbP = self.genSinusoid(3, 'thumbPPos')
                     # thumbY = self.genSinusoid(3, 'thumbYPos')
-                    index = self.genSinusoid(4, 'indexPos')
-                    # mrp = self.genSinusoid(4, 'mrpPos')
+                    index = self.genSinusoid(2, 'indexPos')
+                    mrp = self.genSinusoid(3, 'mrpPos')
                     # wristRot = self.genSinusoid(6, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
                     # humPos = self.genSinusoid(8, 'humPos')
@@ -474,17 +483,12 @@ class LUKEArm:
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
                 self.buildCommand(posCom=posCom)
-                if count == 0:
-                    self.printSensors()
+                # self.printSensors()
 
-                # record at 60 Hz - rate this loop is run at
-                time.sleep(max(1/self.Hz - (time.time() - T), 0))
                 if self.recording: self.addLogEntry(emg)
-                T = time.time()
 
-                count += 1
-                if count == 60: count = 0
-        
+                T = time.time()
+    
         except KeyboardInterrupt:
             print("\nControl ended.")
 
@@ -624,7 +628,10 @@ def main(usingEMG):
                 # set recording to false, regardless of whether you have been recording
                 if arm.recording:
                     filename = input('Enter a .csv filename: ')
-                    np.savetxt(filename + '.csv', arm.recordedData, delimiter='\t', fmt='%s')
+                    if not filename == "exit":
+                        dataToSave = np.array(arm.recordedData)
+                        np.savetxt("./LUKEarmLogs/" + filename + '.csv', dataToSave, delimiter='\t', fmt='%s')
+
                     arm.recording = False
 
             elif run == "standby":

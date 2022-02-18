@@ -63,7 +63,7 @@ class LUKE_Command_Sender:
 
     def printCommandHex(self):
         """ Print the commands in a nice format """
-        print("[", ", ".join("{:02x}".format(i) for i in self.dACI1),
+        print(f'{time.time():.3f}', "[", ", ".join("{:02x}".format(i) for i in self.dACI1),
              "] [", ", ".join("{:02x}".format(i) for i in self.dACI2),
               "] [", ", ".join("{:02x}".format(i) for i in self.dACI3), "]")
 

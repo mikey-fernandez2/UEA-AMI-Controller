@@ -26,7 +26,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [2, 0], [0, 0], [0, 0]]
+        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
