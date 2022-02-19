@@ -12,6 +12,7 @@ import math
 # from Dynamics.Muscle import Muscle
 # from Dynamics.System_Dynamic_Model import System_Dynamic_Model
 from Dynamics2.Hand_1dof import Hand_1dof
+from Dynamics2.Hand_4dof import Hand_4dof
 import torch
 from torch.utils.data import DataLoader
 
@@ -44,7 +45,8 @@ class impedanceController:
         self.th_0 = [0, 0, 0, 0, 0, 0, 0, 0]
 
         # set the used EMG channels here
-        self.usedChannels = [6, 3]
+        # self.usedChannels = [9, 3] # for wrist
+        self.usedChannels = [0, 2, 3, 4, 5, 6, 9, 10]
 
     # get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
     def getElectrodesforMotor(self, motor):
@@ -195,9 +197,12 @@ class impedanceController:
 
         # Build whole model based on muscles and masses
         learningRate = 20
-        self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
+        # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
+        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 1, 0)
 
-        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
+
+        # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
+        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/upper.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
@@ -205,10 +210,7 @@ class impedanceController:
         self.system_dynamic_model.eval()
 
         # set initial conditions
-        self.hidden1 = torch.FloatTensor([[0,0]]).to(self.device)
-        # self.hidden2 = torch.FloatTensor([[0,0]]).to(self.device)
-        # self.hidden3 = torch.FloatTensor([[0,0]]).to(self.device)
-        # self.hidden4 = torch.FloatTensor([[0,0]]).to(self.device)
+        self.hidden = torch.FloatTensor([[0,0,0,0,0,0,0,0]]).to(self.device)
 
     def forwardDynamics(self):
         allEMG = self.emg.normedEMG
@@ -217,16 +219,33 @@ class impedanceController:
         # EMG = torch.FloatTensor([usedEMG]).to(torch.device("cpu"))
 
         # joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
-        wristAngle, self.hidden1 = self.system_dynamic_model(self.hidden1, EMG, dt = 1/self.LUKEArm.Hz)
-        # posDegrees = [math.degrees(rad) for rad in [joint1, joint2, joint3, joint4]] # convert the radian output to degrees
-        wristAngle = math.degrees(wristAngle)
+        # wristAngle, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt = 1/self.LUKEArm.Hz)
+        jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt = 1/self.LUKEArm.Hz)
+        # posDegrees = [math.degrees(rad) for rad in jointAngles] # convert the radian output to degrees
+        # wristAngle = math.degrees(wristAngle)
 
         jointPos = self.LUKEArm.getCurPos()
 
         # joint order: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
         # TODO For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
         # print(wristAngle)
-        jointPos[2] = 0.5*(90 + wristAngle)
-        jointPos[3] = jointPos[2]
+        # jointPos[2] = 0.5*(90 + wristAngle)
+        # jointPos[3] = jointPos[2]
+        # jointPos[0] = jointPos[2]
+        # jointPos[1] = jointPos[2]
+
+        # jointPos[7] = (jointAngles[0][0] + 0.4)/1.2*135
+        # jointPos[2] = (jointAngles[0][1] + 0.6)/1.2*90
+        # jointPos[3] = (jointAngles[0][1] + 0.6)/1.2*90
+        # jointPos[0] = (jointAngles[0][2] + 0.6)/1.2*75
+        # jointPos[4] = 0.5*((jointAngles[0][3] + 1.4)/2.8*295 - 120)
+
+        jointPos[7] = ((jointAngles[0][0].detach().numpy() - 0.0413)/.1 + 0.05)*135
+        jointPos[2] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
+        jointPos[3] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
+        jointPos[0] = ((jointAngles[0][2].detach().numpy() + 0.0548)/.09 + 0.05)*75
+        jointPos[4] = 0.5*(((jointAngles[0][3].detach().numpy() -.1527)/.62 + 0.31)*295 - 120)
+
+        # print(jointAngles)
 
         return jointPos

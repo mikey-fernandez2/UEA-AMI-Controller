@@ -453,9 +453,7 @@ class LUKEArm:
                 self.recv()
                 self.messageCallback()
 
-                if self.usingEMG:                   
-                    # update EMG reading
-                    # emg.pipelineEMG()
+                if self.usingEMG:        
 
                     # diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
                     # posCom = self.getCurPos()
@@ -465,10 +463,11 @@ class LUKEArm:
                     # posCom = diffCom
 
                     posCom = controller.forwardDynamics()
-                    posCom = [self.lowpassCommands.filters[i].inputData(posCom[i]) for i in range(self.numMotors)]
+                    # posCom = [self.lowpassCommands.filters[i].inputData(posCom[i]) for i in range(self.numMotors)]
 
                     # emg.printNormedEMG()
                     # emg.printRawEMG()
+                    # emg.printiEMG()
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -492,15 +491,15 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                # dont move arm
-                # posCom = self.getCurPos()
+                if count % (self.Hz/12) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+
+                posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
                 if self.recording: self.addLogEntry(emg)
 
                 T = time.time()
-                if count % (self.Hz/4) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
                 count += 1
     
         except KeyboardInterrupt:
@@ -680,7 +679,7 @@ def main(usingEMG):
     except KeyboardInterrupt:
         print("Exiting.")
         if arm.usingEMG:
-            emgThread.join()
+            emg.isRunning = False
 
     arm.shutdown()
     print("Shutting down.")

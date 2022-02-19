@@ -107,7 +107,25 @@ class EMGProcessing(object):
 
     def receiveEMG(self):
         self.emg.sock.recv()
-        self.emg.pipelineEMG()
+
+        self.emg.readEMG()
+        self.emg.intEMG()
+        # self.emg.normEMG()
+        # self.emg.muscleDynamics()
+
+    def stream(self):
+        try:
+            while(True):
+                self.receiveEMG()
+                useiEMG = True
+        
+                if useiEMG:
+                    self.emg.printiEMG()
+                else:
+                    self.emg.printRawEMG()
+
+        except KeyboardInterrupt:
+            print(f"\nStreaming complete.")
 
     def normEMG(self):
         for i in range(self.numElectrodes):
@@ -154,6 +172,7 @@ class EMGProcessing(object):
         except KeyboardInterrupt:
             print(f"\nReceiving complete.\nWriting normalization factors to {self.sfPath}")
 
+            # NOTE NEED TO FIX HOW THIS IS BEING DONE
             # use 90th percentile for the maxes and 1st percentile for the mins
             self.maxes = np.percentile(self.allReadings, 90, axis=1)
             self.mins = np.percentile(self.allReadings, 1, axis=1)
@@ -253,8 +272,8 @@ class EMGProcessing(object):
 
 def callback():
     run = ""
-    while run not in ["norm", "iemg", "delta", "print", "manual", "exit"]:
-        run = input("Enter 'norm' to find raw EMG normalization factors.\nEnter 'iemg' to find normalization factors with iEMG.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'exit' to quit:\n")
+    while run not in ["norm", "iemg", "delta", "print", "manual", "stream", "exit"]:
+        run = input("Enter 'norm' to find raw EMG normalization factors.\nEnter 'iemg' to find normalization factors with iEMG.\nEnter 'manual' to enter EMG normalization factors.\nEnter 'delta' to find max/min EMG deltas.\nEnter 'print' to print EMG bounds.\nEnter 'stream' to print EMG without recording.\nEnter 'exit' to quit:\n")
 
     return run
 
@@ -294,6 +313,11 @@ if __name__ == "__main__":
             elif run == "manual":
                 print("\n\nManually setting EMG normalization factors")
                 emg.emgManual()
+                print("\n\n")
+
+            elif run == "stream":
+                print("\n\nStreaming EMG...")
+                emg.stream()
                 print("\n\n")
             
             elif run == "exit":

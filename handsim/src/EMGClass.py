@@ -38,6 +38,8 @@ class EMG:
 
         self.resetEMG()
 
+        self.isRunning = True
+
     def __del__(self):
         try:
             # close the socket
@@ -59,6 +61,7 @@ class EMG:
         self.window_len = math.ceil(self.int_window*self.samplingFreq)
         self.rawHistory = np.zeros((self.numElectrodes, self.window_len))
         self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=58, f_high=62, fs=self.samplingFreq, bandstop=1) # removes power line 60 Hz noise
+        self.powerLineFilters2 = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=118, f_high=122, fs=self.samplingFreq, bandstop=1) # removes power line 120 Hz noise
         # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
         self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
         # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
@@ -170,25 +173,33 @@ class EMG:
     ## The below are all done using numpy, make sure you understand what they do
     # calculate integrated EMG
     def intEMG(self):
+        noiseLevel = np.asarray(self.bounds[self.numElectrodes:])
+
         emg = self.rawEMG
-        # emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        emg = [self.powerLineFilters2.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+
         # print(emg)
-        emg = [self.highPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        emg = [abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]
+        
+        # NOTE THE CHANGE TO HOW WE NORMALIZE THE EMG
+        emg = [max(emg[i] - noiseLevel, 0) for i in range(self.numElectrodes)] # subtract the noise of the raw emg
         
         # self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
         # iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
 
         # self.iEMG = [self.lowPassFilters.filters[i].inputData(iEMG[i]) for i in range(self.numElectrodes)]
-        self.iEMG = [self.lowPassFilters.filters[i].inputData(abs(emg[i])) for i in range(self.numElectrodes)]
+        self.iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
 
         iEMG = self.iEMG
 
     # normalize the EMG
     def normEMG(self):
         maxVals = np.asarray(self.bounds[:self.numElectrodes])
-        minVals = np.asarray(self.bounds[self.numElectrodes:])
+        # minVals = np.asarray(self.bounds[self.numElectrodes:])
 
-        normed = (self.iEMG - minVals)/(maxVals - minVals)
+        # normed = (self.iEMG - minVals)/(maxVals - minVals)
+        normed = self.iEMG/maxVals
 
         # correct the bounds
         normed[normed < 0] = 0
@@ -215,8 +226,10 @@ class EMG:
 
     # full EMG update pipeline
     def pipelineEMG(self):
-        while(True):
+        while(self.isRunning):
             self.readEMG()
             self.intEMG()
             self.normEMG()
             # self.muscleDynamics()
+        
+        return

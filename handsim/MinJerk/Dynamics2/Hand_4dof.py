@@ -16,7 +16,7 @@ from Dynamics2.Joint_1dof_Bilinear_NN import Joint_1dof
 # from Muscle import Muscle
 # from Joint_2dof import Joint_2dof
 
-class Hand_1dof(nn.Module):
+class Hand_4dof(nn.Module):
     def __init__(self, device, EMG_Channel_Count, Left, Dyanmic_Lr, EMG_mat_Lr, NN_ratio, \
                  K0_scale=2000, K1_scale=40000, L0_scale=0.03, L1_scale=0.006, I_scale=0.008, M_scale=0.05, speed_mode=False):
         super().__init__()
@@ -40,7 +40,7 @@ class Hand_1dof(nn.Module):
         m7 = Muscle(100, 2000, 0.06, 0.006, [-0.05])
         m8 = Muscle(100, 2000, 0.06, 0.006, [0.05])
         
-        self.muslces = [m1, m2, m3, m4, m5, m6, m7, m8]
+        self.muscles = [m1, m2, m3, m4, m5, m6, m7, m8]
          
         self.AMI1 = [m1, m2]
         self.AMI2 = [m3, m4]
@@ -73,44 +73,62 @@ class Hand_1dof(nn.Module):
         # There will be two initialization style of the EMG to muscle activation matrix.
         # If the electrodes are right upon the targeted muscle eye matrix should be chose, otherwise all-one matrix should be the way to go 
         # I'm using the scaled all-one matrix implementation here.
-        # self.EMG_to_Activation_Mat = nn.Parameter(torch.ones((self.muscle_num, self.EMG_Channel_Count), dtype=torch.float, device=self.device)/self.EMG_mat_Lr/self.EMG_Channel_Count)
-        self.EMG_to_Activation_Mat = nn.Parameter(torch.eye(self.muscle_num, self.EMG_Channel_Count, dtype=torch.float, device=self.device)/self.EMG_mat_Lr)
+        self.EMG_to_Activation_Mat = nn.Parameter(torch.ones((self.muscle_num, self.EMG_Channel_Count), dtype=torch.float, device=self.device)/self.EMG_mat_Lr/self.EMG_Channel_Count)
+        # self.EMG_to_Activation_Mat = nn.Parameter(torch.eye(self.muscle_num, self.EMG_Channel_Count, dtype=torch.float, device=self.device)/self.EMG_mat_Lr)
         
     def forward(self, SS, EMG, dt):
         # Get the muscle activations then pass them into the joint model.
         Alphas = torch.matmul(EMG, self.EMG_to_Activation_Mat*self.EMG_mat_Lr)
         
-        SS1 = SS[:,0:2]
-        SS2 = SS[:,2:4]
-        SS3 = SS[:,4:6]
-        SS4 = SS[:,6:8]
+        # SS1 = SS[:,0:2]
+        # SS2 = SS[:,2:4]
+        # SS3 = SS[:,4:6]
+        # SS4 = SS[:,6:8]
         
         
         # TODO: #3 Add nonlinear calculation to EMG
         # print(Alphas)
-        self.AMI1(SS)
+        rw1, rs1 = self.Joint1(SS[:, 0:2], Alphas[:, 0:2], dt)
+        rw2, rs2 = self.Joint2(SS[:, 2:4], Alphas[:, 2:4], dt)
+        rw3, rs3 = self.Joint3(SS[:, 4:6], Alphas[:, 4:6], dt)
+        rw4, rs4 = self.Joint4(SS[:, 6:8], Alphas[:, 6:8], dt)
         
-        return self.Joint(SS, Alphas, dt)
+        rw = torch.hstack([rw1, rw2, rw3, rw4])
+        rs = torch.hstack([rs1, rs2, rs3, rs4])
+        
+        return rw, rs
 
     def lock_EMG_mat(self, switch=True):
         self.EMG_to_Activation_Mat.requires_grad = not switch
         
     def lock_I(self, switch=True):
-        self.Joint.I.requires_grad = not switch
+        self.Joint1.I.requires_grad = not switch
+        self.Joint2.I.requires_grad = not switch
+        self.Joint3.I.requires_grad = not switch
+        self.Joint4.I.requires_grad = not switch
         
     def lock_for_robot(self, switch=True):
         self.lock_EMG_mat(switch)
         self.lock_I(switch)
         
     def disable_NN(self):
-        self.Joint.disalbe_NN()
+        self.Joint1.disalbe_NN()
+        self.Joint2.disalbe_NN()
+        self.Joint3.disalbe_NN()
+        self.Joint4.disalbe_NN()
         
     def enable_NN(self):
-        self.Joint.enable_NN()
+        self.Joint1.enable_NN()
+        self.Joint2.enable_NN()
+        self.Joint3.enable_NN()
+        self.Joint4.enable_NN()
         
     def print_params(self):
         # print all parameters of the dynamic model
-        self.Joint.print_params()
+        self.Joint1.print_params()
+        self.Joint2.print_params()
+        self.Joint3.print_params()
+        self.Joint4.print_params()
         print("EMG to Muscle Activation mat:\n", (self.EMG_to_Activation_Mat*self.EMG_mat_Lr).detach().cpu().numpy())
 
 # Test
