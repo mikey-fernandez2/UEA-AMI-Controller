@@ -60,8 +60,10 @@ class EMG:
         self.int_window = .05 # sec - 50 ms integration window
         self.window_len = math.ceil(self.int_window*self.samplingFreq)
         self.rawHistory = np.zeros((self.numElectrodes, self.window_len))
-        self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=58, f_high=62, fs=self.samplingFreq, bandstop=1) # removes power line 60 Hz noise
-        self.powerLineFilters2 = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=118, f_high=122, fs=self.samplingFreq, bandstop=1) # removes power line 120 Hz noise
+        self.numPowerLines = 8
+        self.powerLineFilterArray = [CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=60*i - 2, f_high=60*i + 2, fs=self.samplingFreq, bandstop=1) for i in range(self.numPowerLines)] # remove power line noise and multiples up to 480 Hz
+        # self.powerLineFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=58, f_high=62, fs=self.samplingFreq, bandstop=1) # removes power line 60 Hz noise
+        # self.powerLineFilters2 = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=118, f_high=122, fs=self.samplingFreq, bandstop=1) # removes power line 120 Hz noise
         # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
         self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=20, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
         # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
@@ -176,8 +178,10 @@ class EMG:
         noiseLevel = np.asarray(self.bounds[self.numElectrodes:])
 
         emg = self.rawEMG
-        emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        emg = [self.powerLineFilters2.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # emg = [self.powerLineFilters2.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        for powerMult in range(self.numPowerLines):
+            emg = [self.powerLineFilterArray[powerMult].filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
 
         # print(emg)
         emg = [abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]
