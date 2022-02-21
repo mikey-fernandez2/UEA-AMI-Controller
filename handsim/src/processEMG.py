@@ -108,10 +108,12 @@ class EMGProcessing(object):
     def receiveEMG(self):
         self.emg.sock.recv()
 
-        self.emg.readEMG()
-        self.emg.intEMG()
-        # self.emg.normEMG()
-        # self.emg.muscleDynamics()
+        # self.emg.readEMG()
+        # self.emg.intEMG()
+        self.emg.readEMGPacket()
+        self.emg.intEMGPacket()
+        self.emg.normEMG()
+        self.emg.muscleDynamics()
 
     def stream(self):
         try:
@@ -120,22 +122,13 @@ class EMGProcessing(object):
                 useiEMG = True
         
                 if useiEMG:
-                    self.emg.printiEMG()
+                    # self.emg.printiEMG()
+                    self.emg.printNormedEMG()
                 else:
                     self.emg.printRawEMG()
 
         except KeyboardInterrupt:
             print(f"\nStreaming complete.")
-
-    def normEMG(self):
-        for i in range(self.numElectrodes):
-            normed = (self.emg.rawEMG[i] - self.mins[i])/self.maxes[i]
-
-            # Implement bounds on normalized EMG
-            if normed < 0: normed = 0
-            elif normed > 1: normed = 1
-
-            self.emg.normedEMG[i] = normed
 
     def writeNorms(self):
         normsBytes = struct.pack("ffffffffffffffffffffffffffffffff", self.maxes[0], self.maxes[1], self.maxes[2], self.maxes[3], self.maxes[4], self.maxes[5], self.maxes[6], self.maxes[7],
@@ -172,9 +165,8 @@ class EMGProcessing(object):
         except KeyboardInterrupt:
             print(f"\nReceiving complete.\nWriting normalization factors to {self.sfPath}")
 
-            # NOTE NEED TO FIX HOW THIS IS BEING DONE
-            # use 90th percentile for the maxes and 1st percentile for the mins
-            self.maxes = np.percentile(self.allReadings, 90, axis=1)
+            # use 98th percentile for the maxes and 1st percentile for the mins
+            self.maxes = np.percentile(self.allReadings, 98, axis=1)
             self.mins = np.percentile(self.allReadings, 1, axis=1)
 
             self.writeNorms()

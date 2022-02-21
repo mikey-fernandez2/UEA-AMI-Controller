@@ -94,7 +94,7 @@ class LUKEArm:
         self.recording = False
 
         # main control loop rate
-        self.Hz = 120
+        self.Hz = 20
 
         # lowpass filter joint commands
         self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
@@ -103,6 +103,8 @@ class LUKEArm:
         self.lastposCom = None
         self.lastvelCom = None
         self.lastgripCom = None
+
+        self.startCommunication()
 
     def __del__(self):
         """ Garbage collection """
@@ -117,6 +119,13 @@ class LUKEArm:
             self.ctx.term()
         except:
             print("__del__: Socket closing error")
+
+    def startCommunication(self):
+        # start communicating with the arm
+        self.isRunning = True
+        self.armThread = threading.Thread(target=self.messageHandling)
+        self.armThread.daemon = False
+        self.armThread.start()
 
     def recv(self):
         message = self.bus.recv()
@@ -181,6 +190,12 @@ class LUKEArm:
         pos = scaledCAN if scaledCAN <= 180 else (scaledCAN - 1024)
         return pos
 
+    def messageHandling(self):
+        # handle arm communication
+        while(self.isRunning):
+            self.recv()
+            self.messageCallback()
+
     def syncAck(self):
         status = self.data[0]
         self.gripRead = status >> 2 & 111
@@ -238,13 +253,6 @@ class LUKEArm:
             else:
                 raise ValueError(f'messageCallback(): Invalid sensor message arbitration_id {msg_id:03X}')
 
-    def passiveUpdate(self, duration):
-        # stupid little function to passively update sensors
-        T = time.time()
-        while time.time() - T < duration:
-            self.recv()
-            self.messageCallback()
-
     def isValidCommand(self):
         # returns true if all commands in the list are between 0x000 and 0x3FF (0 to 1023)
         commandCAN = self.command.values()
@@ -257,7 +265,6 @@ class LUKEArm:
     def isValidPosList(self, posList):
         # returns true if all positions given are in the appropriate joint range
         joints = ['thumbPPos', 'thumbYPos', 'indexPos', 'mrpPos', 'wristRot', 'wristFlex', 'humPos', 'elbowPos']
-        # return all([self.isValidPosJoint(posList[i], joints[i]) for i in range(len(posList))])
         return all([(posList[i] >= self.jointRoM[joints[i]][0] and posList[i] <= self.jointRoM[joints[i]][1]) for i in range(len(posList))])
 
     def getCurPos(self):
@@ -341,10 +348,8 @@ class LUKEArm:
         # wait > 500 ms (1 s to be safe)
         self.buildEmptyCommand() # initialize empty command
         missingReadings = self.sensorIDs.copy()
-        while (time.time() - self.startTimestamp < 1 or len(missingReadings) > 0):
-            self.recv()
-            self.messageCallback()
-            
+        T = time.time()
+        while (time.time() - T < 1 or len(missingReadings) > 0):     
             # populate sensors
             if self.arbitration_id in missingReadings:
                 missingReadings.remove(self.arbitration_id)
@@ -372,16 +377,9 @@ class LUKEArm:
         while self.modeSend != newMode and self.modeRead != newMode:
             self.buildEmptyCommand()
             self.changeMode(0x3FF)
-            T = time.time()
-            while (time.time() - T < 0.1):
-                self.recv()
-                self.messageCallback()
-
-                self.sendCommand()
-                time.sleep(0.007)
+            time.sleep(0.1)
 
             self.changeMode(0x000)
-            self.sendCommand()
 
             if newMode in [1, 2, 3]:
                 self.changeMode(newMode)
@@ -392,16 +390,10 @@ class LUKEArm:
         while self.modeRead != 0:
             self.buildEmptyCommand()
             self.changeMode(0x3FF)
-            T = time.time()
-            while (time.time() - T < 1):
-                self.recv()
-                self.messageCallback()
-    
-                self.sendCommand()
-                time.sleep(0.007)
+
+            time.sleep(1)
     
             self.changeMode(0x000)
-            self.sendCommand()
 
         print("In standby mode")
 
@@ -445,25 +437,20 @@ class LUKEArm:
             count = 0
             T = time.time()
             while(True):
-                # to run this loop at a consistent interval, use this empty while loop
-                while(time.time() - T < 1/self.Hz):
-                    pass
+                # to run this loop at a consistent interval
+                newT = time.time()
+                time.sleep(max(1/self.Hz - (newT - T), 0))
+                T = time.time()
 
-                # handle arm communication
-                self.recv()
-                self.messageCallback()
-
-                if self.usingEMG:        
-
+                if self.usingEMG:
                     # diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
-                    # posCom = self.getCurPos()
 
                     # try with index first - this is element 2 of the lists
                     # posCom[2] = diffCom[2]
                     # posCom = diffCom
 
                     posCom = controller.forwardDynamics()
-                    # posCom = [self.lowpassCommands.filters[i].inputData(posCom[i]) for i in range(self.numMotors)]
+                    posCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
 
                     # emg.printNormedEMG()
                     # emg.printRawEMG()
@@ -491,15 +478,14 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                if count % (self.Hz/12) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+                if count % (self.Hz/10) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
 
-                posCom = self.getCurPos() # dont move arm
+                # posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
                 if self.recording: self.addLogEntry(emg)
 
-                T = time.time()
                 count += 1
     
         except KeyboardInterrupt:
@@ -517,10 +503,7 @@ class LUKEArm:
             start = time.time()
             elapsedTime = 0
             while(elapsedTime < period):
-                # handle arm communication
-                self.recv()
-                self.messageCallback()
-
+                
                 # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                 posCom = [(1 - elapsedTime/period)*pos for pos in startPos]
 
@@ -563,10 +546,6 @@ class LUKEArm:
             elapsedTime = 0
             period = 5 # do this over 5 seconds
             while(elapsedTime < period):
-                # handle arm communication
-                self.recv()
-                self.messageCallback()
-
                 # do a linear interpolation
                 posCom = [(elapsedTime/period)*(posDes[i] - startPos[i]) + startPos[i] for i in range(len(startPos))]
 
@@ -602,9 +581,8 @@ def main(usingEMG):
     if usingEMG:
         print("Connecting to EMG board...")
         emg = EMG()
-        emg.readEMG() # need to get first signal to avoid errors
-        # emg.samplingFreq = arm.Hz
-        emg.initFilters() # this sets the appropriate filteres for calculating iEMG
+        # emg.readEMG() # need to get first signal to avoid errors
+        # emg.initFilters() # this sets the appropriate filteres for calculating iEMG
 
         emgThread = threading.Thread(target=emg.pipelineEMG)
         emgThread.daemon = False
@@ -627,7 +605,7 @@ def main(usingEMG):
             if run == "startup":
                 print("\n\nGoing through startup...")
                 arm.startup()
-                arm.passiveUpdate(0.1)
+                time.sleep(0.1)
 
             elif run in movementModes:
                 # this is dumb but I have to make sure that you're in hand mode when you want to switch to arm from standby
@@ -683,6 +661,7 @@ def main(usingEMG):
 
     arm.shutdown()
     print("Shutting down.")
+    arm.isRunning = False
 
 if __name__ == '__main__':
     usingEMG = False

@@ -70,34 +70,67 @@ class CausalButter:
             self.r = 4.0*a
             self.s = 4.0*a2 + 2.0
 
+    # def inputData(self, raw_data):
+    #     #BUGMAN 5/24/2017 modified the npts
+    #     # Mikey Fernandez 01/13/2022 take in only a single data point at a time
+    #     x = raw_data
+
+    #     # the default is to create a bandpass causal butter filter
+    #     if not self.bandstop:
+    #         for i in range(self.n):
+    #             self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
+    #             x = self.A[i]*(self.w0[i] - 2.0*self.w2[i] + self.w4[i])
+    #             self.w4[i] = self.w3[i]
+    #             self.w3[i] = self.w2[i]
+    #             self.w2[i] = self.w1[i]
+    #             self.w1[i] = self.w0[i]
+
+    #         filtered_data = x
+
+    #     else:
+    #         for i in range(self.n):
+    #             self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
+    #             # bandstop method changed some coefficients here
+    #             x = self.A[i]*(self.w0[i] - self.r*self.w1[i] + self.s*self.w2[i] - self.r*self.w3[i]+ self.w4[i])
+    #             self.w4[i] = self.w3[i]
+    #             self.w3[i] = self.w2[i]
+    #             self.w2[i] = self.w1[i]
+    #             self.w1[i] = self.w0[i]
+
+    #         filtered_data = x
+
+    #     return filtered_data
+
     def inputData(self, raw_data):
         #BUGMAN 5/24/2017 modified the npts
-        # Mikey Fernandez 01/13/2022 take in only a single data point at a time
-        x = raw_data
 
+        npts = len(raw_data)
+        filtered_data = [None]*npts
+       
         # the default is to create a bandpass causal butter filter
-        if not self.bandstop:
-            for i in range(self.n):
-                self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
-                x = self.A[i]*(self.w0[i] - 2.0*self.w2[i] + self.w4[i])
-                self.w4[i] = self.w3[i]
-                self.w3[i] = self.w2[i]
-                self.w2[i] = self.w1[i]
-                self.w1[i] = self.w0[i]
-
-            filtered_data = x
-
+        if self.bandstop == 0:
+            for pnt in range(npts):
+                x = raw_data[pnt]
+                for i in range(self.n):
+                    self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
+                    x = self.A[i]*(self.w0[i] - 2.0*self.w2[i] + self.w4[i])
+                    self.w4[i] = self.w3[i]
+                    self.w3[i] = self.w2[i]
+                    self.w2[i] = self.w1[i]
+                    self.w1[i] = self.w0[i]
+                filtered_data[pnt] = x
         else:
-            for i in range(self.n):
-                self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
-                # bandstop method changed some coefficients here
-                x = self.A[i]*(self.w0[i] - self.r*self.w1[i] + self.s*self.w2[i] - self.r*self.w3[i]+ self.w4[i])
-                self.w4[i] = self.w3[i]
-                self.w3[i] = self.w2[i]
-                self.w2[i] = self.w1[i]
-                self.w1[i] = self.w0[i]
-
-            filtered_data = x
+            for pnt in range(npts):
+                x = raw_data[pnt]
+                for i in range(self.n):
+                    self.w0[i] = self.d1[i]*self.w1[i] + self.d2[i]*self.w2[i] + self.d3[i]*self.w3[i] + self.d4[i]*self.w4[i] + x
+                    # bandstop method changed some coefficients here
+                    x = self.A[i]*(self.w0[i] - self.r*self.w1[i] + self.s*self.w2[i] - self.r*self.w3[i]+ self.w4[i])
+                    self.w4[i] = self.w3[i]
+                    self.w3[i] = self.w2[i]
+                    self.w2[i] = self.w1[i]
+                    self.w1[i] = self.w0[i]
+                filtered_data[pnt] = x
 
         return filtered_data
 
