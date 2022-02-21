@@ -443,14 +443,17 @@ class LUKEArm:
                 T = time.time()
 
                 if self.usingEMG:
-                    # diffCom = controller.differentialActCommand(threshold=0.01, gain=0.001)
+                    posCom = controller.differentialActCommand(threshold=0.05, gain=1)
 
                     # try with index first - this is element 2 of the lists
                     # posCom[2] = diffCom[2]
                     # posCom = diffCom
 
-                    posCom = controller.forwardDynamics()
+                    # posCom = controller.forwardDynamics()
+                    # print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+                    posCom = controller.PIDcontroller(posCom)
                     posCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
+                    # print("\t", [f"{pos:6.3f}" for pos in posCom])
 
                     # emg.printNormedEMG()
                     # emg.printRawEMG()

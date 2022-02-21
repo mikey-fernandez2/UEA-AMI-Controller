@@ -28,7 +28,7 @@ class impedanceController:
         self.prev2T = [0]*numMotors
 
         # [thumbP, thumbY, index, mrp, wristRot, wristFlex, humRot, elbow]
-        self.motorElectrodeMap = [[0, 0], [0, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+        self.motorElectrodeMap = [[3, 4], [0, 0], [10, 9], [10, 9], [6, 5], [0, 0], [0, 0], [2, 0]]
         self.K_act_arr = [1]*self.numMotors
         self.K_pas_arr = [0.01]*self.numMotors
 
@@ -47,6 +47,14 @@ class impedanceController:
         # set the used EMG channels here
         # self.usedChannels = [9, 3] # for wrist
         self.usedChannels = [0, 2, 3, 4, 5, 6, 9, 10]
+
+        self.k_p = [1]*self.LUKEArm.numMotors
+        self.k_i = [.001]*self.LUKEArm.numMotors
+        self.k_d = [.1]*self.LUKEArm.numMotors
+
+        self.I = [0 for i in range(self.LUKEArm.numMotors)]
+        self.lastError = [0 for i in range(self.LUKEArm.numMotors)]
+        self.windup = [100 for i in range(self.LUKEArm.numMotors)]
 
     # get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
     def getElectrodesforMotor(self, motor):
@@ -164,7 +172,7 @@ class impedanceController:
 
     def differentialActCommand(self, threshold, gain):
         # get arm current position
-        # curPos = self.LUKEArm.getCurPos()
+        curPos = self.LUKEArm.getCurPos()
         lastCom = self.LUKEArm.lastposCom
 
         # get the difference in activation between the two muscles
@@ -181,7 +189,8 @@ class impedanceController:
             limits = self.LUKEArm.jointRoM[motor]
             RoM = limits[1] - limits[0]
             diff = gain*RoM*direction[i]
-            thisNew = lastCom[i] + diff
+            # thisNew = lastCom[i] + diff
+            thisNew = curPos[i] + diff
 
             # check bounds
             thisNew = limits[0] if thisNew <= limits[0] else (limits[1] if thisNew >= limits[1] else thisNew)
@@ -198,7 +207,7 @@ class impedanceController:
         # Build whole model based on muscles and masses
         learningRate = 5
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
-        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.2)
+        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
@@ -234,14 +243,18 @@ class impedanceController:
         # jointPos[0] = jointPos[2]
         # jointPos[1] = jointPos[2]
 
-        jointPos[7] = (jointAngles[0][0].detach().numpy() + 1.2)/2.4*135
-        jointPos[2] = (-jointAngles[0][1].detach().numpy() + 0.6)/1.2*90
-        jointPos[3] = (-jointAngles[0][1].detach().numpy() + 0.6)/1.2*90
+        # print(jointAngles.detach().numpy())
+
+        jointPos[7] = (jointAngles[0][0].detach().numpy() + 1.12)/2.4*135
+        jointPos[2] = (-(jointAngles[0][1].detach().numpy() + 0.062) + 0.6)/1.2*90
+        jointPos[3] = (-(jointAngles[0][1].detach().numpy() + 0.062) + 0.6)/1.2*90
         jointPos[0] = (-jointAngles[0][2].detach().numpy() + 0.6)/1.2*75
         jointPos[1] = 37.5
         jointPos[5] = 0
         # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
-        jointPos[4] = 0.5*((jointAngles[0][3].detach().numpy() + 1.4)/2.8*295 - 120)
+        jointPos[4] = (jointAngles[0][3].detach().numpy() + .178 + 1.4)/2.8*295 - 120
+
+        # print(jointPos)
 
         # jointPos[7] = ((jointAngles[0][0].detach().numpy() - 0.0413)/.1 + 0.05)*135
         # jointPos[2] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
@@ -252,3 +265,18 @@ class impedanceController:
         # print(jointAngles)
 
         return jointPos
+
+    def PIDcontroller(self, posCom):
+        curPos = self.LUKEArm.getCurPos()
+
+        error = [posCom[i] - curPos[i] for i in range(len(posCom))]
+
+        self.I = [(self.I[i] + error[i]/self.LUKEArm.Hz if abs(self.I[i] + error[i])/self.LUKEArm.Hz < self.windup[i] else 0) for i in range(len(posCom))]
+        derivError = [(self.lastError[i] - error[i])*self.LUKEArm.Hz for i in range(len(posCom))]
+        self.lastError = error
+
+        PIDCommand = [self.k_p[i]*error[i] + self.k_i[i]*self.I[i] + self.k_d[i]*derivError[i] for i in range(len(posCom))]
+        # PIDCommand = [self.k_p[i]*error[i] for i in range(len(posCom))]
+
+        # print(error, self.I, derivError)
+        return [PIDCommand[i] + curPos[i] for i in range(len(posCom))]
