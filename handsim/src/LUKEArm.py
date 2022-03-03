@@ -15,7 +15,6 @@ import numpy as np
 import threading
 from CausalButter import CausalButterArr
 
-
 class LUKEArm:
     def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):        
         # make sure valid inputs given
@@ -94,7 +93,7 @@ class LUKEArm:
         self.recording = False
 
         # main control loop rate
-        self.Hz = 20
+        self.Hz = 30
 
         # lowpass filter joint commands
         self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
@@ -187,7 +186,7 @@ class LUKEArm:
         # convert a 2 byte CAN signal to the corresponding joint position
         fullCAN = (CAN[0] << 0x8) + CAN[1]
         scaledCAN = fullCAN/2**6
-        pos = scaledCAN if scaledCAN <= 180 else (scaledCAN - 1024)
+        pos = scaledCAN if scaledCAN <= 180 else (scaledCAN - 1024) # something to handle the negatives (2's complement, essentially)
         return pos
 
     def messageHandling(self):
@@ -349,7 +348,7 @@ class LUKEArm:
         self.buildEmptyCommand() # initialize empty command
         missingReadings = self.sensorIDs.copy()
         T = time.time()
-        while (time.time() - T < 1 or len(missingReadings) > 0):     
+        while (time.time() - T < 1 or len(missingReadings) > 0):
             # populate sensors
             if self.arbitration_id in missingReadings:
                 missingReadings.remove(self.arbitration_id)
@@ -443,15 +442,17 @@ class LUKEArm:
                 T = time.time()
 
                 if self.usingEMG:
-                    posCom = controller.differentialActCommand(threshold=0.05, gain=1)
+                    # posCom = controller.differentialActCommand(threshold=0.05, gain=1)
 
                     # try with index first - this is element 2 of the lists
                     # posCom[2] = diffCom[2]
                     # posCom = diffCom
 
-                    # posCom = controller.forwardDynamics()
+                    startNet = time.time()
+                    posCom = controller.forwardDynamics()
+                    # print(time.time() - startNet)
                     # print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
-                    posCom = controller.PIDcontroller(posCom)
+                    # posCom = controller.PIDcontroller(posCom)
                     posCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
                     # print("\t", [f"{pos:6.3f}" for pos in posCom])
 
@@ -471,11 +472,11 @@ class LUKEArm:
 
                     # thumbP = self.genSinusoid(3, 'thumbPPos')
                     # thumbY = self.genSinusoid(3, 'thumbYPos')
-                    index = self.genSinusoid(2, 'indexPos')
+                    # index = self.genSinusoid(3, 'indexPos')
                     # mrp = self.genSinusoid(3, 'mrpPos')
                     # wristRot = self.genSinusoid(10, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
-                    # humPos = self.genSinusoid(8, 'humPos')
+                    humPos = self.genSinusoid(20, 'humPos')
                     # elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
@@ -483,7 +484,7 @@ class LUKEArm:
 
                 if count % (self.Hz/10) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
 
-                # posCom = self.getCurPos() # dont move arm
+                posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
@@ -584,12 +585,7 @@ def main(usingEMG):
     if usingEMG:
         print("Connecting to EMG board...")
         emg = EMG()
-        # emg.readEMG() # need to get first signal to avoid errors
-        # emg.initFilters() # this sets the appropriate filteres for calculating iEMG
-
-        emgThread = threading.Thread(target=emg.pipelineEMG)
-        emgThread.daemon = False
-        emgThread.start()
+        emg.startCommunication()
         print("Connected.")
 
         # setup the controller class

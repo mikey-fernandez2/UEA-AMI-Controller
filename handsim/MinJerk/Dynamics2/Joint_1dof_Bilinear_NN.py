@@ -22,7 +22,7 @@ class Joint_1dof(Joint):
         super().__init__(device, muscles, inertias, Lr_scale, \
                          K0_scale, K1_scale, L0_scale, L1_scale, I_scale, M_scale)
         # For the __compensational_nn
-        self.compensational_nns = nn.ModuleList([compensational_nn(device=self.device) for i in range(self.muscle_num)])
+        self.compensational_nns = nn.ModuleList([compensational_nn().to(device) for i in range(self.muscle_num)])
         self.speed_mode = speed_mode
         self.designed_NN_ratio = NN_ratio
         self.NN_ratio = NN_ratio
@@ -248,14 +248,13 @@ class compensational_nn(nn.Module):
         bilinary model.
     """
 
-    def __init__(self, device):
+    def __init__(self):
         """
         Args:
             ranges (list): A list of numbers which are the ranges of each output
         """
         # Generate fully connected neural network.
         super(compensational_nn, self).__init__()
-        self.device = device
 
         # The inputs are [muscle_activation, muscle_length, muscle_speed]
         self.fc1 = nn.Linear(3, 256)

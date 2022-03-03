@@ -8,6 +8,7 @@ import numpy as np
 from scipy import signal
 from CausalButter import CausalButterArr
 import time
+import threading
 
 class EMG:
     def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1):
@@ -37,22 +38,19 @@ class EMG:
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
 
         self.resetEMG()
-
-        self.isRunning = True
-
-        self.messageLen = 92
-
+        
+        # initialize the EMG with the first signal (need the sampling frequency)
         self.readEMG()
         self.initFilters()
 
         # parameters for calculating iEMG
         self.int_window = .05 # sec - 50 ms integration window
-        self.intFreq = 60 # group packets to this frequency
+        self.intFreq = 60 # group packets to this frequency in Hz
         self.numPackets = math.ceil(self.samplingFreq/self.intFreq)
 
         self.window_len = math.ceil(self.int_window*self.samplingFreq)
         # self.rawHistory = np.zeros((self.numElectrodes, self.window_len))
-        self.rawHistory = np.zeros((self.numElectrodes, self.numPackets))
+        self.rawHistory = np.zeros((self.numElectrodes, self.numPackets)) # switch to processing packets (apply filters only once on a number of packets)
 
     def __del__(self):
         try:
@@ -76,7 +74,14 @@ class EMG:
         self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=10, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
         # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
         # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
-        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope
+        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope, when not using 'actually' integrated EMG
+
+    def startCommunication(self):
+        # set the emg thread up here
+        self.isRunning = True
+        self.emgThread = threading.Thread(target=self.pipelineEMG)
+        self.emgThread.daemon = False
+        self.emgThread.start()
 
     ##########################################################################
     # print functions
@@ -204,8 +209,6 @@ class EMG:
     # calculate integrated EMG
     def intEMG(self):
         emg = self.rawEMG
-        # emg = [self.powerLineFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        # emg = [self.powerLineFilters2.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
         for powerMult in range(self.numPowerLines):
             emg = [self.powerLineFilterArray[powerMult].filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
 
@@ -213,14 +216,13 @@ class EMG:
         emg = [abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]
         
         # NOTE THE CHANGE TO HOW WE NORMALIZE THE EMG
-        # emg = [max(emg[i] - noiseLevel[i], 0) for i in range(self.numElectrodes)] # subtract the noise of the raw emg
         emg = np.clip(emg - self.noiseLevel, 0, None)
         
         # self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
         # iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
 
         # self.iEMG = [self.lowPassFilters.filters[i].inputData(iEMG[i]) for i in range(self.numElectrodes)]
-        self.iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        self.iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)] # filter the rectified emg, rather than actually integrating in time
 
     # calculate integrated emg over multiple packets
     def intEMGPacket(self):
@@ -229,12 +231,9 @@ class EMG:
             emg = [self.powerLineFilterArray[powerMult].filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
         emg = [np.abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]    
         emg = np.clip(emg - np.repeat(np.reshape(self.noiseLevel, (-1, 1)), self.numPackets, axis=1), 0, None)
-        # emg = emg - np.repeat(np.reshape(self.noiseLevel, (-1, 1)), self.numPackets, axis=1)
-        # emg[emg < 0] = 0
 
         iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
 
-        # self.iEMG = np.mean(iEMG, axis=1)
         self.iEMG = np.asarray(iEMG)[:, -1]
 
     # normalize the EMG

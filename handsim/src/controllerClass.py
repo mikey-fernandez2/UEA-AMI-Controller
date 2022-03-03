@@ -15,6 +15,7 @@ from Dynamics2.Hand_1dof import Hand_1dof
 from Dynamics2.Hand_4dof import Hand_4dof
 import torch
 from torch.utils.data import DataLoader
+import time
 
 class impedanceController:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
@@ -225,11 +226,11 @@ class impedanceController:
         allEMG = self.emg.normedEMG
         usedEMG = allEMG[self.usedChannels]
         EMG = torch.FloatTensor([usedEMG]).to(self.device)
-        # EMG = torch.FloatTensor([usedEMG]).to(torch.device("cpu"))
 
         # joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
         # wristAngle, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt = 1/self.LUKEArm.Hz)
-        jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
+        with torch.no_grad():
+            jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
         # posDegrees = [math.degrees(rad) for rad in jointAngles] # convert the radian output to degrees
         # wristAngle = math.degrees(wristAngle)
 
@@ -245,14 +246,14 @@ class impedanceController:
 
         # print(jointAngles.detach().numpy())
 
-        jointPos[7] = (jointAngles[0][0].detach().numpy() + 1.12)/2.4*135
-        jointPos[2] = (-(jointAngles[0][1].detach().numpy() + 0.062) + 0.6)/1.2*90
-        jointPos[3] = (-(jointAngles[0][1].detach().numpy() + 0.062) + 0.6)/1.2*90
-        jointPos[0] = (-jointAngles[0][2].detach().numpy() + 0.6)/1.2*75
+        jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.12)/2.4*135
+        jointPos[2] = (-(jointAngles[0][1].detach().cpu().numpy() + 0.062) + 0.6)/1.2*90
+        jointPos[3] = (-(jointAngles[0][1].detach().cpu().numpy() + 0.062) + 0.6)/1.2*90
+        jointPos[0] = (-jointAngles[0][2].detach().cpu().numpy() + 0.6)/1.2*75
         jointPos[1] = 37.5
         jointPos[5] = 0
         # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
-        jointPos[4] = (jointAngles[0][3].detach().numpy() + .178 + 1.4)/2.8*295 - 120
+        jointPos[4] = (jointAngles[0][3].detach().cpu().numpy() + .178 + 1.4)/2.8*295 - 120
 
         # print(jointPos)
 
@@ -267,16 +268,14 @@ class impedanceController:
         return jointPos
 
     def PIDcontroller(self, posCom):
-        curPos = self.LUKEArm.getCurPos()
+        curPos = self.LUKEArm.getCurPos() # reference position
 
-        error = [posCom[i] - curPos[i] for i in range(len(posCom))]
+        error = [posCom[i] - curPos[i] for i in range(len(posCom))] # position error
 
-        self.I = [(self.I[i] + error[i]/self.LUKEArm.Hz if abs(self.I[i] + error[i])/self.LUKEArm.Hz < self.windup[i] else 0) for i in range(len(posCom))]
-        derivError = [(self.lastError[i] - error[i])*self.LUKEArm.Hz for i in range(len(posCom))]
-        self.lastError = error
+        self.I = [(self.I[i] + error[i]/self.LUKEArm.Hz if abs(self.I[i] + error[i]/self.LUKEArm.Hz) < self.windup[i] else 0) for i in range(len(posCom))] # integrate error, with windup built in
+        derivError = [(self.lastError[i] - error[i])*self.LUKEArm.Hz for i in range(len(posCom))] # get the derivative error
+        self.lastError = error # store last error
 
-        PIDCommand = [self.k_p[i]*error[i] + self.k_i[i]*self.I[i] + self.k_d[i]*derivError[i] for i in range(len(posCom))]
-        # PIDCommand = [self.k_p[i]*error[i] for i in range(len(posCom))]
+        PIDCommand = [self.k_p[i]*error[i] + self.k_i[i]*self.I[i] + self.k_d[i]*derivError[i] for i in range(len(posCom))] # get PID command
 
-        # print(error, self.I, derivError)
-        return [PIDCommand[i] + curPos[i] for i in range(len(posCom))]
+        return [PIDCommand[i] + curPos[i] for i in range(len(posCom))] # increment the current position by the PID command
