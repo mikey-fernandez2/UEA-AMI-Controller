@@ -8,7 +8,7 @@ import time
 from can.interface import Bus
 import math
 from EMGClass import EMG
-from controllerClass import impedanceController
+from controllerClass import LUKEControllers
 import sys
 import zmq
 import numpy as np
@@ -92,7 +92,7 @@ class LUKEArm:
         # for recording
         self.recording = False
 
-        # main control loop rate
+        # neural net control loop rate
         self.Hz = 30
 
         # lowpass filter joint commands
@@ -119,24 +119,7 @@ class LUKEArm:
         except:
             print("__del__: Socket closing error")
 
-    def startCommunication(self):
-        # start communicating with the arm
-        self.isRunning = True
-        self.armThread = threading.Thread(target=self.messageHandling)
-        self.armThread.daemon = False
-        self.armThread.start()
-
-    def recv(self):
-        message = self.bus.recv()
-        self.arbitration_id = message.arbitration_id
-        self.data = message.data
-        self.timestamp = message.timestamp
-        self.message = message
-
-        if self.firstMessage:
-            self.startTimestamp = self.timestamp
-            self.firstMessage = False
-
+    ####### PRINTING
     def printSensors(self):
         s = self.sensors # to save me from typing
         print(f"\nRunning time: {self.timestamp - self.startTimestamp:f}")
@@ -173,6 +156,36 @@ class LUKEArm:
         print("Hand Mode:")
         print(f"\tHand OC: {c['handOC']} | Grip: {c['grip']}\n")
 
+    ####### LOGGING
+    # set the first row of the recorded data - the title of each column
+    def resetRecording(self):
+        rawEMGNames = [f'raw{i}' for i in range(16)]
+        iEMGNames = [f'iEMG{i}' for i in range(16)]
+        titles = [['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command) + rawEMGNames + iEMGNames + ['Trigger']]
+        self.recordedData = titles
+
+    def addLogEntry(self, emg=None):
+        # add, in order, the timestamp, the position command, the joint position readings, the force sensor readings, the force sensor statuses, and the hex command sent
+        newEntry = [self.timestamp]
+        newEntry.extend(self.lastposCom)
+        for joint in self.sensorPositions:
+            newEntry.extend([self.sensors[joint]])
+        for sensor in self.sensorForces:
+            newEntry.extend([self.sensors[sensor]])
+        for status in self.sensorStatus:
+            newEntry.extend([self.sensors[status]])
+        for comm in list(self.command):
+            newEntry.extend([self.command[comm]])
+        if emg == None:
+            newEntry.extend([0]*33)
+        else:
+            newEntry.extend(emg.rawEMG)
+            newEntry.extend(emg.iEMG)
+            newEntry.extend([emg.trigger])
+
+        self.recordedData.append(newEntry)
+  
+    ####### COMMAND HELPERS
     def posToCAN(self, pos, joint):
         # convert a position command for a joint to its CAN command
         # need to convert the desired position in degrees to the number of degrees from the bottom of the range then scale by the ACI counts and add the zero offset
@@ -188,6 +201,25 @@ class LUKEArm:
         scaledCAN = fullCAN/2**6
         pos = scaledCAN if scaledCAN <= 180 else (scaledCAN - 1024) # something to handle the negatives (2's complement, essentially)
         return pos
+
+    ####### COMMUNICATION
+    def startCommunication(self):
+        # start communicating with the arm
+        self.isRunning = True
+        self.armThread = threading.Thread(target=self.messageHandling)
+        self.armThread.daemon = False
+        self.armThread.start()
+
+    def recv(self):
+        message = self.bus.recv()
+        self.arbitration_id = message.arbitration_id
+        self.data = message.data
+        self.timestamp = message.timestamp
+        self.message = message
+
+        if self.firstMessage:
+            self.startTimestamp = self.timestamp
+            self.firstMessage = False 
 
     def messageHandling(self):
         # handle arm communication
@@ -251,7 +283,8 @@ class LUKEArm:
                 self.sensors['thumbUlStat'] = data[4] & 1
             else:
                 raise ValueError(f'messageCallback(): Invalid sensor message arbitration_id {msg_id:03X}')
-
+ 
+    ###### COMMAND GENERATION
     def isValidCommand(self):
         # returns true if all commands in the list are between 0x000 and 0x3FF (0 to 1023)
         commandCAN = self.command.values()
@@ -286,8 +319,6 @@ class LUKEArm:
             self.command['humPos'] = self.posToCAN(posCom[6], 'humPos')
             self.command['elbow'] = self.posToCAN(posCom[7], 'elbowPos')
 
-            self.lastposCom = posCom
-
         elif posCom == None and velCom != None and gripCom == None:
             # build the velocity commands here
             # CONTRACT: these velocities will be in [-1, 1] representing fraction of maximum velocity in each direction
@@ -302,15 +333,15 @@ class LUKEArm:
             self.command['humPos'] = math.floor(maxVel*velCom[6]) + self.zeroVel
             self.command['elbow'] = math.floor(maxVel*velCom[7]) + self.zeroVel
 
-            self.lastvelCom = velCom
+            # self.lastvelCom = velCom
 
         elif posCom == None and velCom == None and gripCom != None:
-            # build the grip commands here
+            # build the grip commands here2
             # CONTRACT: TODO
             self.command['handOC'] = gripCom[0]
             self.command['grip'] = gripCom[1]
 
-            self.lastgripCom = gripCom
+            # self.lastgripCom = gripCom
 
         else:
             raise ValueError('buildCommand(): command type incorrect')
@@ -342,6 +373,7 @@ class LUKEArm:
         commsPacked = bytearray(dACI1 + dACI2 + dACI3)
         self.sock.send(commsPacked)
 
+    ####### MODE SWITCHING AND STARTUP
     def initSensors(self):
         # send mode select as 0x000
         # wait > 500 ms (1 s to be safe)
@@ -403,62 +435,28 @@ class LUKEArm:
     def shutdown(self):
         self.longModeSwitch()
 
-    # set the first row of the recorded data - the title of each column
-    def resetRecording(self):
-        rawEMGNames = [f'raw{i}' for i in range(16)]
-        iEMGNames = [f'iEMG{i}' for i in range(16)]
-        titles = [['Timestamp'] + self.jointNames + self.sensorPositions + self.sensorForces + self.sensorStatus + list(self.command) + rawEMGNames + iEMGNames + ['Trigger']]
-        self.recordedData = titles
-
-    def addLogEntry(self, emg=None):
-        # add, in order, the timestamp, the position command, the joint position readings, the force sensor readings, the force sensor statuses, and the hex command sent
-        newEntry = [self.timestamp]
-        newEntry.extend(self.lastposCom)
-        for joint in self.sensorPositions:
-            newEntry.extend([self.sensors[joint]])
-        for sensor in self.sensorForces:
-            newEntry.extend([self.sensors[sensor]])
-        for status in self.sensorStatus:
-            newEntry.extend([self.sensors[status]])
-        for comm in list(self.command):
-            newEntry.extend([self.command[comm]])
-        if emg == None:
-            newEntry.extend([0]*33)
-        else:
-            newEntry.extend(emg.rawEMG)
-            newEntry.extend(emg.iEMG)
-            newEntry.extend([emg.trigger])
-
-        self.recordedData.append(newEntry)
-
+    ###### CONTROL
     def mainControlLoop(self, emg=None, controller=None):
         try:
+            loopRate = 4 # this is how much faster this should run than the neural net
             count = 0
             T = time.time()
             while(True):
-                # to run this loop at a consistent interval
+                # to run this loop at a consistent interval (LOOPRATEx faster than the neural net runs!)
                 newT = time.time()
-                time.sleep(max(1/self.Hz - (newT - T), 0))
+                time.sleep(max(1/(loopRate*self.Hz) - (newT - T), 0))
                 T = time.time()
 
                 if self.usingEMG:
-                    # posCom = controller.differentialActCommand(threshold=0.05, gain=1)
+                    # posCom = controller.differentialActCommand(threshold=0.05, gain=1) # differential activation controller
 
-                    # try with index first - this is element 2 of the lists
-                    # posCom[2] = diffCom[2]
-                    # posCom = diffCom
+                    # posCom = controller.PIDcontroller(posCom) # PID to update comands when too far away
+                    # posCom = controller.rateLimit(posCom) # pseudo-velocity to update commands when too far away
 
-                    startNet = time.time()
-                    posCom = controller.forwardDynamics()
-                    # print(time.time() - startNet)
-                    # print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
-                    # posCom = controller.PIDcontroller(posCom)
-                    posCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
-                    # print("\t", [f"{pos:6.3f}" for pos in posCom])
-
-                    # emg.printNormedEMG()
-                    # emg.printRawEMG()
-                    # emg.printiEMG()
+                    posCom = []
+                    # interpolate between outputs from the neural net model
+                    for i in range(self.numMotors):
+                        posCom.append((self.NetCom[i] - self.lastposCom[i])/loopRate*count + self.lastposCom[i])
 
                 else:
                     thumbP = self.sensors['thumbPPos']
@@ -482,21 +480,36 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                if count % (self.Hz/10) == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+                if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
 
-                posCom = self.getCurPos() # dont move arm
+                # posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
                 if self.recording: self.addLogEntry(emg)
 
                 count += 1
+                count = count % 4
     
         except KeyboardInterrupt:
             print("\nControl ended.")
 
         except can.CanError:
             print("\nCAN Error")
+
+    # For a thread that runs the neural net at self.Hz, allowing faster command interpolation to be sent to the arm
+    def runNetForward(self, controller):
+        T = time.time()
+        self.NetCom = self.getCurPos()
+        controller.resetModel()
+        while(self.isRunning):
+            newT = time.time()
+            time.sleep(max(1/self.Hz - (newT - T), 0))
+            T = time.time()
+
+            self.lastposCom = self.NetCom
+            posCom = controller.forwardDynamics()
+            self.NetCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
 
     def goToZeroPos(self, period):
         self.shortModeSwitch(1) # make sure to switch to arm mode first!
@@ -589,7 +602,12 @@ def main(usingEMG):
         print("Connected.")
 
         # setup the controller class
-        controller = impedanceController(numMotors=arm.numMotors, freq_n=3, LUKEArm=arm, emg=emg)
+        controller = LUKEControllers(numMotors=arm.numMotors, freq_n=3, LUKEArm=arm, emg=emg)
+
+        # start the neural net thread
+        netThread = threading.Thread(target=arm.runNetForward, args=[controller])
+        netThread.daemon = False
+        netThread.start()
 
     print("Initializing sensor readings...")
     arm.initSensors()
@@ -615,9 +633,7 @@ def main(usingEMG):
                 print(f"\n\nSwitching to {run} mode...")
                 arm.shortModeSwitch(movementModes.index(run) + 1)
                 if usingEMG:
-                    controller.resetModel()
                     arm.mainControlLoop(emg, controller)
-                    controller.resetModel()
                 else:
                     arm.mainControlLoop()
 

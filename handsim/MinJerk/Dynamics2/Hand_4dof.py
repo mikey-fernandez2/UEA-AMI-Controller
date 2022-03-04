@@ -73,12 +73,12 @@ class Hand_4dof(nn.Module):
         # There will be two initialization style of the EMG to muscle activation matrix.
         # If the electrodes are right upon the targeted muscle eye matrix should be chose, otherwise all-one matrix should be the way to go 
         # I'm using the scaled all-one matrix implementation here.
-        self.EMG_to_Activation_Mat = nn.Parameter(torch.ones((self.muscle_num, self.EMG_Channel_Count), dtype=torch.float, device=self.device)/self.EMG_mat_Lr/self.EMG_Channel_Count)
-        # self.EMG_to_Activation_Mat = nn.Parameter(torch.eye(self.muscle_num, self.EMG_Channel_Count, dtype=torch.float, device=self.device)/self.EMG_mat_Lr)
+        # self.EMG_to_Activation_Mat = nn.Parameter(torch.ones((self.EMG_Channel_Count, self.muscle_num ), dtype=torch.float, device=self.device)/self.EMG_mat_Lr/self.EMG_Channel_Count)
+        self.EMG_to_Activation_Mat = nn.Parameter(torch.eye(self.EMG_Channel_Count, self.muscle_num , dtype=torch.float, device=self.device)/self.EMG_mat_Lr)
         
     def forward(self, SS, EMG, dt):
         # Get the muscle activations then pass them into the joint model.
-        Alphas = torch.matmul(EMG, self.EMG_to_Activation_Mat*self.EMG_mat_Lr)
+        Alphas = torch.matmul(EMG[:,0:self.EMG_Channel_Count], self.EMG_to_Activation_Mat*self.EMG_mat_Lr)
         
         # SS1 = SS[:,0:2]
         # SS2 = SS[:,2:4]

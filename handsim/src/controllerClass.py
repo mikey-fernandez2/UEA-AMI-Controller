@@ -17,7 +17,7 @@ import torch
 from torch.utils.data import DataLoader
 import time
 
-class impedanceController:
+class LUKEControllers:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
         self.LUKEArm = LUKEArm
         self.emg = emg
@@ -208,7 +208,7 @@ class impedanceController:
         # Build whole model based on muscles and masses
         learningRate = 5
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
-        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
+        self.system_dynamic_model = Hand_4dof(self.device, 4, True, learningRate, 20, 0.3)
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
@@ -246,16 +246,14 @@ class impedanceController:
 
         # print(jointAngles.detach().numpy())
 
-        jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.12)/2.4*135
-        jointPos[2] = (-(jointAngles[0][1].detach().cpu().numpy() + 0.062) + 0.6)/1.2*90
-        jointPos[3] = (-(jointAngles[0][1].detach().cpu().numpy() + 0.062) + 0.6)/1.2*90
-        jointPos[0] = (-jointAngles[0][2].detach().cpu().numpy() + 0.6)/1.2*75
+        jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.2)/2.4*135
+        jointPos[2] = (-(jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
+        jointPos[3] = (-(jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
+        jointPos[0] = (-jointAngles[0][1].detach().cpu().numpy() + 0.6)/1.2*75
         jointPos[1] = 37.5
-        jointPos[5] = 0
+        # jointPos[5] = 0
         # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
-        jointPos[4] = (jointAngles[0][3].detach().cpu().numpy() + .178 + 1.4)/2.8*295 - 120
-
-        # print(jointPos)
+        # jointPos[4] = (jointAngles[0][3].detach().cpu().numpy() + .178 + 1.4)/2.8*295 - 120
 
         # jointPos[7] = ((jointAngles[0][0].detach().numpy() - 0.0413)/.1 + 0.05)*135
         # jointPos[2] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
@@ -266,6 +264,20 @@ class impedanceController:
         # print(jointAngles)
 
         return jointPos
+
+    # applies a velocity controller when the joint command is out of the joint's range
+
+    def rateLimit(self, posCom):
+        newPosCom = [0]*len(posCom)
+        rateLim = [30, 30, 30, 30, 10, 10, 10, 30]
+        kp = [22.5, 22.5, 22.5, 22.5, 7.5, 7.5, 7.5, 15]
+        curPos = self.LUKEArm.getCurPos()
+        for i in range(self.LUKEArm.numMotors):
+            if abs(posCom[i] - curPos[i]) > rateLim[i]:
+                diff = kp[i] if posCom[i] > curPos[i] else -kp[i]
+            else: diff = 0
+            newPosCom[i] = curPos[i] + diff
+        return newPosCom
 
     def PIDcontroller(self, posCom):
         curPos = self.LUKEArm.getCurPos() # reference position
