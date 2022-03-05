@@ -208,11 +208,11 @@ class LUKEControllers:
         # Build whole model based on muscles and masses
         learningRate = 5
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
-        self.system_dynamic_model = Hand_4dof(self.device, 4, True, learningRate, 20, 0.3)
+        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
-        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/upper.tar'
+        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/P1_0305_2022v3_upper.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
@@ -231,6 +231,7 @@ class LUKEControllers:
         # wristAngle, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt = 1/self.LUKEArm.Hz)
         with torch.no_grad():
             jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
+        jointAngles = jointAngles.detach().cpu().numpy()
         # posDegrees = [math.degrees(rad) for rad in jointAngles] # convert the radian output to degrees
         # wristAngle = math.degrees(wristAngle)
 
@@ -244,13 +245,21 @@ class LUKEControllers:
         # jointPos[0] = jointPos[2]
         # jointPos[1] = jointPos[2]
 
-        # print(jointAngles.detach().numpy())
+        # print(jointAngles.detach().nufmy())
 
-        jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.2)/2.4*135
-        jointPos[2] = (-(jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
-        jointPos[3] = (-(jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
-        jointPos[0] = (-jointAngles[0][1].detach().cpu().numpy() + 0.6)/1.2*75
+        # jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.2)/2.4*135
+        # jointPos[2] = ((jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
+        # jointPos[3] = ((jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
+        # jointPos[0] = (jointAngles[0][1].detach().cpu().numpy() + 0.6)/1.2*75
+        # jointPos[1] = 37.5
+        elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else 2*jointAngles[0][0]
+        handAng = jointAngles[0][1] if jointAngles[0][1] > 0 else 2*jointAngles[0][1]
+        jointPos[7] = (elbowAng + 1.2)/2.4*135
+        jointPos[2] = (handAng + 0.6)/1.2*90
+        jointPos[3] = (handAng + 0.6)/1.2*90
+        jointPos[0] = (handAng + 0.6)/1.2*75
         jointPos[1] = 37.5
+
         # jointPos[5] = 0
         # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
         # jointPos[4] = (jointAngles[0][3].detach().cpu().numpy() + .178 + 1.4)/2.8*295 - 120
