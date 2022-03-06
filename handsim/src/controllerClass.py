@@ -212,7 +212,7 @@ class LUKEControllers:
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
-        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/P1_0305_2022v3_upper.tar'
+        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/P1_0306_2022_upper.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
@@ -252,8 +252,8 @@ class LUKEControllers:
         # jointPos[3] = ((jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
         # jointPos[0] = (jointAngles[0][1].detach().cpu().numpy() + 0.6)/1.2*75
         # jointPos[1] = 37.5
-        elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else 2*jointAngles[0][0]
-        handAng = jointAngles[0][1] if jointAngles[0][1] > 0 else 2*jointAngles[0][1]
+        elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else jointAngles[0][0]
+        handAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
         jointPos[7] = (elbowAng + 1.2)/2.4*135
         jointPos[2] = (handAng + 0.6)/1.2*90
         jointPos[3] = (handAng + 0.6)/1.2*90

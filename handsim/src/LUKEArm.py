@@ -458,6 +458,9 @@ class LUKEArm:
                     for i in range(self.numMotors):
                         posCom.append((self.NetCom[i] - self.lastposCom[i])/loopRate*count + self.lastposCom[i])
 
+                    posCom[4] = -30
+                    posCom[5] = 0
+
                 else:
                     thumbP = self.sensors['thumbPPos']
                     thumbY = self.sensors['thumbYPos']
