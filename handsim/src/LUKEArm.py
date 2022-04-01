@@ -471,13 +471,13 @@ class LUKEArm:
                     humPos = self.sensors['humPos']
                     elbow = self.sensors['elbowPos']
 
-                    # thumbP = self.genSinusoid(3, 'thumbPPos')
-                    # thumbY = self.genSinusoid(3, 'thumbYPos')
-                    # index = self.genSinusoid(3, 'indexPos')
+                    # thumbP = self.genSinusoid(4, 'thumbPPos')
+                    # thumbY = self.genSinusoid(2, 'thumbYPos')
+                    index = self.genSinusoid(1.5, 'indexPos')
                     # mrp = self.genSinusoid(3, 'mrpPos')
                     # wristRot = self.genSinusoid(10, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
-                    humPos = self.genSinusoid(20, 'humPos')
+                    # humPos = self.genSinusoid(20, 'humPos')
                     # elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
@@ -581,6 +581,37 @@ class LUKEArm:
 
         print("At desired position. Ending this movement.")
 
+    def boxConfig(self):
+        if self.config == 'HC':
+            posDes = [0, 0, 0, 0, -30, 0, 0, 90]
+        else:
+            posDes = [0, 0, 0, 0, -30, 0]
+
+        self.shortModeSwitch(1) # make sure to switch to arm mode first!
+
+        try:
+            startPos = self.getCurPos()
+            self.printCurPos()
+
+            start = time.time()
+            elapsedTime = 0
+            period = 5 # do this over 5 seconds
+            while(elapsedTime < period):
+                # do a linear interpolation
+                posCom = [(elapsedTime/period)*(posDes[i] - startPos[i]) + startPos[i] for i in range(len(startPos))]
+
+                self.buildCommand(posCom=posCom)
+
+                # update time
+                elapsedTime = time.time() - start
+
+        except can.CanError:
+            print("CAN Error")
+
+        self.printCurPos()
+
+        print("At desired position. Ending this movement.")
+
     def genSinusoid(self, period, joint):
         rom = self.jointRoM[joint]
         return 0.5*(rom[1] - rom[0])*(math.sin(2*math.pi*(self.startTimestamp - self.timestamp)/period) + 1) + rom[0]
@@ -588,8 +619,8 @@ class LUKEArm:
 ###################################################################
 def callback():
     run = ""
-    while run not in ["standby", "arm", "hand", "startup", "record", "zero", "manual", "exit"]:
-        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'record' and then a control mode to record the arm's movement.\nEnter 'zero' to return the arm to joint positions of 0.\nEnter 'manual' to enter manual joint positions.\nEnter 'exit' to put the arm in standby mode and quit:\n")
+    while run not in ["standby", "arm", "hand", "startup", "record", "zero", "manual", "box", "exit"]:
+        run = input("\nEnter 'startup' to enable the arm.\nEnter 'standby' to put the arm in standby mode.\nEnter 'arm' to switch to arm mode.\nEnter 'hand' to switch to hand mode.\nEnter 'record' and then a control mode to record the arm's movement.\nEnter 'zero' to return the arm to joint positions of 0.\nEnter 'manual' to enter manual joint positions.\nEnter 'box' to put the arm in storage configuration.\nEnter 'exit' to put the arm in standby mode and quit:\n")
 
     return run
 
@@ -665,6 +696,10 @@ def main(usingEMG):
             elif run == "manual":
                 print("\n\nAccepting manual input...")
                 arm.manualPos()
+
+            elif run == "box":
+                print("\n\nGoing to box configuration...")
+                arm.boxConfig()
             
             elif run == "exit":
                 break

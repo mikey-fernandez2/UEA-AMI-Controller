@@ -5,7 +5,7 @@
 
 # need to add the location of Junqing's model + functions to the path
 import sys
-sys.path.append("/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk")
+sys.path.append("/home/haptix/haptix/haptix_controller/handsim/MinJerk")
 
 import math
 # from Dynamics.AMI_Joint_Dynamic import AMI_Joint
