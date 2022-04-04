@@ -16,8 +16,8 @@ class EMG:
         self.tauA = tauA
         self.tauD = tauD
 
-        self.boundsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
-        self.deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
+        self.boundsPath = "/home/haptix/haptix/haptix_controller/handsim/include/scaleFactors.txt"
+        self.deltasPath = "/home/haptix/haptix/haptix_controller/handsim/include/deltas.txt"
 
         self.socketAddr = socketAddr
         self.ctx = zmq.Context()

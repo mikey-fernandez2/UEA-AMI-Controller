@@ -212,7 +212,7 @@ class LUKEControllers:
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
-        self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/P1_0307_2022v2_upper.tar'
+        self.model_save_path = '/home/haptix/UE AMI Clinical Work/P1 - 729/P1_0307_2022/P1_0307_2022v2_upper.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])

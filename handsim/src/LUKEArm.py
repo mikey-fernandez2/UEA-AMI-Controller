@@ -93,7 +93,7 @@ class LUKEArm:
         self.recording = False
 
         # neural net control loop rate
-        self.Hz = 30
+        self.Hz = 100
 
         # lowpass filter joint commands
         self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
@@ -485,7 +485,7 @@ class LUKEArm:
 
                 if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
 
-                # posCom = self.getCurPos() # dont move arm
+                posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 
