@@ -93,10 +93,10 @@ class LUKEArm:
         self.recording = False
 
         # neural net control loop rate
-        self.Hz = 100
+        self.Hz = 60
 
         # lowpass filter joint commands
-        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
+        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=1.5, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
 
         # store prior commands for some reason
         self.lastposCom = None
@@ -471,21 +471,21 @@ class LUKEArm:
                     humPos = self.sensors['humPos']
                     elbow = self.sensors['elbowPos']
 
-                    # thumbP = self.genSinusoid(4, 'thumbPPos')
-                    # thumbY = self.genSinusoid(2, 'thumbYPos')
+                    thumbP = self.genSinusoid(4, 'thumbPPos')
+                    thumbY = self.genSinusoid(2, 'thumbYPos')
                     index = self.genSinusoid(1.5, 'indexPos')
-                    # mrp = self.genSinusoid(3, 'mrpPos')
-                    # wristRot = self.genSinusoid(10, 'wristRot')
+                    mrp = self.genSinusoid(3, 'mrpPos')
+                    wristRot = self.genSinusoid(10, 'wristRot')
                     # wristFlex = self.genSinusoid(6, 'wristFlex')
                     # humPos = self.genSinusoid(20, 'humPos')
-                    # elbow = self.genSinusoid(10, 'elbowPos')
+                    elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
                 if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
 
-                posCom = self.getCurPos() # dont move arm
+                # posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
                 # self.printSensors()
 

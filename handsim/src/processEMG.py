@@ -272,8 +272,8 @@ def callback():
 if __name__ == "__main__":
 
     socketAddr = "tcp://127.0.0.1:1235"
-    scaleFactorsPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/scaleFactors.txt"
-    deltasPath = "/home/haptix-e15-463/haptix/haptix_controller/handsim/include/deltas.txt"
+    scaleFactorsPath = "/home/haptix/haptix/haptix_controller/handsim/include/scaleFactors.txt"
+    deltasPath = "/home/haptix/haptix/haptix_controller/handsim/include/deltas.txt"
     numElectrodes = 16
 
     emg = EMGProcessing(socketAddr, scaleFactorsPath, deltasPath, numElectrodes)
