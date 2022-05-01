@@ -96,7 +96,7 @@ class LUKEArm:
         self.Hz = 60
 
         # lowpass filter joint commands
-        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=1.5, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
+        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
 
         # store prior commands for some reason
         self.lastposCom = None
@@ -458,8 +458,9 @@ class LUKEArm:
                     for i in range(self.numMotors):
                         posCom.append((self.NetCom[i] - self.lastposCom[i])/loopRate*count + self.lastposCom[i])
 
-                    posCom[4] = -30
-                    posCom[5] = 0
+                    # posCom[4] = -30
+                    # posCom[5] = 0
+                    # posCom[7] = 30
 
                 else:
                     thumbP = self.sensors['thumbPPos']

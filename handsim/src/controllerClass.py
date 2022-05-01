@@ -47,7 +47,7 @@ class LUKEControllers:
 
         # set the used EMG channels here
         # self.usedChannels = [9, 3] # for wrist
-        self.usedChannels = [0, 1, 2, 4]
+        self.usedChannels = [0, 1, 4, 5, 6, 7, 8, 9, 10]
 
         self.k_p = [1]*self.LUKEArm.numMotors
         self.k_i = [.001]*self.LUKEArm.numMotors
@@ -208,12 +208,13 @@ class LUKEControllers:
         # Build whole model based on muscles and masses
         learningRate = 5
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
-        self.system_dynamic_model = Hand_4dof(self.device, 4, True, learningRate, 20, 0.3)
+        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
 
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
         # self.model_save_path = '/home/haptix/UE AMI Clinical Work/P1 - 729/P1_0307_2022/P1_0307_2022v2_upper.tar'
-        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/Mikey2DoF-04-12-22.tar'
+        # self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/Mikey2DoF-04-12-22.tar'
+        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/mikey4DoF-0501_2022.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
@@ -255,13 +256,14 @@ class LUKEControllers:
         # jointPos[1] = 37.5
         elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else jointAngles[0][0]
         digitsAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
-        thumbAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
-        indexAng = jointAngles[0][3] if jointAngles[0][3] > 0 else jointAngles[0][3]
-        jointPos[7] = (elbowAng + 1.2)/2.4*135
-        jointPos[2] = (digitsAng + 0.6)/1.2*90
+        indexAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
+        wristAng = jointAngles[0][3] if jointAngles[0][3] > 0 else jointAngles[0][3]
+        jointPos[7] = 0.75*((elbowAng + 1.2)/2.4*135)
+        jointPos[2] = (indexAng + 0.6)/1.2*90
         jointPos[3] = (digitsAng + 0.6)/1.2*90
-        jointPos[1] = (digitsAng + 0.6)/1.2*75
-        jointPos[0] = (digitsAng + 0.6)/1.2*75
+        # jointPos[1] = (digitsAng + 0.6)/1.2*75
+        # jointPos[0] = (digitsAng + 0.6)/1.2*75
+        jointPos[4] = 0.33*((wristAng + 0.6)/1.2*295 - 120)
 
         # jointPos[5] = 0
         # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
