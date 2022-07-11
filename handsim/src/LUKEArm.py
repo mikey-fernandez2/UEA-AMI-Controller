@@ -39,7 +39,7 @@ class LUKEArm:
         if config == 'HC':
             self.numMotors = 8
         else:
-            self.numMotors = 6
+            self.numMotors = 8 # NOTE that this isn't actually true, but we can send the same number of commands either way
 
         # setup communication with arm
         can.rc['interface'] = 'socketcan'
@@ -62,7 +62,10 @@ class LUKEArm:
 
         # constant message identifiers
         self.syncID = 0x080
-        self.sensorIDs = [0x4AA, 0x4BF, 0x1A0, 0x1A4, 0x241, 0x341, 0x4C2]
+        if self.config == 'HC':
+            self.sensorIDs = [0x4AA, 0x4BF, 0x1A0, 0x1A4, 0x241, 0x341, 0x4C2]
+        else:
+            self.sensorIDs = [0x4AA, 0x4BF, 0x241, 0x341, 0x4C2]
         self.messagesReceived = dict.fromkeys(self.sensorIDs + [self.syncID], 0) # for tracking number of messages received
 
         # initial command and sensor settings
@@ -184,7 +187,7 @@ class LUKEArm:
             newEntry.extend([emg.trigger])
 
         self.recordedData.append(newEntry)
-  
+ 
     ####### COMMAND HELPERS
     def posToCAN(self, pos, joint):
         # convert a position command for a joint to its CAN command
@@ -219,11 +222,11 @@ class LUKEArm:
 
         if self.firstMessage:
             self.startTimestamp = self.timestamp
-            self.firstMessage = False 
+            self.firstMessage = False
 
     def messageHandling(self):
         # handle arm communication
-        while(self.isRunning):
+        while self.isRunning:
             self.recv()
             self.messageCallback()
 
@@ -237,9 +240,13 @@ class LUKEArm:
         if msg_id in self.sensorIDs + [self.syncID]:
             self.messagesReceived[msg_id] += 1
             data = list(self.data)
+
+            # sync message
             if msg_id == self.syncID:
                 self.syncAck()
                 self.sendCommand() # reply to sync message
+
+            # sensor messages
             elif msg_id == 0x4AA:
                 self.sensors['wristRot'] = self.CANtoPos(data[0:2])
                 self.sensors['wristFlex'] = self.CANtoPos(data[2:4])
@@ -281,9 +288,11 @@ class LUKEArm:
                 self.sensors['thumbTipStat'] = (data[4] >> 2) & 1
                 self.sensors['thumbRaStat'] = (data[4] >> 1) & 1
                 self.sensors['thumbUlStat'] = data[4] & 1
+
+            # Uh-oh - error!
             else:
-                raise ValueError(f'messageCallback(): Invalid sensor message arbitration_id {msg_id:03X}')
- 
+                raise ValueError(f'messageCallback(): Invalid message arbitration_id {msg_id:03X}')
+
     ###### COMMAND GENERATION
     def isValidCommand(self):
         # returns true if all commands in the list are between 0x000 and 0x3FF (0 to 1023)
@@ -423,7 +432,7 @@ class LUKEArm:
             self.changeMode(0x3FF)
 
             time.sleep(1)
-    
+   
             self.changeMode(0x000)
 
         print("In standby mode")
@@ -458,10 +467,6 @@ class LUKEArm:
                     for i in range(self.numMotors):
                         posCom.append((self.NetCom[i] - self.lastposCom[i])/loopRate*count + self.lastposCom[i])
 
-                    # posCom[4] = -30
-                    # posCom[5] = 0
-                    # posCom[7] = 30
-
                 else:
                     thumbP = self.sensors['thumbPPos']
                     thumbY = self.sensors['thumbYPos']
@@ -477,9 +482,9 @@ class LUKEArm:
                     index = self.genSinusoid(1.5, 'indexPos')
                     mrp = self.genSinusoid(3, 'mrpPos')
                     wristRot = self.genSinusoid(10, 'wristRot')
-                    # wristFlex = self.genSinusoid(6, 'wristFlex')
+                    wristFlex = self.genSinusoid(6, 'wristFlex')
                     # humPos = self.genSinusoid(20, 'humPos')
-                    elbow = self.genSinusoid(10, 'elbowPos')
+                    # elbow = self.genSinusoid(10, 'elbowPos')
 
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
@@ -552,7 +557,7 @@ class LUKEArm:
             except: # Uh-oh! Formatting wrong
                 posDes = []
 
-            if (len(posDes) != self.numMotors or not self.isValidPosList(posDes)): # repeat if not valid
+            if not self.isValidPosList(posDes): # repeat if not valid
                 print("Input formatted incorrectly. Enter 8 valid joint positions.\n")
             else: # Otherwise exit
                 break
@@ -583,10 +588,7 @@ class LUKEArm:
         print("At desired position. Ending this movement.")
 
     def boxConfig(self):
-        if self.config == 'HC':
-            posDes = [0, 0, 0, 0, -30, 0, 0, 90]
-        else:
-            posDes = [0, 0, 0, 0, -30, 0]
+        posDes = [0, 0, 0, 0, -30, 0, 0, 90] # yes, this has extra positions, but we can send the extra commands to the RC with no problem
 
         self.shortModeSwitch(1) # make sure to switch to arm mode first!
 
@@ -627,7 +629,7 @@ def callback():
 
 def main(usingEMG):
     # instantiate arm class
-    arm = LUKEArm(config='HC', hand='R', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=usingEMG)
+    arm = LUKEArm(config='RC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=usingEMG)
 
     # connect to EMG board
     if usingEMG:
@@ -729,8 +731,8 @@ if __name__ == '__main__':
             
             print("Starting LUKEArm.py (with EMG)...\n")
             usingEMG = True
-        except:
-            raise ValueError(f"Wrong argument type (expected int, given {type(sys.argv[1])})")
+        except Exception as exc:
+            raise ValueError(f"Wrong argument type (expected int, given {type(sys.argv[1])})") from exc
     else:
         raise ValueError(f"Wrong number of arguments ({len(sys.argv) - 1})")
 

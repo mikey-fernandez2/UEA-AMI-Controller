@@ -47,7 +47,7 @@ class LUKEControllers:
 
         # set the used EMG channels here
         # self.usedChannels = [9, 3] # for wrist
-        self.usedChannels = [0, 1, 4, 5, 6, 7, 8, 9, 10]
+        self.usedChannels = [0, 1, 4, 5, 6, 7, 8, 9]
 
         self.k_p = [1]*self.LUKEArm.numMotors
         self.k_i = [.001]*self.LUKEArm.numMotors

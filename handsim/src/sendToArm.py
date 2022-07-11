@@ -17,10 +17,6 @@ import zmq
 
 class LUKE_Command_Sender:
     def __init__(self, socketAddr="tcp://127.0.0.1:1234"):
-        self.dACI1 = None
-        self.dACI2 = None
-        self.dACI3 = None
-
         can.rc['interface'] = 'socketcan'
         can.rc['channel'] = 'can0'
         can.rc['bitrate'] = 1000000
@@ -87,7 +83,6 @@ class LUKE_Command_Sender:
 
     def safetyCheck(self, commands):
         return len(commands) != 0 and commands[0:8] != [] and commands[8:16] != [] and commands[16:] != []
-
     def receiveData(self):
         while True:
             try:
