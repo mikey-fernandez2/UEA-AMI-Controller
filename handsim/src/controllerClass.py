@@ -5,17 +5,15 @@
 
 # need to add the location of Junqing's model + functions to the path
 import sys
-sys.path.append("/home/haptix/haptix/haptix_controller/handsim/MinJerk")
+# sys.path.append("/home/haptix/haptix/haptix_controller/handsim/MinJerk")
+sys.path.append('/home/haptix/haptix/Upper Extremity Models/Upper Extremity Shadmehr')
 
-import math
-# from Dynamics.AMI_Joint_Dynamic import AMI_Joint
-# from Dynamics.Muscle import Muscle
-# from Dynamics.System_Dynamic_Model import System_Dynamic_Model
-from Dynamics2.Hand_1dof import Hand_1dof
-from Dynamics2.Hand_4dof import Hand_4dof
+# from Dynamics2.Hand_1dof import Hand_1dof
+# from Dynamics2.Hand_4dof import Hand_4dof
+from Dynamics2.upperLimbModel import upperExtremityModel
 import torch
 from torch.utils.data import DataLoader
-import time
+import numpy as np
 
 class LUKEControllers:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
@@ -53,9 +51,9 @@ class LUKEControllers:
         self.k_i = [.001]*self.LUKEArm.numMotors
         self.k_d = [.1]*self.LUKEArm.numMotors
 
-        self.I = [0 for i in range(self.LUKEArm.numMotors)]
-        self.lastError = [0 for i in range(self.LUKEArm.numMotors)]
-        self.windup = [100 for i in range(self.LUKEArm.numMotors)]
+        self.I = [0]*self.LUKEArm.numMotors
+        self.lastError = [0]*self.LUKEArm.numMotors
+        self.windup = [100]*self.LUKEArm.numMotors
 
     # get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
     def getElectrodesforMotor(self, motor):
@@ -75,7 +73,7 @@ class LUKEControllers:
 
     def secondOrderDynamics(self, T_des):
         # calculates command = wn^2/(s^2 + 2*zeta*wn*s + wn^2) [unit gain]
-        Wn = 2*math.pi*self.freq_n # desired natural frequency
+        Wn = 2*np.pi*self.freq_n # desired natural frequency
         b = 2*Wn                   # 2*zeta*Wn, but critically damped so zeta = 1
         k = Wn**2                  # k = Wn^2
 
@@ -207,9 +205,12 @@ class LUKEControllers:
 
         # Build whole model based on muscles and masses
         learningRate = 5
+        DoF = 4
+        muscleType = 'bilinear'
+        numChannels = 8
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
-        self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
-
+        # self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
+        self.system_dynamic_model = upperExtremityModel(muscleType=muscleType, numDoF=DoF, device=self.device, EMG_Channel_Count=numChannels, Dynamic_LR=learningRate, EM_mat_lr=20, NN_ratio=0.3)
 
         # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
         # self.model_save_path = '/home/haptix/UE AMI Clinical Work/P1 - 729/P1_0307_2022/P1_0307_2022v2_upper.tar'
@@ -222,7 +223,9 @@ class LUKEControllers:
         self.system_dynamic_model.eval()
 
         # set initial conditions
-        self.hidden = torch.FloatTensor([[0,0,0,0,0,0,0,0]]).to(self.device)
+        # self.hidden = torch.FloatTensor([[0,0,0,0,0,0,0,0]]).to(self.device)
+        self.hidden = torch.FloatTensor([[0]*DoF*self.system_dynamic_model.numStates]).to(self.device)
+
 
     def forwardDynamics(self):
         allEMG = self.emg.normedEMG
@@ -230,30 +233,15 @@ class LUKEControllers:
         EMG = torch.FloatTensor([usedEMG]).to(self.device)
 
         # joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
-        # wristAngle, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt = 1/self.LUKEArm.Hz)
         with torch.no_grad():
             jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
         jointAngles = jointAngles.detach().cpu().numpy()
-        # posDegrees = [math.degrees(rad) for rad in jointAngles] # convert the radian output to degrees
-        # wristAngle = math.degrees(wristAngle)
 
         jointPos = self.LUKEArm.getCurPos()
 
         # joint order: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
-        # TODO For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
-        # print(wristAngle)
-        # jointPos[2] = 0.5*(90 + wristAngle)
-        # jointPos[3] = jointPos[2]
-        # jointPos[0] = jointPos[2]
-        # jointPos[1] = jointPos[2]
+        # For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
 
-        # print(jointAngles.detach().numpy())
-
-        # jointPos[7] = (jointAngles[0][0].detach().cpu().numpy() + 1.2)/2.4*135
-        # jointPos[2] = ((jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
-        # jointPos[3] = ((jointAngles[0][1].detach().cpu().numpy()) + 0.6)/1.2*90
-        # jointPos[0] = (jointAngles[0][1].detach().cpu().numpy() + 0.6)/1.2*75
-        # jointPos[1] = 37.5
         elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else jointAngles[0][0]
         digitsAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
         indexAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
@@ -261,47 +249,43 @@ class LUKEControllers:
         jointPos[7] = 0.75*((elbowAng + 1.2)/2.4*135)
         jointPos[2] = (indexAng + 0.6)/1.2*90
         jointPos[3] = (digitsAng + 0.6)/1.2*90
-        # jointPos[1] = (digitsAng + 0.6)/1.2*75
-        # jointPos[0] = (digitsAng + 0.6)/1.2*75
         jointPos[4] = 0.33*((wristAng + 0.6)/1.2*295 - 120)
-
-        # jointPos[5] = 0
-        # jointPos[0] = (-jointAngles[0][2] + 0.6)/1.2*75
-        # jointPos[4] = (jointAngles[0][3].detach().cpu().numpy() + .178 + 1.4)/2.8*295 - 120
-
-        # jointPos[7] = ((jointAngles[0][0].detach().numpy() - 0.0413)/.1 + 0.05)*135
-        # jointPos[2] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
-        # jointPos[3] = ((jointAngles[0][1].detach().numpy() - 0.0594)/.1 + 0.05)*90
-        # jointPos[0] = ((jointAngles[0][2].detach().numpy() + 0.0548)/.09 + 0.05)*75
-        # jointPos[4] = 0.5*(((jointAngles[0][3].detach().numpy() -.1527)/.62 + 0.31)*295 - 120)
-
-        # print(jointAngles)
 
         return jointPos
 
     # applies a velocity controller when the joint command is out of the joint's range
-
     def rateLimit(self, posCom):
         newPosCom = [0]*len(posCom)
         rateLim = [30, 30, 30, 30, 10, 10, 10, 30]
         kp = [22.5, 22.5, 22.5, 22.5, 7.5, 7.5, 7.5, 15]
-        curPos = self.LUKEArm.getCurPos()
-        for i in range(self.LUKEArm.numMotors):
-            if abs(posCom[i] - curPos[i]) > rateLim[i]:
-                diff = kp[i] if posCom[i] > curPos[i] else -kp[i]
-            else: diff = 0
-            newPosCom[i] = curPos[i] + diff
-        return newPosCom
+        curPos = np.asarray(self.LUKEArm.getCurPos())
+
+        gains = np.where(posCom > curPos, kp, -kp)
+        diff = np.where(np.abs(posCom - curPos) > rateLim, gains, 0)
+        newPosCom = curPos + diff
+
+        # for i in range(self.LUKEArm.numMotors):
+        #     if abs(posCom[i] - curPos[i]) > rateLim[i]:
+        #         diff = kp[i] if posCom[i] > curPos[i] else -kp[i]
+        #     else:
+        #         diff = 0
+        #     newPosCom[i] = curPos[i] + diff
+        # return newPosCom
 
     def PIDcontroller(self, posCom):
-        curPos = self.LUKEArm.getCurPos() # reference position
+        curPos = np.asrray(self.LUKEArm.getCurPos()) # reference position
 
-        error = [posCom[i] - curPos[i] for i in range(len(posCom))] # position error
+        # error = [posCom[i] - curPos[i] for i in range(len(posCom))] # position error
+        error = posCom - curPos
 
-        self.I = [(self.I[i] + error[i]/self.LUKEArm.Hz if abs(self.I[i] + error[i]/self.LUKEArm.Hz) < self.windup[i] else 0) for i in range(len(posCom))] # integrate error, with windup built in
-        derivError = [(self.lastError[i] - error[i])*self.LUKEArm.Hz for i in range(len(posCom))] # get the derivative error
+        # self.I = [(self.I[i] + error[i]/self.LUKEArm.Hz if abs(self.I[i] + error[i]/self.LUKEArm.Hz) < self.windup[i] else 0) for i in range(len(posCom))] # integrate error, with windup built in
+        self.I = np.where(np.abs(self.I + error/self.LUKEArm.Hz) < self.windup, self.I + error/self.LUKEArm.Hz)
+        # derivError = [(self.lastError[i] - error[i])*self.LUKEArm.Hz for i in range(len(posCom))] # get the derivative error
+        derivError = (self.lastError - error)*self.LUKEArm.Hz
         self.lastError = error # store last error
 
-        PIDCommand = [self.k_p[i]*error[i] + self.k_i[i]*self.I[i] + self.k_d[i]*derivError[i] for i in range(len(posCom))] # get PID command
+        # PIDCommand = [self.k_p[i]*error[i] + self.k_i[i]*self.I[i] + self.k_d[i]*derivError[i] for i in range(len(posCom))] # get PID command
+        PIDCommand = self.k_p*error + self.k_i*self.I + self.k_d*derivError
 
-        return [PIDCommand[i] + curPos[i] for i in range(len(posCom))] # increment the current position by the PID command
+        # return [PIDCommand[i] + curPos[i] for i in range(len(posCom))] # increment the current position by the PID command
+        return PIDCommand + curPos

@@ -3,9 +3,9 @@ set(CPACK_PACKAGE_VENDOR "osrfoundation.org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
   "A set of  classes for robot applications.")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "handsim")
-set(CPACK_RESOURCE_FILE_LICENSE "/home/haptix-e15-463/haptix/haptix_controller/handsim/LICENSE")
-set(CPACK_RESOURCE_FILE_README "/home/haptix-e15-463/haptix/haptix_controller/handsim/README.md")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "/home/haptix-e15-463/haptix/haptix_controller/handsim/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "/home/haptix/haptix/haptix_controller/handsim/LICENSE")
+set(CPACK_RESOURCE_FILE_README "/home/haptix/haptix/haptix_controller/handsim/README.md")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "/home/haptix/haptix/haptix_controller/handsim/README.md")
 set(CPACK_PACKAGE_MAINTAINER "Nate Koenig <nate@osrfoundation.org>")
 set(CPACK_PACKAGE_CONTACT "Nate Koenig <natekoenig@osrfoundation.org>")
 

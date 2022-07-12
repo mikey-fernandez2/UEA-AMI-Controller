@@ -23,8 +23,8 @@ class LUKE_Command_Sender:
         can.rc['state'] = can.bus.BusState.PASSIVE
         try:
             self.bus = Bus()
-        except:
-            print("__init__(): Make sure to run 'CANon' first to establish communication.")
+        except can.CanError as err:
+            print(f'__init__(): Make sure to run "CANon" first to establish communication.\nError: {err}')
 
         self.dACI1 = None
         self.dACI2 = None
@@ -45,8 +45,8 @@ class LUKE_Command_Sender:
         try:
             # shutdown the bus
             self.bus.shutdown()
-        except:
-            print("__del__: Bus shutdown error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
         try:
             # close the socket

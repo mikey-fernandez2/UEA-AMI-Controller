@@ -16,13 +16,13 @@ import threading
 from CausalButter import CausalButterArr
 
 class LUKEArm:
-    def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):        
+    def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):       
         # make sure valid inputs given
         assert config in ['HC', 'RC'], f'Invalid arm config {config} given'
         assert hand in ['L', 'R'], f'Invalid handedness {hand} given'
         assert commandDes in ['DF', 'G'], f'Invalid command description {commandDes} given'
         assert commandType in ['P', 'V'], f'Invalid control type {commandType} given'
-        
+       
         # setup arm state
         self.config = config
         self.hand = hand
@@ -65,7 +65,7 @@ class LUKEArm:
         if self.config == 'HC':
             self.sensorIDs = [0x4AA, 0x4BF, 0x1A0, 0x1A4, 0x241, 0x341, 0x4C2]
         else:
-            self.sensorIDs = [0x4AA, 0x4BF, 0x241, 0x341, 0x4C2]
+            self.sensorIDs = [0x4AA, 0x4BF, 0x241, 0x341, 0x4C2] # the RC sends two less of these sensor IDs
         self.messagesReceived = dict.fromkeys(self.sensorIDs + [self.syncID], 0) # for tracking number of messages received
 
         # initial command and sensor settings
@@ -112,14 +112,14 @@ class LUKEArm:
         """ Garbage collection """
         try:
             self.bus.shutdown()
-        except:
-            print("__del__: Bus shutdown error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
         try:
             self.sock.unbind(self.socketAddr)
             self.sock.close()
             self.ctx.term()
-        except:
+        except Exception:
             print("__del__: Socket closing error")
 
     ####### PRINTING
@@ -180,7 +180,7 @@ class LUKEArm:
         for comm in list(self.command):
             newEntry.extend([self.command[comm]])
         if emg == None:
-            newEntry.extend([0]*33)
+            newEntry.extend([0]*33) # hardcoded 33! 16 channels raw EMG, 16 iEMG, and 1 trigger
         else:
             newEntry.extend(emg.rawEMG)
             newEntry.extend(emg.iEMG)
@@ -301,7 +301,7 @@ class LUKEArm:
         return all(vals)
 
     def isValidPosJoint(self, pos, joint):
-        return (pos >= self.jointRoM[joint][0] and pos <= self.jointRoM[joint][1])
+        return pos >= self.jointRoM[joint][0] and pos <= self.jointRoM[joint][1]
 
     def isValidPosList(self, posList):
         # returns true if all positions given are in the appropriate joint range
@@ -395,7 +395,7 @@ class LUKEArm:
                 missingReadings.remove(self.arbitration_id)
 
         self.printSensors()
-        
+ 
     def startup(self):
         self.shortModeSwitch(2)
 
@@ -432,7 +432,7 @@ class LUKEArm:
             self.changeMode(0x3FF)
 
             time.sleep(1)
-   
+
             self.changeMode(0x000)
 
         print("In standby mode")
@@ -450,7 +450,7 @@ class LUKEArm:
             loopRate = 4 # this is how much faster this should run than the neural net
             count = 0
             T = time.time()
-            while(True):
+            while True:
                 # to run this loop at a consistent interval (LOOPRATEx faster than the neural net runs!)
                 newT = time.time()
                 time.sleep(max(1/(loopRate*self.Hz) - (newT - T), 0))
@@ -503,8 +503,8 @@ class LUKEArm:
         except KeyboardInterrupt:
             print("\nControl ended.")
 
-        except can.CanError:
-            print("\nCAN Error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
     # For a thread that runs the neural net at self.Hz, allowing faster command interpolation to be sent to the arm
     def runNetForward(self, controller):
@@ -538,8 +538,8 @@ class LUKEArm:
                 # update time
                 elapsedTime = time.time() - start
 
-        except can.CanError:
-            print("CAN Error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
         self.printCurPos()
 
@@ -580,8 +580,8 @@ class LUKEArm:
                 # update time
                 elapsedTime = time.time() - start
 
-        except can.CanError:
-            print("CAN Error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
         self.printCurPos()
 
@@ -608,8 +608,8 @@ class LUKEArm:
                 # update time
                 elapsedTime = time.time() - start
 
-        except can.CanError:
-            print("CAN Error")
+        except can.CanError as err:
+            print(f'\nCAN Error: {err}')
 
         self.printCurPos()
 
