@@ -101,7 +101,7 @@ class EMGProcessing(object):
         for pair in range(self.numPairs):
             # Compare maxes
             if self.deltas[pair] > self.maxDelta[pair]: self.maxDelta[pair] = self.deltas[pair]
-            
+
             # Compare mins
             if self.deltas[pair] < self.minDelta[pair]: self.minDelta[pair] = self.deltas[pair]
 
@@ -117,10 +117,10 @@ class EMGProcessing(object):
 
     def stream(self):
         try:
-            while(True):
+            while True:
                 self.receiveEMG()
                 useiEMG = True
-        
+
                 if useiEMG:
                     # self.emg.printiEMG()
                     self.emg.printNormedEMG()
@@ -149,7 +149,7 @@ class EMGProcessing(object):
     def emgExtrema(self, iemg):
         try:
             print("Recording EMG normalization factors...\n")
-            while(1):
+            while True:
                 self.receiveEMG()
 
                 if not iemg:
@@ -174,10 +174,10 @@ class EMGProcessing(object):
     def emgManual(self):
         try:
             print("Enter 16 maximum electrode readings for normalization.\n")
-            while(True):
+            while True:
                 maxesRaw = input() # Take input
 
-                if (maxesRaw == "exit"): # Escape valve
+                if maxesRaw == "exit": # Escape valve
                     return
                 
                 try: # Turn input into array of floats
@@ -185,28 +185,28 @@ class EMGProcessing(object):
                 except: # Uh-oh! Formatting wrong
                     maxes = []
 
-                if (len(maxes) == self.numElectrodes): # Exit if 16 floats received
+                if len(maxes) == self.numElectrodes: # Exit if 16 floats received
                     break
                 else: # Otherwise ask for the input again
                     print("Input formatted incorrectly. Enter 16 floats.\n")
 
             print("\nEnter 16 minimum electrode readings for normalization.\n")
-            while(True):
+            while True:
                 minsRaw = input() # Take input
 
-                if (minsRaw == "exit"): # Escape value
+                if minsRaw == "exit": # Escape value
                     return
-               
+
                 try: # Turn into array of floats
                     mins = [float(x) for x in minsRaw.split()]
                 except: # Uh-oh! Formatting wrong
                     mins = []
 
-                if (len(mins) == self.numElectrodes): # Exit if 16 floats received
+                if len(mins) == self.numElectrodes: # Exit if 16 floats received
                     break
                 else: # Otherwise ask for the input again
                     print("Input formatted incorrectly. Enter 16 floats.\n")
-        
+
         except KeyboardInterrupt:
             print("\nStopping manual input.")
             return
@@ -224,7 +224,7 @@ class EMGProcessing(object):
             self.maxDelta = [-math.inf]*(self.numPairs)
             self.minDelta = [sys.maxsize]*(self.numPairs)
 
-            while(1):
+            while True:
                 self.receiveEMG()
 
                 for i in range(self.numPairs):
@@ -232,7 +232,7 @@ class EMGProcessing(object):
                     self.deltas[i] = self.emg.iEMG[2*i] - self.emg.iEMG[2*i + 1]
 
                 self.compareDeltas()
-                
+
                 time.sleep(1/self.emg.samplingFreq)
 
         except KeyboardInterrupt:
@@ -251,7 +251,7 @@ class EMGProcessing(object):
             print(f"Could not open scale factors file - {e}")
 
         print()
-        
+     
         try:
             with open(self.dPath, 'rb') as fifo:
                 deltasPack = fifo.read()
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     emg = EMGProcessing(socketAddr, scaleFactorsPath, deltasPath, numElectrodes)
 
     try:
-        while(1):
+        while True:
             run = callback()
 
             if run == "norm":
@@ -311,7 +311,7 @@ if __name__ == "__main__":
                 print("\n\nStreaming EMG...")
                 emg.stream()
                 print("\n\n")
-            
+          
             elif run == "exit":
                 print("\n\nExiting.")
                 break
