@@ -7,10 +7,11 @@ import struct, os, sys, zmq, math
 import numpy as np
 from scipy import signal
 from CausalButter import CausalButterArr
+from BesselFilter import BesselFilterArr
 import time
 import threading
 
-class EMG:
+class EMG():
     def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1):
         self.numElectrodes = numElectrodes
         self.tauA = tauA
@@ -36,6 +37,7 @@ class EMG:
 
         self.getBounds() # first 16: maximum values, second 16: minimum values
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
+        self.getSynergyMat() # this is a [nSynergies x usedChannels] array
 
         self.resetEMG()
         
@@ -68,13 +70,19 @@ class EMG:
         self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
 
     def initFilters(self):
-        self.numPowerLines = 2
-        self.powerLineFilterArray = [CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=60*(i + 1) - 2, f_high=60*(i + 1) + 2, fs=self.samplingFreq, bandstop=1) for i in range(self.numPowerLines)] # remove power line noise and multiples up to 600 Hz
+        # self.numPowerLines = 2
+        # self.powerLineFilterArray = [CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=60*(i + 1) - 2, f_high=60*(i + 1) + 2, fs=self.samplingFreq, bandstop=1) for i in range(self.numPowerLines)] # remove power line noise and multiples up to 600 Hz
+        # # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
+        # self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=10, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
+        # # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
+        # # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
+        # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope, when not using 'actually' integrated EMG
+
+        self.powerLineFilterArray = BesselFilterArr(numChannels=self.numElectrodes, order=8, critFreqs=[58, 62], fs=self.samplingFreq, filtType='bandstop') # remove power line noise and multiples up to 600 Hz
         # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
-        self.highPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=10, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=0) # high pass removes motion artifacts and drift
+        self.highPassFilters = BesselFilterArr(numChannels=self.numElectrodes, order=4, critFreqs=20, fs=self.samplingFreq, filtType='highpass') # high pass removes motion artifacts and drift
         # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
-        # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq*self.int_window/2, fs=self.samplingFreq*self.int_window, bandstop=1) # smooth the envelope
-        self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope, when not using 'actually' integrated EMG
+        self.lowPassFilters = BesselFilterArr(numChannels=self.numElectrodes, order=4, critFreqs=3, fs=self.samplingFreq, filtType='lowpass') # smooth the envelope, when not using 'actually' integrated EMG
 
     def startCommunication(self):
         # set the emg thread up here
@@ -135,7 +143,7 @@ class EMG:
         return self.rawEMG[electrode]
 
     def getiEMG(self, electrode):
-        return self.iEMG[electrode] 
+        return self.iEMG[electrode]
 
     def getNormedEMG(self, electrode):
         return self.normedEMG[electrode]
@@ -147,7 +155,7 @@ class EMG:
         try:
             with open(self.boundsPath, 'rb') as fifo:
                 normsPack = fifo.read()
-    
+
             norms = struct.unpack("ffffffffffffffffffffffffffffffff", normsPack)
             self.bounds = list(norms)
             self.maxVals = np.asarray(self.bounds[:self.numElectrodes])
@@ -160,12 +168,23 @@ class EMG:
         try:
             with open(self.deltasPath, 'rb') as fifo:
                 deltasPack = fifo.read()
-    
+
             deltas = struct.unpack("ffffffffffffffff", deltasPack)
             self.deltas = list(deltas)
 
         except OSError as e:
             print(f"getDeltas(): Could not read deltas - {e}")
+
+    def getSynergyMat(self):
+        try:
+            with open(self.synergyPath, 'rb') as fifo:
+                synergyPack = fifo.read()
+
+            synergy = struct.unpack("ffffffffffffffff", synergyPack)
+            self.synergyMat = np.ndarray(synergy)
+
+        except OSError as e:
+            print(f"getSynergyMat(): Could not read matrix - {e}")
 
     ##########################################################################
     # actual calculations
@@ -214,10 +233,10 @@ class EMG:
 
         # print(emg)
         emg = [abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]
-        
+
         # NOTE THE CHANGE TO HOW WE NORMALIZE THE EMG
         emg = np.clip(emg - self.noiseLevel, 0, None)
-        
+
         # self.rawHistory = np.hstack((self.rawHistory[:, 1:], np.reshape(emg, (-1, 1))))
         # iEMG = np.trapz(abs(self.rawHistory), axis=1)/self.window_len # trapezoidal numerical integration
 
@@ -226,15 +245,37 @@ class EMG:
 
     # calculate integrated emg over multiple packets
     def intEMGPacket(self):
-        emg = self.rawHistory
-        for powerMult in range(self.numPowerLines):
-            emg = [self.powerLineFilterArray[powerMult].filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
-        emg = [np.abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]    
-        emg = np.clip(emg - np.repeat(np.reshape(self.noiseLevel, (-1, 1)), self.numPackets, axis=1), 0, None)
+        # emg = self.rawHistory
+        # for powerMult in range(self.numPowerLines):
+        #     emg = [self.powerLineFilterArray[powerMult].filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # emg = [np.abs(self.highPassFilters.filters[i].inputData(emg[i])) for i in range(self.numElectrodes)]
+        # emg = np.clip(emg - np.repeat(np.reshape(self.noiseLevel, (-1, 1)), self.numPackets, axis=1), 0, None)
 
-        iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+        # iEMG = [self.lowPassFilters.filters[i].inputData(emg[i]) for i in range(self.numElectrodes)]
+
+        # self.iEMG = np.asarray(iEMG)[:, -1]
+
+        emg = np.copy(self.rawHistory)
+        # print(f'emgHistory:\n{emg}\n')
+
+        emg = self.powerLineFilterArray.filter(emg)
+        # print(f'powerLined:\n{emg}\n')
+        emg = np.abs(self.highPassFilters.filter(emg))
+        # print(f'highPass:\n{emg}\n')
+        emg = np.clip(emg - self.noiseLevel[:, None], 0, None)
+        # print(f'noiseGone:\n{emg}\n')
+
+        iEMG = np.clip(self.lowPassFilters.filter(emg), 0, None)
+        # print(f'lowPass:\n{iEMG}\n')
 
         self.iEMG = np.asarray(iEMG)[:, -1]
+      
+        # print('\n------')
+        # print(self.powerLineFilterArray.getFilter(0))
+        # print(self.highPassFilters.getFilter(0))
+        # print(self.lowPassFilters.getFilter(0))
+
+        # print(f'iEMG: {self.iEMG}')
 
     # normalize the EMG
     def normEMG(self):
@@ -265,9 +306,13 @@ class EMG:
 
         self.muscleAct = muscleAct
 
+    # get the synergies
+    def synergyProd(self, usedChannels):
+        return np.matmul(self.synergyMat, self.normedEMG[usedChannels])
+
     # full EMG update pipeline
     def pipelineEMG(self):
-        while(self.isRunning):
+        while self.isRunning:
             # self.readEMG()
             # self.intEMG()
             self.readEMGPacket()

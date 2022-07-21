@@ -231,6 +231,7 @@ class LUKEControllers:
         allEMG = self.emg.normedEMG
         usedEMG = allEMG[self.usedChannels]
         EMG = torch.FloatTensor([usedEMG]).to(self.device)
+        ## This is with the proper matrix EMG = torch.FloatTensor([self.emg.synergyProd(allEMG, self.usedChannels)]).to(self.device)
 
         # joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
         with torch.no_grad():
