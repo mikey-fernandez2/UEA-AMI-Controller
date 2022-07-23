@@ -3,22 +3,30 @@
 # EMGClass.py
 # Define the EMG class for use with the LUKE arm
 
+import numbers
 import struct, os, sys, zmq, math
 import numpy as np
 from scipy import signal
+import pandas as pd
 from CausalButter import CausalButterArr
 from BesselFilter import BesselFilterArr
 import time
 import threading
 
 class EMG():
-    def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1):
+    def __init__(self, socketAddr='tcp://127.0.0.1:1235', numElectrodes=16, tauA=0.05, tauD=0.1, usedChannels=None):
         self.numElectrodes = numElectrodes
         self.tauA = tauA
         self.tauD = tauD
 
+        if usedChannels == None:
+            self.usedChannels = []
+        else:
+            self.usedChannels = usedChannels
+
         self.boundsPath = "/home/haptix/haptix/haptix_controller/handsim/include/scaleFactors.txt"
         self.deltasPath = "/home/haptix/haptix/haptix_controller/handsim/include/deltas.txt"
+        self.synergyPath = "/home/haptix/haptix/haptix_controller/handsim/include/synergyMat.csv"
 
         self.socketAddr = socketAddr
         self.ctx = zmq.Context()
@@ -37,7 +45,8 @@ class EMG():
 
         self.getBounds() # first 16: maximum values, second 16: minimum values
         self.getDeltas() # first 8: maximum deltas, second 8: minimum deltas
-        self.getSynergyMat() # this is a [nSynergies x usedChannels] array
+        self.getSynergyMat() # this is an [nSynergies x usedChannels] array
+        self.numSynergies = self.synergyMat.shape[1]
 
         self.resetEMG()
         
@@ -68,6 +77,7 @@ class EMG():
         self.normedEMG = [-1]*self.numElectrodes # array of normalized EMG values
         self.muscleAct = [-1]*self.numElectrodes # array of muscle activation (through low pass muscle activation dynamics)
         self.prevAct = [-1]*self.numElectrodes # array of previous muscle activation values
+        self.synergies = [-1]*self.numSynergies
 
     def initFilters(self):
         # self.numPowerLines = 2
@@ -79,9 +89,7 @@ class EMG():
         # self.lowPassFilters = CausalButterArr(numChannels=self.numElectrodes, order=4, f_low=8, f_high=self.samplingFreq/2, fs=self.samplingFreq, bandstop=1) # smooth the envelope, when not using 'actually' integrated EMG
 
         self.powerLineFilterArray = BesselFilterArr(numChannels=self.numElectrodes, order=8, critFreqs=[58, 62], fs=self.samplingFreq, filtType='bandstop') # remove power line noise and multiples up to 600 Hz
-        # Remember the Nyquist frequency! Need to adjust the bounds of the filters accordingly
         self.highPassFilters = BesselFilterArr(numChannels=self.numElectrodes, order=4, critFreqs=20, fs=self.samplingFreq, filtType='highpass') # high pass removes motion artifacts and drift
-        # for the filter on the iEMG, the sampling frequency is effectively lowered by a factor of the window length - adjust as needed
         self.lowPassFilters = BesselFilterArr(numChannels=self.numElectrodes, order=4, critFreqs=3, fs=self.samplingFreq, filtType='lowpass') # smooth the envelope, when not using 'actually' integrated EMG
 
     def startCommunication(self):
@@ -109,9 +117,15 @@ class EMG():
     def printDeltas(self):
         print("EMG Deltas:")
         deltas = self.deltas
-        
+
         print(f"""\tMaxes:\n\t\t{deltas[0]:07.2f} {deltas[1]:07.2f} {deltas[2]:07.2f} {deltas[3]:07.2f}\n\t\t{deltas[4]:07.2f} {deltas[5]:07.2f} {deltas[6]:07.2f} {deltas[7]:07.2f}""")
         print(f"""\tMins:\n\t\t{deltas[8]:07.2f} {deltas[9]:07.2f} {deltas[10]:07.2f} {deltas[11]:07.2f}\n\t\t{deltas[12]:07.2f} {deltas[13]:07.2f} {deltas[14]:07.2f} {deltas[15]:07.2f}""")
+
+    def printSynergyMat(self):
+        print(f'Synergy Matrix:\n{self.synergyMat}')
+
+    def printSynergies(self):
+        print(f'Synergies:\n{self.synergies}')
 
     def printRawEMG(self):
         print(f"Raw EMG at {self.OS_time}:")
@@ -140,16 +154,34 @@ class EMG():
     ##########################################################################
     # get fields
     def getRawEMG(self, electrode):
+        if electrode >= self.numElectrodes:
+            raise ValueError(f'getRawEMG(): Asked for invalid electrode {electrode} of {self.numElectrodes}')
+           
         return self.rawEMG[electrode]
 
     def getiEMG(self, electrode):
+        if electrode >= self.numElectrodes:
+            raise ValueError(f'getiEMG(): Asked for invalid electrode {electrode} of {self.numElectrodes}')
+           
         return self.iEMG[electrode]
 
     def getNormedEMG(self, electrode):
+        if electrode >= self.numElectrodes:
+            raise ValueError(f'getNormedEMG(): Asked for invalid electrode {electrode} of {self.numElectrodes}')
+           
         return self.normedEMG[electrode]
 
     def getFilteredEMG(self, electrode):
+        if electrode >= self.numElectrodes:
+            raise ValueError(f'getFilteredEMG(): Asked for invalid electrode {electrode} of {self.numElectrodes}')
+           
         return self.muscleAct[electrode]
+
+    def getSynergy(self, synergy):
+        if synergy >= self.numSynergies:
+            raise ValueError(f'getSynergy(): Asked for invalid synergy {synergy} of {self.numSynergies}')
+           
+        return self.synergies[synergy]
 
     def getBounds(self):
         try:
@@ -177,13 +209,11 @@ class EMG():
 
     def getSynergyMat(self):
         try:
-            with open(self.synergyPath, 'rb') as fifo:
-                synergyPack = fifo.read()
+            df = pd.read_csv(self.synergyPath, sep=' ', header=None, engine='python')
+            synergyMat = df.to_numpy()
+            self.synergyMat = synergyMat
 
-            synergy = struct.unpack("ffffffffffffffff", synergyPack)
-            self.synergyMat = np.ndarray(synergy)
-
-        except OSError as e:
+        except Exception as e:
             print(f"getSynergyMat(): Could not read matrix - {e}")
 
     ##########################################################################
@@ -269,7 +299,7 @@ class EMG():
         # print(f'lowPass:\n{iEMG}\n')
 
         self.iEMG = np.asarray(iEMG)[:, -1]
-      
+
         # print('\n------')
         # print(self.powerLineFilterArray.getFilter(0))
         # print(self.highPassFilters.getFilter(0))
@@ -307,8 +337,12 @@ class EMG():
         self.muscleAct = muscleAct
 
     # get the synergies
-    def synergyProd(self, usedChannels):
-        return np.matmul(self.synergyMat, self.normedEMG[usedChannels])
+    def synergyProd(self):
+        if not self.numSynergies == len(self.usedChannels):
+            raise ValueError(f'synergyProd(): Wrong number of channels ({len(self.usedChannels)} provided; require {self.numSynergies}')
+
+        self.synergies = self.synergyMat @ self.normedEMG[self.usedChannels]
+        return self.synergies
 
     # full EMG update pipeline
     def pipelineEMG(self):
@@ -318,4 +352,5 @@ class EMG():
             self.readEMGPacket()
             self.intEMGPacket()
             self.normEMG()
+            self.synergyProd()
             self.muscleDynamics()

@@ -634,7 +634,7 @@ def main(usingEMG):
     # connect to EMG board
     if usingEMG:
         print("Connecting to EMG board...")
-        emg = EMG()
+        emg = EMG(usedChannels=[0, 1, 4, 5, 6, 7, 8, 12, 13, 14])
         emg.startCommunication()
         print("Connected.")
 

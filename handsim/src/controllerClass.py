@@ -45,7 +45,7 @@ class LUKEControllers:
 
         # set the used EMG channels here
         # self.usedChannels = [9, 3] # for wrist
-        self.usedChannels = [0, 1, 4, 5, 6, 7, 8, 9]
+        # self.usedChannels = [0, 1, 4, 5, 6, 7, 8, 9]
 
         self.k_p = [1]*self.LUKEArm.numMotors
         self.k_i = [.001]*self.LUKEArm.numMotors
@@ -210,12 +210,10 @@ class LUKEControllers:
         numChannels = 8
         # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
         # self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
-        self.system_dynamic_model = upperExtremityModel(muscleType=muscleType, numDoF=DoF, device=self.device, EMG_Channel_Count=numChannels, Dynamic_LR=learningRate, EM_mat_lr=20, NN_ratio=0.3)
+        self.system_dynamic_model = upperExtremityModel(muscleType=muscleType, numDoF=DoF, device=self.device, EMG_Channel_Count=numChannels, Dynamic_Lr=learningRate, EMG_mat_Lr=20, NN_ratio=0.3)
 
-        # self.model_save_path = '/home/haptix-e15-463/haptix/haptix_controller/handsim/MinJerk/wrist.tar'
-        # self.model_save_path = '/home/haptix/UE AMI Clinical Work/P1 - 729/P1_0307_2022/P1_0307_2022v2_upper.tar'
-        # self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/Mikey2DoF-04-12-22.tar'
-        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/mikey4DoF-0501_2022.tar'
+        # self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/mikey4DoF-0501_2022.tar'
+        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/JS-0723-2022.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
         # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
@@ -228,10 +226,10 @@ class LUKEControllers:
 
 
     def forwardDynamics(self):
-        allEMG = self.emg.normedEMG
-        usedEMG = allEMG[self.usedChannels]
-        EMG = torch.FloatTensor([usedEMG]).to(self.device)
-        ## This is with the proper matrix EMG = torch.FloatTensor([self.emg.synergyProd(allEMG, self.usedChannels)]).to(self.device)
+        # allEMG = self.emg.normedEMG
+        # usedEMG = allEMG[self.usedChannels]
+        # EMG = torch.FloatTensor([usedEMG]).to(self.device)
+        EMG = torch.FloatTensor([self.emg.synergyProd()]).to(self.device)
 
         # joint1, joint2, joint3, joint4, self.hidden1, self.hidden2, self.hidden3, self.hidden4 = self.system_dynamic_model.forward(EMG, self.hidden1, self.hidden2, self.hidden3, self.hidden4, dt=1/self.LUKEArm.Hz)
         with torch.no_grad():
@@ -242,15 +240,23 @@ class LUKEControllers:
 
         # joint order: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
         # For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
+        # For JS 07-23, jointAngles = [digits, thumb, wristFlex, wristPro]
 
-        elbowAng = jointAngles[0][0] if jointAngles[0][0] > 0 else jointAngles[0][0]
-        digitsAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
-        indexAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
-        wristAng = jointAngles[0][3] if jointAngles[0][3] > 0 else jointAngles[0][3]
-        jointPos[7] = 0.75*((elbowAng + 1.2)/2.4*135)
-        jointPos[2] = (indexAng + 0.6)/1.2*90
+        digitsAng = jointAngles[0][0] if jointAngles[0][0] > 0 else 2*jointAngles[0][0]
+        thumbAng = 2*jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
+        flexAng = 0.5*jointAngles[0][2] if jointAngles[0][2] > 0 else 1.5*jointAngles[0][2]
+        rotAng = jointAngles[0][3] if jointAngles[0][3] > 0 else jointAngles[0][3]
+        # jointPos[7] = 0.75*((elbowAng + 1.2)/2.4*135)
+        # jointPos[2] = (indexAng + 0.6)/1.2*90
+        # jointPos[3] = (digitsAng + 0.6)/1.2*90
+        # jointPos[4] = 0.33*((wristAng + 0.6)/1.2*295 - 120)
+
+        jointPos[0] = (thumbAng + 0.6)/1.2*75
+        # jointPos[1] = (jointAngles[0][0] + 0.6)/1.2*75
+        jointPos[2] = (digitsAng + 0.6)/1.2*90
         jointPos[3] = (digitsAng + 0.6)/1.2*90
-        jointPos[4] = 0.33*((wristAng + 0.6)/1.2*295 - 120)
+        jointPos[5] = (-flexAng + 0.6)/1.2*110 - 55
+        jointPos[4] = (rotAng + 0.6)/1.2*295 - 120
 
         return jointPos
 
