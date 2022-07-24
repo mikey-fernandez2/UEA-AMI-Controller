@@ -11,7 +11,7 @@ class CausalButterArr():
 
         self.filters = []
         for i in range(self.numChannels):
-            self.filters.append(CausalButter(order, f_low, f_high, fs, bandstop))
+            self.filters.append(CausalButter(order, f_low[i], f_high[i], fs, bandstop))
     
 class CausalButter:
     # the default init method assumes Causal butter is a bandpass filter, and allows signal frequency from f_low to f_high to pass.

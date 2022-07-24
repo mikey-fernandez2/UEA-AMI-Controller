@@ -14,6 +14,7 @@ import zmq
 import numpy as np
 import threading
 from CausalButter import CausalButterArr
+from BesselFilter import BesselFilterArr
 
 class LUKEArm:
     def __init__(self, config='HC', hand='L', commandDes='DF', commandType='P', socketAddr="tcp://127.0.0.1:1234", usingEMG=False):       
@@ -86,9 +87,9 @@ class LUKEArm:
 
         # joint limits
         if self.hand == "R":
-            self.jointRoM = {'indexPos': [0, 90], 'mrpPos': [0, 90], 'thumbYPos': [0, 75], 'thumbPPos': [0, 75], 'wristFlex': [-55, 55], 'wristRot': [-120, 175], 'elbowPos': [0, 135], 'humPos': [-95, 95]}
+            self.jointRoM = {'indexPos': [0, 90], 'mrpPos': [0, 90], 'thumbYPos': [0, 75], 'thumbPPos': [0, 100], 'wristFlex': [-55, 55], 'wristRot': [-120, 175], 'elbowPos': [0, 135], 'humPos': [-95, 95]}
         elif self.hand == "L":
-            self.jointRoM = {'indexPos': [0, 90], 'mrpPos': [0, 90], 'thumbYPos': [0, 75], 'thumbPPos': [0, 75], 'wristFlex': [-55, 55], 'wristRot': [-175, 120], 'elbowPos': [0, 135], 'humPos': [-95, 95]}
+            self.jointRoM = {'indexPos': [0, 90], 'mrpPos': [0, 90], 'thumbYPos': [0, 75], 'thumbPPos': [0, 100], 'wristFlex': [-55, 55], 'wristRot': [-175, 120], 'elbowPos': [0, 135], 'humPos': [-95, 95]}
         else:
             raise ValueError(f"LUKEArm(): invalid handedness {self.hand}")
 
@@ -99,7 +100,8 @@ class LUKEArm:
         self.Hz = 60
 
         # lowpass filter joint commands
-        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=2, f_high=self.Hz/2, fs=self.Hz, bandstop=1)
+        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=[2, 2, 2, 2, 1, .5, 2, 2], f_high=[self.Hz/2]*self.numMotors, fs=self.Hz, bandstop=1)
+        # self.lowpassCommands = BesselFilterArr(numChannels=self.numMotors, order=4, critFreqs=[2], fs=self.Hz, filtType='lowpass')
 
         # store prior commands for some reason
         self.lastposCom = None
@@ -489,7 +491,7 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:6.3f}" for pos in posCom])
+                if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:07.3f}" for pos in posCom])
 
                 # posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
@@ -519,6 +521,7 @@ class LUKEArm:
             self.lastposCom = self.NetCom
             posCom = controller.forwardDynamics()
             self.NetCom = [self.lowpassCommands.filters[i].inputData([posCom[i]])[0] for i in range(self.numMotors)]
+            # self.NetCom = self.lowpassCommands.filter(posCom)
 
     def goToZeroPos(self, period):
         self.shortModeSwitch(1) # make sure to switch to arm mode first!
@@ -679,7 +682,7 @@ def main(usingEMG):
                     filename = input('Enter a .csv filename: ')
                     if not filename == "exit":
                         dataToSave = np.array(arm.recordedData)
-                        np.savetxt("./LUKEarmLogs/" + filename + '.csv', dataToSave, delimiter='\t', fmt='%s')
+                        np.savetxt("/home/haptix/haptix/haptix_controller/handsim/LUKEarmLogs/" + filename + '.csv', dataToSave, delimiter='\t', fmt='%s')
 
                     arm.recording = False
 

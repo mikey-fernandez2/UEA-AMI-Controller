@@ -8,6 +8,9 @@ class BesselFilterArr():
     def __init__(self, numChannels, order, critFreqs, fs, filtType):
         self.numChannels = numChannels
 
+        if filtType not in ['bandstop', 'lowpass', 'highpass']:
+            raise ValueError(f'Invalid filter type {filtType} provided.')
+
         self.filters = {'sos': [], 'zi': []}
         for _ in range(self.numChannels):
             filter_sos = signal.bessel(N=order, Wn=critFreqs, btype=filtType, output='sos', fs=fs, analog=False)
