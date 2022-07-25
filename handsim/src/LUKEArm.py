@@ -100,7 +100,7 @@ class LUKEArm:
         self.Hz = 60
 
         # lowpass filter joint commands
-        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=[2, 2, 2, 2, 1, .5, 2, 2], f_high=[self.Hz/2]*self.numMotors, fs=self.Hz, bandstop=1)
+        self.lowpassCommands = CausalButterArr(numChannels=self.numMotors, order=4, f_low=[2, 2, 2, 2, 0.5, 1, 2, 2], f_high=[self.Hz/2]*self.numMotors, fs=self.Hz, bandstop=1)
         # self.lowpassCommands = BesselFilterArr(numChannels=self.numMotors, order=4, critFreqs=[2], fs=self.Hz, filtType='lowpass')
 
         # store prior commands for some reason
