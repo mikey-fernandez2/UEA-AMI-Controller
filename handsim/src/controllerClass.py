@@ -15,6 +15,8 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 np.set_printoptions(linewidth=200)
+from BesselFilter import BesselFilterArr
+from CausalButter import CausalButterArr, CausalButter
 
 class LUKEControllers:
     def __init__(self, numMotors=8, freq_n=3, numElectrodes=16, LUKEArm=None, emg=None):
@@ -55,6 +57,8 @@ class LUKEControllers:
         self.I = [0]*self.LUKEArm.numMotors
         self.lastError = [0]*self.LUKEArm.numMotors
         self.windup = [100]*self.LUKEArm.numMotors
+
+        self.probFilter = BesselFilterArr(numChannels=3, order=4, critFreqs=[3], fs=self.LUKEArm.Hz, filtType='lowpass')
 
     # get the electrodes corresponding to the agonist and antagonist muscles for given motor/joint
     def getElectrodesforMotor(self, motor):
@@ -206,23 +210,18 @@ class LUKEControllers:
 
         # Build whole model based on muscles and masses
         learningRate = 5
-        DoF = 3
+        DoF = 5
         muscleType = 'bilinear'
         numChannels = 8
-        # self.system_dynamic_model = Hand_1dof(self.device, 4, True, learningRate, 1, 0)
         # self.system_dynamic_model = Hand_4dof(self.device, 8, True, learningRate, 20, 0.3)
         self.system_dynamic_model = upperExtremityModel(muscleType=muscleType, numDoF=DoF, device=self.device, EMG_Channel_Count=numChannels, Dynamic_Lr=learningRate, EMG_mat_Lr=20, NN_ratio=0.3)
 
-        # self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/mikey4DoF-0501_2022.tar'
-        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/JS-0725_2022-3joints.tar'
+        self.model_save_path = '/home/haptix/haptix/haptix_controller/handsim/Controllers/JS-0726_2022_5DoFmult.tar'
         checkpoint = torch.load(self.model_save_path, map_location=self.device)
-        # checkpoint = torch.load(model_save_path, map_location=torch.device('cpu'))
         self.system_dynamic_model.load_state_dict(checkpoint['model_state_dict'])
-        # self.system_dynamic_model.I = [0.4]
         self.system_dynamic_model.eval()
 
         # set initial conditions
-        # self.hidden = torch.FloatTensor([[0,0,0,0,0,0,0,0]]).to(self.device)
         self.hidden = torch.FloatTensor([[0]*DoF*self.system_dynamic_model.numStates]).to(self.device)
 
     def forwardDynamics(self):
@@ -230,110 +229,85 @@ class LUKEControllers:
         # usedEMG = allEMG[self.usedChannels]
         # EMG = torch.FloatTensor([usedEMG]).to(self.device)
         EMG = torch.FloatTensor(np.array([self.emg.synergyProd()])).to(self.device)
-        # activations = np.clip((EMG @ self.system_dynamic_model.EMG_to_Activation_Mat).detach().cpu().numpy(), 0, None)
-        # diffs = []
-        # for i in range(4):
-        #     diffs.append(activations[0, 2*i] - activations[0, 2*i + 1])
-        # print('[', ([f'{i:012.7f}' for i in diffs]), ']')
 
         with torch.no_grad():
-            jointAngles, self.hidden = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
+            jointAngles, self.hidden, predictions = self.system_dynamic_model(self.hidden, EMG, dt=1/self.LUKEArm.Hz)
         jointAngles = jointAngles.detach().cpu().numpy()
-        # jointVels = self.hidden.detach().cpu().numpy()
+        probabilities = predictions.detach().cpu().numpy()[0]
+
+        # probabilities = self.softmax(predictions[0]) # get probabilities
+
+        # if probabilities[0] > 0.3: probabilities[0] += 0.5*probabilities[1]; probabilities[1] = 0
+        # elif probabilities[1] > 0.5: probabilities[1] += 0.5*probabilities[0]; probabilities[0] = 0
+        # elif probabilities[2] > 0.2 and probabilities[0] < 0.75: probabilities[0] *= 0.25
+        # if probabilities[0] > probabilities[1]: probabilities[1] = 0
+        # elif probabilities[1] > probabilities[0]: probabilities[0] = 0
+
+        # probabilities = probabilities/np.sum(probabilities) # renormalize probabilities
+        # probabilities = self.probFilter.filter([probabilities])[0]
+        print([f'{prob:07.6f}' for prob in probabilities])
 
         jointPos = self.LUKEArm.getCurPos()
+
+        moveBool = probabilities > np.array([0.3, 0.5, 0.5, 0.3, 0.5])
 
         # joint order: [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
         # For PP, 1 AMI for both dof of thumb, 1 AMI for all fingers, 1 AMI for wrist rot, 1 AMI for elbow
         # For JS 07-23, jointAngles = [digits, thumb, wristFlex, wristPro]
+        # For JS 07-26 (old) jointAngles = [digits, wristFlex, wristPro]
+        # For JS 07-26 jointAngles = [thumb, index, digits, wristPro, wristFlex]
 
-        digitsAng = jointAngles[0][0] if jointAngles[0][0] > 0 else 2*jointAngles[0][0]
-        flexAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
-        rotAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
+        thumbAng = 2*jointAngles[0][0] if jointAngles[0][0] > 0 else 2*jointAngles[0][0]
+        indexAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
+        digitsAng = 3*jointAngles[0][2] if jointAngles[0][2] > 0 else 2*jointAngles[0][2]
+        rotAng = jointAngles[0][3] if jointAngles[0][3] > 0 else 2*jointAngles[0][3]
+        flexAng = jointAngles[0][4] if jointAngles[0][4] > 0 else jointAngles[0][4]
 
-        # digitsAng = jointAngles[0][0] if jointAngles[0][0] > 0 else jointAngles[0][0]
-        # thumbAng = jointAngles[0][1] if jointAngles[0][1] > 0 else jointAngles[0][1]
-        # flexAng = jointAngles[0][2] if jointAngles[0][2] > 0 else jointAngles[0][2]
-        # rotAng = jointAngles[0][3] if jointAngles[0][3] > 0 else jointAngles[0][3]
-        # digitsAng = 1.2*jointAngles[0][0] if jointAngles[0][0] > 0 else 5*jointAngles[0][0]
-        # thumbAng = 2*jointAngles[0][1] if jointAngles[0][1] > 0 else 2*jointAngles[0][1]
-        # flexAng = 1.5*jointAngles[0][2] if jointAngles[0][2] > 0 else 2*jointAngles[0][2]
-        # rotAng = 2*jointAngles[0][3] if jointAngles[0][3] > 0 else 1.5*jointAngles[0][3]
+        # predictedJoint = np.argmax(predictions)
+        # self.predictionHistory = np.roll(self.predictionHistory, -1)
+        # self.predictionHistory[-1] = predictedJoint
+        # elems, counts = np.unique(self.predictionHistory, return_counts=True)
+        # mostCommon = np.argmax(counts)
+        # predictedJoint = elems[mostCommon]
+        # print(predictedJoint)
 
-        # digitsSpeed = jointVels[0][4]*180/np.pi
-        # thumbSpeed = jointVels[0][5]*180/np.pi
-        # flexSpeed = jointVels[0][6]*180/np.pi
-        # rotSpeed = jointVels[0][7]*180/np.pi
+        newThumb = (thumbAng + 0.13 + 5*np.pi/18)/(5*np.pi/9)*100
+        newIndex = (indexAng + 0.046 + np.pi/4)/(np.pi/2)*90
+        newDigits = (digitsAng + 0.144 + np.pi/4)/(np.pi/2)*90
+        newRot = (rotAng - 0.1 + 175*np.pi/180)/(295*np.pi/180)*295 - 175
+        newFlex = (flexAng + 0.03 + 55*np.pi/180)/(110*np.pi/180)*110 - 55
 
-        # jointPos[0] = (thumbAng + 0.6)/1.2*100
-        # # jointPos[1] = (thumbAng + 0.6)/1.2*75
-        # jointPos[2] = (digitsAng + 0.6)/1.2*90
-        # jointPos[3] = (digitsAng + 0.6)/1.2*90
-        # jointPos[5] = (flexAng + 0.6)/1.2*110 - 55
-        # jointPos[4] = (-rotAng + 0.6)/1.2*295 - 120
+        # jointPos[0] = jointPos[0] + (newThumb - jointPos[0])*probabilities[0]
+        # jointPos[1] = jointPos[0] + (newThumb - jointPos[0])*probabilities[0]
+        # jointPos[2] = jointPos[2] + (newIndex - jointPos[2])*probabilities[1]
+        # jointPos[3] = jointPos[3] + (newDigits - jointPos[3])*probabilities[2]
+        # jointPos[4] = jointPos[4] + (newRot - jointPos[4])*probabilities[3]
+        # jointPos[5] = jointPos[5] + (newFlex - jointPos[5])*probabilities[4]
 
-        # thresh = np.array([0.2, 0.05, 0.2, 0.1])
+        jointPos[0] = newThumb if moveBool[0] else jointPos[0]
+        jointPos[1] = 25 #newThumb if moveBool[0] else jointPos[1]
+        jointPos[2] = newDigits if moveBool[2] else jointPos[3] # newIndex if moveBool[1] else jointPos[2]
+        jointPos[3] = newDigits if moveBool[2] else jointPos[3]
+        jointPos[4] = newRot if moveBool[3] else jointPos[4]
+        jointPos[5] = newFlex if moveBool[4] else jointPos[5]
 
-        # digits, thumb, flex, rot
-        # diffsThreshP = np.array([0.0005, 0.0001, 0.0005, 0.0005])
-        # diffsThreshN = -np.array([0.00005, 0.00001, 0.0005, 0.0005])
-        # diffsThreshP = np.zeros(4)
-        # diffsThreshN = np.zeros(4)
+        # jointPos[0] = newThumb if predictedJoint == 0 else jointPos[0]
+        # jointPos[1] = newThumb if predictedJoint == 0 else jointPos[0]
+        # jointPos[2] = newDigits if predictedJoint == 0 else jointPos[3]
+        # jointPos[3] = newDigits if predictedJoint == 0 else jointPos[3]
+        # jointPos[4] = newRot if predictedJoint == 2 else jointPos[4]
+        # jointPos[5] = newFlex if predictedJoint == 1 else jointPos[5]
 
-        # newThumb = (thumbAng + 5*np.pi/18)/(5*np.pi/9)*100
-        # (thumbAng + 0.6)/1.2*75
-        newDigits = (digitsAng + np.pi/4)/(np.pi/2)*90
-        newThumb = (digitsAng + np.pi/4)/(np.pi/2)*100
-        # (digitsAng + np.pi/4)/(np.pi/2)*90
-        newFlex = (-flexAng + 55*np.pi/180)/(55*np.pi/180)*110 - 95
-        newRot = (rotAng + 175*np.pi/180)/(295*np.pi/180)*295 - 175
-        # newPos = [newThumb, newDigits, newFlex, newRot]
+        # convert commanded position back for model
+        # digitsRad = jointPos[3]/90*(np.pi/2) - np.pi/4
+        # flexRad = (jointPos[5] + 55)/110*(110*np.pi/180) - 55*np.pi/180
+        # rotRad = (jointPos[4] + 175)/295*(295*np.pi/180) - 175*np.pi/180
 
-        # percentRoms = [np.abs(newThumb - jointPos[0])/100, np.abs(newDigits - jointPos[2])/90, np.abs(newRot - jointPos[4])/295, np.abs(newFlex - jointPos[5])/110]
-        # percentSpeed = np.abs([thumbSpeed/100, digitsSpeed/90, rotSpeed/295, flexSpeed/110])
-        # mostMove = np.max(percentRoms)
-        # fastestMove = np.max(percentSpeed)
-
-        # moveBool = np.asarray(percentRoms) > thresh
-        # diffsBool = np.logical_or(diffs[0] > diffsThreshP, diffs[0] < diffsThreshN)
-        # print('[', ([f'{i}' for i in diffsBool]), ']')
-
-        jointPos[0] = newThumb
-        jointPos[1] = newThumb
-        jointPos[2] = newDigits
-        jointPos[3] = newDigits
-        jointPos[4] = newRot
-        jointPos[5] = newFlex
-
-        # jointPos[0] = newThumb if moveBool[0] else jointPos[0]
-        # jointPos[1] = newThumb if moveBool[0] else jointPos[1]
-        # jointPos[2] = newDigits if moveBool[1] else jointPos[3]
-        # jointPos[3] = newDigits if moveBool[1]  else jointPos[3]
-        # jointPos[4] = newRot if moveBool[2] else jointPos[4]
-        # jointPos[5] = newFlex if moveBool[3] else jointPos[5]
-
-        # jointPos[0] = newThumb if diffsBool[1] else jointPos[0]
-        # jointPos[1] = newThumb if diffsBool[1] else jointPos[0]
-        # jointPos[2] = newDigits if diffsBool[0] else jointPos[3]
-        # jointPos[3] = newDigits if diffsBool[0]  else jointPos[3]
-        # jointPos[4] = newRot if diffsBool[3] else jointPos[4]
-        # jointPos[5] = newFlex if diffsBool[2] else jointPos[5]
-
-        # jointPos[0] = newThumb if percentRoms[0] == mostMove else jointPos[0]
-        # # jointPos[1] = newThumb if percentRoms[0] == mostMove else jointPos[1]
-        # jointPos[2] = newDigits if percentRoms[1] == mostMove else jointPos[3]
-        # jointPos[3] = newDigits if percentRoms[1] == mostMove else jointPos[3]
-        # jointPos[4] = newRot if percentRoms[2] == mostMove else jointPos[4]
-        # jointPos[5] = newFlex if percentRoms[3] == mostMove else jointPos[5]
-
-        # jointPos[0] = newThumb if percentSpeed[0] == fastestMove else jointPos[0]
-        # jointPos[1] = newThumb if percentRoms[0] == mostMove else jointPos[1]
-        # jointPos[2] = newDigits if percentSpeed[1] == fastestMove else jointPos[3]
-        # jointPos[3] = newDigits if percentSpeed[1] == fastestMove else jointPos[3]
-        # jointPos[4] = newRot if percentSpeed[2] == fastestMove else jointPos[4]
-        # jointPos[5] = newFlex if percentSpeed[3] == fastestMove else jointPos[5]
+        # digitsRad = digitsRad/1.5 if digitsRad > 0 else digitsRad/2
+        # rotRad = rotRad if rotRad > 0 else rotRad/1.5
 
         # jointPos = self.rateLimit(jointPos)
+        # self.hidden[0, [0, 2, 4]] = torch.tensor([[digitsRad, flexRad, rotRad]], dtype=torch.float, device=self.device, requires_grad=False)
 
         return jointPos
 
@@ -347,8 +321,6 @@ class LUKEControllers:
         gains = np.multiply(kp, np.sign(posCom - curPos))
         newPosCom = np.where(np.abs(posCom - curPos) > rateLim, curPos + gains, posCom)
         # newPosCom = curPos + np.multiply(diff, np.abs(posCom - curPos))
-
-        print(newPosCom == posCom)
 
         return newPosCom
 
@@ -364,3 +336,9 @@ class LUKEControllers:
         PIDCommand = self.k_p*error + self.k_i*self.I + self.k_d*derivError
 
         return PIDCommand + curPos
+
+    @staticmethod
+    def softmax(x):
+        """ gets the probability of each option from a list of values """
+        e_x = np.exp(x - np.max(x))
+        return e_x/e_x.sum()

@@ -491,7 +491,7 @@ class LUKEArm:
                     # [thumbPPos, thumbYPos, indexPos, mrpPos, wristRot, wristFlex, humPos, elbowPos]
                     posCom = [thumbP, thumbY, index, mrp, wristRot, wristFlex, humPos, elbow]
 
-                if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:07.3f}" for pos in posCom])
+                # if count % loopRate == 0: print(f'{time.time():.5f}', [f"{pos:07.3f}" for pos in posCom])
 
                 # posCom = self.getCurPos() # dont move arm
                 self.buildCommand(posCom=posCom)
